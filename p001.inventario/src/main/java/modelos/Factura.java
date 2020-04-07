@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Factura {
+	private static int contadorIds = 1;
 	private int id;
 	private Date fecha;
 	private String cedulaCliente;
@@ -13,6 +14,8 @@ public class Factura {
 	private List<Integer> idsProductos;
 	
 	public Factura() {
+		id = contadorIds;
+		++contadorIds;
 		idsProductos = new ArrayList<>();
 	}
 
