@@ -61,7 +61,7 @@ public class Aplicacion {
 					
 					switch(opcionSubmenu) {
 						case CREAR:
-							
+							crearCliente(clientes);
 							break;
 						case BUSCAR:
 							
@@ -88,6 +88,19 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static void crearCliente(List<Cliente> clientes) {
+		System.out.println("--- 1. Crear Cliente ---");
+		int numeroCedula;
+		
+		do {
+			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente nuevo");
+			
+			if (numeroCedula <= 0) {
+				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+			}
+		} while (numeroCedula <= 0);
 	}
 
 	public static void mostrarMenuPrincipal() {
