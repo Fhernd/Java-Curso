@@ -29,7 +29,7 @@ public class Aplicacion {
 
 		int opcion;
 		int opcionSubmenu;
-		
+
 		Cliente cliente;
 
 		do {
@@ -65,15 +65,29 @@ public class Aplicacion {
 				switch (opcionSubmenu) {
 				case CREAR:
 					cliente = crearCliente(clientes);
-					
+
 					clientes.add(cliente);
-					
+
 					break;
 				case BUSCAR:
 					cliente = buscarCliente(clientes);
+
+					if (cliente != null) {
+						mostrarDatosCliente(cliente);
+					} else {
+						System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+					}
+
 					break;
 				case ACTUALIZAR:
+					cliente = buscarCliente(clientes);
 
+					if (cliente != null) {
+						actualizarCliente(cliente);
+						mostrarDatosCliente(cliente);
+					} else {
+						System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+					}
 					break;
 				case ELIMINAR:
 
@@ -96,31 +110,37 @@ public class Aplicacion {
 
 	}
 
+	private static void actualizarCliente(Cliente cliente) {
+		
+	}
+
+	private static void mostrarDatosCliente(Cliente cliente) {
+		System.out.println("Datos del cliente");
+		System.out.println("Cédula: " + cliente.getCedula());
+		System.out.println("Nombres: " + cliente.getNombres());
+		System.out.println("Apellidos: " + cliente.getApellidos());
+		System.out.println("Teléfono: " + cliente.getTelefono());
+		System.out.println("Dirección: " + cliente.getDireccion());
+		System.out.println("Correo electrónico: " + cliente.getCorreoElectronico());
+	}
+
 	private static Cliente buscarCliente(List<Cliente> clientes) {
 		int numeroCedula;
 		String cedula;
-		Cliente cliente;
-		
+
 		do {
-			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente nuevo");
+			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente");
 
 			if (numeroCedula <= 0) {
 				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
 				numeroCedula = 0;
 				continue;
 			}
-
-			cedula = String.valueOf(numeroCedula);
-
-			cliente = buscarClientePorCedula(clientes, cedula);
-
-			if (cliente != null) {
-				System.out.printf("MENSAJE: Ya existe otro con el número de cédula: %s.\n", cedula);
-				numeroCedula = 0;
-			}
 		} while (numeroCedula <= 0);
-		
-		return null;
+
+		cedula = String.valueOf(numeroCedula);
+
+		return buscarClientePorCedula(clientes, cedula);
 	}
 
 	private static Cliente crearCliente(List<Cliente> clientes) {
@@ -162,20 +182,20 @@ public class Aplicacion {
 
 		String direccion = capturarCadenaCaracteres("Digite la dirección del cliente nuevo");
 		String correoElectronico;
-		
-		while(true) {
+
+		while (true) {
 			correoElectronico = capturarCadenaCaracteres("Digite el correo electrónico del cliente nuevo");
-			
+
 			if (!correoElectronicoValido(correoElectronico)) {
 				System.out.println("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
 				continue;
 			}
-			
+
 			break;
-		} 
-		
+		}
+
 		cliente = new Cliente(cedula, nombres, apellidos, String.valueOf(telefono), direccion, correoElectronico);
-		
+
 		return cliente;
 	}
 
