@@ -13,16 +13,16 @@ public class Aplicacion {
 	}
 	
 	public static void mostrarMenuPrincipal() {
-		System.out.println("=== MENÚ PRINCIPAL ===");
-		System.out.println("1. Gestión Clientes");
-		System.out.println("2. Gestión Proveedores");
-		System.out.println("3. Gestión Productos");
-		System.out.println("4. Gestión Facturación");
+		System.out.println("=== MENÃš PRINCIPAL ===");
+		System.out.println("1. GestiÃ³n Clientes");
+		System.out.println("2. GestiÃ³n Proveedores");
+		System.out.println("3. GestiÃ³n Productos");
+		System.out.println("4. GestiÃ³n FacturaciÃ³n");
 		System.out.println("0. Salir");
 	}
 	
 	public static void mostrarSubmenu(String tipoMenu) {
-		System.out.printf("*** Menú Gestión %s***\n", tipoMenu);
+		System.out.printf("*** MenÃº GestiÃ³n %s***\n", tipoMenu);
 		System.out.println("1. Crear");
 		System.out.println("2. Buscar");
 		System.out.println("3. Actualizar");
@@ -31,7 +31,7 @@ public class Aplicacion {
 	}
 	
 	public static void mostrarSubmenuFacturacion() {
-		System.out.println("*** Menú Gestión Facturación ***");
+		System.out.println("*** MenÃº GestiÃ³n FacturaciÃ³n ***");
 		System.out.println("1. Crear");
 		System.out.println("2. Buscar");
 		System.out.println("0. Salir");
@@ -47,7 +47,7 @@ public class Aplicacion {
 				return resultado;
 			}
 			
-			System.out.println("MENSAJE: Ha escrito una cadena vacía. Específique un valor concreto.");
+			System.out.println("MENSAJE: Ha escrito una cadena vacÃ­a. EspecÃ­fique un valor concreto.");
 		}
 	}
 
@@ -57,7 +57,7 @@ public class Aplicacion {
 				System.out.printf("%s: ", mensaje);
 				return Integer.parseInt(teclado.nextLine());
 			} catch(NumberFormatException e) {
-				System.out.println("MENSAJE: Digite un valor que corresponda con un número entero.");
+				System.out.println("MENSAJE: Digite un valor que corresponda con un nÃºmero entero.");
 			}
 		}
 	}
@@ -68,7 +68,7 @@ public class Aplicacion {
 				System.out.printf("%s: ", mensaje);
 				return Double.parseDouble(teclado.nextLine());
 			} catch(NumberFormatException e) {
-				System.out.println("MENSAJE: Digite un valor que corresponda con un número real.");
+				System.out.println("MENSAJE: Digite un valor que corresponda con un nÃºmero real.");
 			}
 		}
 	}
