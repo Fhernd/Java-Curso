@@ -1,13 +1,39 @@
 package modelos;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Aplicacion {
+	private static final int SALIR = 0;
+	private static final int GESTION_CLIENTES = 1;
+	private static final int GESTION_PROVEEDORES = 2;
+	private static final int GESTION_PRODUCTOS = 3;
+	private static final int GESTION_FACTURACION = 4;
 	
 	public static Scanner teclado;
 
 	public static void main(String[] args) {
 		teclado = new Scanner(System.in);
+		
+		List<Cliente> clientes = new ArrayList<>();
+		List<Proveedor> proveedores = new ArrayList<>();
+		List<Producto> productos = new ArrayList<>();
+		List<Factura> facturas = new ArrayList<>();
+		
+		int opcion;
+		
+		do {
+			do {
+				mostrarMenuPrincipal();
+				opcion = capturarNumeroEntero("Digite la operación a realizar: ");
+				
+				if (opcion < SALIR || opcion > GESTION_FACTURACION) {
+					System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+				}
+			while (opcion < SALIR || opcion > GESTION_FACTURACION);
+			
+		} while (opcion != SALIR);
 		
 		
 	}
