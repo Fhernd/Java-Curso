@@ -90,7 +90,7 @@ public class Aplicacion {
 					}
 					break;
 				case ELIMINAR:
-
+					
 					break;
 				}
 
@@ -111,7 +111,40 @@ public class Aplicacion {
 	}
 
 	private static void actualizarCliente(Cliente cliente) {
+		System.out.println("--- 3. Actualizar Cliente ---");
 		
+		String nombres = capturarCadenaCaracteres("Digite los nuevos nombres del cliente");
+		String apellidos = capturarCadenaCaracteres("Digite los nuevos apellidos del cliente");
+		
+		int telefono;
+		
+		do {
+			telefono = capturarNumeroEntero("Digite el nuevo número de teléfono del cliente");
+
+			if (telefono <= 0) {
+				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+			}
+		} while (telefono <= 0);
+		
+		String direccion = capturarCadenaCaracteres("Digite la nueva dirección del cliente");
+		String correoElectronico;
+
+		while (true) {
+			correoElectronico = capturarCadenaCaracteres("Digite el nuevo correo electrónico del cliente");
+
+			if (!correoElectronicoValido(correoElectronico)) {
+				System.out.println("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
+				continue;
+			}
+
+			break;
+		}
+		
+		cliente.setNombres(nombres);
+		cliente.setApellidos(apellidos);
+		cliente.setTelefono(String.valueOf(telefono));
+		cliente.setDireccion(direccion);
+		cliente.setCorreoElectronico(correoElectronico);
 	}
 
 	private static void mostrarDatosCliente(Cliente cliente) {
