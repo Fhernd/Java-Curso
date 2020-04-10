@@ -11,7 +11,7 @@ public class Aplicacion {
 	private static final int GESTION_PROVEEDORES = 2;
 	private static final int GESTION_PRODUCTOS = 3;
 	private static final int GESTION_FACTURACION = 4;
-	
+
 	private static final int CREAR = 1;
 	private static final int BUSCAR = 2;
 	private static final int ACTUALIZAR = 3;
@@ -29,6 +29,8 @@ public class Aplicacion {
 
 		int opcion;
 		int opcionSubmenu;
+		
+		Cliente cliente;
 
 		do {
 			do {
@@ -45,77 +47,136 @@ public class Aplicacion {
 			}
 
 			switch (opcion) {
-				case GESTION_CLIENTES:
-					
-					do {
-						mostrarSubmenu("Clientes");
-						opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
+			case GESTION_CLIENTES:
 
-						if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-							System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
-						}
-					} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
-					
-					if (opcionSubmenu == SALIR) {
-						break;
+				do {
+					mostrarSubmenu("Clientes");
+					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
+
+					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
 					}
+				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
+
+				if (opcionSubmenu == SALIR) {
+					break;
+				}
+
+				switch (opcionSubmenu) {
+				case CREAR:
+					cliente = crearCliente(clientes);
 					
-					switch(opcionSubmenu) {
-						case CREAR:
-							crearCliente(clientes);
-							break;
-						case BUSCAR:
-							
-							break;
-						case ACTUALIZAR:
-							
-							break;
-						case ELIMINAR:
-							
-							break;
-					}
+					clientes.add(cliente);
 					
 					break;
-				case GESTION_PROVEEDORES:
-	
+				case BUSCAR:
+					cliente = buscarCliente(clientes);
 					break;
-				case GESTION_PRODUCTOS:
-	
+				case ACTUALIZAR:
+
 					break;
-				case GESTION_FACTURACION:
-	
+				case ELIMINAR:
+
 					break;
+				}
+
+				break;
+			case GESTION_PROVEEDORES:
+
+				break;
+			case GESTION_PRODUCTOS:
+
+				break;
+			case GESTION_FACTURACION:
+
+				break;
 			}
 
 		} while (opcion != SALIR);
 
 	}
 
-	private static void crearCliente(List<Cliente> clientes) {
-		System.out.println("--- 1. Crear Cliente ---");
+	private static Cliente buscarCliente(List<Cliente> clientes) {
 		int numeroCedula;
 		String cedula;
+		Cliente cliente;
 		
 		do {
 			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente nuevo");
-			
+
 			if (numeroCedula <= 0) {
 				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
 				numeroCedula = 0;
 				continue;
 			}
-			
+
 			cedula = String.valueOf(numeroCedula);
-			
-			Cliente cliente = buscarClientePorCedula(clientes, cedula);
-			
+
+			cliente = buscarClientePorCedula(clientes, cedula);
+
 			if (cliente != null) {
 				System.out.printf("MENSAJE: Ya existe otro con el número de cédula: %s.\n", cedula);
 				numeroCedula = 0;
-			}			
+			}
 		} while (numeroCedula <= 0);
 		
+		return null;
+	}
+
+	private static Cliente crearCliente(List<Cliente> clientes) {
+		System.out.println("--- 1. Crear Cliente ---");
+		int numeroCedula;
+		int telefono;
+		String cedula = "";
+		Cliente cliente;
+
+		do {
+			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente nuevo");
+
+			if (numeroCedula <= 0) {
+				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+				numeroCedula = 0;
+				continue;
+			}
+
+			cedula = String.valueOf(numeroCedula);
+
+			cliente = buscarClientePorCedula(clientes, cedula);
+
+			if (cliente != null) {
+				System.out.printf("MENSAJE: Ya existe otro con el número de cédula: %s.\n", cedula);
+				numeroCedula = 0;
+			}
+		} while (numeroCedula <= 0);
+
+		String nombres = capturarCadenaCaracteres("Digite los nombres del cliente nuevo");
+		String apellidos = capturarCadenaCaracteres("Digite los apellidos del cliente nuevo");
+
+		do {
+			telefono = capturarNumeroEntero("Digite el número de teléfono del cliente nuevo");
+
+			if (telefono <= 0) {
+				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+			}
+		} while (telefono <= 0);
+
+		String direccion = capturarCadenaCaracteres("Digite la dirección del cliente nuevo");
+		String correoElectronico;
 		
+		while(true) {
+			correoElectronico = capturarCadenaCaracteres("Digite el correo electrónico del cliente nuevo");
+			
+			if (!correoElectronicoValido(correoElectronico)) {
+				System.out.println("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
+				continue;
+			}
+			
+			break;
+		} 
+		
+		cliente = new Cliente(cedula, nombres, apellidos, String.valueOf(telefono), direccion, correoElectronico);
+		
+		return cliente;
 	}
 
 	private static Cliente buscarClientePorCedula(List<Cliente> clientes, String cedula) {
@@ -124,7 +185,7 @@ public class Aplicacion {
 				return cliente;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -187,5 +248,10 @@ public class Aplicacion {
 				System.out.println("MENSAJE: Digite un valor que corresponda con un número real.");
 			}
 		}
+	}
+
+	static boolean correoElectronicoValido(String correo) {
+		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+		return correo.matches(regex);
 	}
 }
