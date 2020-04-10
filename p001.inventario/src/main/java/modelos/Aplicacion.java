@@ -1,6 +1,7 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -93,14 +94,38 @@ public class Aplicacion {
 	private static void crearCliente(List<Cliente> clientes) {
 		System.out.println("--- 1. Crear Cliente ---");
 		int numeroCedula;
+		String cedula;
 		
 		do {
 			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente nuevo");
 			
 			if (numeroCedula <= 0) {
 				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+				numeroCedula = 0;
+				continue;
 			}
+			
+			cedula = String.valueOf(numeroCedula);
+			
+			Cliente cliente = buscarClientePorCedula(clientes, cedula);
+			
+			if (cliente != null) {
+				System.out.printf("MENSAJE: Ya existe otro con el número de cédula: %s.\n", cedula);
+				numeroCedula = 0;
+			}			
 		} while (numeroCedula <= 0);
+		
+		
+	}
+
+	private static Cliente buscarClientePorCedula(List<Cliente> clientes, String cedula) {
+		for (Cliente cliente : clientes) {
+			if (cliente.getCedula().equals(cedula)) {
+				return cliente;
+			}
+		}
+		
+		return null;
 	}
 
 	public static void mostrarMenuPrincipal() {
