@@ -31,6 +31,7 @@ public class Aplicacion {
 		int opcionSubmenu;
 
 		Cliente cliente;
+		Proveedor proveedor;
 
 		do {
 			do {
@@ -75,7 +76,7 @@ public class Aplicacion {
 						if (cliente != null) {
 							mostrarDatosCliente(cliente);
 						} else {
-							System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+							System.out.println("No se encontró un cliente con el número de cédula especificado.");
 						}
 	
 						break;
@@ -86,7 +87,7 @@ public class Aplicacion {
 							actualizarCliente(cliente);
 							mostrarDatosCliente(cliente);
 						} else {
-							System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+							System.out.println("No se encontró un cliente con el número de cédula especificado.");
 						}
 						break;
 					case ELIMINAR:
@@ -111,11 +112,19 @@ public class Aplicacion {
 
 				switch (opcionSubmenu) {
 					case CREAR:
-						Proveedor proveedor = crearProveedor(proveedores);
+						proveedor = crearProveedor(proveedores);
+						
+						proveedores.add(proveedor);
 	
 						break;
 					case BUSCAR:
+						proveedor = buscarProveedor(proveedores);
 						
+						if (proveedor != null) {
+							
+						} else {
+							System.out.println("No se encontró un proveedor con el ID especificado.");
+						}
 	
 						break;
 					case ACTUALIZAR:
@@ -138,11 +147,31 @@ public class Aplicacion {
 
 	}
 
+	private static Proveedor buscarProveedor(List<Proveedor> proveedores) {
+		System.out.println("--- 2. Buscar Proveedor ---");
+		
+		int id;
+		
+		do {
+			id = capturarNumeroEntero("Digite el número ID del proveedor");
+			
+			if (id <= 0) {
+				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				continue;
+			}
+		} while (id <= 0);
+		
+		return buscarProveedorPorId(id);
+	}
+
 	private static Proveedor crearProveedor(List<Proveedor> proveedores) {
 		System.out.println("--- 1. Crear Proveedor ---");
 		
 		int id;
 		Proveedor proveedor;
+		String nombre;
+		int telefono;
+		String direccion;
 		
 		do {
 			id = capturarNumeroEntero("Digite el número ID del nuevo proveedor");
@@ -159,8 +188,20 @@ public class Aplicacion {
 				id = 0;
 			}
 		} while (id <= 0);
+	
+		nombre = capturarCadenaCaracteres("Digite el nombre para el nuevo proveedor");
 		
-		return null;
+		do {
+			telefono = capturarNumeroEntero("Digite el número de teléfono del nuevo proveedor");
+
+			if (telefono <= 0) {
+				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+			}
+		} while (telefono <= 0);
+		
+		direccion = capturarCadenaCaracteres("Digite la dirección del nuevo proveedor");
+		
+		return new Proveedor(id, nombre, String.valueOf(telefono), direccion);
 	}
 
 	private static Proveedor buscarProveedorPorId(int id) {
