@@ -33,6 +33,7 @@ public class Aplicacion {
 
 		Cliente cliente;
 		Proveedor proveedor;
+		Producto producto;
 
 		do {
 			do {
@@ -144,7 +145,50 @@ public class Aplicacion {
 					}
 				break;
 			case GESTION_PRODUCTOS:
+				do {
+					mostrarSubmenu("Productos");
+					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
 
+					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+					}
+				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
+
+				if (opcionSubmenu == SALIR) {
+					break;
+				}
+
+				switch (opcionSubmenu) {
+					case CREAR:
+						producto = crearProducto(productos);
+						
+						productos.add(producto);
+	
+						break;
+					case BUSCAR:
+						proveedor = buscarProveedor(proveedores);
+						
+						if (proveedor != null) {
+							mostrarDatosProveedor(proveedor);
+						} else {
+							System.out.println("No se encontró un proveedor con el ID especificado.");
+						}
+	
+						break;
+					case ACTUALIZAR:
+						proveedor = buscarProveedor(proveedores);
+						
+						if(proveedor != null) {
+							actualizarProveedor(proveedor);
+							mostrarDatosProveedor(proveedor);
+						} else {
+							System.out.println("MENSAJE: No existe un proveedor con el ID suministrado.");
+						}
+						break;
+					case ELIMINAR:
+						eliminarProveedor(proveedores, productos);
+						break;
+					}
 				break;
 			case GESTION_FACTURACION:
 
@@ -153,6 +197,39 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static Producto crearProducto(List<Producto> productos) {
+		System.out.println("--- 1. Crear Producto ---");
+		
+		int id;
+		String nombre;
+		Producto producto;
+		
+		do {
+			id = capturarNumeroEntero("Digite el número de ID del nuevo producto");
+			
+			if (id <= 0) {
+				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				continue;
+			}
+			
+			producto = buscarProductoPorId(id);
+			
+			if (producto != null) {
+				System.out.println("MENSAJE: Ya existe un producto con el ID especificado");
+				id = 0;
+			}
+		} while (id <= 0);
+	
+		nombre = capturarCadenaCaracteres("Digite el nombre para el nuevo proveedor");
+		
+		return null;
+	}
+
+	private static Producto buscarProductoPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private static void eliminarProveedor(List<Proveedor> proveedores, List<Producto> productos) {
@@ -173,13 +250,21 @@ public class Aplicacion {
 		
 		if (proveedor != null) {
 			List<Producto> productosProveedor = buscarProductosPorIdProveedor(productos, id);
+			
+			if (productosProveedor.isEmpty()) {
+				proveedores.remove(proveedor);
+				
+				System.out.printf("MENSAJE: Se ha eliminado el proveedor con ID %d.\n", id);
+			} else {
+				System.out.println("MENSAJE: No puede eliminar este proveedor. Tiene asociado uno o más productos.");
+			}
 		} else {
 			System.out.println("MENSAJE: No existe un proveedor con el número de ID suministrado.");
 		}
 	}
 
 	private static List<Producto> buscarProductosPorIdProveedor(List<Producto> productos, int idProveedor) {
-		return productos.stream().filter(p -> p.getId() == idProveedor).collect(Collectors.toList());
+		return productos.stream().filter(p -> p.getIdProveedor() == idProveedor).collect(Collectors.toList());
 	}
 
 	private static void actualizarProveedor(Proveedor proveedor) {
