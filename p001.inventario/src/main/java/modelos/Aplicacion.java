@@ -214,10 +214,10 @@ public class Aplicacion {
 
 					break;
 				case BUSCAR:
-					producto = buscarProducto(productos);
+					factura = buscarFactura(facturas);
 
-					if (producto != null) {
-						mostrarDatosProducto(producto);
+					if (factura != null) {
+//						 mostrarDatosProducto(producto);
 					} else {
 						System.out.println("No se encontró un producto con el ID especificado.");
 					}
@@ -229,6 +229,26 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static Factura buscarFactura(List<Factura> facturas) {
+		System.out.println("--- 2. Buscar Factura ---");
+		
+		int idFactura;
+		
+		do {
+			System.out.println("Listado de facturas");
+			
+			for (Factura f : facturas) {
+				System.out.printf("%d. %s - %s\n", f.getId(), f.getCedulaCliente(), f.getFecha().toString());
+			}
+			idFactura = capturarNumeroEntero("Digite el ID de la factura");
+			
+			
+			break;
+		} while(true);
+		
+		return null;
 	}
 
 	private static Factura crearFactura(List<Cliente> clientes, List<Producto> productos, List<Factura> facturas) {
@@ -338,9 +358,11 @@ public class Aplicacion {
 			break;
 		} while (true);
 		
-		
+		Factura nuevaFactura = new Factura(cedula, impuesto / 100.0);
+		idsProductos.forEach(id -> nuevaFactura.agregarIdProducto(id));
+		nuevaFactura.setTotal(total);
 
-		return null;
+		return nuevaFactura;
 	}
 
 	private static void eliminarProducto(List<Producto> productos, List<Factura> facturas) {
