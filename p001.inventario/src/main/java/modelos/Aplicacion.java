@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Aplicacion {
 	private static final int SALIR = 0;
@@ -138,7 +139,7 @@ public class Aplicacion {
 						}
 						break;
 					case ELIMINAR:
-						
+						eliminarProveedor(proveedores, productos);
 						break;
 					}
 				break;
@@ -152,6 +153,33 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static void eliminarProveedor(List<Proveedor> proveedores, List<Producto> productos) {
+		
+		int id;
+		Proveedor proveedor;
+		
+		do {
+			id = capturarNumeroEntero("Digite el número de ID del proveedor");
+			
+			if (id <= 0) {
+				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				continue;
+			}
+		} while (id <= 0);
+		
+		proveedor = buscarProveedorPorId(id);
+		
+		if (proveedor != null) {
+			List<Producto> productosProveedor = buscarProductosPorIdProveedor(productos, id);
+		} else {
+			System.out.println("MENSAJE: No existe un proveedor con el número de ID suministrado.");
+		}
+	}
+
+	private static List<Producto> buscarProductosPorIdProveedor(List<Producto> productos, int idProveedor) {
+		return productos.stream().filter(p -> p.getId() == idProveedor).collect(Collectors.toList());
 	}
 
 	private static void actualizarProveedor(Proveedor proveedor) {
