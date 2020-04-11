@@ -208,7 +208,7 @@ public class Aplicacion {
 
 				switch (opcionSubmenu) {
 					case CREAR:
-						factura = crearFactura(clientes, productos, proveedores, facturas);
+						factura = crearFactura(clientes, productos, facturas);
 						
 						facturas.add(factura);
 	
@@ -231,8 +231,38 @@ public class Aplicacion {
 
 	}
 
-	private static Factura crearFactura(List<Cliente> clientes, List<Producto> productos, List<Proveedor> proveedores,
-			List<Factura> facturas) {
+	private static Factura crearFactura(List<Cliente> clientes, List<Producto> productos, List<Factura> facturas) {
+		System.out.println("--- 1. Crear Factura ---");
+		
+		String cedula;
+		int numeroCedula;
+		Cliente cliente;
+		
+		do {
+			System.out.println("Listado de clientes");
+			for (Cliente c : clientes) {
+				System.out.printf("%s. %s %s\n", c.getCedula(), c.getNombres(), c.getApellidos());
+			}
+			numeroCedula = capturarNumeroEntero("Digite el número de cédula del cliente");
+			
+			if (numeroCedula <= 0) {
+				System.out.println("MENSAJE: El número de cédula no puede ser negativo.");
+				continue;
+			}
+			
+			cedula = String.valueOf(numeroCedula);
+			
+			cliente = buscarClientePorCedula(clientes, cedula);
+			
+			if (cliente != null) {
+				break;
+			} else {
+				System.out.println("MENSAJE: No existe un cliente con el número de cédula especificado.");
+			}
+			
+		} while(true);
+		
+		
 		
 		return null;
 	}
