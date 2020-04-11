@@ -237,6 +237,8 @@ public class Aplicacion {
 		String cedula;
 		int numeroCedula;
 		Cliente cliente;
+		List<Integer> idsProductos = new ArrayList<>();
+		int idProducto;
 		
 		do {
 			System.out.println("Listado de clientes");
@@ -262,7 +264,30 @@ public class Aplicacion {
 			
 		} while(true);
 		
-		
+		do {
+			System.out.println("Listado de productos:");
+			for (Producto producto : productos) {
+				System.out.printf("%d. %s - $%.2f\n", producto.getId(), producto.getNombre(), producto.getPrecioVenta());
+			}
+			System.out.println("0. Salir");
+			idProducto = capturarNumeroEntero("Digite el ID del producto");
+			
+			if (idProducto == SALIR && !idsProductos.isEmpty()) {
+				break;
+			}
+			
+			if (idProducto <= 0) {
+				System.out.println("MENSAJE: El ID del producto debe ser un número positivo.");
+				continue;
+			}
+			
+			if (buscarProductoPorId(productos, idProducto) != null) {
+				idsProductos.add(idProducto);
+			} else {
+				System.out.println("MENSAJE: No existe un producto con el ID especificado.");
+			}
+			
+		} while (true);
 		
 		return null;
 	}
