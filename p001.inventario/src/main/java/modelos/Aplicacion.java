@@ -217,7 +217,7 @@ public class Aplicacion {
 					factura = buscarFactura(facturas);
 
 					if (factura != null) {
-//						 mostrarDatosProducto(producto);
+						 mostrarDatosFactura(factura, clientes, productos);
 					} else {
 						System.out.println("No se encontró un producto con el ID especificado.");
 					}
@@ -231,10 +231,26 @@ public class Aplicacion {
 
 	}
 
+	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
+		System.out.println("Datos de la factura");
+		
+		System.out.println("ID: " + factura.getId());
+		System.out.println("Fecha: " + factura.getFecha().toString());
+		
+		Cliente cliente = buscarClientePorCedula(clientes, factura.getCedulaCliente());
+		
+		System.out.println("Datos del cliente:");
+		System.out.println("Cédula: " + cliente.getCedula());
+		System.out.printf("Nombre completo: %s %s\n", cliente.getNombres(), cliente.getApellidos());
+		
+		
+	}
+
 	private static Factura buscarFactura(List<Factura> facturas) {
 		System.out.println("--- 2. Buscar Factura ---");
 		
 		int idFactura;
+		Factura factura;
 		
 		do {
 			System.out.println("Listado de facturas");
@@ -242,13 +258,28 @@ public class Aplicacion {
 			for (Factura f : facturas) {
 				System.out.printf("%d. %s - %s\n", f.getId(), f.getCedulaCliente(), f.getFecha().toString());
 			}
+			
 			idFactura = capturarNumeroEntero("Digite el ID de la factura");
 			
+			if (idFactura <= 0) {
+				System.out.println("MENSAJE: El ID de la factura debe ser un número positivo.");
+				continue;
+			}
 			
-			break;
+			factura = buscarFacturaPorId(facturas, idFactura);
+			
+			if (factura != null) {
+				break;
+			} else {
+				System.out.println("No se ha encontrado una factura con el ID especificado.");
+			}
 		} while(true);
 		
-		return null;
+		return factura;
+	}
+
+	private static Factura buscarFacturaPorId(List<Factura> facturas, int idFactura) {
+		return facturas.stream().filter(f -> f.getId() == idFactura).findFirst().get();
 	}
 
 	private static Factura crearFactura(List<Cliente> clientes, List<Producto> productos, List<Factura> facturas) {
