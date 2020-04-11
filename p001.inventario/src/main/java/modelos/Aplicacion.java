@@ -242,6 +242,7 @@ public class Aplicacion {
 		double total = 0;
 		Producto producto;
 		int cantidad;
+		int impuesto;
 
 		do {
 			System.out.println("Listado de clientes");
@@ -306,6 +307,8 @@ public class Aplicacion {
 
 						break;
 					} while (true);
+					
+					producto.setCantidad(producto.getCantidad() - cantidad);
 
 					total += producto.getPrecioVenta() * cantidad;
 
@@ -318,6 +321,24 @@ public class Aplicacion {
 			}
 
 		} while (true);
+		
+		do {
+			impuesto = capturarNumeroEntero("Digite el impuesto para esta factura");
+			
+			if (impuesto <= 0) {
+				System.out.println("El impuesto debe ser un número positivo.");
+				continue;
+			}
+			
+			if (impuesto > 100) {
+				System.out.println("MENSAJE: El impuesto especificado no es un valor válido. Debe estar entre 1 y 100.");
+				continue;
+			}
+			
+			break;
+		} while (true);
+		
+		
 
 		return null;
 	}
