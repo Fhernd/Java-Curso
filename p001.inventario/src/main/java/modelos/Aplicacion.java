@@ -160,18 +160,18 @@ public class Aplicacion {
 
 				switch (opcionSubmenu) {
 					case CREAR:
-						producto = crearProducto(productos);
+						producto = crearProducto(productos, proveedores);
 						
 						productos.add(producto);
 	
 						break;
 					case BUSCAR:
-						proveedor = buscarProveedor(proveedores);
+						producto = buscarProducto(productos);
 						
-						if (proveedor != null) {
-							mostrarDatosProveedor(proveedor);
+						if (producto != null) {
+							mostrarDatosProducto(producto);
 						} else {
-							System.out.println("No se encontró un proveedor con el ID especificado.");
+							System.out.println("No se encontró un producto con el ID especificado.");
 						}
 	
 						break;
@@ -182,7 +182,7 @@ public class Aplicacion {
 							actualizarProveedor(proveedor);
 							mostrarDatosProveedor(proveedor);
 						} else {
-							System.out.println("MENSAJE: No existe un proveedor con el ID suministrado.");
+							System.out.println("MENSAJE: No existe un proveedor con el ID especificado.");
 						}
 						break;
 					case ELIMINAR:
@@ -199,12 +199,39 @@ public class Aplicacion {
 
 	}
 
-	private static Producto crearProducto(List<Producto> productos) {
+	private static void mostrarDatosProducto(Producto producto) {
+		
+	}
+
+	private static Producto buscarProducto(List<Producto> productos) {
+		System.out.println("--- 2. Buscar Producto ---");
+		
+		int id;
+		
+		do {
+			id = capturarNumeroEntero("Digite el número de ID del producto");
+			
+			if (id <= 0) {
+				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				continue;
+			}
+		} while (id <= 0);
+		
+		return buscarProductoPorId(productos, id);
+	}
+
+	private static Producto crearProducto(List<Producto> productos, List<Proveedor> proveedores) {
 		System.out.println("--- 1. Crear Producto ---");
 		
 		int id;
 		String nombre;
+		String descripcion;
 		Producto producto;
+		double precioCompra;
+		double precioVenta;
+		int cantidad;
+		int cantidadMinimaStock;
+		int idProveedor;
 		
 		do {
 			id = capturarNumeroEntero("Digite el número de ID del nuevo producto");
@@ -214,7 +241,7 @@ public class Aplicacion {
 				continue;
 			}
 			
-			producto = buscarProductoPorId(id);
+			producto = buscarProductoPorId(productos, id);
 			
 			if (producto != null) {
 				System.out.println("MENSAJE: Ya existe un producto con el ID especificado");
@@ -222,14 +249,67 @@ public class Aplicacion {
 			}
 		} while (id <= 0);
 	
-		nombre = capturarCadenaCaracteres("Digite el nombre para el nuevo proveedor");
+		nombre = capturarCadenaCaracteres("Digite el nombre para el nuevo producto");
+		descripcion = capturarCadenaCaracteres("Digite la descripción del nuevo producto");
 		
-		return null;
+		do {
+			precioCompra = capturarNumeroReal("Digite el precio de compra para el nuevo producto");
+			
+			if (precioCompra <= 0) {
+				System.out.println("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+			}
+		} while (precioCompra <= 0);
+		
+		do {
+			precioVenta = capturarNumeroReal("Digite el precio de compra para el nuevo producto");
+			
+			if (precioVenta <= 0) {
+				System.out.println("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				continue;
+			}
+			
+			if (precioVenta <= precioCompra) {
+				System.out.println("MENSAJE: El precio de ventana no puede ser menor o igual al precio de compra.");
+				precioVenta = 0;
+			}
+		} while (precioVenta <= 0);
+		
+		do {
+			cantidad = capturarNumeroEntero("Digite la cantidad para el nuevo producto");
+			
+			if (cantidad <= 0) {
+				System.out.println("MENSAJE: Debe escribir una cantidad positiva.");
+			}
+		} while (cantidad <= 0);
+		
+		do {
+			cantidadMinimaStock = capturarNumeroEntero("Digite la cantidad mínima de stock para el nuevo producto");
+			
+			if (cantidadMinimaStock <= 0) {
+				System.out.println("MENSAJE: Debe escribir una cantidad mínima de stock positiva.");
+			}
+		} while (cantidadMinimaStock <= 0);
+		
+		do {
+			System.out.println("Listado de Proveedores Disponibles");
+			for (Proveedor proveedor : proveedores) {
+				System.out.printf("%d. %s\n", proveedor.getId(), proveedor.getNombre());
+			}
+			idProveedor = capturarNumeroEntero("Digite el ID del proveedor: ");
+			
+			if (buscarProveedorPorId(idProveedor) != null) {
+				break;
+			} else {
+				System.out.printf("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor);
+			}
+			
+		} while(true);
+		
+		return new Producto(id, nombre, descripcion, precioCompra, precioVenta, cantidad, cantidadMinimaStock, idProveedor);
 	}
 
-	private static Producto buscarProductoPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	private static Producto buscarProductoPorId(List<Producto> productos, int id) {
+		return productos.stream().filter(p -> p.getId() == id).findFirst().get();
 	}
 
 	private static void eliminarProveedor(List<Proveedor> proveedores, List<Producto> productos) {
