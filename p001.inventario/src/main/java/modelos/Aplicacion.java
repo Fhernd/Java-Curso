@@ -90,7 +90,7 @@ public class Aplicacion {
 					}
 					break;
 				case ELIMINAR:
-					
+					eliminarCliente(clientes, facturas);
 					break;
 				}
 
@@ -108,6 +108,51 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static void eliminarCliente(List<Cliente> clientes, List<Factura> facturas) {
+		int numeroCedula;
+		String cedula;
+
+		do {
+			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente");
+
+			if (numeroCedula <= 0) {
+				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+				numeroCedula = 0;
+				continue;
+			}
+		} while (numeroCedula <= 0);
+
+		cedula = String.valueOf(numeroCedula);
+
+		Cliente cliente = buscarClientePorCedula(clientes, cedula);
+		
+		if (cliente != null) {
+			Factura factura = buscarFacturaPorCedula(facturas, cedula);
+			
+			if (factura == null) {
+				
+				clientes.remove(cliente);
+				
+				System.out.printf("MENSAJE: Se ha eliminado el cliente con cédula: %s\n", cedula);
+				
+			} else {
+				System.out.println("No se puede eliminar el cliente. Tiene una o más facturas asignadas.");
+			}
+		} else {
+			System.out.println("MENSAJE: No se encontró ningún cliente con el número de cédula especificado.");
+		}
+	}
+
+	private static Factura buscarFacturaPorCedula(List<Factura> facturas, String cedula) {
+		for (Factura factura : facturas) {
+			if (factura.getCedulaCliente().equals(cedula)) {
+				return factura;
+			}
+		}
+		
+		return null;
 	}
 
 	private static void actualizarCliente(Cliente cliente) {
