@@ -63,40 +63,68 @@ public class Aplicacion {
 				}
 
 				switch (opcionSubmenu) {
-				case CREAR:
-					cliente = crearCliente(clientes);
-
-					clientes.add(cliente);
-
-					break;
-				case BUSCAR:
-					cliente = buscarCliente(clientes);
-
-					if (cliente != null) {
-						mostrarDatosCliente(cliente);
-					} else {
-						System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+					case CREAR:
+						cliente = crearCliente(clientes);
+	
+						clientes.add(cliente);
+	
+						break;
+					case BUSCAR:
+						cliente = buscarCliente(clientes);
+	
+						if (cliente != null) {
+							mostrarDatosCliente(cliente);
+						} else {
+							System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+						}
+	
+						break;
+					case ACTUALIZAR:
+						cliente = buscarCliente(clientes);
+	
+						if (cliente != null) {
+							actualizarCliente(cliente);
+							mostrarDatosCliente(cliente);
+						} else {
+							System.out.println("No se encontrado un cliente con el número de cédula especificado.");
+						}
+						break;
+					case ELIMINAR:
+						eliminarCliente(clientes, facturas);
+						break;
 					}
-
-					break;
-				case ACTUALIZAR:
-					cliente = buscarCliente(clientes);
-
-					if (cliente != null) {
-						actualizarCliente(cliente);
-						mostrarDatosCliente(cliente);
-					} else {
-						System.out.println("No se encontrado un cliente con el número de cédula especificado.");
-					}
-					break;
-				case ELIMINAR:
-					eliminarCliente(clientes, facturas);
-					break;
-				}
 
 				break;
 			case GESTION_PROVEEDORES:
+				do {
+					mostrarSubmenu("Proveedores");
+					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
 
+					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+					}
+				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
+
+				if (opcionSubmenu == SALIR) {
+					break;
+				}
+
+				switch (opcionSubmenu) {
+					case CREAR:
+						Proveedor proveedor = crearProveedor(proveedores);
+	
+						break;
+					case BUSCAR:
+						
+	
+						break;
+					case ACTUALIZAR:
+						
+						break;
+					case ELIMINAR:
+						
+						break;
+					}
 				break;
 			case GESTION_PRODUCTOS:
 
@@ -108,6 +136,36 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static Proveedor crearProveedor(List<Proveedor> proveedores) {
+		System.out.println("--- 1. Crear Proveedor ---");
+		
+		int id;
+		Proveedor proveedor;
+		
+		do {
+			id = capturarNumeroEntero("Digite el número ID del nuevo proveedor");
+			
+			if (id <= 0) {
+				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				continue;
+			}
+			
+			proveedor = buscarProveedorPorId(id);
+			
+			if (proveedor != null) {
+				System.out.println("MENSAJE: Ya existe un proveedor con el ID especificado");
+				id = 0;
+			}
+		} while (id <= 0);
+		
+		return null;
+	}
+
+	private static Proveedor buscarProveedorPorId(int id) {
+		
+		return null;
 	}
 
 	private static void eliminarCliente(List<Cliente> clientes, List<Factura> facturas) {
