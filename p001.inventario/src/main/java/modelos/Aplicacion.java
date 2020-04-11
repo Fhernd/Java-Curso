@@ -121,14 +121,21 @@ public class Aplicacion {
 						proveedor = buscarProveedor(proveedores);
 						
 						if (proveedor != null) {
-							
+							mostrarDatosProveedor(proveedor);
 						} else {
 							System.out.println("No se encontró un proveedor con el ID especificado.");
 						}
 	
 						break;
 					case ACTUALIZAR:
+						proveedor = buscarProveedor(proveedores);
 						
+						if(proveedor != null) {
+							actualizarProveedor(proveedor);
+							mostrarDatosProveedor(proveedor);
+						} else {
+							System.out.println("MENSAJE: No existe un proveedor con el ID suministrado.");
+						}
 						break;
 					case ELIMINAR:
 						
@@ -145,6 +152,38 @@ public class Aplicacion {
 
 		} while (opcion != SALIR);
 
+	}
+
+	private static void actualizarProveedor(Proveedor proveedor) {
+		System.out.println("--- 3. Actualizar Proveedor ---");
+		
+		String nombre;
+		int telefono;
+		String direccion;
+	
+		nombre = capturarCadenaCaracteres("Digite el nuevo nombre del proveedor");
+		
+		do {
+			telefono = capturarNumeroEntero("Digite el nuevo número de teléfono proveedor");
+
+			if (telefono <= 0) {
+				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+			}
+		} while (telefono <= 0);
+		
+		direccion = capturarCadenaCaracteres("Digite la nueva dirección del proveedor");
+		
+		proveedor.setNombre(nombre);
+		proveedor.setTelefono(String.valueOf(telefono));
+		proveedor.setDireccion(direccion);
+	}
+
+	private static void mostrarDatosProveedor(Proveedor proveedor) {
+		System.out.println("Datos del proveedor");
+		System.out.println("ID: " + proveedor.getId());
+		System.out.println("Nombre: " + proveedor.getNombre());
+		System.out.println("Teléfono: " + proveedor.getTelefono());
+		System.out.println("Dirección: " + proveedor.getDireccion());
 	}
 
 	private static Proveedor buscarProveedor(List<Proveedor> proveedores) {
