@@ -281,6 +281,8 @@ public class Aplicacion {
 								factura = crearFactura(clientes, productos, facturas);
 
 								facturas.add(factura);
+								
+								mostrarDatosFactura(factura, clientes, productos);
 							} else {
 								mostrarMensaje(
 										"MENSAJE: No se puede crear una factura mientras que no hallan productos.");
@@ -324,6 +326,7 @@ public class Aplicacion {
 	}
 
 	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
+		System.out.println();
 		System.out.println("Datos de la factura");
 
 		System.out.println("ID: " + factura.getId());
@@ -354,6 +357,7 @@ public class Aplicacion {
 	}
 
 	private static Factura buscarFactura(List<Factura> facturas) {
+		System.out.println();
 		System.out.println("--- 2. Buscar Factura ---");
 
 		int idFactura;
@@ -392,6 +396,7 @@ public class Aplicacion {
 	}
 
 	private static Factura crearFactura(List<Cliente> clientes, List<Producto> productos, List<Factura> facturas) {
+		System.out.println();
 		System.out.println("--- 1. Crear Factura ---");
 
 		String cedula;
@@ -429,7 +434,9 @@ public class Aplicacion {
 			}
 
 		} while (true);
-
+		
+		System.out.println();
+		
 		do {
 			System.out.println("Listado de productos:");
 			for (Producto p : productos) {
