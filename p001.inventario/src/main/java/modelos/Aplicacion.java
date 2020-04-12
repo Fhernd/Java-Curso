@@ -592,7 +592,8 @@ public class Aplicacion {
 			id = capturarNumeroEntero("Digite el número de ID del producto");
 
 			if (id <= 0) {
-				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
+				continuar();
 				continue;
 			}
 		} while (id <= 0);
@@ -617,14 +618,16 @@ public class Aplicacion {
 			id = capturarNumeroEntero("Digite el número de ID del nuevo producto");
 
 			if (id <= 0) {
-				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
+				continuar();
 				continue;
 			}
 
 			producto = buscarProductoPorId(productos, id);
 
 			if (producto != null) {
-				System.out.println("MENSAJE: Ya existe un producto con el ID especificado");
+				mostrarMensaje("MENSAJE: Ya existe un producto con el ID especificado");
+				continuar();
 				id = 0;
 			}
 		} while (id <= 0);
@@ -636,7 +639,8 @@ public class Aplicacion {
 			precioCompra = capturarNumeroReal("Digite el precio de compra para el nuevo producto");
 
 			if (precioCompra <= 0) {
-				System.out.println("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				mostrarMensaje("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				continuar();
 			}
 		} while (precioCompra <= 0);
 
@@ -644,12 +648,14 @@ public class Aplicacion {
 			precioVenta = capturarNumeroReal("Digite el precio de compra para el nuevo producto");
 
 			if (precioVenta <= 0) {
-				System.out.println("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				mostrarMensaje("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				continuar();
 				continue;
 			}
 
 			if (precioVenta <= precioCompra) {
-				System.out.println("MENSAJE: El precio de ventana no puede ser menor o igual al precio de compra.");
+				mostrarMensaje("MENSAJE: El precio de ventana no puede ser menor o igual al precio de compra.");
+				continuar();
 				precioVenta = 0;
 			}
 		} while (precioVenta <= 0);
@@ -658,7 +664,8 @@ public class Aplicacion {
 			cantidad = capturarNumeroEntero("Digite la cantidad para el nuevo producto");
 
 			if (cantidad <= 0) {
-				System.out.println("MENSAJE: Debe escribir una cantidad positiva.");
+				mostrarMensaje("MENSAJE: Debe escribir una cantidad positiva.");
+				continuar();
 			}
 		} while (cantidad <= 0);
 
@@ -666,7 +673,8 @@ public class Aplicacion {
 			cantidadMinimaStock = capturarNumeroEntero("Digite la cantidad mínima de stock para el nuevo producto");
 
 			if (cantidadMinimaStock <= 0) {
-				System.out.println("MENSAJE: Debe escribir una cantidad mínima de stock positiva.");
+				mostrarMensaje("MENSAJE: Debe escribir una cantidad mínima de stock positiva.");
+				continuar();
 			}
 		} while (cantidadMinimaStock <= 0);
 
@@ -680,7 +688,8 @@ public class Aplicacion {
 			if (buscarProveedorPorId(idProveedor) != null) {
 				break;
 			} else {
-				System.out.printf("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor);
+				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor));
+				continuar();
 			}
 
 		} while (true);
@@ -702,7 +711,8 @@ public class Aplicacion {
 			id = capturarNumeroEntero("Digite el número de ID del proveedor");
 
 			if (id <= 0) {
-				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
+				continuar();
 				continue;
 			}
 		} while (id <= 0);
@@ -715,12 +725,14 @@ public class Aplicacion {
 			if (productosProveedor.isEmpty()) {
 				proveedores.remove(proveedor);
 
-				System.out.printf("MENSAJE: Se ha eliminado el proveedor con ID %d.\n", id);
+				mostrarMensaje(String.format("MENSAJE: Se ha eliminado el proveedor con ID %d.\n", id));
 			} else {
-				System.out.println("MENSAJE: No puede eliminar este proveedor. Tiene asociado uno o más productos.");
+				mostrarMensaje("MENSAJE: No puede eliminar este proveedor. Tiene asociado uno o más productos.");
+				continuar();
 			}
 		} else {
-			System.out.println("MENSAJE: No existe un proveedor con el número de ID suministrado.");
+			mostrarMensaje("MENSAJE: No existe un proveedor con el número de ID especificado.");
+			continuar();
 		}
 	}
 
@@ -741,7 +753,8 @@ public class Aplicacion {
 			telefono = capturarNumeroEntero("Digite el nuevo número de teléfono proveedor");
 
 			if (telefono <= 0) {
-				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				mostrarMensaje("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				continuar();
 			}
 		} while (telefono <= 0);
 
@@ -769,7 +782,7 @@ public class Aplicacion {
 			id = capturarNumeroEntero("Digite el número ID del proveedor");
 
 			if (id <= 0) {
-				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
 				continue;
 			}
 		} while (id <= 0);
@@ -790,14 +803,16 @@ public class Aplicacion {
 			id = capturarNumeroEntero("Digite el número ID del nuevo proveedor");
 
 			if (id <= 0) {
-				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
+				continuar();
 				continue;
 			}
 
-			proveedor = buscarProveedorPorId(id);
+			proveedor = buscarProveedorPorId(proveedores, id);
 
 			if (proveedor != null) {
-				System.out.println("MENSAJE: Ya existe un proveedor con el ID especificado");
+				mostrarMensaje("MENSAJE: Ya existe un proveedor con el ID especificado");
+				continuar();
 				id = 0;
 			}
 		} while (id <= 0);
@@ -808,7 +823,8 @@ public class Aplicacion {
 			telefono = capturarNumeroEntero("Digite el número de teléfono del nuevo proveedor");
 
 			if (telefono <= 0) {
-				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				mostrarMensaje("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				continuar();
 			}
 		} while (telefono <= 0);
 
@@ -817,9 +833,8 @@ public class Aplicacion {
 		return new Proveedor(id, nombre, String.valueOf(telefono), direccion);
 	}
 
-	private static Proveedor buscarProveedorPorId(int id) {
-
-		return null;
+	private static Proveedor buscarProveedorPorId(List<Proveedor> proveedores, int id) {
+		return proveedores.stream().filter(p -> p.getId() == id).findFirst().get();
 	}
 
 	private static void eliminarCliente(List<Cliente> clientes, List<Factura> facturas) {
