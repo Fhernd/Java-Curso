@@ -1,10 +1,19 @@
 package modelos;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import javax.imageio.IIOException;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 public class Aplicacion {
 	private static final int SALIR = 0;
@@ -17,6 +26,11 @@ public class Aplicacion {
 	private static final int BUSCAR = 2;
 	private static final int ACTUALIZAR = 3;
 	private static final int ELIMINAR = 4;
+
+	private static final String ARCHIVO_CSV_CLIENTES = "./clientes.csv";
+	private static final String ARCHIVO_CSV_PROVEEDORES = "./proveedores.csv";
+	private static final String ARCHIVO_CSV_PRODUCTOS = "./productos.csv";
+	private static final String ARCHIVO_CSV_FACTURAS = "./facturas.csv";
 
 	public static Scanner teclado;
 
@@ -208,7 +222,7 @@ public class Aplicacion {
 							producto = crearProducto(productos, proveedores);
 
 							productos.add(producto);
-							
+
 							mostrarMensaje("MENSAJE: Se ha creado el nuevo producto.");
 						} else {
 							mostrarMensaje("MENSAJE: Antes de crear un producto, debe crear un proveedor.");
@@ -281,7 +295,7 @@ public class Aplicacion {
 								factura = crearFactura(clientes, productos, facturas);
 
 								facturas.add(factura);
-								
+
 								mostrarDatosFactura(factura, clientes, productos);
 							} else {
 								mostrarMensaje(
@@ -307,7 +321,7 @@ public class Aplicacion {
 
 						break;
 					}
-					
+
 					continuar();
 				} while (opcionSubmenu != SALIR);
 				break;
@@ -328,7 +342,21 @@ public class Aplicacion {
 
 	private static void guardarDatosInventario(List<Cliente> clientes, List<Proveedor> proveedores,
 			List<Producto> productos, List<Factura> facturas) {
-		
+
+		try {
+			BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_CLIENTES));
+			CSVPrinter csvPrinter = new CSVPrinter(writer,
+					CSVFormat.DEFAULT.withHeader("cedula", "nombres", "apellidos", "telefono", "direccion", "correo"));
+
+			
+			
+		} catch (IIOException e) {
+
+		} catch (IOException e) {
+			// 
+			e.printStackTrace();
+		}
+
 	}
 
 	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
@@ -440,9 +468,9 @@ public class Aplicacion {
 			}
 
 		} while (true);
-		
+
 		System.out.println();
-		
+
 		do {
 			System.out.println("Listado de productos:");
 			for (Producto p : productos) {
@@ -772,7 +800,7 @@ public class Aplicacion {
 				System.out.printf("%d. %s\n", proveedor.getId(), proveedor.getNombre());
 			}
 			idProveedor = capturarNumeroEntero("Digite el ID del proveedor");
-			
+
 			if (idProveedor <= 0) {
 				mostrarMensaje("MENSAJE: El ID de producto no puede ser un número negativo o igual a cero.");
 				continuar();
@@ -782,7 +810,8 @@ public class Aplicacion {
 			if (buscarProveedorPorId(proveedores, idProveedor) != null) {
 				break;
 			} else {
-				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el ID %d especificado.\n", idProveedor));
+				mostrarMensaje(
+						String.format("MENSAJE: No existe un proveedor con el ID %d especificado.\n", idProveedor));
 				continuar();
 			}
 
@@ -1033,7 +1062,7 @@ public class Aplicacion {
 	private static Cliente buscarCliente(List<Cliente> clientes) {
 		System.out.println();
 		System.out.println("--- 2. Buscar Cliente ---");
-		
+
 		int numeroCedula;
 		String cedula;
 
