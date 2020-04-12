@@ -77,27 +77,40 @@ public class Aplicacion {
 
 					break;
 				case BUSCAR:
-					cliente = buscarCliente(clientes);
+					if (!clientes.isEmpty()) {
+						cliente = buscarCliente(clientes);
 
-					if (cliente != null) {
-						mostrarDatosCliente(cliente);
+						if (cliente != null) {
+							mostrarDatosCliente(cliente);
+						} else {
+							mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+						}
 					} else {
-						mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+						mostrarMensaje("MENSAJE: Aún no se ha creado un cliente. La búsqueda no se puede efectuar.");
 					}
 
 					break;
 				case ACTUALIZAR:
-					cliente = buscarCliente(clientes);
+					if (!clientes.isEmpty()) {
+						cliente = buscarCliente(clientes);
 
-					if (cliente != null) {
-						actualizarCliente(cliente);
-						mostrarDatosCliente(cliente);
+						if (cliente != null) {
+							actualizarCliente(cliente);
+							mostrarDatosCliente(cliente);
+						} else {
+							mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+						}
 					} else {
-						mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+						mostrarMensaje(
+								"MENSAJE: Aún no se ha creado un cliente. La actualización no se puede efectuar.");
 					}
 					break;
 				case ELIMINAR:
-					eliminarCliente(clientes, facturas);
+					if (!clientes.isEmpty()) {
+						eliminarCliente(clientes, facturas);
+					} else {
+						mostrarMensaje("MENSAJE: Aún no se ha creado un cliente. La eliminación no se puede efectuar.");
+					}
 					break;
 				}
 
@@ -125,27 +138,41 @@ public class Aplicacion {
 
 					break;
 				case BUSCAR:
-					proveedor = buscarProveedor(proveedores);
+					if (!proveedores.isEmpty()) {
+						proveedor = buscarProveedor(proveedores);
 
-					if (proveedor != null) {
-						mostrarDatosProveedor(proveedor);
+						if (proveedor != null) {
+							mostrarDatosProveedor(proveedor);
+						} else {
+							mostrarMensaje("No se encontró un proveedor con el ID especificado.");
+						}
 					} else {
-						mostrarMensaje("No se encontró un proveedor con el ID especificado.");
+						mostrarMensaje("MENSAJE: Aún no se ha creado un proveedor. La búsqueda no se puede efectuar.");
 					}
 
 					break;
 				case ACTUALIZAR:
-					proveedor = buscarProveedor(proveedores);
+					if (!proveedores.isEmpty()) {
+						proveedor = buscarProveedor(proveedores);
 
-					if (proveedor != null) {
-						actualizarProveedor(proveedor);
-						mostrarDatosProveedor(proveedor);
+						if (proveedor != null) {
+							actualizarProveedor(proveedor);
+							mostrarDatosProveedor(proveedor);
+						} else {
+							mostrarMensaje("MENSAJE: No existe un proveedor con el ID suministrado.");
+						}
 					} else {
-						mostrarMensaje("MENSAJE: No existe un proveedor con el ID suministrado.");
+						mostrarMensaje(
+								"MENSAJE: Aún no se ha creado un proveedor. La actualización no se puede efectuar.");
 					}
 					break;
 				case ELIMINAR:
-					eliminarProveedor(proveedores, productos);
+					if (!proveedores.isEmpty()) {
+						eliminarProveedor(proveedores, productos);
+					} else {
+						mostrarMensaje(
+								"MENSAJE: Aún no se ha creado un proveedor. La eliminación no se puede efectuar.");
+					}
 					break;
 				}
 				break;
@@ -166,18 +193,27 @@ public class Aplicacion {
 
 				switch (opcionSubmenu) {
 				case CREAR:
-					producto = crearProducto(productos, proveedores);
+					if (!proveedores.isEmpty()) {
+						producto = crearProducto(productos, proveedores);
 
-					productos.add(producto);
+						productos.add(producto);
+					} else {
+						mostrarMensaje("Antes de crear un producto, debe crear un proveedor.");
+					}
 
 					break;
 				case BUSCAR:
-					producto = buscarProducto(productos);
+					if (!productos.isEmpty()) {
+						producto = buscarProducto(productos);
 
-					if (producto != null) {
-						mostrarDatosProducto(producto);
+						if (producto != null) {
+							mostrarDatosProducto(producto);
+						} else {
+							mostrarMensaje("No se encontró un producto con el ID especificado.");
+						}
 					} else {
-						mostrarMensaje("No se encontró un producto con el ID especificado.");
+						mostrarMensaje(
+								"MENSAJE: Aún no se ha creado un producto. La actualización no se puede efectuar.");
 					}
 
 					break;
@@ -387,9 +423,8 @@ public class Aplicacion {
 						}
 
 						if (cantidad > producto.getCantidad()) {
-							mostrarMensaje(
-									"MENSAJE: No hay cantidad suficiente de este producto. Cantidad disponible: "
-											+ producto.getCantidad());
+							mostrarMensaje("MENSAJE: No hay cantidad suficiente de este producto. Cantidad disponible: "
+									+ producto.getCantidad());
 							continuar();
 							continue;
 						}
@@ -557,7 +592,7 @@ public class Aplicacion {
 				break;
 			} else {
 				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor));
-				
+
 			}
 
 		} while (true);
@@ -864,7 +899,7 @@ public class Aplicacion {
 				clientes.remove(cliente);
 
 				mostrarMensaje(String.format("MENSAJE: Se ha eliminado el cliente con cédula: %s\n", cedula));
-				
+
 			} else {
 				mostrarMensaje("No se puede eliminar el cliente. Tiene una o más facturas asignadas.");
 				continuar();
