@@ -2,7 +2,6 @@ package modelos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -219,7 +218,7 @@ public class Aplicacion {
 					if (factura != null) {
 						 mostrarDatosFactura(factura, clientes, productos);
 					} else {
-						System.out.println("No se encontró un producto con el ID especificado.");
+						System.out.println("No se encontró una factura con el ID especificado.");
 					}
 
 					break;
@@ -236,6 +235,7 @@ public class Aplicacion {
 		
 		System.out.println("ID: " + factura.getId());
 		System.out.println("Fecha: " + factura.getFecha().toString());
+		System.out.println("Total factura: $" + factura.getTotal());
 		
 		Cliente cliente = buscarClientePorCedula(clientes, factura.getCedulaCliente());
 		
@@ -243,7 +243,21 @@ public class Aplicacion {
 		System.out.println("Cédula: " + cliente.getCedula());
 		System.out.printf("Nombre completo: %s %s\n", cliente.getNombres(), cliente.getApellidos());
 		
+		System.out.println();
 		
+		System.out.println("Productos comprados:");
+		
+		Producto producto;
+		
+		for (Integer id : factura.getIdsProductos()) {
+			producto = buscarProductoPorId(productos, id);
+			
+			System.out.println("ID: " + id);
+			System.out.println("Nombre: " + producto.getNombre());
+			System.out.println("Precio: $" + producto.getPrecioVenta());
+			
+			System.out.println();
+		}
 	}
 
 	private static Factura buscarFactura(List<Factura> facturas) {
