@@ -35,11 +35,11 @@ public class Aplicacion {
 		Proveedor proveedor;
 		Producto producto;
 		Factura factura;
-
+		
 		do {
 			do {
 				mostrarMenuPrincipal();
-				opcion = capturarNumeroEntero("Digite la operación a realizar: ");
+				opcion = capturarNumeroEntero("Digite la operación a realizar");
 
 				if (opcion < SALIR || opcion > GESTION_FACTURACION) {
 					System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
@@ -49,6 +49,8 @@ public class Aplicacion {
 			if (opcion == SALIR) {
 				break;
 			}
+			
+			System.out.println();
 
 			switch (opcion) {
 			case GESTION_CLIENTES:
@@ -1008,8 +1010,10 @@ public class Aplicacion {
 				System.out.printf("%s: ", mensaje);
 				return Integer.parseInt(teclado.nextLine());
 			} catch (NumberFormatException e) {
-				System.out.println("MENSAJE: Digite un valor que corresponda con un número entero.");
+				System.out.println("\nMENSAJE: Digite un valor que corresponda con un número entero.");
 			}
+			
+			continuar();
 		}
 	}
 
@@ -1027,5 +1031,12 @@ public class Aplicacion {
 	static boolean correoElectronicoValido(String correo) {
 		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 		return correo.matches(regex);
+	}
+	
+	static void continuar() {
+		System.out.println();
+		System.out.print("Presione Enter para continuar...");
+		teclado.nextLine();
+		System.out.println();
 	}
 }
