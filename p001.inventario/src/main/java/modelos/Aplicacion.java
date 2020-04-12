@@ -855,6 +855,7 @@ public class Aplicacion {
 
 			if (id <= 0) {
 				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
+				continuar();
 				continue;
 			}
 		} while (id <= 0);
@@ -906,7 +907,7 @@ public class Aplicacion {
 	}
 
 	private static Proveedor buscarProveedorPorId(List<Proveedor> proveedores, int id) {
-		return proveedores.stream().filter(p -> p.getId() == id).findFirst().get();
+		return proveedores.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
 	}
 
 	private static void eliminarCliente(List<Cliente> clientes, List<Factura> facturas) {
@@ -1007,6 +1008,9 @@ public class Aplicacion {
 	}
 
 	private static Cliente buscarCliente(List<Cliente> clientes) {
+		System.out.println();
+		System.out.println("--- 2. Buscar Cliente ---");
+		
 		int numeroCedula;
 		String cedula;
 
