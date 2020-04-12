@@ -115,180 +115,197 @@ public class Aplicacion {
 						}
 						break;
 					}
+
+					continuar();
 				} while (opcionSubmenu != SALIR);
 
 				break;
 			case GESTION_PROVEEDORES:
 				do {
-					mostrarSubmenu("Proveedores");
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
+					do {
+						mostrarSubmenu("Proveedores");
+						opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
-					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
-						continuar();
-					}
-				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
-
-				if (opcionSubmenu == SALIR) {
-					break;
-				}
-
-				switch (opcionSubmenu) {
-				case CREAR:
-					proveedor = crearProveedor(proveedores);
-
-					proveedores.add(proveedor);
-
-					break;
-				case BUSCAR:
-					if (!proveedores.isEmpty()) {
-						proveedor = buscarProveedor(proveedores);
-
-						if (proveedor != null) {
-							mostrarDatosProveedor(proveedor);
-						} else {
-							mostrarMensaje("No se encontró un proveedor con el ID especificado.");
+						if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+							mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
+							continuar();
 						}
-					} else {
-						mostrarMensaje("MENSAJE: Aún no se ha creado un proveedor. La búsqueda no se puede efectuar.");
+					} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
+
+					if (opcionSubmenu == SALIR) {
+						break;
 					}
 
-					break;
-				case ACTUALIZAR:
-					if (!proveedores.isEmpty()) {
-						proveedor = buscarProveedor(proveedores);
+					switch (opcionSubmenu) {
+					case CREAR:
+						proveedor = crearProveedor(proveedores);
 
-						if (proveedor != null) {
-							actualizarProveedor(proveedor);
-							mostrarDatosProveedor(proveedor);
+						proveedores.add(proveedor);
+
+						break;
+					case BUSCAR:
+						if (!proveedores.isEmpty()) {
+							proveedor = buscarProveedor(proveedores);
+
+							if (proveedor != null) {
+								mostrarDatosProveedor(proveedor);
+							} else {
+								mostrarMensaje("No se encontró un proveedor con el ID especificado.");
+							}
 						} else {
-							mostrarMensaje("MENSAJE: No existe un proveedor con el ID suministrado.");
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un proveedor. La búsqueda no se puede efectuar.");
 						}
-					} else {
-						mostrarMensaje(
-								"MENSAJE: Aún no se ha creado un proveedor. La actualización no se puede efectuar.");
+
+						break;
+					case ACTUALIZAR:
+						if (!proveedores.isEmpty()) {
+							proveedor = buscarProveedor(proveedores);
+
+							if (proveedor != null) {
+								actualizarProveedor(proveedor);
+								mostrarDatosProveedor(proveedor);
+							} else {
+								mostrarMensaje("MENSAJE: No existe un proveedor con el ID suministrado.");
+							}
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un proveedor. La actualización no se puede efectuar.");
+						}
+						break;
+					case ELIMINAR:
+						if (!proveedores.isEmpty()) {
+							eliminarProveedor(proveedores, productos);
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un proveedor. La eliminación no se puede efectuar.");
+						}
+						break;
 					}
-					break;
-				case ELIMINAR:
-					if (!proveedores.isEmpty()) {
-						eliminarProveedor(proveedores, productos);
-					} else {
-						mostrarMensaje(
-								"MENSAJE: Aún no se ha creado un proveedor. La eliminación no se puede efectuar.");
-					}
-					break;
-				}
+
+					continuar();
+				} while (opcionSubmenu != SALIR);
 				break;
 			case GESTION_PRODUCTOS:
 				do {
-					mostrarSubmenu("Productos");
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
+					do {
+						mostrarSubmenu("Productos");
+						opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
-					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
-						continuar();
-					}
-				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
-
-				if (opcionSubmenu == SALIR) {
-					break;
-				}
-
-				switch (opcionSubmenu) {
-				case CREAR:
-					if (!proveedores.isEmpty()) {
-						producto = crearProducto(productos, proveedores);
-
-						productos.add(producto);
-					} else {
-						mostrarMensaje("Antes de crear un producto, debe crear un proveedor.");
-					}
-
-					break;
-				case BUSCAR:
-					if (!productos.isEmpty()) {
-						producto = buscarProducto(productos);
-
-						if (producto != null) {
-							mostrarDatosProducto(producto);
-						} else {
-							mostrarMensaje("No se encontró un producto con el ID especificado.");
+						if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+							mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
+							continuar();
 						}
-					} else {
-						mostrarMensaje("MENSAJE: Aún no se ha creado un producto. La búsqueda no se puede efectuar.");
+					} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
+
+					if (opcionSubmenu == SALIR) {
+						break;
 					}
 
-					break;
-				case ACTUALIZAR:
-					if (!productos.isEmpty()) {
-						producto = buscarProducto(productos);
+					switch (opcionSubmenu) {
+					case CREAR:
+						if (!proveedores.isEmpty()) {
+							producto = crearProducto(productos, proveedores);
 
-						if (producto != null) {
-							actualizarProducto(producto, proveedores);
-							mostrarDatosProducto(producto);
+							productos.add(producto);
 						} else {
-							mostrarMensaje("MENSAJE: No existe un proveedor con el ID especificado.");
+							mostrarMensaje("Antes de crear un producto, debe crear un proveedor.");
 						}
-					} else {
-						mostrarMensaje(
-								"MENSAJE: Aún no se ha creado un producto. La actualización no se puede efectuar.");
+
+						break;
+					case BUSCAR:
+						if (!productos.isEmpty()) {
+							producto = buscarProducto(productos);
+
+							if (producto != null) {
+								mostrarDatosProducto(producto);
+							} else {
+								mostrarMensaje("No se encontró un producto con el ID especificado.");
+							}
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un producto. La búsqueda no se puede efectuar.");
+						}
+
+						break;
+					case ACTUALIZAR:
+						if (!productos.isEmpty()) {
+							producto = buscarProducto(productos);
+
+							if (producto != null) {
+								actualizarProducto(producto, proveedores);
+								mostrarDatosProducto(producto);
+							} else {
+								mostrarMensaje("MENSAJE: No existe un proveedor con el ID especificado.");
+							}
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un producto. La actualización no se puede efectuar.");
+						}
+						break;
+					case ELIMINAR:
+						if (!productos.isEmpty()) {
+							eliminarProducto(productos, facturas);
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un producto. La eliminación no se puede efectuar.");
+						}
+						break;
 					}
-					break;
-				case ELIMINAR:
-					if (!productos.isEmpty()) {
-						eliminarProducto(productos, facturas);
-					} else {
-						mostrarMensaje(
-								"MENSAJE: Aún no se ha creado un producto. La eliminación no se puede efectuar.");
-					}
-					break;
-				}
+
+					continuar();
+				} while (opcionSubmenu != SALIR);
 				break;
 			case GESTION_FACTURACION:
 				do {
-					mostrarSubmenuFacturacion();
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
+					do {
+						mostrarSubmenuFacturacion();
+						opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
-					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 2.");
-						continuar();
-					}
-				} while (opcionSubmenu < SALIR || opcionSubmenu > BUSCAR);
-
-				if (opcionSubmenu == SALIR) {
-					break;
-				}
-
-				switch (opcionSubmenu) {
-				case CREAR:
-					if (!clientes.isEmpty()) {
-						if (!productos.isEmpty()) {
-							factura = crearFactura(clientes, productos, facturas);
-
-							facturas.add(factura);
-						} else {
-							mostrarMensaje("MENSAJE: No se puede crear una factura mientras que no hallan productos.");
+						if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+							mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 2.");
+							continuar();
 						}
-					} else {
-						mostrarMensaje("MENSAJE: No se puede crear una factura mientras que no hallan clientes.");
+					} while (opcionSubmenu < SALIR || opcionSubmenu > BUSCAR);
+
+					if (opcionSubmenu == SALIR) {
+						break;
 					}
 
-					break;
-				case BUSCAR:
-					if (!facturas.isEmpty()) {
-						factura = buscarFactura(facturas);
+					switch (opcionSubmenu) {
+					case CREAR:
+						if (!clientes.isEmpty()) {
+							if (!productos.isEmpty()) {
+								factura = crearFactura(clientes, productos, facturas);
 
-						if (factura != null) {
-							mostrarDatosFactura(factura, clientes, productos);
+								facturas.add(factura);
+							} else {
+								mostrarMensaje(
+										"MENSAJE: No se puede crear una factura mientras que no hallan productos.");
+							}
 						} else {
-							mostrarMensaje("No se encontró una factura con el ID especificado.");
+							mostrarMensaje("MENSAJE: No se puede crear una factura mientras que no hallan clientes.");
 						}
-					} else {
-						mostrarMensaje("Aún no se han creado facturas.");
-					}
 
-					break;
-				}
+						break;
+					case BUSCAR:
+						if (!facturas.isEmpty()) {
+							factura = buscarFactura(facturas);
+
+							if (factura != null) {
+								mostrarDatosFactura(factura, clientes, productos);
+							} else {
+								mostrarMensaje("No se encontró una factura con el ID especificado.");
+							}
+						} else {
+							mostrarMensaje("Aún no se han creado facturas.");
+						}
+
+						break;
+					}
+					
+					continuar();
+				} while (opcionSubmenu != SALIR);
 				break;
 			}
 
@@ -1158,5 +1175,6 @@ public class Aplicacion {
 	static void mostrarMensaje(String mensaje) {
 		System.out.println();
 		System.out.printf(mensaje);
+		System.out.println();
 	}
 }
