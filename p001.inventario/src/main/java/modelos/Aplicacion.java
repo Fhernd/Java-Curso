@@ -381,14 +381,16 @@ public class Aplicacion {
 						cantidad = capturarNumeroEntero("Digite la cantidad a comprar de este producto");
 
 						if (cantidad <= 0) {
-							System.out.println("MENSAJE: Debe digitar una cantidad positiva.");
+							mostrarMensaje("MENSAJE: Debe digitar una cantidad positiva.");
+							continuar();
 							continue;
 						}
 
 						if (cantidad > producto.getCantidad()) {
-							System.out.println(
+							mostrarMensaje(
 									"MENSAJE: No hay cantidad suficiente de este producto. Cantidad disponible: "
 											+ producto.getCantidad());
+							continuar();
 							continue;
 						}
 
@@ -401,10 +403,12 @@ public class Aplicacion {
 
 					idsProductos.add(idProducto);
 				} else {
-					System.out.println("MENSAJE: Este producto no cuenta con existencias.");
+					mostrarMensaje("MENSAJE: Este producto no cuenta con existencias.");
+					continuar();
 				}
 			} else {
-				System.out.println("MENSAJE: No existe un producto con el ID especificado.");
+				mostrarMensaje("MENSAJE: No existe un producto con el ID especificado.");
+				continuar();
 			}
 
 		} while (true);
@@ -413,13 +417,14 @@ public class Aplicacion {
 			impuesto = capturarNumeroEntero("Digite el impuesto para esta factura");
 
 			if (impuesto <= 0) {
-				System.out.println("El impuesto debe ser un número positivo.");
+				mostrarMensaje("MENSAJE: El impuesto debe ser un número positivo.");
+				continuar();
 				continue;
 			}
 
 			if (impuesto > 100) {
-				System.out
-						.println("MENSAJE: El impuesto especificado no es un valor válido. Debe estar entre 1 y 100.");
+				mostrarMensaje("MENSAJE: El impuesto especificado no es un valor válido. Debe estar entre 1 y 100.");
+				continuar();
 				continue;
 			}
 
@@ -443,7 +448,8 @@ public class Aplicacion {
 			id = capturarNumeroEntero("Digite el número de ID del producto");
 
 			if (id <= 0) {
-				System.out.println("MENSAJE: Debe digitar un número de ID positivo.");
+				mostrarMensaje("MENSAJE: Debe digitar un número de ID positivo.");
+				continuar();
 				continue;
 			}
 		} while (id <= 0);
@@ -456,14 +462,16 @@ public class Aplicacion {
 
 				productos.remove(producto);
 
-				System.out.printf("Se ha eliminado el producto con el ID %d.\n", id);
+				mostrarMensaje(String.format("Se ha eliminado el producto con el ID %d.\n", id));
 
 			} else {
-				System.out.println("MENSAJE: No se puede eliminar el producto porque está asociado a una factura.");
+				mostrarMensaje("MENSAJE: No se puede eliminar el producto porque está asociado a una factura.");
+				continuar();
 			}
 
 		} else {
-			System.out.println("MENSAJE: No se ha encontrado ningún producto con el ID especificado.");
+			mostrarMensaje("MENSAJE: No se ha encontrado ningún producto con el ID especificado.");
+			continuar();
 		}
 	}
 
@@ -500,7 +508,8 @@ public class Aplicacion {
 			precioCompra = capturarNumeroReal("Digite el precio de compra para el producto");
 
 			if (precioCompra <= 0) {
-				System.out.println("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				mostrarMensaje("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				continuar();
 			}
 		} while (precioCompra <= 0);
 
@@ -508,12 +517,13 @@ public class Aplicacion {
 			precioVenta = capturarNumeroReal("Digite el precio de compra para el producto");
 
 			if (precioVenta <= 0) {
-				System.out.println("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				mostrarMensaje("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				continuar();
 				continue;
 			}
 
 			if (precioVenta <= precioCompra) {
-				System.out.println("MENSAJE: El precio de ventana no puede ser menor o igual al precio de compra.");
+				mostrarMensaje("MENSAJE: El precio de ventana no puede ser menor o igual al precio de compra.");
 				precioVenta = 0;
 			}
 		} while (precioVenta <= 0);
@@ -522,7 +532,8 @@ public class Aplicacion {
 			cantidad = capturarNumeroEntero("Digite la cantidad para el producto");
 
 			if (cantidad <= 0) {
-				System.out.println("MENSAJE: Debe escribir una cantidad positiva.");
+				mostrarMensaje("MENSAJE: Debe escribir una cantidad positiva.");
+				continuar();
 			}
 		} while (cantidad <= 0);
 
@@ -530,7 +541,8 @@ public class Aplicacion {
 			cantidadMinimaStock = capturarNumeroEntero("Digite la cantidad mínima de stock para el producto");
 
 			if (cantidadMinimaStock <= 0) {
-				System.out.println("MENSAJE: Debe escribir una cantidad mínima de stock positiva.");
+				mostrarMensaje("MENSAJE: Debe escribir una cantidad mínima de stock positiva.");
+				continuar();
 			}
 		} while (cantidadMinimaStock <= 0);
 
@@ -544,7 +556,8 @@ public class Aplicacion {
 			if (buscarProveedorPorId(idProveedor) != null) {
 				break;
 			} else {
-				System.out.printf("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor);
+				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor));
+				
 			}
 
 		} while (true);
