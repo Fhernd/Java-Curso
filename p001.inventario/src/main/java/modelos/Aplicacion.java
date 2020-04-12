@@ -208,6 +208,8 @@ public class Aplicacion {
 							producto = crearProducto(productos, proveedores);
 
 							productos.add(producto);
+							
+							mostrarMensaje("MENSAJE: Se ha creado el nuevo producto.");
 						} else {
 							mostrarMensaje("MENSAJE: Antes de crear un producto, debe crear un proveedor.");
 						}
@@ -386,7 +388,7 @@ public class Aplicacion {
 	}
 
 	private static Factura buscarFacturaPorId(List<Factura> facturas, int idFactura) {
-		return facturas.stream().filter(f -> f.getId() == idFactura).findFirst().get();
+		return facturas.stream().filter(f -> f.getId() == idFactura).findFirst().orElse(null);
 	}
 
 	private static Factura crearFactura(List<Cliente> clientes, List<Producto> productos, List<Factura> facturas) {
@@ -573,11 +575,11 @@ public class Aplicacion {
 		int cantidadMinimaStock;
 		int idProveedor;
 
-		nombre = capturarCadenaCaracteres("Digite el nombre para el producto");
-		descripcion = capturarCadenaCaracteres("Digite la descripción del producto");
+		nombre = capturarCadenaCaracteres("Digite el nuevo nombre para el producto");
+		descripcion = capturarCadenaCaracteres("Digite la nueva descripción del producto");
 
 		do {
-			precioCompra = capturarNumeroReal("Digite el precio de compra para el producto");
+			precioCompra = capturarNumeroReal("Digite el nuevo precio de compra para el producto");
 
 			if (precioCompra <= 0) {
 				mostrarMensaje("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
@@ -586,22 +588,22 @@ public class Aplicacion {
 		} while (precioCompra <= 0);
 
 		do {
-			precioVenta = capturarNumeroReal("Digite el precio de compra para el producto");
+			precioVenta = capturarNumeroReal("Digite el nuevo precio de venta para el producto");
 
 			if (precioVenta <= 0) {
-				mostrarMensaje("MENSAJE: El precio de compra no puede ser menor o igual a 0.");
+				mostrarMensaje("MENSAJE: El precio de venta no puede ser menor o igual a 0.");
 				continuar();
 				continue;
 			}
 
 			if (precioVenta <= precioCompra) {
-				mostrarMensaje("MENSAJE: El precio de ventana no puede ser menor o igual al precio de compra.");
+				mostrarMensaje("MENSAJE: El precio de venta no puede ser menor o igual al precio de compra.");
 				precioVenta = 0;
 			}
 		} while (precioVenta <= 0);
 
 		do {
-			cantidad = capturarNumeroEntero("Digite la cantidad para el producto");
+			cantidad = capturarNumeroEntero("Digite la nueva cantidad para el producto");
 
 			if (cantidad <= 0) {
 				mostrarMensaje("MENSAJE: Debe escribir una cantidad positiva.");
@@ -610,7 +612,7 @@ public class Aplicacion {
 		} while (cantidad <= 0);
 
 		do {
-			cantidadMinimaStock = capturarNumeroEntero("Digite la cantidad mínima de stock para el producto");
+			cantidadMinimaStock = capturarNumeroEntero("Digite la neva cantidad mínima de stock para el producto");
 
 			if (cantidadMinimaStock <= 0) {
 				mostrarMensaje("MENSAJE: Debe escribir una cantidad mínima de stock positiva.");
@@ -644,6 +646,7 @@ public class Aplicacion {
 	}
 
 	private static void mostrarDatosProducto(Producto producto) {
+		System.out.println();
 		System.out.println("Datos del producto");
 		System.out.println("ID: " + producto.getId());
 		System.out.println("Nombre: " + producto.getNombre());
@@ -755,12 +758,18 @@ public class Aplicacion {
 			for (Proveedor proveedor : proveedores) {
 				System.out.printf("%d. %s\n", proveedor.getId(), proveedor.getNombre());
 			}
-			idProveedor = capturarNumeroEntero("Digite el ID del proveedor: ");
+			idProveedor = capturarNumeroEntero("Digite el ID del proveedor");
+			
+			if (idProveedor <= 0) {
+				mostrarMensaje("MENSAJE: El ID de producto no puede ser un número negativo o igual a cero.");
+				continuar();
+				continue;
+			}
 
 			if (buscarProveedorPorId(proveedores, idProveedor) != null) {
 				break;
 			} else {
-				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor));
+				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el ID %d especificado.\n", idProveedor));
 				continuar();
 			}
 
@@ -771,7 +780,7 @@ public class Aplicacion {
 	}
 
 	private static Producto buscarProductoPorId(List<Producto> productos, int id) {
-		return productos.stream().filter(p -> p.getId() == id).findFirst().get();
+		return productos.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
 	}
 
 	private static void eliminarProveedor(List<Proveedor> proveedores, List<Producto> productos) {
@@ -864,6 +873,7 @@ public class Aplicacion {
 	}
 
 	private static Proveedor crearProveedor(List<Proveedor> proveedores) {
+		System.out.println();
 		System.out.println("--- 1. Crear Proveedor ---");
 
 		int id;
