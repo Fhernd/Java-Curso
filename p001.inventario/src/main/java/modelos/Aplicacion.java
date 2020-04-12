@@ -35,7 +35,7 @@ public class Aplicacion {
 		Proveedor proveedor;
 		Producto producto;
 		Factura factura;
-		
+
 		do {
 			do {
 				mostrarMenuPrincipal();
@@ -49,7 +49,7 @@ public class Aplicacion {
 			if (opcion == SALIR) {
 				break;
 			}
-			
+
 			System.out.println();
 
 			switch (opcion) {
@@ -213,18 +213,30 @@ public class Aplicacion {
 
 				switch (opcionSubmenu) {
 				case CREAR:
-					factura = crearFactura(clientes, productos, facturas);
+					if (!clientes.isEmpty()) {
+						if (!productos.isEmpty()) {
+							factura = crearFactura(clientes, productos, facturas);
 
-					facturas.add(factura);
+							facturas.add(factura);
+						} else {
+							mostrarMensaje("MENSAJE: No se puede crear una factura mientras que no hallan productos.");
+						}
+					} else {
+						mostrarMensaje("MENSAJE: No se puede crear una factura mientras que no hallan clientes.");
+					}
 
 					break;
 				case BUSCAR:
-					factura = buscarFactura(facturas);
+					if (!facturas.isEmpty()) {
+						factura = buscarFactura(facturas);
 
-					if (factura != null) {
-						 mostrarDatosFactura(factura, clientes, productos);
+						if (factura != null) {
+							mostrarDatosFactura(factura, clientes, productos);
+						} else {
+							mostrarMensaje("No se encontró una factura con el ID especificado.");
+						}
 					} else {
-						mostrarMensaje("No se encontró una factura con el ID especificado.");
+						mostrarMensaje("Aún no se han creado facturas.");
 					}
 
 					break;
@@ -238,64 +250,65 @@ public class Aplicacion {
 
 	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
 		System.out.println("Datos de la factura");
-		
+
 		System.out.println("ID: " + factura.getId());
 		System.out.println("Fecha: " + factura.getFecha().toString());
 		System.out.println("Total factura: $" + factura.getTotal());
-		
+
 		Cliente cliente = buscarClientePorCedula(clientes, factura.getCedulaCliente());
-		
+
 		System.out.println("Datos del cliente:");
 		System.out.println("Cédula: " + cliente.getCedula());
 		System.out.printf("Nombre completo: %s %s\n", cliente.getNombres(), cliente.getApellidos());
-		
+
 		System.out.println();
-		
+
 		System.out.println("Productos comprados:");
-		
+
 		Producto producto;
-		
+
 		for (Integer id : factura.getIdsProductos()) {
 			producto = buscarProductoPorId(productos, id);
-			
+
 			System.out.println("ID: " + id);
 			System.out.println("Nombre: " + producto.getNombre());
 			System.out.println("Precio: $" + producto.getPrecioVenta());
-			
+
 			System.out.println();
 		}
 	}
 
 	private static Factura buscarFactura(List<Factura> facturas) {
 		System.out.println("--- 2. Buscar Factura ---");
-		
+
 		int idFactura;
 		Factura factura;
-		
+
 		do {
 			System.out.println("Listado de facturas");
-			
+
 			for (Factura f : facturas) {
 				System.out.printf("%d. %s - %s\n", f.getId(), f.getCedulaCliente(), f.getFecha().toString());
 			}
-			
+
 			idFactura = capturarNumeroEntero("Digite el ID de la factura");
-			
+
 			if (idFactura <= 0) {
 				mostrarMensaje("MENSAJE: El ID de la factura debe ser un número positivo.");
 				continuar();
 				continue;
 			}
-			
+
 			factura = buscarFacturaPorId(facturas, idFactura);
-			
+
 			if (factura != null) {
 				break;
 			} else {
-				mostrarMensaje("No se ha encontrado una factura con el ID especificado.");
+				mostrarMensaje("MENSAJE: No se ha encontrado una factura con el ID especificado.");
+				continuar();
 			}
-		} while(true);
-		
+		} while (true);
+
 		return factura;
 	}
 
@@ -324,7 +337,8 @@ public class Aplicacion {
 			numeroCedula = capturarNumeroEntero("Digite el número de cédula del cliente");
 
 			if (numeroCedula <= 0) {
-				System.out.println("MENSAJE: El número de cédula no puede ser negativo.");
+				mostrarMensaje("MENSAJE: El número de cédula no puede ser negativo.");
+				continuar();
 				continue;
 			}
 
@@ -335,7 +349,8 @@ public class Aplicacion {
 			if (cliente != null) {
 				break;
 			} else {
-				System.out.println("MENSAJE: No existe un cliente con el número de cédula especificado.");
+				mostrarMensaje("MENSAJE: No existe un cliente con el número de cédula especificado.");
+				continuar();
 			}
 
 		} while (true);
@@ -354,7 +369,7 @@ public class Aplicacion {
 			}
 
 			if (idProducto <= 0) {
-				System.out.println("MENSAJE: El ID del producto debe ser un número positivo.");
+				mostrarMensaje("MENSAJE: El ID del producto debe ser un número positivo.");
 				continue;
 			}
 
@@ -379,7 +394,7 @@ public class Aplicacion {
 
 						break;
 					} while (true);
-					
+
 					producto.setCantidad(producto.getCantidad() - cantidad);
 
 					total += producto.getPrecioVenta() * cantidad;
@@ -393,23 +408,24 @@ public class Aplicacion {
 			}
 
 		} while (true);
-		
+
 		do {
 			impuesto = capturarNumeroEntero("Digite el impuesto para esta factura");
-			
+
 			if (impuesto <= 0) {
 				System.out.println("El impuesto debe ser un número positivo.");
 				continue;
 			}
-			
+
 			if (impuesto > 100) {
-				System.out.println("MENSAJE: El impuesto especificado no es un valor válido. Debe estar entre 1 y 100.");
+				System.out
+						.println("MENSAJE: El impuesto especificado no es un valor válido. Debe estar entre 1 y 100.");
 				continue;
 			}
-			
+
 			break;
 		} while (true);
-		
+
 		Factura nuevaFactura = new Factura(cedula, impuesto / 100.0);
 		idsProductos.forEach(id -> nuevaFactura.agregarIdProducto(id));
 		nuevaFactura.setTotal(total);
@@ -1006,7 +1022,7 @@ public class Aplicacion {
 			}
 
 			System.out.println("\nMENSAJE: Ha escrito una cadena vacía. Específique un valor concreto.");
-			
+
 			continuar();
 		}
 	}
@@ -1019,7 +1035,7 @@ public class Aplicacion {
 			} catch (NumberFormatException e) {
 				System.out.println("\nMENSAJE: Digite un valor que corresponda con un número entero.");
 			}
-			
+
 			continuar();
 		}
 	}
@@ -1032,7 +1048,7 @@ public class Aplicacion {
 			} catch (NumberFormatException e) {
 				System.out.println("\nMENSAJE: Digite un valor que corresponda con un número real.");
 			}
-			
+
 			continuar();
 		}
 	}
@@ -1041,14 +1057,14 @@ public class Aplicacion {
 		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 		return correo.matches(regex);
 	}
-	
+
 	static void continuar() {
 		System.out.println();
 		System.out.print("Presione Enter para continuar...");
 		teclado.nextLine();
 		System.out.println();
 	}
-	
+
 	static void mostrarMensaje(String mensaje) {
 		System.out.println();
 		System.out.printf(mensaje);
