@@ -209,7 +209,7 @@ public class Aplicacion {
 
 							productos.add(producto);
 						} else {
-							mostrarMensaje("Antes de crear un producto, debe crear un proveedor.");
+							mostrarMensaje("MENSAJE: Antes de crear un producto, debe crear un proveedor.");
 						}
 
 						break;
@@ -220,7 +220,7 @@ public class Aplicacion {
 							if (producto != null) {
 								mostrarDatosProducto(producto);
 							} else {
-								mostrarMensaje("No se encontró un producto con el ID especificado.");
+								mostrarMensaje("MENSAJE: No se encontró un producto con el ID especificado.");
 							}
 						} else {
 							mostrarMensaje(
@@ -295,10 +295,10 @@ public class Aplicacion {
 							if (factura != null) {
 								mostrarDatosFactura(factura, clientes, productos);
 							} else {
-								mostrarMensaje("No se encontró una factura con el ID especificado.");
+								mostrarMensaje("MENSAJE: No se encontró una factura con el ID especificado.");
 							}
 						} else {
-							mostrarMensaje("Aún no se han creado facturas.");
+							mostrarMensaje("MENSAJE: Aún no se han creado facturas.");
 						}
 
 						break;
@@ -1027,6 +1027,7 @@ public class Aplicacion {
 	}
 
 	private static Cliente crearCliente(List<Cliente> clientes) {
+		System.out.println();
 		System.out.println("--- 1. Crear Cliente ---");
 		int numeroCedula;
 		int telefono;
@@ -1122,6 +1123,7 @@ public class Aplicacion {
 		String resultado;
 
 		while (true) {
+			System.out.printf("%s: ", mensaje);
 			resultado = teclado.nextLine().strip();
 
 			if (!resultado.isEmpty()) {
