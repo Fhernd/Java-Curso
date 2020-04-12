@@ -553,7 +553,7 @@ public class Aplicacion {
 			}
 			idProveedor = capturarNumeroEntero("Digite el ID del proveedor: ");
 
-			if (buscarProveedorPorId(idProveedor) != null) {
+			if (buscarProveedorPorId(proveedores, idProveedor) != null) {
 				break;
 			} else {
 				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor));
@@ -685,7 +685,7 @@ public class Aplicacion {
 			}
 			idProveedor = capturarNumeroEntero("Digite el ID del proveedor: ");
 
-			if (buscarProveedorPorId(idProveedor) != null) {
+			if (buscarProveedorPorId(proveedores, idProveedor) != null) {
 				break;
 			} else {
 				mostrarMensaje(String.format("MENSAJE: No existe un proveedor con el %d especificado.\n", idProveedor));
@@ -717,7 +717,7 @@ public class Aplicacion {
 			}
 		} while (id <= 0);
 
-		proveedor = buscarProveedorPorId(id);
+		proveedor = buscarProveedorPorId(proveedores, id);
 
 		if (proveedor != null) {
 			List<Producto> productosProveedor = buscarProductosPorIdProveedor(productos, id);
@@ -787,7 +787,7 @@ public class Aplicacion {
 			}
 		} while (id <= 0);
 
-		return buscarProveedorPorId(id);
+		return buscarProveedorPorId(proveedores, id);
 	}
 
 	private static Proveedor crearProveedor(List<Proveedor> proveedores) {
@@ -845,8 +845,9 @@ public class Aplicacion {
 			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente");
 
 			if (numeroCedula <= 0) {
-				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+				mostrarMensaje("MENSAJE: La cédula debe ser un número entero positivo.");
 				numeroCedula = 0;
+				continuar();
 				continue;
 			}
 		} while (numeroCedula <= 0);
@@ -862,13 +863,15 @@ public class Aplicacion {
 
 				clientes.remove(cliente);
 
-				System.out.printf("MENSAJE: Se ha eliminado el cliente con cédula: %s\n", cedula);
-
+				mostrarMensaje(String.format("MENSAJE: Se ha eliminado el cliente con cédula: %s\n", cedula));
+				
 			} else {
-				System.out.println("No se puede eliminar el cliente. Tiene una o más facturas asignadas.");
+				mostrarMensaje("No se puede eliminar el cliente. Tiene una o más facturas asignadas.");
+				continuar();
 			}
 		} else {
-			System.out.println("MENSAJE: No se encontró ningún cliente con el número de cédula especificado.");
+			mostrarMensaje("MENSAJE: No se encontró ningún cliente con el número de cédula especificado.");
+			continuar();
 		}
 	}
 
@@ -894,7 +897,8 @@ public class Aplicacion {
 			telefono = capturarNumeroEntero("Digite el nuevo número de teléfono del cliente");
 
 			if (telefono <= 0) {
-				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				mostrarMensaje("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				continuar();
 			}
 		} while (telefono <= 0);
 
@@ -905,7 +909,8 @@ public class Aplicacion {
 			correoElectronico = capturarCadenaCaracteres("Digite el nuevo correo electrónico del cliente");
 
 			if (!correoElectronicoValido(correoElectronico)) {
-				System.out.println("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
+				mostrarMensaje("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
+				continuar();
 				continue;
 			}
 
@@ -937,8 +942,9 @@ public class Aplicacion {
 			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente");
 
 			if (numeroCedula <= 0) {
-				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+				mostrarMensaje("MENSAJE: La cédula debe ser un número entero positivo.");
 				numeroCedula = 0;
+				continuar();
 				continue;
 			}
 		} while (numeroCedula <= 0);
@@ -959,8 +965,9 @@ public class Aplicacion {
 			numeroCedula = capturarNumeroEntero("Digite la cédula del cliente nuevo");
 
 			if (numeroCedula <= 0) {
-				System.out.println("MENSAJE: La cédula debe ser un número entero positivo.");
+				mostrarMensaje("MENSAJE: La cédula debe ser un número entero positivo.");
 				numeroCedula = 0;
+				continuar();
 				continue;
 			}
 
@@ -969,7 +976,7 @@ public class Aplicacion {
 			cliente = buscarClientePorCedula(clientes, cedula);
 
 			if (cliente != null) {
-				System.out.printf("MENSAJE: Ya existe otro con el número de cédula: %s.\n", cedula);
+				mostrarMensaje(String.format("MENSAJE: Ya existe otro con el número de cédula: %s.\n", cedula));
 				numeroCedula = 0;
 			}
 		} while (numeroCedula <= 0);
@@ -981,7 +988,8 @@ public class Aplicacion {
 			telefono = capturarNumeroEntero("Digite el número de teléfono del cliente nuevo");
 
 			if (telefono <= 0) {
-				System.out.println("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				mostrarMensaje("MENSAJE: El número de teléfono debe ser un valor positivo.");
+				continuar();
 			}
 		} while (telefono <= 0);
 
@@ -992,16 +1000,15 @@ public class Aplicacion {
 			correoElectronico = capturarCadenaCaracteres("Digite el correo electrónico del cliente nuevo");
 
 			if (!correoElectronicoValido(correoElectronico)) {
-				System.out.println("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
+				mostrarMensaje("MENSAJE: Ha digito un valor que no corresponde con un correo electrónico.");
+				continuar();
 				continue;
 			}
 
 			break;
 		}
 
-		cliente = new Cliente(cedula, nombres, apellidos, String.valueOf(telefono), direccion, correoElectronico);
-
-		return cliente;
+		return new Cliente(cedula, nombres, apellidos, String.valueOf(telefono), direccion, correoElectronico);
 	}
 
 	private static Cliente buscarClientePorCedula(List<Cliente> clientes, String cedula) {
