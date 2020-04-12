@@ -1,8 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>co.ortizol</groupId>
-  <artifactId>p001.inventario</artifactId>
-  <version>1.0.0</version>
-  <name>Sistema de Gestión de Inventario</name>
-  <description>Sistema de Gestión de Inventario para una Ferretería</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>co.ortizol</groupId>
+	<artifactId>p001.inventario</artifactId>
+	<version>1.0.0</version>
+	<name>Sistema de Gestión de Inventario</name>
+	<description>Sistema de Gestión de Inventario para una Ferretería</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.8</version>
+		</dependency>
+	</dependencies>
 </project>

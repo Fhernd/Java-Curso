@@ -323,6 +323,12 @@ public class Aplicacion {
 
 		continuar();
 
+		guardarDatosInventario(clientes, proveedores, productos, facturas);
+	}
+
+	private static void guardarDatosInventario(List<Cliente> clientes, List<Proveedor> proveedores,
+			List<Producto> productos, List<Factura> facturas) {
+		
 	}
 
 	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
