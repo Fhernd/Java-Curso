@@ -42,7 +42,7 @@ public class Aplicacion {
 				opcion = capturarNumeroEntero("Digite la operación a realizar");
 
 				if (opcion < SALIR || opcion > GESTION_FACTURACION) {
-					System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+					mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
 				}
 			} while (opcion < SALIR || opcion > GESTION_FACTURACION);
 
@@ -60,7 +60,8 @@ public class Aplicacion {
 					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
+						continuar();
 					}
 				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
 
@@ -81,7 +82,7 @@ public class Aplicacion {
 					if (cliente != null) {
 						mostrarDatosCliente(cliente);
 					} else {
-						System.out.println("No se encontró un cliente con el número de cédula especificado.");
+						mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
 					}
 
 					break;
@@ -92,7 +93,7 @@ public class Aplicacion {
 						actualizarCliente(cliente);
 						mostrarDatosCliente(cliente);
 					} else {
-						System.out.println("No se encontró un cliente con el número de cédula especificado.");
+						mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
 					}
 					break;
 				case ELIMINAR:
@@ -107,7 +108,8 @@ public class Aplicacion {
 					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
+						continuar();
 					}
 				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
 
@@ -128,7 +130,7 @@ public class Aplicacion {
 					if (proveedor != null) {
 						mostrarDatosProveedor(proveedor);
 					} else {
-						System.out.println("No se encontró un proveedor con el ID especificado.");
+						mostrarMensaje("No se encontró un proveedor con el ID especificado.");
 					}
 
 					break;
@@ -139,7 +141,7 @@ public class Aplicacion {
 						actualizarProveedor(proveedor);
 						mostrarDatosProveedor(proveedor);
 					} else {
-						System.out.println("MENSAJE: No existe un proveedor con el ID suministrado.");
+						mostrarMensaje("MENSAJE: No existe un proveedor con el ID suministrado.");
 					}
 					break;
 				case ELIMINAR:
@@ -153,7 +155,8 @@ public class Aplicacion {
 					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 4.");
+						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
+						continuar();
 					}
 				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
 
@@ -174,7 +177,7 @@ public class Aplicacion {
 					if (producto != null) {
 						mostrarDatosProducto(producto);
 					} else {
-						System.out.println("No se encontró un producto con el ID especificado.");
+						mostrarMensaje("No se encontró un producto con el ID especificado.");
 					}
 
 					break;
@@ -185,7 +188,7 @@ public class Aplicacion {
 						actualizarProducto(producto, proveedores);
 						mostrarDatosProducto(producto);
 					} else {
-						System.out.println("MENSAJE: No existe un proveedor con el ID especificado.");
+						mostrarMensaje("MENSAJE: No existe un proveedor con el ID especificado.");
 					}
 					break;
 				case ELIMINAR:
@@ -199,7 +202,8 @@ public class Aplicacion {
 					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						System.out.println("MENSAJE: Debe digitar un valor entre 0 y 2.");
+						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 2.");
+						continuar();
 					}
 				} while (opcionSubmenu < SALIR || opcionSubmenu > BUSCAR);
 
@@ -220,7 +224,7 @@ public class Aplicacion {
 					if (factura != null) {
 						 mostrarDatosFactura(factura, clientes, productos);
 					} else {
-						System.out.println("No se encontró una factura con el ID especificado.");
+						mostrarMensaje("No se encontró una factura con el ID especificado.");
 					}
 
 					break;
@@ -278,7 +282,8 @@ public class Aplicacion {
 			idFactura = capturarNumeroEntero("Digite el ID de la factura");
 			
 			if (idFactura <= 0) {
-				System.out.println("MENSAJE: El ID de la factura debe ser un número positivo.");
+				mostrarMensaje("MENSAJE: El ID de la factura debe ser un número positivo.");
+				continuar();
 				continue;
 			}
 			
@@ -287,7 +292,7 @@ public class Aplicacion {
 			if (factura != null) {
 				break;
 			} else {
-				System.out.println("No se ha encontrado una factura con el ID especificado.");
+				mostrarMensaje("No se ha encontrado una factura con el ID especificado.");
 			}
 		} while(true);
 		
@@ -1000,7 +1005,9 @@ public class Aplicacion {
 				return resultado;
 			}
 
-			System.out.println("MENSAJE: Ha escrito una cadena vacía. Específique un valor concreto.");
+			System.out.println("\nMENSAJE: Ha escrito una cadena vacía. Específique un valor concreto.");
+			
+			continuar();
 		}
 	}
 
@@ -1023,8 +1030,10 @@ public class Aplicacion {
 				System.out.printf("%s: ", mensaje);
 				return Double.parseDouble(teclado.nextLine());
 			} catch (NumberFormatException e) {
-				System.out.println("MENSAJE: Digite un valor que corresponda con un número real.");
+				System.out.println("\nMENSAJE: Digite un valor que corresponda con un número real.");
 			}
+			
+			continuar();
 		}
 	}
 
@@ -1038,5 +1047,10 @@ public class Aplicacion {
 		System.out.print("Presione Enter para continuar...");
 		teclado.nextLine();
 		System.out.println();
+	}
+	
+	static void mostrarMensaje(String mensaje) {
+		System.out.println();
+		System.out.printf(mensaje);
 	}
 }
