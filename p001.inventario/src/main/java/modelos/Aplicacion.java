@@ -54,71 +54,74 @@ public class Aplicacion {
 
 			switch (opcion) {
 			case GESTION_CLIENTES:
-
 				do {
-					mostrarSubmenu("Clientes");
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
+					do {
+						mostrarSubmenu("Clientes");
+						opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
-					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
-						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
-						continuar();
-					}
-				} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
-
-				if (opcionSubmenu == SALIR) {
-					break;
-				}
-
-				switch (opcionSubmenu) {
-				case CREAR:
-					cliente = crearCliente(clientes);
-
-					clientes.add(cliente);
-
-					break;
-				case BUSCAR:
-					if (!clientes.isEmpty()) {
-						cliente = buscarCliente(clientes);
-
-						if (cliente != null) {
-							mostrarDatosCliente(cliente);
-						} else {
-							mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+						if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
+							mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
+							continuar();
 						}
-					} else {
-						mostrarMensaje("MENSAJE: Aún no se ha creado un cliente. La búsqueda no se puede efectuar.");
+					} while (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR);
+
+					if (opcionSubmenu == SALIR) {
+						break;
 					}
 
-					break;
-				case ACTUALIZAR:
-					if (!clientes.isEmpty()) {
-						cliente = buscarCliente(clientes);
+					switch (opcionSubmenu) {
+					case CREAR:
+						cliente = crearCliente(clientes);
 
-						if (cliente != null) {
-							actualizarCliente(cliente);
-							mostrarDatosCliente(cliente);
+						clientes.add(cliente);
+
+						break;
+					case BUSCAR:
+						if (!clientes.isEmpty()) {
+							cliente = buscarCliente(clientes);
+
+							if (cliente != null) {
+								mostrarDatosCliente(cliente);
+							} else {
+								mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+							}
 						} else {
-							mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un cliente. La búsqueda no se puede efectuar.");
 						}
-					} else {
-						mostrarMensaje(
-								"MENSAJE: Aún no se ha creado un cliente. La actualización no se puede efectuar.");
+
+						break;
+					case ACTUALIZAR:
+						if (!clientes.isEmpty()) {
+							cliente = buscarCliente(clientes);
+
+							if (cliente != null) {
+								actualizarCliente(cliente);
+								mostrarDatosCliente(cliente);
+							} else {
+								mostrarMensaje("No se encontró un cliente con el número de cédula especificado.");
+							}
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un cliente. La actualización no se puede efectuar.");
+						}
+						break;
+					case ELIMINAR:
+						if (!clientes.isEmpty()) {
+							eliminarCliente(clientes, facturas);
+						} else {
+							mostrarMensaje(
+									"MENSAJE: Aún no se ha creado un cliente. La eliminación no se puede efectuar.");
+						}
+						break;
 					}
-					break;
-				case ELIMINAR:
-					if (!clientes.isEmpty()) {
-						eliminarCliente(clientes, facturas);
-					} else {
-						mostrarMensaje("MENSAJE: Aún no se ha creado un cliente. La eliminación no se puede efectuar.");
-					}
-					break;
-				}
+				} while (opcionSubmenu != SALIR);
 
 				break;
 			case GESTION_PROVEEDORES:
 				do {
 					mostrarSubmenu("Proveedores");
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
+					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
 						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
@@ -179,7 +182,7 @@ public class Aplicacion {
 			case GESTION_PRODUCTOS:
 				do {
 					mostrarSubmenu("Productos");
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
+					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
 						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 4.");
@@ -212,30 +215,39 @@ public class Aplicacion {
 							mostrarMensaje("No se encontró un producto con el ID especificado.");
 						}
 					} else {
-						mostrarMensaje(
-								"MENSAJE: Aún no se ha creado un producto. La actualización no se puede efectuar.");
+						mostrarMensaje("MENSAJE: Aún no se ha creado un producto. La búsqueda no se puede efectuar.");
 					}
 
 					break;
 				case ACTUALIZAR:
-					producto = buscarProducto(productos);
+					if (!productos.isEmpty()) {
+						producto = buscarProducto(productos);
 
-					if (producto != null) {
-						actualizarProducto(producto, proveedores);
-						mostrarDatosProducto(producto);
+						if (producto != null) {
+							actualizarProducto(producto, proveedores);
+							mostrarDatosProducto(producto);
+						} else {
+							mostrarMensaje("MENSAJE: No existe un proveedor con el ID especificado.");
+						}
 					} else {
-						mostrarMensaje("MENSAJE: No existe un proveedor con el ID especificado.");
+						mostrarMensaje(
+								"MENSAJE: Aún no se ha creado un producto. La actualización no se puede efectuar.");
 					}
 					break;
 				case ELIMINAR:
-					eliminarProducto(productos, facturas);
+					if (!productos.isEmpty()) {
+						eliminarProducto(productos, facturas);
+					} else {
+						mostrarMensaje(
+								"MENSAJE: Aún no se ha creado un producto. La eliminación no se puede efectuar.");
+					}
 					break;
 				}
 				break;
 			case GESTION_FACTURACION:
 				do {
 					mostrarSubmenuFacturacion();
-					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar: ");
+					opcionSubmenu = capturarNumeroEntero("Digite la operación a realizar");
 
 					if (opcionSubmenu < SALIR || opcionSubmenu > ELIMINAR) {
 						mostrarMensaje("MENSAJE: Debe digitar un valor entre 0 y 2.");
@@ -280,7 +292,15 @@ public class Aplicacion {
 				break;
 			}
 
+			continuar();
+
 		} while (opcion != SALIR);
+
+		System.out.println();
+
+		mostrarMensaje("El programa ha terminado.");
+
+		continuar();
 
 	}
 
