@@ -337,7 +337,9 @@ public class Aplicacion {
 
 		continuar();
 
-		guardarDatosInventario(clientes, proveedores, productos, facturas);
+		if (!clientes.isEmpty()) {
+			guardarDatosInventario(clientes, proveedores, productos, facturas);
+		}
 	}
 
 	private static void guardarDatosInventario(List<Cliente> clientes, List<Proveedor> proveedores,
@@ -353,17 +355,56 @@ public class Aplicacion {
 				csvPrinter.printRecord(c.getCedula(), c.getNombres(), c.getApellidos(), c.getTelefono(),
 						c.getDireccion(), c.getCorreoElectronico());
 			}
-			
+
 			csvPrinter.flush();
 			csvPrinter.close();
 
-		} catch (IIOException e) {
-			System.err.println("ERROR: " + e.getMessage());
 		} catch (IOException e) {
 			System.err.println("ERROR: " + e.getMessage());
 		}
+
+		if (!proveedores.isEmpty()) {
+			try {
+				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_PROVEEDORES));
+
+				CSVPrinter csvPrinter = new CSVPrinter(writer,
+						CSVFormat.DEFAULT.withHeader("id", "nombre", "telefono", "direccion"));
+
+				for (Proveedor p : proveedores) {
+					csvPrinter.printRecord(p.getId(), p.getNombre(), p.getTelefono(), p.getDireccion());
+				}
+
+				csvPrinter.flush();
+				csvPrinter.close();
+
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
+			}
+		}
+
+		if (!productos.isEmpty()) {
+			try {
+				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_PRODUCTOS));
+
+				CSVPrinter csvPrinter = new CSVPrinter(writer,
+						CSVFormat.DEFAULT.withHeader("id", "nombre", "descripcion", "precioCompra", "precioVenta",
+								"cantidad", "cantidadMinimaStock", "idProveedor"));
+
+				for (Producto p : productos) {
+					csvPrinter.printRecord(p.getId(), p.getNombre(), p.getDescripcion(), p.getPrecioCompra(),
+							p.getPrecioVenta(), p.getCantidad(), p.getCantidadMinimaStock(), p.getIdProveedor());
+				}
+
+				csvPrinter.flush();
+				csvPrinter.close();
+
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
+			}
+		}
 		
 		
+
 		System.out.println();
 		System.out.println("Se han guardado todos los datos del inventario.");
 		System.out.println();
