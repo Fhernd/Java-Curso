@@ -345,18 +345,28 @@ public class Aplicacion {
 
 		try {
 			BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_CLIENTES));
+
 			CSVPrinter csvPrinter = new CSVPrinter(writer,
 					CSVFormat.DEFAULT.withHeader("cedula", "nombres", "apellidos", "telefono", "direccion", "correo"));
 
+			for (Cliente c : clientes) {
+				csvPrinter.printRecord(c.getCedula(), c.getNombres(), c.getApellidos(), c.getTelefono(),
+						c.getDireccion(), c.getCorreoElectronico());
+			}
 			
-			
+			csvPrinter.flush();
+			csvPrinter.close();
+
 		} catch (IIOException e) {
-
+			System.err.println("ERROR: " + e.getMessage());
 		} catch (IOException e) {
-			// 
-			e.printStackTrace();
+			System.err.println("ERROR: " + e.getMessage());
 		}
-
+		
+		
+		System.out.println();
+		System.out.println("Se han guardado todos los datos del inventario.");
+		System.out.println();
 	}
 
 	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
