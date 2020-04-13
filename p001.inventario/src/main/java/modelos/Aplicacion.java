@@ -403,7 +403,25 @@ public class Aplicacion {
 			}
 		}
 		
-		
+		if (!facturas.isEmpty()) {
+			try {
+				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_FACTURAS));
+
+				CSVPrinter csvPrinter = new CSVPrinter(writer,
+						CSVFormat.DEFAULT.withHeader("id", "fecha", "cedulaCliente", "impuesto", "total",
+								"idsProductos"));
+
+				for (Factura f : facturas) {
+					csvPrinter.printRecord(f.getId(), f.getFecha(), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(), "");
+				}
+				 
+				csvPrinter.flush();
+				csvPrinter.close();
+
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
+			}
+		}
 
 		System.out.println();
 		System.out.println("Se han guardado todos los datos del inventario.");
