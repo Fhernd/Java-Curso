@@ -1,0 +1,2 @@
+id;nombre;descripcion;precioCompra;precioVenta;cantidad;cantidadMinimaStock;idProveedor
+2000;Martillo;Martillo con mango de goma;50000.0;60000.0;90;10;3000

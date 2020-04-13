@@ -14,6 +14,7 @@ import javax.imageio.IIOException;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.lang3.StringUtils;
 
 public class Aplicacion {
 	private static final int SALIR = 0;
@@ -415,7 +416,7 @@ public class Aplicacion {
 
 				for (Factura f : facturas) {
 					csvPrinter.printRecord(f.getId(), f.getFecha(), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(),
-							f.getIdsProductos());
+							StringUtils.join(f.getIdsProductos(), ","));
 				}
 				
 				csvPrinter.flush();

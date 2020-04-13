@@ -1,2 +1,2 @@
-cedula,nombres,apellidos,telefono,direccion,correo
-1000,John,Ortiz,3111,Carrera 1,john@mail.co
+cedula;nombres;apellidos;telefono;direccion;correo
+1000;John F.;Ortiz O.;312;Carrera 1;john@mail.co
