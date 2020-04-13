@@ -9,7 +9,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -350,11 +352,11 @@ public class Aplicacion {
 		}
 	}
 
-	private static void cargarDatos() {
-		List<Cliente> clientes;
-		List<Proveedor> proveedores;
-		List<Producto> productos;
-		List<Factura> facturas;
+	private static Map<String, Object> cargarDatos() {
+		List<Cliente> clientes = null;
+		List<Proveedor> proveedores = null;
+		List<Producto> productos = null;
+		List<Factura> facturas = null;
 
 		Path rutaArchivo = Paths.get(ARCHIVO_CSV_CLIENTES);
 
@@ -467,7 +469,7 @@ public class Aplicacion {
 					String[] idsProductos = StringUtils.split(r.get("idsProductos"), ",");
 					factura.setIdsProductosDesdeArregloCadenas(idsProductos);
 					
-					
+					facturas.add(factura);
 				}
 
 				csvParser.close();
@@ -475,6 +477,14 @@ public class Aplicacion {
 				System.err.println("ERROR: " + e.getMessage());
 			}
 		}
+		
+		Map<String, Object> inventario = new HashMap<>();
+		inventario.put("clientes", clientes);
+		inventario.put("proveedores", proveedores);
+		inventario.put("productos", productos);
+		inventario.put("facturas", facturas);
+		
+		return inventario;
 	}
 
 	private static void guardarDatosInventario(List<Cliente> clientes, List<Proveedor> proveedores,
