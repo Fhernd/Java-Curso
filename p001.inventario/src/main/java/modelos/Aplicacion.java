@@ -2,7 +2,9 @@ package modelos;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,9 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import javax.imageio.IIOException;
-
 import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,7 +40,9 @@ public class Aplicacion {
 
 	public static void main(String[] args) {
 		teclado = new Scanner(System.in);
-
+		
+		cargarDatos();
+		
 		List<Cliente> clientes = new ArrayList<>();
 		List<Proveedor> proveedores = new ArrayList<>();
 		List<Producto> productos = new ArrayList<>();
@@ -342,6 +345,27 @@ public class Aplicacion {
 
 		if (!clientes.isEmpty()) {
 			guardarDatosInventario(clientes, proveedores, productos, facturas);
+		}
+	}
+
+	private static void cargarDatos() {
+		List<Cliente> clientes;
+		
+		Path rutaArchivo = Paths.get(ARCHIVO_CSV_CLIENTES);
+		
+		if (Files.exists(rutaArchivo)) {
+			clientes = new ArrayList<>();
+			
+			try {
+				Reader reader = Files.newBufferedReader(rutaArchivo);
+				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader(
+						"cedula", "nombres", "apellidos", "telefono", "direccion", "correo")
+							.withDelimiter(SEPARADOR));
+				
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 	}
 
