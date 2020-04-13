@@ -32,6 +32,8 @@ public class Aplicacion {
 	private static final String ARCHIVO_CSV_PRODUCTOS = "./productos.csv";
 	private static final String ARCHIVO_CSV_FACTURAS = "./facturas.csv";
 
+	private static final char SEPARADOR = ';';
+
 	public static Scanner teclado;
 
 	public static void main(String[] args) {
@@ -349,7 +351,8 @@ public class Aplicacion {
 			BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_CLIENTES));
 
 			CSVPrinter csvPrinter = new CSVPrinter(writer,
-					CSVFormat.DEFAULT.withHeader("cedula", "nombres", "apellidos", "telefono", "direccion", "correo"));
+					CSVFormat.DEFAULT.withHeader("cedula", "nombres", "apellidos", "telefono", "direccion", "correo")
+							.withDelimiter(SEPARADOR));
 
 			for (Cliente c : clientes) {
 				csvPrinter.printRecord(c.getCedula(), c.getNombres(), c.getApellidos(), c.getTelefono(),
@@ -368,7 +371,7 @@ public class Aplicacion {
 				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_PROVEEDORES));
 
 				CSVPrinter csvPrinter = new CSVPrinter(writer,
-						CSVFormat.DEFAULT.withHeader("id", "nombre", "telefono", "direccion"));
+						CSVFormat.DEFAULT.withHeader("id", "nombre", "telefono", "direccion").withDelimiter(SEPARADOR));
 
 				for (Proveedor p : proveedores) {
 					csvPrinter.printRecord(p.getId(), p.getNombre(), p.getTelefono(), p.getDireccion());
@@ -388,7 +391,7 @@ public class Aplicacion {
 
 				CSVPrinter csvPrinter = new CSVPrinter(writer,
 						CSVFormat.DEFAULT.withHeader("id", "nombre", "descripcion", "precioCompra", "precioVenta",
-								"cantidad", "cantidadMinimaStock", "idProveedor"));
+								"cantidad", "cantidadMinimaStock", "idProveedor").withDelimiter(SEPARADOR));
 
 				for (Producto p : productos) {
 					csvPrinter.printRecord(p.getId(), p.getNombre(), p.getDescripcion(), p.getPrecioCompra(),
@@ -402,19 +405,19 @@ public class Aplicacion {
 				System.err.println("ERROR: " + e.getMessage());
 			}
 		}
-		
+
 		if (!facturas.isEmpty()) {
 			try {
 				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_FACTURAS));
 
-				CSVPrinter csvPrinter = new CSVPrinter(writer,
-						CSVFormat.DEFAULT.withHeader("id", "fecha", "cedulaCliente", "impuesto", "total",
-								"idsProductos"));
+				CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("id", "fecha",
+						"cedulaCliente", "impuesto", "total", "idsProductos").withDelimiter(SEPARADOR));
 
 				for (Factura f : facturas) {
-					csvPrinter.printRecord(f.getId(), f.getFecha(), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(), "");
+					csvPrinter.printRecord(f.getId(), f.getFecha(), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(),
+							f.getIdsProductos());
 				}
-				 
+				
 				csvPrinter.flush();
 				csvPrinter.close();
 
