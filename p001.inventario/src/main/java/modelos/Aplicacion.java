@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -456,6 +457,16 @@ public class Aplicacion {
 				Factura factura;
 
 				for (CSVRecord r : csvParser) {
+					factura = new Factura();
+					factura.setId(Integer.parseInt(r.get("id")));
+					factura.setFecha(new Date(r.get("fecha")));
+					factura.setCedulaCliente(r.get("cedulaCliente"));
+					factura.setImpuesto(Double.parseDouble(r.get("impuesto")));
+					factura.setTotal(Double.parseDouble(r.get("total")));
+					
+					String[] idsProductos = StringUtils.split(r.get("idsProductos"), ",");
+					factura.setIdsProductosDesdeArregloCadenas(idsProductos);
+					
 					
 				}
 

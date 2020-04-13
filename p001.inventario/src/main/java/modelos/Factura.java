@@ -76,4 +76,10 @@ public class Factura {
 		
 		return idsProductosCopia;
 	}
+
+	public void setIdsProductosDesdeArregloCadenas(String[] idsProductosCadenas) {
+		for (String idProducto : idsProductosCadenas) {
+			idsProductos.add(Integer.parseInt(idProducto));
+		}
+	}
 }
