@@ -406,6 +406,64 @@ public class Aplicacion {
 				System.err.println("ERROR: " + e.getMessage());
 			}
 		}
+
+		rutaArchivo = Paths.get(ARCHIVO_CSV_PRODUCTOS);
+
+		if (Files.exists(rutaArchivo)) {
+			productos = new ArrayList<>();
+
+			try {
+				Reader reader = Files.newBufferedReader(rutaArchivo);
+				CSVParser csvParser = new CSVParser(reader,
+						CSVFormat.DEFAULT.withHeader("id", "nombre", "descripcion", "precioCompra", "precioVenta",
+								"cantidad", "cantidadMinimaStock", "idProveedor").withDelimiter(SEPARADOR));
+
+				Producto producto;
+
+				for (CSVRecord r : csvParser) {
+					producto = new Producto();
+
+					producto.setId(Integer.parseInt(r.get("id")));
+					producto.setNombre(r.get("nombre"));
+					producto.setDescripcion(r.get("descripcion"));
+					producto.setPrecioCompra(Double.parseDouble(r.get("precioCompra")));
+					producto.setPrecioVenta(Double.parseDouble(r.get("precioVenta")));
+					producto.setCantidad(Integer.parseInt(r.get("cantidad")));
+					producto.setCantidadMinimaStock(Integer.parseInt(r.get("cantidadMinimaStock")));
+					producto.setIdProveedor(Integer.parseInt(r.get("idProveedor")));
+
+					productos.add(producto);
+				}
+
+				csvParser.close();
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
+			}
+		}
+
+		rutaArchivo = Paths.get(ARCHIVO_CSV_FACTURAS);
+
+		if (Files.exists(rutaArchivo)) {
+			facturas = new ArrayList<>();
+
+			try {
+				Reader reader = Files.newBufferedReader(rutaArchivo);
+				CSVParser csvParser = new CSVParser(reader,
+						CSVFormat.DEFAULT
+								.withHeader("id", "fecha", "cedulaCliente", "impuesto", "total", "idsProductos")
+								.withDelimiter(SEPARADOR));
+
+				Factura factura;
+
+				for (CSVRecord r : csvParser) {
+					
+				}
+
+				csvParser.close();
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
+			}
+		}
 	}
 
 	private static void guardarDatosInventario(List<Cliente> clientes, List<Proveedor> proveedores,
