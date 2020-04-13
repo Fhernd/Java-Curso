@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
 
 public class Aplicacion {
@@ -40,9 +41,9 @@ public class Aplicacion {
 
 	public static void main(String[] args) {
 		teclado = new Scanner(System.in);
-		
+
 		cargarDatos();
-		
+
 		List<Cliente> clientes = new ArrayList<>();
 		List<Proveedor> proveedores = new ArrayList<>();
 		List<Producto> productos = new ArrayList<>();
@@ -350,21 +351,59 @@ public class Aplicacion {
 
 	private static void cargarDatos() {
 		List<Cliente> clientes;
-		
+		List<Proveedor> proveedores;
+		List<Producto> productos;
+		List<Factura> facturas;
+
 		Path rutaArchivo = Paths.get(ARCHIVO_CSV_CLIENTES);
-		
+
 		if (Files.exists(rutaArchivo)) {
 			clientes = new ArrayList<>();
-			
+
 			try {
 				Reader reader = Files.newBufferedReader(rutaArchivo);
-				CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withHeader(
-						"cedula", "nombres", "apellidos", "telefono", "direccion", "correo")
-							.withDelimiter(SEPARADOR));
-				
-				
-			} catch (Exception e) {
-				// TODO: handle exception
+				CSVParser csvParser = new CSVParser(reader,
+						CSVFormat.DEFAULT
+								.withHeader("cedula", "nombres", "apellidos", "telefono", "direccion", "correo")
+								.withDelimiter(SEPARADOR));
+
+				Cliente cliente;
+
+				for (CSVRecord r : csvParser) {
+					cliente = new Cliente(r.get("cedula"), r.get("nombres"), r.get("apellidos"), r.get("telefono"),
+							r.get("direccion"), r.get("correo"));
+
+					clientes.add(cliente);
+				}
+
+				csvParser.close();
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
+			}
+		}
+
+		rutaArchivo = Paths.get(ARCHIVO_CSV_PROVEEDORES);
+
+		if (Files.exists(rutaArchivo)) {
+			proveedores = new ArrayList<>();
+
+			try {
+				Reader reader = Files.newBufferedReader(rutaArchivo);
+				CSVParser csvParser = new CSVParser(reader,
+						CSVFormat.DEFAULT.withHeader("id", "nombre", "telefono", "direccion").withDelimiter(SEPARADOR));
+
+				Proveedor proveedor;
+
+				for (CSVRecord r : csvParser) {
+					proveedor = new Proveedor(Integer.parseInt(r.get("id")), r.get("nombre"), r.get("telefono"),
+							r.get("direccion"));
+
+					proveedores.add(proveedor);
+				}
+
+				csvParser.close();
+			} catch (IOException e) {
+				System.err.println("ERROR: " + e.getMessage());
 			}
 		}
 	}
@@ -435,14 +474,16 @@ public class Aplicacion {
 			try {
 				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_FACTURAS));
 
-				CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("id", "fecha",
-						"cedulaCliente", "impuesto", "total", "idsProductos").withDelimiter(SEPARADOR));
+				CSVPrinter csvPrinter = new CSVPrinter(writer,
+						CSVFormat.DEFAULT
+								.withHeader("id", "fecha", "cedulaCliente", "impuesto", "total", "idsProductos")
+								.withDelimiter(SEPARADOR));
 
 				for (Factura f : facturas) {
 					csvPrinter.printRecord(f.getId(), f.getFecha(), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(),
 							StringUtils.join(f.getIdsProductos(), ","));
 				}
-				
+
 				csvPrinter.flush();
 				csvPrinter.close();
 
