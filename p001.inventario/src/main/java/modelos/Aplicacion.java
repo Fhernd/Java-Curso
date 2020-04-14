@@ -387,8 +387,12 @@ public class Aplicacion {
 				}
 			} while (true);
 			
-			
-			guardarDatosInventario(clientes, proveedores, productos, facturas);
+			if (opcion == SI) {
+				guardarDatosInventario(clientes, proveedores, productos, facturas);
+				System.out.println();
+				System.out.println("Se han guardado todos los datos del inventario.");
+				System.out.println();
+			}
 		}
 	}
 
@@ -630,10 +634,6 @@ public class Aplicacion {
 				System.err.println("ERROR: " + e.getMessage());
 			}
 		}
-
-		System.out.println();
-		System.out.println("Se han guardado todos los datos del inventario.");
-		System.out.println();
 	}
 
 	private static void mostrarDatosFactura(Factura factura, List<Cliente> clientes, List<Producto> productos) {
