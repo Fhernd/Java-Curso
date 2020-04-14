@@ -6,6 +6,8 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -48,14 +50,14 @@ public class Aplicacion {
 
 	public static void main(String[] args) {
 		teclado = new Scanner(System.in);
-		
+
 		List<Cliente> clientes = new ArrayList<>();
 		List<Proveedor> proveedores = new ArrayList<>();
 		List<Producto> productos = new ArrayList<>();
 		List<Factura> facturas = new ArrayList<>();
 
 		Map<String, Object> inventario = cargarDatos();
-		
+
 		if (inventario.get(CLIENTES) != null) {
 			clientes = (List<Cliente>) inventario.get(CLIENTES);
 		}
@@ -63,11 +65,11 @@ public class Aplicacion {
 		if (inventario.get(PROVEEDORES) != null) {
 			proveedores = (List<Proveedor>) inventario.get(PROVEEDORES);
 		}
-		
+
 		if (inventario.get(PRODUCTOS) != null) {
 			productos = (List<Producto>) inventario.get(PRODUCTOS);
 		}
-		
+
 		if (inventario.get(FACTURAS) != null) {
 			facturas = (List<Factura>) inventario.get(FACTURAS);
 		}
@@ -392,7 +394,10 @@ public class Aplicacion {
 
 				Cliente cliente;
 
-				for (CSVRecord r : csvParser.getRecords()) {
+				List<CSVRecord> registros = csvParser.getRecords().stream().filter(r -> r.getRecordNumber() != 1)
+						.collect(Collectors.toList());
+
+				for (CSVRecord r : registros) {
 					cliente = new Cliente(r.get("cedula"), r.get("nombres"), r.get("apellidos"), r.get("telefono"),
 							r.get("direccion"), r.get("correo"));
 
@@ -417,8 +422,10 @@ public class Aplicacion {
 
 				Proveedor proveedor;
 
-				for (CSVRecord r : csvParser.getRecords()) {
-					System.out.println("ID: " + r.get("id"));
+				List<CSVRecord> registros = csvParser.getRecords().stream().filter(r -> r.getRecordNumber() != 1)
+						.collect(Collectors.toList());
+
+				for (CSVRecord r : registros) {
 					proveedor = new Proveedor(Integer.parseInt(r.get("id")), r.get("nombre"), r.get("telefono"),
 							r.get("direccion"));
 
@@ -444,7 +451,10 @@ public class Aplicacion {
 
 				Producto producto;
 
-				for (CSVRecord r : csvParser.getRecords()) {
+				List<CSVRecord> registros = csvParser.getRecords().stream().filter(r -> r.getRecordNumber() != 1)
+						.collect(Collectors.toList());
+
+				for (CSVRecord r : registros) {
 					producto = new Producto();
 
 					producto.setId(Integer.parseInt(r.get("id")));
@@ -479,17 +489,26 @@ public class Aplicacion {
 
 				Factura factura;
 
-				for (CSVRecord r : csvParser.getRecords()) {
+				List<CSVRecord> registros = csvParser.getRecords().stream().filter(r -> r.getRecordNumber() != 1)
+						.collect(Collectors.toList());
+
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+				for (CSVRecord r : registros) {
 					factura = new Factura();
 					factura.setId(Integer.parseInt(r.get("id")));
-					factura.setFecha(new Date(r.get("fecha")));
+					try {
+						factura.setFecha(simpleDateFormat.parse(r.get("fecha")));
+					} catch (ParseException e) {
+						
+					}
 					factura.setCedulaCliente(r.get("cedulaCliente"));
 					factura.setImpuesto(Double.parseDouble(r.get("impuesto")));
 					factura.setTotal(Double.parseDouble(r.get("total")));
-					
+
 					String[] idsProductos = StringUtils.split(r.get("idsProductos"), ",");
 					factura.setIdsProductosDesdeArregloCadenas(idsProductos);
-					
+
 					facturas.add(factura);
 				}
 
@@ -498,13 +517,13 @@ public class Aplicacion {
 				System.err.println("ERROR: " + e.getMessage());
 			}
 		}
-		
+
 		Map<String, Object> inventario = new HashMap<>();
 		inventario.put(CLIENTES, clientes);
 		inventario.put(PROVEEDORES, proveedores);
 		inventario.put(PRODUCTOS, productos);
 		inventario.put(FACTURAS, facturas);
-		
+
 		return inventario;
 	}
 
