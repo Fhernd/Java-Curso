@@ -38,6 +38,9 @@ public class Aplicacion {
 	private static final int BUSCAR = 2;
 	private static final int ACTUALIZAR = 3;
 	private static final int ELIMINAR = 4;
+	
+	private static final int SI = 1;
+	private static final int NO = 2;
 
 	private static final String ARCHIVO_CSV_CLIENTES = "./clientes.csv";
 	private static final String ARCHIVO_CSV_PROVEEDORES = "./proveedores.csv";
@@ -370,6 +373,21 @@ public class Aplicacion {
 		continuar();
 
 		if (!clientes.isEmpty()) {
+			do {
+				System.out.println("Guardar datos");
+				System.out.println("1. Sí");
+				System.out.println("2. No");
+				opcion = capturarNumeroEntero("¿Desea guardar los datos del inventario?: ");
+				
+				if (opcion == SI || opcion == NO) {
+					break;
+				} else {
+					mostrarMensaje("MENSAJE: Debe responder Sí (1) o No (2).");
+					continuar();
+				}
+			} while (true);
+			
+			
 			guardarDatosInventario(clientes, proveedores, productos, facturas);
 		}
 	}
@@ -597,9 +615,11 @@ public class Aplicacion {
 						CSVFormat.DEFAULT
 								.withHeader("id", "fecha", "cedulaCliente", "impuesto", "total", "idsProductos")
 								.withDelimiter(SEPARADOR));
+				
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 				for (Factura f : facturas) {
-					csvPrinter.printRecord(f.getId(), f.getFecha(), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(),
+					csvPrinter.printRecord(f.getId(), simpleDateFormat.format(f.getFecha()), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(),
 							StringUtils.join(f.getIdsProductos(), ","));
 				}
 
