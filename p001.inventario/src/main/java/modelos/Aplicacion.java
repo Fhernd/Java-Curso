@@ -392,7 +392,7 @@ public class Aplicacion {
 
 				Cliente cliente;
 
-				for (CSVRecord r : csvParser) {
+				for (CSVRecord r : csvParser.getRecords()) {
 					cliente = new Cliente(r.get("cedula"), r.get("nombres"), r.get("apellidos"), r.get("telefono"),
 							r.get("direccion"), r.get("correo"));
 
@@ -417,7 +417,8 @@ public class Aplicacion {
 
 				Proveedor proveedor;
 
-				for (CSVRecord r : csvParser) {
+				for (CSVRecord r : csvParser.getRecords()) {
+					System.out.println("ID: " + r.get("id"));
 					proveedor = new Proveedor(Integer.parseInt(r.get("id")), r.get("nombre"), r.get("telefono"),
 							r.get("direccion"));
 
@@ -443,7 +444,7 @@ public class Aplicacion {
 
 				Producto producto;
 
-				for (CSVRecord r : csvParser) {
+				for (CSVRecord r : csvParser.getRecords()) {
 					producto = new Producto();
 
 					producto.setId(Integer.parseInt(r.get("id")));
@@ -478,7 +479,7 @@ public class Aplicacion {
 
 				Factura factura;
 
-				for (CSVRecord r : csvParser) {
+				for (CSVRecord r : csvParser.getRecords()) {
 					factura = new Factura();
 					factura.setId(Integer.parseInt(r.get("id")));
 					factura.setFecha(new Date(r.get("fecha")));
