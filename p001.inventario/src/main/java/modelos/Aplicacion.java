@@ -22,6 +22,10 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
 
 public class Aplicacion {
+	private static final String FACTURAS = "facturas";
+	private static final String PRODUCTOS = "productos";
+	private static final String PROVEEDORES = "proveedores";
+	private static final String CLIENTES = "clientes";
 	private static final int SALIR = 0;
 	private static final int GESTION_CLIENTES = 1;
 	private static final int GESTION_PROVEEDORES = 2;
@@ -44,13 +48,29 @@ public class Aplicacion {
 
 	public static void main(String[] args) {
 		teclado = new Scanner(System.in);
-
-		cargarDatos();
-
+		
 		List<Cliente> clientes = new ArrayList<>();
 		List<Proveedor> proveedores = new ArrayList<>();
 		List<Producto> productos = new ArrayList<>();
 		List<Factura> facturas = new ArrayList<>();
+
+		Map<String, Object> inventario = cargarDatos();
+		
+		if (inventario.get(CLIENTES) != null) {
+			clientes = (List<Cliente>) inventario.get(CLIENTES);
+		}
+
+		if (inventario.get(PROVEEDORES) != null) {
+			proveedores = (List<Proveedor>) inventario.get(PROVEEDORES);
+		}
+		
+		if (inventario.get(PRODUCTOS) != null) {
+			productos = (List<Producto>) inventario.get(PRODUCTOS);
+		}
+		
+		if (inventario.get(FACTURAS) != null) {
+			facturas = (List<Factura>) inventario.get(FACTURAS);
+		}
 
 		int opcion;
 		int opcionSubmenu;
@@ -479,10 +499,10 @@ public class Aplicacion {
 		}
 		
 		Map<String, Object> inventario = new HashMap<>();
-		inventario.put("clientes", clientes);
-		inventario.put("proveedores", proveedores);
-		inventario.put("productos", productos);
-		inventario.put("facturas", facturas);
+		inventario.put(CLIENTES, clientes);
+		inventario.put(PROVEEDORES, proveedores);
+		inventario.put(PRODUCTOS, productos);
+		inventario.put(FACTURAS, facturas);
 		
 		return inventario;
 	}
