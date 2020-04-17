@@ -54,6 +54,60 @@ public class Aplicacion {
 		JMenuItem mniSalir = new JMenuItem("Salir");
 		mnuArchivo.add(mniSalir);
 		
+		JMenu mnuClientes = new JMenu("Clientes");
+		menuBar.add(mnuClientes);
+		
+		JMenuItem mniClientesCrear = new JMenuItem("Crear");
+		mnuClientes.add(mniClientesCrear);
+		
+		JMenuItem mniClientesBuscar = new JMenuItem("Buscar");
+		mnuClientes.add(mniClientesBuscar);
+		
+		JMenuItem mniClientesActualizar = new JMenuItem("Actualizar");
+		mnuClientes.add(mniClientesActualizar);
+		
+		JMenuItem mniClientesEliminar = new JMenuItem("Eliminar");
+		mnuClientes.add(mniClientesEliminar);
+		
+		JMenu mnuProveedores = new JMenu("Proveedores");
+		menuBar.add(mnuProveedores);
+		
+		JMenuItem mniProveedoresCrear = new JMenuItem("Crear");
+		mnuProveedores.add(mniProveedoresCrear);
+		
+		JMenuItem mniProveedoresBuscar = new JMenuItem("Buscar");
+		mnuProveedores.add(mniProveedoresBuscar);
+		
+		JMenuItem mniProveedoresActualizar = new JMenuItem("Actualizar");
+		mnuProveedores.add(mniProveedoresActualizar);
+		
+		JMenuItem mniProveedoresEliminar = new JMenuItem("Eliminar");
+		mnuProveedores.add(mniProveedoresEliminar);
+		
+		JMenu mnuProductos = new JMenu("Productos");
+		menuBar.add(mnuProductos);
+		
+		JMenuItem mniProductosCrear = new JMenuItem("Crear");
+		mnuProductos.add(mniProductosCrear);
+		
+		JMenuItem mniProductosBuscar = new JMenuItem("Buscar");
+		mnuProductos.add(mniProductosBuscar);
+		
+		JMenuItem mniProductosActualizar = new JMenuItem("Actualizar");
+		mnuProductos.add(mniProductosActualizar);
+		
+		JMenuItem mniProductosEliminar = new JMenuItem("Eliminar");
+		mnuProductos.add(mniProductosEliminar);
+		
+		JMenu mnuFacturacion = new JMenu("Facturación");
+		menuBar.add(mnuFacturacion);
+		
+		JMenuItem mniFacturacionCrear = new JMenuItem("Crear");
+		mnuFacturacion.add(mniFacturacionCrear);
+		
+		JMenuItem mniFacturacionBuscar = new JMenuItem("Buscar");
+		mnuFacturacion.add(mniFacturacionBuscar);
+		
 		JMenu mnuAyuda = new JMenu("Ayuda");
 		menuBar.add(mnuAyuda);
 		
