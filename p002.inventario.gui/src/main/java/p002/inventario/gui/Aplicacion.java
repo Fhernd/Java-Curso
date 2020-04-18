@@ -17,6 +17,7 @@ public class Aplicacion {
 
 	private static final int CODIGO_SALIDA_SATISFACTORIA = 0;
 	private JFrame frmSistemaDeGestion;
+	private JDesktopPane dpnEscritorio;
 
 	/**
 	 * Launch the application.
@@ -49,6 +50,8 @@ public class Aplicacion {
 		frmSistemaDeGestion.setTitle("Sistema de Gestión de Inventario - Ferretería Don Tuerca");
 		frmSistemaDeGestion.setBounds(100, 100, 800, 600);
 		frmSistemaDeGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frmSistemaDeGestion.setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
 		frmSistemaDeGestion.setJMenuBar(menuBar);
@@ -73,6 +76,13 @@ public class Aplicacion {
 		menuBar.add(mnuClientes);
 
 		JMenuItem mniClientesCrear = new JMenuItem("Crear");
+		mniClientesCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClientesCrearFormulario clientesCrearFormulario = new ClientesCrearFormulario();
+				dpnEscritorio.add(clientesCrearFormulario);
+				clientesCrearFormulario.show();
+			}
+		});
 		mnuClientes.add(mniClientesCrear);
 
 		JMenuItem mniClientesBuscar = new JMenuItem("Buscar");
@@ -130,7 +140,7 @@ public class Aplicacion {
 		mnuAyuda.add(mniAcercaDe);
 		frmSistemaDeGestion.getContentPane().setLayout(new BorderLayout(0, 0));
 
-		JDesktopPane desktopPane = new JDesktopPane();
-		frmSistemaDeGestion.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		dpnEscritorio = new JDesktopPane();
+		frmSistemaDeGestion.getContentPane().add(dpnEscritorio, BorderLayout.CENTER);
 	}
 }

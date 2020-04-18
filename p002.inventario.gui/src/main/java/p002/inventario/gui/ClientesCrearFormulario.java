@@ -13,6 +13,8 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ClientesCrearFormulario extends JInternalFrame {
 
@@ -124,6 +126,12 @@ public class ClientesCrearFormulario extends JInternalFrame {
 		txtCorreoElectronico.setColumns(10);
 		
 		JButton btnCrear = new JButton("Crear");
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cedula = txtCedula.getText();
+				
+			}
+		});
 		pnlClientesCrearDatos.add(btnCrear, "8, 14");
 		
 		JButton btnLimpiar = new JButton("Limpiar");

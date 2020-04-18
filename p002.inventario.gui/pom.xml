@@ -19,6 +19,11 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.10</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jgoodies</groupId>
+			<artifactId>jgoodies-forms</artifactId>
+			<version>1.8.0</version>
+		</dependency>
 	</dependencies>
 
 </project>
