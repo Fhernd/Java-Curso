@@ -149,6 +149,12 @@ public class ClientesCrearFormulario extends JInternalFrame {
 				}
 				
 				Cliente cliente = aplicacion.buscarClientePorCedula(cedula);
+				
+				if (cliente != null) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this,
+							"Ya existe un cliente con la cédula especificada.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 
 				if (nombres.isEmpty()) {
 					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Nombres es obligatorio.",
@@ -208,7 +214,7 @@ public class ClientesCrearFormulario extends JInternalFrame {
 					return;
 				}
 				
-				Cliente nuevoCliente = new Cliente(cedula, nombres, apellidos, telefono, direccion, correoElectronico);
+				cliente = new Cliente(cedula, nombres, apellidos, telefono, direccion, correoElectronico);
 				
 				
 			}
