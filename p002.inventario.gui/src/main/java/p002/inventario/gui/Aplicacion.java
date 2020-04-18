@@ -9,6 +9,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import modelos.Cliente;
+import modelos.GestionInventario;
+
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,6 +22,7 @@ public class Aplicacion {
 	private static final int CODIGO_SALIDA_SATISFACTORIA = 0;
 	private JFrame frmSistemaDeGestion;
 	private JDesktopPane dpnEscritorio;
+	private GestionInventario gestionInventario;
 
 	/**
 	 * Launch the application.
@@ -40,6 +45,8 @@ public class Aplicacion {
 	 */
 	public Aplicacion() {
 		initialize();
+		
+		gestionInventario = new GestionInventario();
 	}
 
 	/**
@@ -78,7 +85,7 @@ public class Aplicacion {
 		JMenuItem mniClientesCrear = new JMenuItem("Crear");
 		mniClientesCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClientesCrearFormulario clientesCrearFormulario = new ClientesCrearFormulario();
+				ClientesCrearFormulario clientesCrearFormulario = new ClientesCrearFormulario(Aplicacion.this);
 				dpnEscritorio.add(clientesCrearFormulario);
 				clientesCrearFormulario.show();
 			}
@@ -142,5 +149,9 @@ public class Aplicacion {
 
 		dpnEscritorio = new JDesktopPane();
 		frmSistemaDeGestion.getContentPane().add(dpnEscritorio, BorderLayout.CENTER);
+	}
+
+	public Cliente buscarClientePorCedula(String cedula) {
+		return gestionInventario.buscarClientePorCedula(cedula);
 	}
 }

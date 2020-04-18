@@ -13,6 +13,9 @@ import org.apache.commons.validator.routines.IntegerValidator;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Cliente;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,7 +44,7 @@ public class ClientesCrearFormulario extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClientesCrearFormulario frame = new ClientesCrearFormulario();
+					ClientesCrearFormulario frame = new ClientesCrearFormulario(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +56,7 @@ public class ClientesCrearFormulario extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClientesCrearFormulario() {
+	public ClientesCrearFormulario(Aplicacion aplicacion) {
 		setClosable(true);
 		setTitle("Clientes - Crear");
 		setBounds(100, 100, 450, 300);
@@ -144,6 +147,8 @@ public class ClientesCrearFormulario extends JInternalFrame {
 							"El campo Cédula debe ser un número positivo.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+				
+				Cliente cliente = aplicacion.buscarClientePorCedula(cedula);
 
 				if (nombres.isEmpty()) {
 					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Nombres es obligatorio.",
@@ -202,6 +207,8 @@ public class ClientesCrearFormulario extends JInternalFrame {
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+				
+				Cliente nuevoCliente = new Cliente(cedula, nombres, apellidos, telefono, direccion, correoElectronico);
 				
 				
 			}
