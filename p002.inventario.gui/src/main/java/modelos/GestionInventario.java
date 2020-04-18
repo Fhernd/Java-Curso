@@ -21,4 +21,8 @@ public class GestionInventario {
 		return clientes.stream().filter(c -> c.getCedula().equals(cedula)).findFirst().orElse(null);
 	}
 
+	public void crearCliente(Cliente cliente) {
+		clientes.add(cliente);
+	}
+
 }

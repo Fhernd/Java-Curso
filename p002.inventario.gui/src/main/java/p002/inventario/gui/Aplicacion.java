@@ -154,4 +154,8 @@ public class Aplicacion {
 	public Cliente buscarClientePorCedula(String cedula) {
 		return gestionInventario.buscarClientePorCedula(cedula);
 	}
+
+	public void crearCliente(Cliente cliente) {
+		gestionInventario.crearCliente(cliente);
+	}
 }

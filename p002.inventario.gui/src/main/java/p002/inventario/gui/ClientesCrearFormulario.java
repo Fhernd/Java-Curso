@@ -147,12 +147,13 @@ public class ClientesCrearFormulario extends JInternalFrame {
 							"El campo Cédula debe ser un número positivo.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				Cliente cliente = aplicacion.buscarClientePorCedula(cedula);
-				
+
 				if (cliente != null) {
 					JOptionPane.showMessageDialog(ClientesCrearFormulario.this,
-							"Ya existe un cliente con la cédula especificada.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+							"Ya existe un cliente con la cédula especificada.", "Advertencia",
+							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 
@@ -213,17 +214,36 @@ public class ClientesCrearFormulario extends JInternalFrame {
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				cliente = new Cliente(cedula, nombres, apellidos, telefono, direccion, correoElectronico);
+
+				aplicacion.crearCliente(cliente);
+
+				JOptionPane.showMessageDialog(ClientesCrearFormulario.this,
+						"El cliente se ha creado de forma satisfactoria.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 				
-				
+				limpiarCampos();
 			}
 		});
 		pnlClientesCrearDatos.add(btnCrear, "8, 14");
 
 		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpiarCampos();
+			}
+		});
 		pnlClientesCrearDatos.add(btnLimpiar, "8, 16");
 
+	}
+
+	protected void limpiarCampos() {
+		txtCedula.setText("");
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtTelefono.setText("");
+		txtDireccion.setText("");
+		txtCorreoElectronico.setText("");
 	}
 
 }
