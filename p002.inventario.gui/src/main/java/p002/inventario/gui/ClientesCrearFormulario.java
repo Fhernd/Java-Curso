@@ -6,11 +6,15 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.IntegerValidator;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -128,8 +132,51 @@ public class ClientesCrearFormulario extends JInternalFrame {
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String cedula = txtCedula.getText();
+				String cedula = txtCedula.getText().strip();
+				String nombres = txtNombres.getText().strip();
+				String apellidos = txtApellidos.getText().strip();
+				String telefono = txtTelefono.getText().strip();
+				String direccion = txtDireccion.getText().strip();
+				String correoElectronico = txtCorreoElectronico.getText().strip();
 				
+				if (cedula.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Cédula es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				Integer cedulaNumerica = IntegerValidator.getInstance().validate(cedula);
+				
+				if (cedulaNumerica == null) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Cédula debe ser un número.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				
+				
+				if (nombres.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Nombres es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (apellidos.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Apellidos es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (telefono.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Teléfono es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (direccion.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Dirección es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (correoElectronico.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this, "El campo Correo electrónico es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 			}
 		});
 		pnlClientesCrearDatos.add(btnCrear, "8, 14");
