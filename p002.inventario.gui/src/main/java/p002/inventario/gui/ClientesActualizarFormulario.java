@@ -118,31 +118,11 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
 							String.format("No existe un cliente con el número de cédula %s.", cedula), "Advertencia",
 							JOptionPane.WARNING_MESSAGE);
-					txtNombres.setText("");
-					txtNombres.setEditable(false);
-					txtApellidos.setText("");
-					txtApellidos.setEditable(false);
-					txtTelefono.setText("");
-					txtTelefono.setEditable(false);
-					txtDireccion.setText("");
-					txtDireccion.setEditable(false);
-					txtCorreoElectronico.setText("");
-					txtCorreoElectronico.setEditable(false);
-					btnActualizar.setEnabled(false);
+					cambiarEstadoFormulario(false, null);
 					return;
 				}
 
-				txtNombres.setText(cliente.getNombres());
-				txtNombres.setEditable(true);
-				txtApellidos.setText(cliente.getApellidos());
-				txtApellidos.setEditable(true);
-				txtTelefono.setText(cliente.getTelefono());
-				txtTelefono.setEditable(true);
-				txtDireccion.setText(cliente.getDireccion());
-				txtDireccion.setEditable(true);
-				txtCorreoElectronico.setText(cliente.getCorreoElectronico());
-				txtCorreoElectronico.setEditable(true);
-				btnActualizar.setEnabled(true);
+				cambiarEstadoFormulario(true, cliente);
 			}
 		});
 		pnlClientesActualizar.add(btnBuscar, "12, 4");
@@ -188,8 +168,27 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 		txtCorreoElectronico.setColumns(10);
 
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		pnlClientesActualizar.add(btnActualizar, "12, 16");
 
+	}
+
+	private void cambiarEstadoFormulario(boolean estado, Cliente cliente) {
+		txtNombres.setText(estado ? cliente.getNombres() : "");
+		txtNombres.setEditable(estado);
+		txtApellidos.setText(estado ? cliente.getApellidos() : "");
+		txtApellidos.setEditable(estado);
+		txtTelefono.setText(estado ? cliente.getTelefono() : "");
+		txtTelefono.setEditable(estado);
+		txtDireccion.setText(estado ? cliente.getDireccion() : "");
+		txtDireccion.setEditable(estado);
+		txtCorreoElectronico.setText(estado ? cliente.getCorreoElectronico(): "");
+		txtCorreoElectronico.setEditable(estado);
+		btnActualizar.setEnabled(estado);
 	}
 
 }
