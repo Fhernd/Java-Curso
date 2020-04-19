@@ -93,6 +93,13 @@ public class Aplicacion {
 		mnuClientes.add(mniClientesCrear);
 
 		JMenuItem mniClientesBuscar = new JMenuItem("Buscar");
+		mniClientesBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClientesBuscarFormulario clientesBuscarFormulario = new ClientesBuscarFormulario(Aplicacion.this);
+				dpnEscritorio.add(clientesBuscarFormulario);
+				clientesBuscarFormulario.show();
+			}
+		});
 		mnuClientes.add(mniClientesBuscar);
 
 		JMenuItem mniClientesActualizar = new JMenuItem("Actualizar");

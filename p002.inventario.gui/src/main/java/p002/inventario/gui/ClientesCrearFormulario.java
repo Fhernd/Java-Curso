@@ -175,12 +175,6 @@ public class ClientesCrearFormulario extends JInternalFrame {
 					return;
 				}
 
-				if (telefono.length() != 10) {
-					JOptionPane.showMessageDialog(ClientesCrearFormulario.this,
-							"El número de Teléfono debe tener 10 dígitos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-					return;
-				}
-
 				numero = IntegerValidator.getInstance().validate(telefono);
 
 				if (numero == null) {
@@ -193,6 +187,12 @@ public class ClientesCrearFormulario extends JInternalFrame {
 					JOptionPane.showMessageDialog(ClientesCrearFormulario.this,
 							"El campo Teléfono debe ser un número positivo.", "Advertencia",
 							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (telefono.length() != 10) {
+					JOptionPane.showMessageDialog(ClientesCrearFormulario.this,
+							"El número de Teléfono debe tener 10 dígitos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 

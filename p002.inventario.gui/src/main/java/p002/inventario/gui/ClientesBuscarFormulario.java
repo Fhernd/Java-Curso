@@ -8,14 +8,23 @@ import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Cliente;
+
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.IntegerValidator;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ClientesBusarFormulario extends JInternalFrame {
+public class ClientesBuscarFormulario extends JInternalFrame {
 	private JTextField txtCedula;
 	private JTextField txtNombres;
 	private JTextField txtApellidos;
@@ -30,7 +39,7 @@ public class ClientesBusarFormulario extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ClientesBusarFormulario frame = new ClientesBusarFormulario();
+					ClientesBuscarFormulario frame = new ClientesBuscarFormulario(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +51,9 @@ public class ClientesBusarFormulario extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClientesBusarFormulario() {
+	public ClientesBuscarFormulario(Aplicacion aplicacion) {
+		setTitle("Clientes - Buscar");
+		setClosable(true);
 		setBounds(100, 100, 450, 260);
 		
 		JPanel panel = new JPanel();
@@ -86,6 +97,50 @@ public class ClientesBusarFormulario extends JInternalFrame {
 		txtCedula.setColumns(10);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cedula = txtCedula.getText().strip();
+
+				if (cedula.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesBuscarFormulario.this, "El campo Cédula es obligatorio.",
+							"Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Integer numero = IntegerValidator.getInstance().validate(cedula);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ClientesBuscarFormulario.this, "El campo Cédula debe ser un número.",
+							"Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ClientesBuscarFormulario.this,
+							"El campo Cédula debe ser un número positivo.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Cliente cliente = aplicacion.buscarClientePorCedula(cedula);
+				
+				if (cliente == null) {
+					JOptionPane.showMessageDialog(ClientesBuscarFormulario.this,
+							String.format("No existe un cliente con el número de cédula %s.", cedula), "Advertencia", JOptionPane.WARNING_MESSAGE);
+					txtNombres.setText("");
+					txtApellidos.setText("");
+					txtTelefono.setText("");
+					txtDireccion.setText("");
+					txtCorreoElectronico.setText("");
+					return;
+				}
+				
+				txtNombres.setText(cliente.getNombres());
+				txtApellidos.setText(cliente.getApellidos());
+				txtTelefono.setText(cliente.getTelefono());
+				txtDireccion.setText(cliente.getDireccion());
+				txtCorreoElectronico.setText(cliente.getCorreoElectronico());
+			}
+		});
 		panel.add(btnBuscar, "12, 4");
 		
 		JLabel lblNombres = new JLabel("Nombres");
