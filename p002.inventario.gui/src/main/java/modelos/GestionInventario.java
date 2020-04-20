@@ -40,4 +40,10 @@ public class GestionInventario {
 		return facturas.stream().filter(f -> f.getCedulaCliente().equals(cedula)).collect(Collectors.toList());
 	}
 
+	public void eliminarClientePorNumeroCedula(String cedula) {
+		Cliente cliente = buscarClientePorCedula(cedula);
+		
+		clientes.remove(cliente);
+	}
+
 }

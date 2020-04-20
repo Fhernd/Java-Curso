@@ -187,4 +187,8 @@ public class Aplicacion {
 	public List<Factura> buscarFacturasCliente(String cedula) {
 		return gestionInventario.buscarFacturasCliente(cedula);
 	}
+
+	public void eliminarClientePorNumeroCedula(String cedula) {
+		gestionInventario.eliminarClientePorNumeroCedula(cedula);
+	}
 }
