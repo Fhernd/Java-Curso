@@ -2,6 +2,7 @@ package modelos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GestionInventario {
 	
@@ -33,6 +34,10 @@ public class GestionInventario {
 		clienteActualizar.setTelefono(cliente.getTelefono());
 		clienteActualizar.setDireccion(cliente.getDireccion());
 		clienteActualizar.setCorreoElectronico(cliente.getCorreoElectronico());
+	}
+
+	public List<Factura> buscarFacturasCliente(String cedula) {
+		return facturas.stream().filter(f -> f.getCedulaCliente().equals(cedula)).collect(Collectors.toList());
 	}
 
 }

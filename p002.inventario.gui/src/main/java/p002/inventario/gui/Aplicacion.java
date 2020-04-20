@@ -11,10 +11,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import modelos.Cliente;
+import modelos.Factura;
 import modelos.GestionInventario;
 
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class Aplicacion {
@@ -180,5 +182,9 @@ public class Aplicacion {
 
 	public void actualizarCliente(Cliente cliente) {
 		gestionInventario.actualizarCliente(cliente);
+	}
+
+	public List<Factura> buscarFacturasCliente(String cedula) {
+		return gestionInventario.buscarFacturasCliente(cedula);
 	}
 }
