@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.commons.validator.routines.IntegerValidator;
 
 import javax.swing.border.EtchedBorder;
@@ -36,7 +37,7 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 	private JTextField txtTelefono;
 	private JTextField txtDireccion;
 	private JTextField txtCorreoElectronico;
-	
+
 	private JButton btnActualizar;
 
 	/**
@@ -59,6 +60,7 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ClientesActualizarFormulario(Aplicacion aplicacion) {
+		setClosable(true);
 		setTitle("Clientes - Actualizar");
 		setBounds(100, 100, 450, 300);
 
@@ -101,8 +103,8 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 				Integer numero = IntegerValidator.getInstance().validate(cedula);
 
 				if (numero == null) {
-					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this, "El campo Cédula debe ser un número.",
-							"Advertencia", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Cédula debe ser un número.", "Advertencia", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 
@@ -123,6 +125,7 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 				}
 
 				cambiarEstadoFormulario(true, cliente);
+				txtCedula.setEditable(false);
 			}
 		});
 		pnlClientesActualizar.add(btnBuscar, "12, 4");
@@ -159,7 +162,7 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 		pnlClientesActualizar.add(txtDireccion, "12, 12, fill, default");
 		txtDireccion.setColumns(10);
 
-		JLabel lblCorreoElectronico = new JLabel("New label");
+		JLabel lblCorreoElectronico = new JLabel("Correo electrónico");
 		pnlClientesActualizar.add(lblCorreoElectronico, "2, 14");
 
 		txtCorreoElectronico = new JTextField();
@@ -170,11 +173,119 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String cedula = txtCedula.getText().strip();
+				String nombres = txtNombres.getText().strip();
+				String apellidos = txtApellidos.getText().strip();
+				String telefono = txtTelefono.getText().strip();
+				String direccion = txtDireccion.getText().strip();
+				String correoElectronico = txtCorreoElectronico.getText().strip();
+
+				if (cedula.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this, "El campo Cédula es obligatorio.",
+							"Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Integer numero = IntegerValidator.getInstance().validate(cedula);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Cédula debe ser un número.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Cédula debe ser un número positivo.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (nombres.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this, "El campo Nombres es obligatorio.",
+							"Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (apellidos.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Apellidos es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (telefono.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Teléfono es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				numero = IntegerValidator.getInstance().validate(telefono);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Teléfono debe ser un número.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Teléfono debe ser un número positivo.", "Advertencia",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (telefono.length() != 10) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El número de Teléfono debe tener 10 dígitos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (direccion.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Dirección es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (correoElectronico.isEmpty()) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El campo Correo electrónico es obligatorio.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (!EmailValidator.getInstance().isValid(correoElectronico)) {
+					JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+							"El valor del campo Correo electrónico no es válido.", "Advertencia",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Cliente clienteActualizado = new Cliente(cedula, nombres, apellidos, telefono, direccion,
+						correoElectronico);
+
+				aplicacion.actualizarCliente(clienteActualizado);
+
+				JOptionPane.showMessageDialog(ClientesActualizarFormulario.this,
+						String.format("El cliente con cédula %s se ha actualizado de forma satisfactoria.", cedula),
+						"Advertencia", JOptionPane.INFORMATION_MESSAGE);
 				
+				limpiarCampos();
 			}
 		});
 		pnlClientesActualizar.add(btnActualizar, "12, 16");
 
+	}
+
+	protected void limpiarCampos() {
+		txtCedula.setText("");
+		txtCedula.setEditable(true);
+		txtNombres.setText("");
+		txtNombres.setEditable(false);
+		txtApellidos.setText("");
+		txtApellidos.setEditable(false);
+		txtTelefono.setText("");
+		txtTelefono.setEditable(false);
+		txtDireccion.setText("");
+		txtCorreoElectronico.setText("");
+		txtCorreoElectronico.setEditable(false);
 	}
 
 	private void cambiarEstadoFormulario(boolean estado, Cliente cliente) {
@@ -186,7 +297,7 @@ public class ClientesActualizarFormulario extends JInternalFrame {
 		txtTelefono.setEditable(estado);
 		txtDireccion.setText(estado ? cliente.getDireccion() : "");
 		txtDireccion.setEditable(estado);
-		txtCorreoElectronico.setText(estado ? cliente.getCorreoElectronico(): "");
+		txtCorreoElectronico.setText(estado ? cliente.getCorreoElectronico() : "");
 		txtCorreoElectronico.setEditable(estado);
 		btnActualizar.setEnabled(estado);
 	}

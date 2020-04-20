@@ -103,9 +103,21 @@ public class Aplicacion {
 		mnuClientes.add(mniClientesBuscar);
 
 		JMenuItem mniClientesActualizar = new JMenuItem("Actualizar");
+		mniClientesActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClientesActualizarFormulario clientesActualizarFormulario = new ClientesActualizarFormulario(Aplicacion.this);
+				dpnEscritorio.add(clientesActualizarFormulario);
+				clientesActualizarFormulario.show();
+			}
+		});
 		mnuClientes.add(mniClientesActualizar);
 
 		JMenuItem mniClientesEliminar = new JMenuItem("Eliminar");
+		mniClientesEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		mnuClientes.add(mniClientesEliminar);
 
 		JMenu mnuProveedores = new JMenu("Proveedores");
@@ -164,5 +176,9 @@ public class Aplicacion {
 
 	public void crearCliente(Cliente cliente) {
 		gestionInventario.crearCliente(cliente);
+	}
+
+	public void actualizarCliente(Cliente cliente) {
+		gestionInventario.actualizarCliente(cliente);
 	}
 }
