@@ -194,10 +194,12 @@ public class ClientesEliminarFormulario extends JInternalFrame {
 
 				if (resultado == JOptionPane.YES_OPTION) {
 					String cedula = txtCedula.getText();
-					
+
 					aplicacion.eliminarClientePorNumeroCedula(cedula);
-					
-					
+
+					JOptionPane.showMessageDialog(ClientesEliminarFormulario.this,
+							String.format("El cliente con cédula %s se ha eliminado de forma satisfactoria.", cedula),
+							"Mensaje", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

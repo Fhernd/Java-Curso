@@ -117,7 +117,9 @@ public class Aplicacion {
 		JMenuItem mniClientesEliminar = new JMenuItem("Eliminar");
 		mniClientesEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ClientesEliminarFormulario clientesEliminarFormulario = new ClientesEliminarFormulario(Aplicacion.this);
+				dpnEscritorio.add(clientesEliminarFormulario);
+				clientesEliminarFormulario.show();
 			}
 		});
 		mnuClientes.add(mniClientesEliminar);
