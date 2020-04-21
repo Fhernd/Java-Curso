@@ -104,7 +104,7 @@ public class ProveedoresBuscarFormulario extends JInternalFrame {
 				
 				if (proveedor == null) {
 					JOptionPane.showMessageDialog(ProveedoresBuscarFormulario.this,
-							"Ya existe un proveedor con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+							"No existe un proveedor con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					
 					txtNombre.setText("");
 					txtDireccion.setText("");
