@@ -1,30 +1,33 @@
 package p002.inventario.gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import com.jgoodies.forms.layout.FormLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.LongValidator;
+
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import modelos.Cliente;
 
-import javax.swing.border.TitledBorder;
-
-import org.apache.commons.validator.routines.IntegerValidator;
-
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class ClientesBuscarFormulario extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7969333863378265617L;
 	private JTextField txtCedula;
 	private JTextField txtNombres;
 	private JTextField txtApellidos;
@@ -107,7 +110,7 @@ public class ClientesBuscarFormulario extends JInternalFrame {
 					return;
 				}
 
-				Integer numero = IntegerValidator.getInstance().validate(cedula);
+				Long numero = LongValidator.getInstance().validate(cedula);
 
 				if (numero == null) {
 					JOptionPane.showMessageDialog(ClientesBuscarFormulario.this, "El campo Cédula debe ser un número.",

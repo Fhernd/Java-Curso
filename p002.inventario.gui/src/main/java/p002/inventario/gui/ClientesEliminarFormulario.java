@@ -200,6 +200,13 @@ public class ClientesEliminarFormulario extends JInternalFrame {
 					JOptionPane.showMessageDialog(ClientesEliminarFormulario.this,
 							String.format("El cliente con cédula %s se ha eliminado de forma satisfactoria.", cedula),
 							"Mensaje", JOptionPane.INFORMATION_MESSAGE);
+					
+					txtNombres.setText("");
+					txtApellidos.setText("");
+					txtTelefono.setText("");
+					txtDireccion.setText("");
+					txtCorreoElectronico.setText("");
+					btnEliminar.setEnabled(false);
 				}
 			}
 		});
