@@ -46,4 +46,8 @@ public class GestionInventario {
 		clientes.remove(cliente);
 	}
 
+	public Proveedor buscarProveedorPorId(Long id) {
+		return proveedores.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+	}
+
 }

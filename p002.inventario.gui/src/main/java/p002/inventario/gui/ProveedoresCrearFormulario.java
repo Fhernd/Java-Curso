@@ -6,6 +6,9 @@ import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Proveedor;
+
 import javax.swing.border.TitledBorder;
 
 import org.apache.commons.validator.routines.LongValidator;
@@ -102,7 +105,19 @@ public class ProveedoresCrearFormulario extends JInternalFrame {
 					return;
 				}
 				
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
+							"El campo ID debe ser un número entero positivo.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 				
+				Proveedor proveedor = aplicacion.buscarProveedorPorId(numero);
+				
+				if (proveedor != null) {
+					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
+							"Ya existe un proveedor con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 
 				if (nombre.isEmpty()) {
 					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this, "El campo Nombre es obligatorio.",
@@ -117,10 +132,20 @@ public class ProveedoresCrearFormulario extends JInternalFrame {
 				}
 
 				if (telefono.isEmpty()) {
-					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this, "El campo Nombre es obligatorio.",
+					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this, "El campo Teléfono es obligatorio.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+				
+				if (telefono.length() != 10) {
+					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this, "El campo Teléfono debe tener longitud 10.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				numero = LongValidator.getInstance().validate(telefono);
+				
+				
 			}
 		});
 		pnlProveedoresCrear.add(btnCrear, "12, 10");

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import modelos.Cliente;
 import modelos.Factura;
 import modelos.GestionInventario;
+import modelos.Proveedor;
 
 import javax.swing.JDesktopPane;
 import java.awt.event.ActionListener;
@@ -192,5 +193,9 @@ public class Aplicacion {
 
 	public void eliminarClientePorNumeroCedula(String cedula) {
 		gestionInventario.eliminarClientePorNumeroCedula(cedula);
+	}
+
+	public Proveedor buscarProveedorPorId(Long id) {
+		return gestionInventario.buscarProveedorPorId(id);
 	}
 }
