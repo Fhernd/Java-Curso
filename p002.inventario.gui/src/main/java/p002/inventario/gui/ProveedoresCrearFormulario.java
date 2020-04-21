@@ -104,15 +104,15 @@ public class ProveedoresCrearFormulario extends JInternalFrame {
 							"El campo ID debe ser un número entero.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				if (numero <= 0) {
 					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
 							"El campo ID debe ser un número entero positivo.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				Proveedor proveedor = aplicacion.buscarProveedorPorId(numero);
-				
+
 				if (proveedor != null) {
 					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
 							"Ya existe un proveedor con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
@@ -136,20 +136,40 @@ public class ProveedoresCrearFormulario extends JInternalFrame {
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				if (telefono.length() != 10) {
-					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this, "El campo Teléfono debe tener longitud 10.",
-							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
+							"El campo Teléfono debe tener longitud 10.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				numero = LongValidator.getInstance().validate(telefono);
-				
-				
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
+							"El campo Teléfono debe ser un número positivo.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				proveedor = new Proveedor(Long.parseLong(id), nombre, telefono, direccion);
+
+				aplicacion.crearProveedor(proveedor);
+
+				JOptionPane.showMessageDialog(ProveedoresCrearFormulario.this,
+						"El proveedor se ha creado de forma satisfactoria.", "Mensaje",
+						JOptionPane.INFORMATION_MESSAGE);
+
+				limpiarCampos();
 			}
 		});
 		pnlProveedoresCrear.add(btnCrear, "12, 10");
 
 	}
 
+	private void limpiarCampos() {
+		txtId.setText("");
+		txtNombre.setText("");
+		txtDireccion.setText("");
+		txtTelefono.setText("");
+	}
 }

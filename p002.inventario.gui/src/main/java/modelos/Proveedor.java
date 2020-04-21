@@ -1,7 +1,7 @@
 package modelos;
 
 public class Proveedor {
-	private int id;
+	private long id;
 	private String nombre;
 	private String telefono;
 	private String direccion;
@@ -9,18 +9,18 @@ public class Proveedor {
 	public Proveedor() {
 	}
 
-	public Proveedor(int id, String nombre, String telefono, String direccion) {
+	public Proveedor(long id, String nombre, String telefono, String direccion) {
 		this.id = id;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

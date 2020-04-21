@@ -129,6 +129,13 @@ public class Aplicacion {
 		menuBar.add(mnuProveedores);
 
 		JMenuItem mniProveedoresCrear = new JMenuItem("Crear");
+		mniProveedoresCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProveedoresCrearFormulario proveedoresCrearFormulario = new ProveedoresCrearFormulario(Aplicacion.this);
+				dpnEscritorio.add(proveedoresCrearFormulario);
+				proveedoresCrearFormulario.show();
+			}
+		});
 		mnuProveedores.add(mniProveedoresCrear);
 
 		JMenuItem mniProveedoresBuscar = new JMenuItem("Buscar");
@@ -197,5 +204,9 @@ public class Aplicacion {
 
 	public Proveedor buscarProveedorPorId(Long id) {
 		return gestionInventario.buscarProveedorPorId(id);
+	}
+
+	public void crearProveedor(Proveedor proveedor) {
+		gestionInventario.crearProveedor(proveedor);
 	}
 }

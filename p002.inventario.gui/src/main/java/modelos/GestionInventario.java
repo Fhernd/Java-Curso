@@ -50,4 +50,8 @@ public class GestionInventario {
 		return proveedores.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
 	}
 
+	public void crearProveedor(Proveedor proveedor) {
+		proveedores.add(proveedor);
+	}
+
 }
