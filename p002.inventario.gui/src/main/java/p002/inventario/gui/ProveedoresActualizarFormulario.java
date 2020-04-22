@@ -31,6 +31,7 @@ public class ProveedoresActualizarFormulario extends JInternalFrame {
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
 	private JTextField txtTelefono;
+	private JButton btnActualizar;
 
 	/**
 	 * Create the frame.
@@ -80,7 +81,7 @@ public class ProveedoresActualizarFormulario extends JInternalFrame {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-String id = txtId.getText().trim();
+				String id = txtId.getText().trim();
 				
 				if (id.isEmpty()) {
 					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this, "El campo ID es obligatorio.",
@@ -109,15 +110,24 @@ String id = txtId.getText().trim();
 							"No existe un proveedor con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					
 					txtNombre.setText("");
+					txtNombre.setEnabled(false);
 					txtDireccion.setText("");
+					txtDireccion.setEnabled(false);
 					txtTelefono.setText("");
+					txtTelefono.setEnabled(false);
+					btnActualizar.setEnabled(false);
 					
 					return;
 				}
 				
 				txtNombre.setText(proveedor.getNombre());
+				txtNombre.setEnabled(true);
 				txtDireccion.setText(proveedor.getDireccion());
+				txtDireccion.setEnabled(true);
 				txtTelefono.setText(proveedor.getTelefono());
+				txtTelefono.setEnabled(true);
+				btnActualizar.setEnabled(true);
+				txtId.setEnabled(false);
 			}
 		});
 		pnlProveedoresBuscar.add(btnBuscar, "12, 4");
@@ -146,7 +156,37 @@ String id = txtId.getText().trim();
 		pnlProveedoresBuscar.add(txtTelefono, "12, 10, fill, default");
 		txtTelefono.setColumns(10);
 		
-		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = txtId.getText().trim();
+				
+				Proveedor proveedor = aplicacion.buscarProveedorPorId(Long.parseLong(id));
+				
+				String telefono = txtTelefono.getText().trim();
+				
+				if (telefono.isEmpty()) {
+					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this, "El campo Teléfono es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (telefono.length() != 10) {
+					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this,
+							"El campo Teléfono debe tener longitud 10.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Long numero = LongValidator.getInstance().validate(telefono);
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this,
+							"El campo Teléfono debe ser un número positivo.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+			}
+		});
 		btnActualizar.setEnabled(false);
 		pnlProveedoresBuscar.add(btnActualizar, "12, 12");
 

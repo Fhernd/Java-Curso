@@ -48,7 +48,7 @@ public class Aplicacion {
 	 */
 	public Aplicacion() {
 		initialize();
-		
+
 		gestionInventario = new GestionInventario();
 	}
 
@@ -60,7 +60,7 @@ public class Aplicacion {
 		frmSistemaDeGestion.setTitle("Sistema de Gestión de Inventario - Ferretería Don Tuerca");
 		frmSistemaDeGestion.setBounds(100, 100, 800, 600);
 		frmSistemaDeGestion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		frmSistemaDeGestion.setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -72,9 +72,9 @@ public class Aplicacion {
 		JMenuItem mniSalir = new JMenuItem("Salir");
 		mniSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int resultado = JOptionPane.showConfirmDialog(frmSistemaDeGestion, "¿Desea cerrar la aplicación?", "Confirmación",
-						JOptionPane.YES_NO_OPTION);
-				
+				int resultado = JOptionPane.showConfirmDialog(frmSistemaDeGestion, "¿Desea cerrar la aplicación?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+
 				if (resultado == JOptionPane.YES_OPTION) {
 					System.exit(CODIGO_SALIDA_SATISFACTORIA);
 				}
@@ -108,7 +108,8 @@ public class Aplicacion {
 		JMenuItem mniClientesActualizar = new JMenuItem("Actualizar");
 		mniClientesActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClientesActualizarFormulario clientesActualizarFormulario = new ClientesActualizarFormulario(Aplicacion.this);
+				ClientesActualizarFormulario clientesActualizarFormulario = new ClientesActualizarFormulario(
+						Aplicacion.this);
 				dpnEscritorio.add(clientesActualizarFormulario);
 				clientesActualizarFormulario.show();
 			}
@@ -141,7 +142,8 @@ public class Aplicacion {
 		JMenuItem mniProveedoresBuscar = new JMenuItem("Buscar");
 		mniProveedoresBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProveedoresBuscarFormulario proveedoresBuscarFormulario = new ProveedoresBuscarFormulario(Aplicacion.this);
+				ProveedoresBuscarFormulario proveedoresBuscarFormulario = new ProveedoresBuscarFormulario(
+						Aplicacion.this);
 				dpnEscritorio.add(proveedoresBuscarFormulario);
 				proveedoresBuscarFormulario.show();
 			}
@@ -149,6 +151,14 @@ public class Aplicacion {
 		mnuProveedores.add(mniProveedoresBuscar);
 
 		JMenuItem mniProveedoresActualizar = new JMenuItem("Actualizar");
+		mniProveedoresActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProveedoresActualizarFormulario proveedoresActualizarFormulario = new ProveedoresActualizarFormulario(
+						Aplicacion.this);
+				dpnEscritorio.add(proveedoresActualizarFormulario);
+				proveedoresActualizarFormulario.show();
+			}
+		});
 		mnuProveedores.add(mniProveedoresActualizar);
 
 		JMenuItem mniProveedoresEliminar = new JMenuItem("Eliminar");
