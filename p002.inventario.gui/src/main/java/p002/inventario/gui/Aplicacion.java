@@ -226,4 +226,8 @@ public class Aplicacion {
 	public void crearProveedor(Proveedor proveedor) {
 		gestionInventario.crearProveedor(proveedor);
 	}
+
+	public void actualizarProveedor(Proveedor proveedor) {
+		gestionInventario.actualizarProveedor(proveedor);
+	}
 }

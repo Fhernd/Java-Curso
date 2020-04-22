@@ -54,4 +54,12 @@ public class GestionInventario {
 		proveedores.add(proveedor);
 	}
 
+	public void actualizarProveedor(Proveedor proveedor) {
+		Proveedor proveedorExistente = buscarProveedorPorId(proveedor.getId());
+		
+		proveedorExistente.setNombre(proveedor.getNombre());
+		proveedorExistente.setDireccion(proveedor.getDireccion());
+		proveedorExistente.setTelefono(proveedor.getTelefono());
+	}
+
 }

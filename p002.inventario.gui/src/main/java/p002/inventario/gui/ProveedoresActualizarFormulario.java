@@ -160,10 +160,24 @@ public class ProveedoresActualizarFormulario extends JInternalFrame {
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = txtId.getText().trim();
+				String nombre = txtNombre.getText().trim();
+				String direccion = txtDireccion.getText().trim();
 				
 				Proveedor proveedor = aplicacion.buscarProveedorPorId(Long.parseLong(id));
 				
 				String telefono = txtTelefono.getText().trim();
+				
+				if (nombre.isEmpty()) {
+					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this, "El campo Nombre es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (direccion.isEmpty()) {
+					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this, "El campo Dirección es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 				
 				if (telefono.isEmpty()) {
 					JOptionPane.showMessageDialog(ProveedoresActualizarFormulario.this, "El campo Teléfono es obligatorio.",
@@ -185,6 +199,11 @@ public class ProveedoresActualizarFormulario extends JInternalFrame {
 					return;
 				}
 				
+				proveedor.setNombre(nombre);
+				proveedor.setDireccion(direccion);
+				proveedor.setTelefono(telefono);
+				
+				aplicacion.actualizarProveedor(proveedor);
 			}
 		});
 		btnActualizar.setEnabled(false);
