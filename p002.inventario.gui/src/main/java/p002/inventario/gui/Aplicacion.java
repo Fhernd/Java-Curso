@@ -162,6 +162,11 @@ public class Aplicacion {
 		mnuProveedores.add(mniProveedoresActualizar);
 
 		JMenuItem mniProveedoresEliminar = new JMenuItem("Eliminar");
+		mniProveedoresEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		mnuProveedores.add(mniProveedoresEliminar);
 
 		JMenu mnuProductos = new JMenu("Productos");

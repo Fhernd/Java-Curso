@@ -204,6 +204,16 @@ public class ProveedoresActualizarFormulario extends JInternalFrame {
 				proveedor.setTelefono(telefono);
 				
 				aplicacion.actualizarProveedor(proveedor);
+				
+				txtId.setText("");
+				txtId.setEnabled(true);
+				txtNombre.setText("");
+				txtNombre.setEnabled(false);
+				txtDireccion.setText("");
+				txtDireccion.setEnabled(false);
+				txtTelefono.setText("");
+				txtTelefono.setEnabled(false);
+				btnActualizar.setEnabled(false);
 			}
 		});
 		btnActualizar.setEnabled(false);
