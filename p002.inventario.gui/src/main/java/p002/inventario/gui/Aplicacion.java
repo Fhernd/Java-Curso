@@ -165,7 +165,10 @@ public class Aplicacion {
 		JMenuItem mniProveedoresEliminar = new JMenuItem("Eliminar");
 		mniProveedoresEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ProveedoresEliminarFormulario proveedoresEliminarFormulario = new ProveedoresEliminarFormulario(
+						Aplicacion.this);
+				dpnEscritorio.add(proveedoresEliminarFormulario);
+				proveedoresEliminarFormulario.show();
 			}
 		});
 		mnuProveedores.add(mniProveedoresEliminar);

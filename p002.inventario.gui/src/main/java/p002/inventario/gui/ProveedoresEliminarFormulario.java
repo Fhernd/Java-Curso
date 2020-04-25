@@ -158,19 +158,18 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 				if (resultado == JOptionPane.YES_OPTION) {
 					aplicacion.eliminarProveedorPorId(Long.parseLong(id));
 					
-					txtId.setText("");
-					txtId.setEnabled(true);
-					txtNombre.setText("");
-					txtDireccion.setText("");
-					txtTelefono.setText("");
-					btnEliminar.setEnabled(false);
-					btnBuscar.setEnabled(false);
-					
-					// TODO: Diálogo para informar que el proveedor se ha eliminado.
-				} else {
-					txtId.setEnabled(true);
-					btnBuscar.setEnabled(true);
+					JOptionPane.showMessageDialog(ProveedoresEliminarFormulario.this,
+							"El proveedor se ha eliminado.", "Información",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
+				
+				txtId.setText("");
+				txtId.setEnabled(true);
+				txtNombre.setText("");
+				txtDireccion.setText("");
+				txtTelefono.setText("");
+				btnEliminar.setEnabled(false);
+				btnBuscar.setEnabled(true);
 			}
 		});
 		btnEliminar.setEnabled(false);
