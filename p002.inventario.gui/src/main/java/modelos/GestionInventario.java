@@ -62,4 +62,8 @@ public class GestionInventario {
 		proveedorExistente.setTelefono(proveedor.getTelefono());
 	}
 
+	public List<Producto> buscarProductosPorIdProveedor(Long numero) {
+		return productos.stream().filter(p -> p.getIdProveedor() == numero).collect(Collectors.toList());
+	}
+
 }

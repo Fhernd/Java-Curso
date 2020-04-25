@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import modelos.Cliente;
 import modelos.Factura;
 import modelos.GestionInventario;
+import modelos.Producto;
 import modelos.Proveedor;
 
 import javax.swing.JDesktopPane;
@@ -234,5 +235,9 @@ public class Aplicacion {
 
 	public void actualizarProveedor(Proveedor proveedor) {
 		gestionInventario.actualizarProveedor(proveedor);
+	}
+
+	public List<Producto> buscarProductosPorIdProveedor(Long numero) {
+		return gestionInventario.buscarProductosPorIdProveedor(numero);
 	}
 }

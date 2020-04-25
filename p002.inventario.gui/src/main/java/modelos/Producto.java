@@ -8,12 +8,13 @@ public class Producto {
 	private double precioVenta;
 	private int cantidad;
 	private int cantidadMinimaStock;
-	private int idProveedor;
-	
+	private long idProveedor;
+
 	public Producto() {
 	}
 
-	public Producto(int id, String nombre, String descripcion, double precioCompra, double precioVenta, int cantidad, int cantidadMinimaStock, int idProveedor) {
+	public Producto(int id, String nombre, String descripcion, double precioCompra, double precioVenta, int cantidad,
+			int cantidadMinimaStock, long idProveedor) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -81,11 +82,11 @@ public class Producto {
 		this.cantidadMinimaStock = cantidadMinimaStock;
 	}
 
-	public int getIdProveedor() {
+	public long getIdProveedor() {
 		return idProveedor;
 	}
 
-	public void setIdProveedor(int idProveedor) {
+	public void setIdProveedor(long idProveedor) {
 		this.idProveedor = idProveedor;
 	}
 }
