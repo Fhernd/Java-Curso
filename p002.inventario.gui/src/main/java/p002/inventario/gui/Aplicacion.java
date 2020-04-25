@@ -240,4 +240,8 @@ public class Aplicacion {
 	public List<Producto> buscarProductosPorIdProveedor(Long numero) {
 		return gestionInventario.buscarProductosPorIdProveedor(numero);
 	}
+
+	public void eliminarProveedorPorId(long parseLong) {
+		
+	}
 }

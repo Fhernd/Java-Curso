@@ -114,6 +114,7 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 				txtNombre.setText(proveedor.getNombre());
 				txtDireccion.setText(proveedor.getDireccion());
 				txtTelefono.setText(proveedor.getTelefono());
+				txtId.setEnabled(false);
 			}
 		});
 		pnlProveedoresEliminar.add(btnBuscar, "12, 4");
@@ -143,6 +144,19 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 		txtTelefono.setColumns(10);
 
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = txtId.getText().trim();
+
+				int resultado = JOptionPane.showConfirmDialog(ProveedoresEliminarFormulario.this,
+						"¿Está seguro de querer eliminar este proveedor?", "Confirmación", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+				
+				if (resultado == JOptionPane.YES_OPTION) {
+					aplicacion.eliminarProveedorPorId(Long.parseLong(id));
+				}
+			}
+		});
 		btnEliminar.setEnabled(false);
 		pnlProveedoresEliminar.add(btnEliminar, "12, 12");
 
