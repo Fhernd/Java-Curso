@@ -241,7 +241,7 @@ public class Aplicacion {
 		return gestionInventario.buscarProductosPorIdProveedor(numero);
 	}
 
-	public void eliminarProveedorPorId(long parseLong) {
-		
+	public void eliminarProveedorPorId(long id) {
+		gestionInventario.eliminarProveedorPorId(id);
 	}
 }

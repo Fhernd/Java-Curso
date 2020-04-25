@@ -66,4 +66,9 @@ public class GestionInventario {
 		return productos.stream().filter(p -> p.getIdProveedor() == numero).collect(Collectors.toList());
 	}
 
+	public void eliminarProveedorPorId(long id) {
+		Proveedor proveedor = buscarProveedorPorId(id);
+		proveedores.remove(proveedor);
+	}
+
 }

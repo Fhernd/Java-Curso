@@ -33,6 +33,7 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
 	private JTextField txtTelefono;
+	private JButton btnEliminar;
 
 	/**
 	 * Create the frame.
@@ -115,6 +116,8 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 				txtDireccion.setText(proveedor.getDireccion());
 				txtTelefono.setText(proveedor.getTelefono());
 				txtId.setEnabled(false);
+				btnBuscar.setEnabled(false);
+				btnEliminar.setEnabled(true);
 			}
 		});
 		pnlProveedoresEliminar.add(btnBuscar, "12, 4");
@@ -143,7 +146,7 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 		pnlProveedoresEliminar.add(txtTelefono, "12, 10, fill, default");
 		txtTelefono.setColumns(10);
 
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = txtId.getText().trim();
@@ -154,6 +157,19 @@ public class ProveedoresEliminarFormulario extends JInternalFrame {
 				
 				if (resultado == JOptionPane.YES_OPTION) {
 					aplicacion.eliminarProveedorPorId(Long.parseLong(id));
+					
+					txtId.setText("");
+					txtId.setEnabled(true);
+					txtNombre.setText("");
+					txtDireccion.setText("");
+					txtTelefono.setText("");
+					btnEliminar.setEnabled(false);
+					btnBuscar.setEnabled(false);
+					
+					// TODO: Diálogo para informar que el proveedor se ha eliminado.
+				} else {
+					txtId.setEnabled(true);
+					btnBuscar.setEnabled(true);
 				}
 			}
 		});
