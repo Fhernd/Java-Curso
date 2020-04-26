@@ -92,6 +92,7 @@ public class ProductosBuscarFormulario extends JInternalFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = txtId.getText().trim();
+				
 				if (id.isEmpty()) {
 					JOptionPane.showMessageDialog(ProductosBuscarFormulario.this, "El campo ID es obligatorio.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
@@ -115,14 +116,28 @@ public class ProductosBuscarFormulario extends JInternalFrame {
 
 				Producto producto = aplicacion.buscarProductoPorId(numero.intValue());
 
-				if (producto != null) {
+				if (producto == null) {
 					JOptionPane.showMessageDialog(ProductosBuscarFormulario.this,
-							"Ya existe un proveedor con el ID que se ha especificado. Intente otro ID.", "Mensaje",
+							"No existe un producto con el ID especificado.", "Mensaje",
 							JOptionPane.WARNING_MESSAGE);
+					txtNombre.setText("");
+					txtDescripcion.setText("");
+					txtPrecioCompra.setText("");
+					txtPrecioVenta.setText("");
+					txtCantidad.setText("");
+					txtCantidadMinimaStock.setText("");
+					txtIdProveedor.setText("");
+					
 					return;
 				}
 				
-				
+				txtNombre.setText(producto.getNombre());
+				txtDescripcion.setText(producto.getDescripcion());
+				txtPrecioCompra.setText(String.valueOf(producto.getPrecioCompra()));
+				txtPrecioVenta.setText(String.valueOf(producto.getPrecioVenta()));
+				txtCantidad.setText(String.valueOf(producto.getCantidad()));
+				txtCantidadMinimaStock.setText(String.valueOf(producto.getCantidadMinimaStock()));
+				txtIdProveedor.setText(String.valueOf(producto.getIdProveedor()));
 			}
 		});
 		pnlProductosBuscar.add(btnBuscar, "12, 4");
