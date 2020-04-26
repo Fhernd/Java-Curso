@@ -1,6 +1,7 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,6 +70,13 @@ public class GestionInventario {
 	public void eliminarProveedorPorId(long id) {
 		Proveedor proveedor = buscarProveedorPorId(id);
 		proveedores.remove(proveedor);
+	}
+
+	public Proveedor[] obtenerProveedores() {
+		Proveedor[] proveedoresCopia = new Proveedor[proveedores.size()];
+		proveedores.toArray(proveedoresCopia);
+		
+		return proveedoresCopia;
 	}
 
 }

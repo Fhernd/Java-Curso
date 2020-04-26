@@ -247,4 +247,8 @@ public class Aplicacion {
 	public void eliminarProveedorPorId(long id) {
 		gestionInventario.eliminarProveedorPorId(id);
 	}
+
+	public Proveedor[] obtenerProveedores() {
+		return gestionInventario.obtenerProveedores();
+	}
 }

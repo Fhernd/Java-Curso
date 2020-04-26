@@ -3,7 +3,9 @@ package p002.inventario.gui;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -33,6 +35,7 @@ public class ProductosCrearFormulario extends JInternalFrame {
 	private JTextField txtCantidadMinimaStock;
 	private JComboBox cbxIdProveedor;
 	private Aplicacion aplicacion;
+	private Map<String, Long> idsProveedores;
 
 	/**
 	 * Create the frame.
@@ -142,7 +145,18 @@ public class ProductosCrearFormulario extends JInternalFrame {
 	}
 
 	private void cargarDatosProveedores() {
-		Proveedor[] proveedores = null;  
+		Proveedor[] proveedores = aplicacion.obtenerProveedores();
+		idsProveedores = new HashMap<>();
+		String llave;
+		long valor;
+		
+		for (Proveedor proveedor : proveedores) {
+			llave = String.format("%d - %s", proveedor.getId(),  proveedor.getNombre());
+			valor = proveedor.getId();
+			idsProveedores.put(llave, valor);
+			
+			cbxIdProveedor.addItem(llave);
+		}
 	}
 
 }
