@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.swing.border.TitledBorder;
 
+import org.apache.commons.validator.routines.DoubleValidator;
 import org.apache.commons.validator.routines.LongValidator;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -158,12 +159,85 @@ public class ProductosCrearFormulario extends JInternalFrame {
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				Producto producto = aplicacion.buscarProductoPorId(numero.intValue());
-				
+
 				if (producto != null) {
 					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
 							"Ya existe un proveedor con el ID que se ha especificado. Intente otro ID.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (nombre.isEmpty()) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this, "El campo Nombre es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (descripcion.isEmpty()) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this, "El campo ID es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Double valor = DoubleValidator.getInstance().validate(precioCompra);
+
+				if (valor == null) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Precio Compra debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (valor <= 0) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Precio Compra debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				valor = DoubleValidator.getInstance().validate(precioVenta);
+
+				if (valor == null) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Precio Venta debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (valor <= 0) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Precio Venta debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				numero = LongValidator.getInstance().validate(cantidad);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Cantidad debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Cantidad debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				numero = LongValidator.getInstance().validate(cantidadMinimaStock);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Cantidad Mínima Stock debe ser un número.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo Cantidad Mínima Stock debe ser un número positivo (mayor a cero).", "Mensaje",
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
@@ -174,6 +248,13 @@ public class ProductosCrearFormulario extends JInternalFrame {
 		pnlProductosCrear.add(btnCrear, "12, 18");
 
 		cargarDatosProveedores();
+		
+		if (idsProveedores.size() == 0) {
+			JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+					"No puede crear un producto ya que no existen proveedores.", "Mensaje",
+					JOptionPane.WARNING_MESSAGE);
+			btnCrear.setEnabled(false);
+		}
 	}
 
 	private void cargarDatosProveedores() {
