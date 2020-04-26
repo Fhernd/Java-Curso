@@ -6,11 +6,20 @@ import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Producto;
+
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.LongValidator;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProductosBuscarFormulario extends JInternalFrame {
 
@@ -19,19 +28,19 @@ public class ProductosBuscarFormulario extends JInternalFrame {
 	 * Serial Version ID.
 	 */
 	private static final long serialVersionUID = -7272490546935297906L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField txtId;
+	private JTextField txtNombre;
+	private JTextField txtDescripcion;
+	private JTextField txtPrecioCompra;
+	private JTextField txtPrecioVenta;
+	private JTextField txtCantidad;
+	private JTextField txtCantidadMinimaStock;
+	private JTextField txtIdProveedor;
 
 	/**
 	 * Create the frame.
 	 */
-	public ProductosBuscarFormulario() {
+	public ProductosBuscarFormulario(Aplicacion aplicacion) {
 		setTitle("Productos - Buscar");
 		setClosable(true);
 		setBounds(100, 100, 450, 320);
@@ -72,64 +81,107 @@ public class ProductosBuscarFormulario extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel, "2, 2");
+		JLabel lblId = new JLabel("ID");
+		pnlProductosBuscar.add(lblId, "2, 2");
 		
-		textField = new JTextField();
-		pnlProductosBuscar.add(textField, "12, 2, fill, default");
-		textField.setColumns(10);
+		txtId = new JTextField();
+		pnlProductosBuscar.add(txtId, "12, 2, fill, default");
+		txtId.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
-		pnlProductosBuscar.add(btnNewButton, "12, 4");
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = txtId.getText().trim();
+				if (id.isEmpty()) {
+					JOptionPane.showMessageDialog(ProductosBuscarFormulario.this, "El campo ID es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Long numero = LongValidator.getInstance().validate(id);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosBuscarFormulario.this, "El campo ID debe ser un número.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosBuscarFormulario.this,
+							"El campo ID debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Producto producto = aplicacion.buscarProductoPorId(numero.intValue());
+
+				if (producto != null) {
+					JOptionPane.showMessageDialog(ProductosBuscarFormulario.this,
+							"Ya existe un proveedor con el ID que se ha especificado. Intente otro ID.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				
+			}
+		});
+		pnlProductosBuscar.add(btnBuscar, "12, 4");
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_1, "2, 6");
+		JLabel lblNombre = new JLabel("Nombre");
+		pnlProductosBuscar.add(lblNombre, "2, 6");
 		
-		textField_1 = new JTextField();
-		pnlProductosBuscar.add(textField_1, "12, 6, fill, default");
-		textField_1.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setEnabled(false);
+		pnlProductosBuscar.add(txtNombre, "12, 6, fill, default");
+		txtNombre.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_2, "2, 8");
+		JLabel lblDescripcion = new JLabel("Descripción");
+		pnlProductosBuscar.add(lblDescripcion, "2, 8");
 		
-		textField_2 = new JTextField();
-		pnlProductosBuscar.add(textField_2, "12, 8, fill, default");
-		textField_2.setColumns(10);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setEnabled(false);
+		pnlProductosBuscar.add(txtDescripcion, "12, 8, fill, default");
+		txtDescripcion.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_3, "2, 10");
+		JLabel lblPrecioCompra = new JLabel("Precio Compra");
+		pnlProductosBuscar.add(lblPrecioCompra, "2, 10");
 		
-		textField_3 = new JTextField();
-		pnlProductosBuscar.add(textField_3, "12, 10, fill, default");
-		textField_3.setColumns(10);
+		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setEnabled(false);
+		pnlProductosBuscar.add(txtPrecioCompra, "12, 10, fill, default");
+		txtPrecioCompra.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_4, "2, 12");
+		JLabel lblPrecioVenta = new JLabel("Precio Venta");
+		pnlProductosBuscar.add(lblPrecioVenta, "2, 12");
 		
-		textField_4 = new JTextField();
-		pnlProductosBuscar.add(textField_4, "12, 12, fill, default");
-		textField_4.setColumns(10);
+		txtPrecioVenta = new JTextField();
+		txtPrecioVenta.setEnabled(false);
+		pnlProductosBuscar.add(txtPrecioVenta, "12, 12, fill, default");
+		txtPrecioVenta.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_5, "2, 14");
+		JLabel lblCantidad = new JLabel("Cantidad");
+		pnlProductosBuscar.add(lblCantidad, "2, 14");
 		
-		textField_5 = new JTextField();
-		pnlProductosBuscar.add(textField_5, "12, 14, fill, default");
-		textField_5.setColumns(10);
+		txtCantidad = new JTextField();
+		txtCantidad.setEnabled(false);
+		pnlProductosBuscar.add(txtCantidad, "12, 14, fill, default");
+		txtCantidad.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_6, "2, 16");
+		JLabel lblCantidadMinimaStock = new JLabel("Cantidad Mínima Stock");
+		pnlProductosBuscar.add(lblCantidadMinimaStock, "2, 16");
 		
-		textField_6 = new JTextField();
-		pnlProductosBuscar.add(textField_6, "12, 16, fill, default");
-		textField_6.setColumns(10);
+		txtCantidadMinimaStock = new JTextField();
+		txtCantidadMinimaStock.setEnabled(false);
+		pnlProductosBuscar.add(txtCantidadMinimaStock, "12, 16, fill, default");
+		txtCantidadMinimaStock.setColumns(10);
 		
-		JLabel lblNewLabel_7 = new JLabel("New label");
-		pnlProductosBuscar.add(lblNewLabel_7, "2, 18");
+		JLabel lblIdProveedor = new JLabel("ID Proveedor");
+		pnlProductosBuscar.add(lblIdProveedor, "2, 18");
 		
-		textField_7 = new JTextField();
-		pnlProductosBuscar.add(textField_7, "12, 18, fill, default");
-		textField_7.setColumns(10);
+		txtIdProveedor = new JTextField();
+		txtIdProveedor.setEnabled(false);
+		pnlProductosBuscar.add(txtIdProveedor, "12, 18, fill, default");
+		txtIdProveedor.setColumns(10);
 
 	}
 
