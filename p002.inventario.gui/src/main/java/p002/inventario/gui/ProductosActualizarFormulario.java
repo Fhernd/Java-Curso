@@ -39,6 +39,7 @@ public class ProductosActualizarFormulario extends JInternalFrame {
 	private JTextField txtCantidad;
 	private JTextField txtCantidadMinimaStock;
 	private JComboBox cbxIdProveedor;
+	private JButton btnActualizar;
 	
 	private Aplicacion aplicacion;
 	Map<String, Long> idsProveedores;
@@ -110,26 +111,48 @@ public class ProductosActualizarFormulario extends JInternalFrame {
 				if (producto == null) {
 					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
 							"No existe un producto con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					
+					txtId.setEnabled(true);
 					txtNombre.setText("");
+					txtNombre.setEnabled(false);
 					txtDescripcion.setText("");
+					txtDescripcion.setEnabled(false);
 					txtPrecioCompra.setText("");
+					txtPrecioCompra.setEnabled(false);
 					txtPrecioVenta.setText("");
+					txtPrecioVenta.setEnabled(false);
 					txtCantidad.setText("");
+					txtCantidad.setEnabled(false);
 					txtCantidadMinimaStock.setText("");
+					txtCantidadMinimaStock.setEnabled(false);
+					
 					idsProveedores.clear();
+					btnActualizar.setEnabled(false);
+					btnBuscar.setEnabled(true);
 
 					return;
 				}
 
 				txtNombre.setText(producto.getNombre());
+				txtNombre.setEnabled(true);
 				txtDescripcion.setText(producto.getDescripcion());
+				txtDescripcion.setEnabled(true);
 				txtPrecioCompra.setText(String.valueOf(producto.getPrecioCompra()));
+				txtPrecioCompra.setEnabled(true);
 				txtPrecioVenta.setText(String.valueOf(producto.getPrecioVenta()));
+				txtPrecioVenta.setEnabled(true);
 				txtCantidad.setText(String.valueOf(producto.getCantidad()));
+				txtCantidad.setEnabled(true);
 				txtCantidadMinimaStock.setText(String.valueOf(producto.getCantidadMinimaStock()));
-				
+				txtCantidadMinimaStock.setEnabled(true);
 				
 				cargarDatosProveedores();
+				cbxIdProveedor.setEnabled(true);
+				Proveedor proveedor = aplicacion.buscarProveedorPorId(producto.getIdProveedor());
+				cbxIdProveedor.setSelectedItem(String.format("%d - %s", proveedor.getId(), proveedor.getNombre()));
+				
+				btnActualizar.setEnabled(true);
+				txtId.setEnabled(false);
 			}
 		});
 		pnlProductosActualizar.add(btnBuscar, "12, 4");
@@ -189,7 +212,12 @@ public class ProductosActualizarFormulario extends JInternalFrame {
 		cbxIdProveedor.setEnabled(false);
 		pnlProductosActualizar.add(cbxIdProveedor, "12, 18, fill, default");
 
-		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnActualizar.setEnabled(false);
 		pnlProductosActualizar.add(btnActualizar, "12, 20");
 
