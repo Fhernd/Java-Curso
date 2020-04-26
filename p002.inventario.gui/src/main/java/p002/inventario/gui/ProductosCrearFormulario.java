@@ -53,7 +53,7 @@ public class ProductosCrearFormulario extends JInternalFrame {
 
 		setTitle("Productos - Crear");
 		setClosable(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 320);
 
 		JPanel pnlProductosCrear = new JPanel();
 		pnlProductosCrear
@@ -176,7 +176,7 @@ public class ProductosCrearFormulario extends JInternalFrame {
 				}
 
 				if (descripcion.isEmpty()) {
-					JOptionPane.showMessageDialog(ProductosCrearFormulario.this, "El campo ID es obligatorio.",
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this, "El campo Descripción es obligatorio.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}

@@ -177,6 +177,13 @@ public class Aplicacion {
 		menuBar.add(mnuProductos);
 
 		JMenuItem mniProductosCrear = new JMenuItem("Crear");
+		mniProductosCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProductosCrearFormulario productosCrearFormulario = new ProductosCrearFormulario(Aplicacion.this);
+				dpnEscritorio.add(productosCrearFormulario);
+				productosCrearFormulario.show();
+			}
+		});
 		mnuProductos.add(mniProductosCrear);
 
 		JMenuItem mniProductosBuscar = new JMenuItem("Buscar");
