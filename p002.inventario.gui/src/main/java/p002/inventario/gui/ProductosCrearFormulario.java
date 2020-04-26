@@ -3,10 +3,15 @@ package p002.inventario.gui;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.List;
+
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Proveedor;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -26,11 +31,15 @@ public class ProductosCrearFormulario extends JInternalFrame {
 	private JTextField txtPrecioVenta;
 	private JTextField txtCantidad;
 	private JTextField txtCantidadMinimaStock;
+	private JComboBox cbxIdProveedor;
+	private Aplicacion aplicacion;
 
 	/**
 	 * Create the frame.
 	 */
-	public ProductosCrearFormulario() {
+	public ProductosCrearFormulario(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+		
 		setTitle("Productos - Crear");
 		setClosable(true);
 		setBounds(100, 100, 450, 300);
@@ -120,15 +129,20 @@ public class ProductosCrearFormulario extends JInternalFrame {
 		pnlProductosCrear.add(txtCantidadMinimaStock, "12, 14, fill, default");
 		txtCantidadMinimaStock.setColumns(10);
 		
-		JLabel lblIdProveedor = new JLabel("New label");
+		JLabel lblIdProveedor = new JLabel("Proveedor");
 		pnlProductosCrear.add(lblIdProveedor, "2, 16");
 		
-		JComboBox cbxIdProveedor = new JComboBox();
+		cbxIdProveedor = new JComboBox();
 		pnlProductosCrear.add(cbxIdProveedor, "12, 16, fill, default");
 		
 		JButton btnCrear = new JButton("Crear");
 		pnlProductosCrear.add(btnCrear, "12, 18");
 
+		cargarDatosProveedores();
+	}
+
+	private void cargarDatosProveedores() {
+		Proveedor[] proveedores = null;  
 	}
 
 }
