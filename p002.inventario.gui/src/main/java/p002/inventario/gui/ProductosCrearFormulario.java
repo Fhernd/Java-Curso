@@ -241,14 +241,32 @@ public class ProductosCrearFormulario extends JInternalFrame {
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+
+				Long idProveedorSeleccionado = idsProveedores.get(idProveedor);
+
+				producto = new Producto(Integer.parseInt(id), nombre, descripcion, Double.parseDouble(precioCompra),
+						Double.parseDouble(precioVenta), Integer.parseInt(cantidad),
+						Integer.parseInt(cantidadMinimaStock), idProveedorSeleccionado);
 				
+				aplicacion.crearProducto(producto);
 				
+				JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+						"El producto se ha creado de forma satisfactoria.", "Mensaje",
+						JOptionPane.INFORMATION_MESSAGE);
+				
+				txtId.setText("");
+				txtNombre.setText("");
+				txtDescripcion.setText("");
+				txtPrecioCompra.setText("");
+				txtPrecioVenta.setText("");
+				txtCantidad.setText("");
+				txtCantidadMinimaStock.setText("");
 			}
 		});
 		pnlProductosCrear.add(btnCrear, "12, 18");
 
 		cargarDatosProveedores();
-		
+
 		if (idsProveedores.size() == 0) {
 			JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
 					"No puede crear un producto ya que no existen proveedores.", "Mensaje",

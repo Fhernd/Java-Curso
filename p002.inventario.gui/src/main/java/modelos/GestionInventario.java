@@ -83,4 +83,8 @@ public class GestionInventario {
 		return productos.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
 	}
 
+	public void crearProducto(Producto producto) {
+		productos.add(producto);
+	}
+
 }

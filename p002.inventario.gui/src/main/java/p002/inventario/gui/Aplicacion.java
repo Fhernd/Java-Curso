@@ -255,4 +255,8 @@ public class Aplicacion {
 	public Producto buscarProductoPorId(int id) {
 		return gestionInventario.buscarProductoPorId(id);
 	}
+
+	public void crearProducto(Producto producto) {
+		gestionInventario.crearProducto(producto);
+	}
 }
