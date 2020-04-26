@@ -79,4 +79,8 @@ public class GestionInventario {
 		return proveedoresCopia;
 	}
 
+	public Producto buscarProductoPorId(int id) {
+		return productos.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+	}
+
 }

@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.LongValidator;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import modelos.Producto;
 import modelos.Proveedor;
 
 import com.jgoodies.forms.layout.FormSpecs;
@@ -137,6 +141,30 @@ public class ProductosCrearFormulario extends JInternalFrame {
 				if (id.isEmpty()) {
 					JOptionPane.showMessageDialog(ProductosCrearFormulario.this, "El campo ID es obligatorio.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Long numero = LongValidator.getInstance().validate(id);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this, "El campo ID debe ser un número.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"El campo ID debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				Producto producto = aplicacion.buscarProductoPorId(numero.intValue());
+				
+				if (producto != null) {
+					JOptionPane.showMessageDialog(ProductosCrearFormulario.this,
+							"Ya existe un proveedor con el ID que se ha especificado. Intente otro ID.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				

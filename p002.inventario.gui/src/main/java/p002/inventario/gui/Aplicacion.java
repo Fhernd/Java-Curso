@@ -251,4 +251,8 @@ public class Aplicacion {
 	public Proveedor[] obtenerProveedores() {
 		return gestionInventario.obtenerProveedores();
 	}
+
+	public Producto buscarProductoPorId(int id) {
+		return gestionInventario.buscarProductoPorId(id);
+	}
 }
