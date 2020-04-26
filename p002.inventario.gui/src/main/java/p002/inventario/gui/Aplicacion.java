@@ -197,6 +197,11 @@ public class Aplicacion {
 		mnuProductos.add(mniProductosBuscar);
 
 		JMenuItem mniProductosActualizar = new JMenuItem("Actualizar");
+		mniProductosActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Ventana Actualizar Producto
+			}
+		});
 		mnuProductos.add(mniProductosActualizar);
 
 		JMenuItem mniProductosEliminar = new JMenuItem("Eliminar");
