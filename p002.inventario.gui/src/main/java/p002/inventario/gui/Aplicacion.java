@@ -289,4 +289,8 @@ public class Aplicacion {
 	public void actualizarProducto(Producto producto) {
 		gestionInventario.actualizarProducto(producto);
 	}
+
+	public boolean productoEnFactura(int idProducto) {
+		return gestionInventario.productoEnFactura(idProducto);
+	}
 }

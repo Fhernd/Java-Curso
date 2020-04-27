@@ -98,4 +98,8 @@ public class GestionInventario {
 		productoActualizado.setIdProveedor(producto.getIdProveedor());		
 	}
 
+	public boolean productoEnFactura(int idProducto) {
+		return false;
+	}
+
 }

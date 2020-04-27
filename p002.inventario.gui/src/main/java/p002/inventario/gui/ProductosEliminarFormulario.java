@@ -23,7 +23,6 @@ import java.awt.event.ActionEvent;
 
 public class ProductosEliminarFormulario extends JInternalFrame {
 
-	
 	/**
 	 * Serial Version ID.
 	 */
@@ -36,6 +35,7 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 	private JTextField txtCantidad;
 	private JTextField txtCantidadMinimaStock;
 	private JTextField txtIdProveedor;
+	private JButton btnEliminar;
 
 	/**
 	 * Create the frame.
@@ -44,57 +44,37 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 		setTitle("Productos - Eliminar");
 		setClosable(true);
 		setBounds(100, 100, 450, 340);
-		
+
 		JPanel pnlProductosEliminar = new JPanel();
-		pnlProductosEliminar.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlProductosEliminar
+				.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(pnlProductosEliminar, BorderLayout.CENTER);
-		pnlProductosEliminar.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		pnlProductosEliminar.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("default:grow"), },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
 		JLabel lblId = new JLabel("ID");
 		pnlProductosEliminar.add(lblId, "2, 2");
-		
+
 		txtId = new JTextField();
 		pnlProductosEliminar.add(txtId, "12, 2, fill, default");
 		txtId.setColumns(10);
-		
+
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-String id = txtId.getText().trim();
-				
+				String id = txtId.getText().trim();
+
 				if (id.isEmpty()) {
 					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this, "El campo ID es obligatorio.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
@@ -120,8 +100,7 @@ String id = txtId.getText().trim();
 
 				if (producto == null) {
 					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
-							"No existe un producto con el ID especificado.", "Mensaje",
-							JOptionPane.WARNING_MESSAGE);
+							"No existe un producto con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					txtNombre.setText("");
 					btnBuscar.setEnabled(true);
 					txtDescripcion.setText("");
@@ -130,10 +109,13 @@ String id = txtId.getText().trim();
 					txtCantidad.setText("");
 					txtCantidadMinimaStock.setText("");
 					txtIdProveedor.setText("");
-					
+					btnEliminar.setEnabled(false);
+
 					return;
 				}
 				
+				boolean respuesta = aplicacion.productoEnFactura(numero.intValue());
+
 				txtNombre.setText(producto.getNombre());
 				txtDescripcion.setText(producto.getDescripcion());
 				txtPrecioCompra.setText(String.valueOf(producto.getPrecioCompra()));
@@ -141,67 +123,80 @@ String id = txtId.getText().trim();
 				txtCantidad.setText(String.valueOf(producto.getCantidad()));
 				txtCantidadMinimaStock.setText(String.valueOf(producto.getCantidadMinimaStock()));
 				txtIdProveedor.setText(String.valueOf(producto.getIdProveedor()));
+
+				btnBuscar.setEnabled(false);
+				btnEliminar.setEnabled(true);
 			}
 		});
 		pnlProductosEliminar.add(btnBuscar, "12, 4");
-		
+
 		JLabel lblNombre = new JLabel("Nombre");
 		pnlProductosEliminar.add(lblNombre, "2, 6");
-		
+
 		txtNombre = new JTextField();
 		txtNombre.setEnabled(false);
 		pnlProductosEliminar.add(txtNombre, "12, 6, fill, default");
 		txtNombre.setColumns(10);
-		
+
 		JLabel lblDescripcion = new JLabel("Descripción");
 		pnlProductosEliminar.add(lblDescripcion, "2, 8");
-		
+
 		txtDescripcion = new JTextField();
 		txtDescripcion.setEnabled(false);
 		pnlProductosEliminar.add(txtDescripcion, "12, 8, fill, default");
 		txtDescripcion.setColumns(10);
-		
+
 		JLabel lblPrecioCompra = new JLabel("Precio Compra");
 		pnlProductosEliminar.add(lblPrecioCompra, "2, 10");
-		
+
 		txtPrecioCompra = new JTextField();
 		txtPrecioCompra.setEnabled(false);
 		pnlProductosEliminar.add(txtPrecioCompra, "12, 10, fill, default");
 		txtPrecioCompra.setColumns(10);
-		
+
 		JLabel lblPrecioVenta = new JLabel("Precio Venta");
 		pnlProductosEliminar.add(lblPrecioVenta, "2, 12");
-		
+
 		txtPrecioVenta = new JTextField();
 		txtPrecioVenta.setEnabled(false);
 		pnlProductosEliminar.add(txtPrecioVenta, "12, 12, fill, default");
 		txtPrecioVenta.setColumns(10);
-		
+
 		JLabel lblCantidad = new JLabel("Cantidad");
 		pnlProductosEliminar.add(lblCantidad, "2, 14");
-		
+
 		txtCantidad = new JTextField();
 		txtCantidad.setEnabled(false);
 		pnlProductosEliminar.add(txtCantidad, "12, 14, fill, default");
 		txtCantidad.setColumns(10);
-		
+
 		JLabel lblCantidadMinimaStock = new JLabel("Cantidad Mínima Stock");
 		pnlProductosEliminar.add(lblCantidadMinimaStock, "2, 16");
-		
+
 		txtCantidadMinimaStock = new JTextField();
 		txtCantidadMinimaStock.setEnabled(false);
 		pnlProductosEliminar.add(txtCantidadMinimaStock, "12, 16, fill, default");
 		txtCantidadMinimaStock.setColumns(10);
-		
+
 		JLabel lblIdProveedor = new JLabel("ID Proveedor");
 		pnlProductosEliminar.add(lblIdProveedor, "2, 18");
-		
+
 		txtIdProveedor = new JTextField();
 		txtIdProveedor.setEnabled(false);
 		pnlProductosEliminar.add(txtIdProveedor, "12, 18, fill, default");
 		txtIdProveedor.setColumns(10);
-		
-		JButton btnEliminar = new JButton("Eliminar");
+
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = txtId.getText().trim();
+
+				int resultado = JOptionPane.showConfirmDialog(ProductosEliminarFormulario.this,
+						"¿Está seguro de querer eliminar este producto?", "Confirmación", JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+				
+			}
+		});
 		btnEliminar.setEnabled(false);
 		pnlProductosEliminar.add(btnEliminar, "12, 20");
 
