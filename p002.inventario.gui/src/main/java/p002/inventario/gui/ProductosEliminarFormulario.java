@@ -4,13 +4,22 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.LongValidator;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Producto;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ProductosEliminarFormulario extends JInternalFrame {
 
@@ -19,19 +28,19 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 	 * Serial Version ID.
 	 */
 	private static final long serialVersionUID = 4902421048621265227L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField txtId;
+	private JTextField txtNombre;
+	private JTextField txtDescripcion;
+	private JTextField txtPrecioCompra;
+	private JTextField txtPrecioVenta;
+	private JTextField txtCantidad;
+	private JTextField txtCantidadMinimaStock;
+	private JTextField txtIdProveedor;
 
 	/**
 	 * Create the frame.
 	 */
-	public ProductosEliminarFormulario() {
+	public ProductosEliminarFormulario(Aplicacion aplicacion) {
 		setTitle("Productos - Eliminar");
 		setClosable(true);
 		setBounds(100, 100, 450, 340);
@@ -74,67 +83,127 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel, "2, 2");
+		JLabel lblId = new JLabel("ID");
+		pnlProductosEliminar.add(lblId, "2, 2");
 		
-		textField = new JTextField();
-		pnlProductosEliminar.add(textField, "12, 2, fill, default");
-		textField.setColumns(10);
+		txtId = new JTextField();
+		pnlProductosEliminar.add(txtId, "12, 2, fill, default");
+		txtId.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
-		pnlProductosEliminar.add(btnNewButton, "12, 4");
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+String id = txtId.getText().trim();
+				
+				if (id.isEmpty()) {
+					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this, "El campo ID es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Long numero = LongValidator.getInstance().validate(id);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this, "El campo ID debe ser un número.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
+							"El campo ID debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Producto producto = aplicacion.buscarProductoPorId(numero.intValue());
+
+				if (producto == null) {
+					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
+							"No existe un producto con el ID especificado.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					txtNombre.setText("");
+					btnBuscar.setEnabled(true);
+					txtDescripcion.setText("");
+					txtPrecioCompra.setText("");
+					txtPrecioVenta.setText("");
+					txtCantidad.setText("");
+					txtCantidadMinimaStock.setText("");
+					txtIdProveedor.setText("");
+					
+					return;
+				}
+				
+				txtNombre.setText(producto.getNombre());
+				txtDescripcion.setText(producto.getDescripcion());
+				txtPrecioCompra.setText(String.valueOf(producto.getPrecioCompra()));
+				txtPrecioVenta.setText(String.valueOf(producto.getPrecioVenta()));
+				txtCantidad.setText(String.valueOf(producto.getCantidad()));
+				txtCantidadMinimaStock.setText(String.valueOf(producto.getCantidadMinimaStock()));
+				txtIdProveedor.setText(String.valueOf(producto.getIdProveedor()));
+			}
+		});
+		pnlProductosEliminar.add(btnBuscar, "12, 4");
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_1, "2, 6");
+		JLabel lblNombre = new JLabel("Nombre");
+		pnlProductosEliminar.add(lblNombre, "2, 6");
 		
-		textField_1 = new JTextField();
-		pnlProductosEliminar.add(textField_1, "12, 6, fill, default");
-		textField_1.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setEnabled(false);
+		pnlProductosEliminar.add(txtNombre, "12, 6, fill, default");
+		txtNombre.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_2, "2, 8");
+		JLabel lblDescripcion = new JLabel("Descripción");
+		pnlProductosEliminar.add(lblDescripcion, "2, 8");
 		
-		textField_2 = new JTextField();
-		pnlProductosEliminar.add(textField_2, "12, 8, fill, default");
-		textField_2.setColumns(10);
+		txtDescripcion = new JTextField();
+		txtDescripcion.setEnabled(false);
+		pnlProductosEliminar.add(txtDescripcion, "12, 8, fill, default");
+		txtDescripcion.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_3, "2, 10");
+		JLabel lblPrecioCompra = new JLabel("Precio Compra");
+		pnlProductosEliminar.add(lblPrecioCompra, "2, 10");
 		
-		textField_3 = new JTextField();
-		pnlProductosEliminar.add(textField_3, "12, 10, fill, default");
-		textField_3.setColumns(10);
+		txtPrecioCompra = new JTextField();
+		txtPrecioCompra.setEnabled(false);
+		pnlProductosEliminar.add(txtPrecioCompra, "12, 10, fill, default");
+		txtPrecioCompra.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_4, "2, 12");
+		JLabel lblPrecioVenta = new JLabel("Precio Venta");
+		pnlProductosEliminar.add(lblPrecioVenta, "2, 12");
 		
-		textField_4 = new JTextField();
-		pnlProductosEliminar.add(textField_4, "12, 12, fill, default");
-		textField_4.setColumns(10);
+		txtPrecioVenta = new JTextField();
+		txtPrecioVenta.setEnabled(false);
+		pnlProductosEliminar.add(txtPrecioVenta, "12, 12, fill, default");
+		txtPrecioVenta.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_5, "2, 14");
+		JLabel lblCantidad = new JLabel("Cantidad");
+		pnlProductosEliminar.add(lblCantidad, "2, 14");
 		
-		textField_5 = new JTextField();
-		pnlProductosEliminar.add(textField_5, "12, 14, fill, default");
-		textField_5.setColumns(10);
+		txtCantidad = new JTextField();
+		txtCantidad.setEnabled(false);
+		pnlProductosEliminar.add(txtCantidad, "12, 14, fill, default");
+		txtCantidad.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_6, "2, 16");
+		JLabel lblCantidadMinimaStock = new JLabel("Cantidad Mínima Stock");
+		pnlProductosEliminar.add(lblCantidadMinimaStock, "2, 16");
 		
-		textField_6 = new JTextField();
-		pnlProductosEliminar.add(textField_6, "12, 16, fill, default");
-		textField_6.setColumns(10);
+		txtCantidadMinimaStock = new JTextField();
+		txtCantidadMinimaStock.setEnabled(false);
+		pnlProductosEliminar.add(txtCantidadMinimaStock, "12, 16, fill, default");
+		txtCantidadMinimaStock.setColumns(10);
 		
-		JLabel lblNewLabel_7 = new JLabel("New label");
-		pnlProductosEliminar.add(lblNewLabel_7, "2, 18");
+		JLabel lblIdProveedor = new JLabel("ID Proveedor");
+		pnlProductosEliminar.add(lblIdProveedor, "2, 18");
 		
-		textField_7 = new JTextField();
-		pnlProductosEliminar.add(textField_7, "12, 18, fill, default");
-		textField_7.setColumns(10);
+		txtIdProveedor = new JTextField();
+		txtIdProveedor.setEnabled(false);
+		pnlProductosEliminar.add(txtIdProveedor, "12, 18, fill, default");
+		txtIdProveedor.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		pnlProductosEliminar.add(btnNewButton_1, "12, 20");
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setEnabled(false);
+		pnlProductosEliminar.add(btnEliminar, "12, 20");
 
 	}
 
