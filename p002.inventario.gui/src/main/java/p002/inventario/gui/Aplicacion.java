@@ -207,6 +207,11 @@ public class Aplicacion {
 		mnuProductos.add(mniProductosActualizar);
 
 		JMenuItem mniProductosEliminar = new JMenuItem("Eliminar");
+		mniProductosEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Visualizar ventana de eliminación de un producto
+			}
+		});
 		mnuProductos.add(mniProductosEliminar);
 
 		JMenu mnuFacturacion = new JMenu("Facturación");
