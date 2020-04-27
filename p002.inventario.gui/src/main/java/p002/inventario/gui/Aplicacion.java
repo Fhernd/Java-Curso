@@ -199,7 +199,9 @@ public class Aplicacion {
 		JMenuItem mniProductosActualizar = new JMenuItem("Actualizar");
 		mniProductosActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Ventana Actualizar Producto
+				ProductosActualizarFormulario productosActualizarFormulario = new ProductosActualizarFormulario(Aplicacion.this);
+				dpnEscritorio.add(productosActualizarFormulario);
+				productosActualizarFormulario.show();
 			}
 		});
 		mnuProductos.add(mniProductosActualizar);
@@ -277,5 +279,9 @@ public class Aplicacion {
 
 	public void crearProducto(Producto producto) {
 		gestionInventario.crearProducto(producto);
+	}
+
+	public void actualizarProducto(Producto producto) {
+		gestionInventario.actualizarProducto(producto);
 	}
 }

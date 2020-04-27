@@ -1,7 +1,6 @@
 package modelos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,6 +84,18 @@ public class GestionInventario {
 
 	public void crearProducto(Producto producto) {
 		productos.add(producto);
+	}
+
+	public void actualizarProducto(Producto producto) {
+		Producto productoActualizado = buscarProductoPorId(producto.getId());
+		
+		productoActualizado.setNombre(producto.getNombre());
+		productoActualizado.setDescripcion(producto.getDescripcion());
+		productoActualizado.setPrecioCompra(producto.getPrecioCompra());
+		productoActualizado.setPrecioVenta(producto.getPrecioVenta());
+		productoActualizado.setCantidad(producto.getCantidad());
+		productoActualizado.setCantidadMinimaStock(producto.getCantidadMinimaStock());
+		productoActualizado.setIdProveedor(producto.getIdProveedor());		
 	}
 
 }

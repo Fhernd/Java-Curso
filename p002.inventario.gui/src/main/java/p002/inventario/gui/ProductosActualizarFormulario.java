@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 
+import org.apache.commons.validator.routines.DoubleValidator;
 import org.apache.commons.validator.routines.LongValidator;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -215,7 +216,117 @@ public class ProductosActualizarFormulario extends JInternalFrame {
 		btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String id = txtId.getText().trim();
+				String nombre = txtNombre.getText().trim();
+				String descripcion = txtDescripcion.getText().trim();
+				String precioCompra = txtPrecioCompra.getText().trim();
+				String precioVenta = txtPrecioVenta.getText().trim();
+				String cantidad = txtCantidad.getText().trim();
+				String cantidadMinimaStock = txtCantidadMinimaStock.getText().trim();
+				String idProveedor = cbxIdProveedor.getSelectedItem().toString();
 				
+				if (nombre.isEmpty()) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this, "El campo Nombre es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (descripcion.isEmpty()) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this, "El campo Descripción es obligatorio.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Double valor = DoubleValidator.getInstance().validate(precioCompra);
+
+				if (valor == null) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Precio Compra debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (valor <= 0) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Precio Compra debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				valor = DoubleValidator.getInstance().validate(precioVenta);
+
+				if (valor == null) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Precio Venta debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (valor <= 0) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Precio Venta debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				Long numero = LongValidator.getInstance().validate(cantidad);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Cantidad debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Cantidad debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				numero = LongValidator.getInstance().validate(cantidadMinimaStock);
+
+				if (numero == null) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Cantidad Mínima Stock debe ser un número.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (numero <= 0) {
+					JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+							"El campo Cantidad Mínima Stock debe ser un número positivo (mayor a cero).", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				Long idProveedorSeleccionado = idsProveedores.get(idProveedor);
+
+				Producto producto = new Producto(Integer.parseInt(id), nombre, descripcion, Double.parseDouble(precioCompra),
+						Double.parseDouble(precioVenta), Integer.parseInt(cantidad),
+						Integer.parseInt(cantidadMinimaStock), idProveedorSeleccionado);
+				
+				aplicacion.actualizarProducto(producto);
+				
+				JOptionPane.showMessageDialog(ProductosActualizarFormulario.this,
+						"Los datos del producto se han actualizado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				
+				txtId.setEnabled(true);
+				txtNombre.setText("");
+				txtNombre.setEnabled(false);
+				txtDescripcion.setText("");
+				txtDescripcion.setEnabled(false);
+				txtPrecioCompra.setText("");
+				txtPrecioCompra.setEnabled(false);
+				txtPrecioVenta.setText("");
+				txtPrecioVenta.setEnabled(false);
+				txtCantidad.setText("");
+				txtCantidad.setEnabled(false);
+				txtCantidadMinimaStock.setText("");
+				txtCantidadMinimaStock.setEnabled(false);
+				
+				idsProveedores.clear();
+				cbxIdProveedor.removeAll();
+				btnActualizar.setEnabled(false);
+				btnBuscar.setEnabled(true);
 			}
 		});
 		btnActualizar.setEnabled(false);
