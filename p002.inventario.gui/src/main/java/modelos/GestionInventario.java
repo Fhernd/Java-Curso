@@ -103,4 +103,9 @@ public class GestionInventario {
 		return facturas.stream().anyMatch(f -> Arrays.asList(f.getIdsProductos()).contains(idProducto));
 	}
 
+	public void eliminarProductoPorId(int id) {
+		Producto producto = buscarProductoPorId(id);
+		productos.remove(producto);
+	}
+
 }

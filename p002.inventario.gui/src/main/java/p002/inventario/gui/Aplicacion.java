@@ -209,7 +209,9 @@ public class Aplicacion {
 		JMenuItem mniProductosEliminar = new JMenuItem("Eliminar");
 		mniProductosEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Visualizar ventana de eliminación de un producto
+				ProductosEliminarFormulario productosEliminarFormulario = new ProductosEliminarFormulario(Aplicacion.this);
+				dpnEscritorio.add(productosEliminarFormulario);
+				productosEliminarFormulario.show();
 			}
 		});
 		mnuProductos.add(mniProductosEliminar);
@@ -292,5 +294,9 @@ public class Aplicacion {
 
 	public boolean productoEnFactura(int idProducto) {
 		return gestionInventario.productoEnFactura(idProducto);
+	}
+
+	public void eliminarProductoPorId(int id) {
+		gestionInventario.eliminarProductoPorId(id);
 	}
 }

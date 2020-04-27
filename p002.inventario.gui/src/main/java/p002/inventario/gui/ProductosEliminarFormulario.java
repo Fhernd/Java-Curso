@@ -101,15 +101,7 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 				if (producto == null) {
 					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
 							"No existe un producto con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
-					txtNombre.setText("");
-					btnBuscar.setEnabled(true);
-					txtDescripcion.setText("");
-					txtPrecioCompra.setText("");
-					txtPrecioVenta.setText("");
-					txtCantidad.setText("");
-					txtCantidadMinimaStock.setText("");
-					txtIdProveedor.setText("");
-					btnEliminar.setEnabled(false);
+					limpiarCampos(btnBuscar);
 
 					return;
 				}
@@ -120,6 +112,8 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
 							"No se puede eliminar este producto porque está asociado al menos a una factura.", "Mensaje",
 							JOptionPane.WARNING_MESSAGE);
+					limpiarCampos(btnBuscar);
+					
 					return;
 				}
 
@@ -131,6 +125,7 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 				txtCantidadMinimaStock.setText(String.valueOf(producto.getCantidadMinimaStock()));
 				txtIdProveedor.setText(String.valueOf(producto.getIdProveedor()));
 
+				txtId.setEnabled(false);
 				btnBuscar.setEnabled(false);
 				btnEliminar.setEnabled(true);
 			}
@@ -202,11 +197,32 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 						"¿Está seguro de querer eliminar este producto?", "Confirmación", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
 				
+				if (resultado == JOptionPane.YES_OPTION) {
+					aplicacion.eliminarProductoPorId(Integer.parseInt(id));
+					
+					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
+							"El producto se ha eliminado del inventario.", "Información",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				limpiarCampos(btnBuscar);
 			}
 		});
 		btnEliminar.setEnabled(false);
 		pnlProductosEliminar.add(btnEliminar, "12, 20");
 
+	}
+
+	private void limpiarCampos(JButton btnBuscar) {
+		txtNombre.setText("");
+		btnBuscar.setEnabled(true);
+		txtDescripcion.setText("");
+		txtPrecioCompra.setText("");
+		txtPrecioVenta.setText("");
+		txtCantidad.setText("");
+		txtCantidadMinimaStock.setText("");
+		txtIdProveedor.setText("");
+		btnEliminar.setEnabled(false);
 	}
 
 }
