@@ -220,6 +220,11 @@ public class Aplicacion {
 		menuBar.add(mnuFacturacion);
 
 		JMenuItem mniFacturacionCrear = new JMenuItem("Crear");
+		mniFacturacionCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Crear la vista para la ventana de crear una factura...
+			}
+		});
 		mnuFacturacion.add(mniFacturacionCrear);
 
 		JMenuItem mniFacturacionBuscar = new JMenuItem("Buscar");
