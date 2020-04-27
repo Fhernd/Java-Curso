@@ -115,6 +115,13 @@ public class ProductosEliminarFormulario extends JInternalFrame {
 				}
 				
 				boolean respuesta = aplicacion.productoEnFactura(numero.intValue());
+				
+				if (respuesta) {
+					JOptionPane.showMessageDialog(ProductosEliminarFormulario.this,
+							"No se puede eliminar este producto porque está asociado al menos a una factura.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
 
 				txtNombre.setText(producto.getNombre());
 				txtDescripcion.setText(producto.getDescripcion());

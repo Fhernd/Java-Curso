@@ -1,6 +1,7 @@
 package modelos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,7 +100,7 @@ public class GestionInventario {
 	}
 
 	public boolean productoEnFactura(int idProducto) {
-		return false;
+		return facturas.stream().anyMatch(f -> Arrays.asList(f.getIdsProductos()).contains(idProducto));
 	}
 
 }
