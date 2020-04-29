@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import modelos.Cliente;
 import modelos.Producto;
 
 import javax.swing.border.TitledBorder;
@@ -22,6 +23,9 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import org.apache.commons.validator.routines.IntegerValidator;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -132,6 +136,60 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 				if (cedulaCliente.isEmpty()) {
 					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
 							"El campo Cédula Cliente es obligatorio.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				Integer numero = IntegerValidator.getInstance().validate(cedulaCliente);
+				
+				if (numero == null) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"El campo Cédula Cliente debe ser un número.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				if (numero > 0) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"El campo Cédula Cliente debe ser un número positivo.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				Cliente cliente = aplicacion.buscarClientePorCedula(cedulaCliente);
+				
+				if (cliente == null) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"No existe un cliente con el número de cédula especificado.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				if (impuesto.isEmpty()) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"El campo Impuesto es obligatorio.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				numero = IntegerValidator.getInstance().validate(impuesto);
+				
+				if (numero == null) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"El campo Impuesto debe ser un número.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				if (numero > 0) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"El campo Impuesto debe ser un número positivo.", "Mensaje",
 							JOptionPane.WARNING_MESSAGE);
 					
 					return;
