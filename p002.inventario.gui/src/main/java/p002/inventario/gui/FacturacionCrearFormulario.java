@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class FacturacionCrearFormulario extends JInternalFrame {
 
@@ -21,9 +22,9 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 	 * Serial Version ID.
 	 */
 	private static final long serialVersionUID = 7287407346788257718L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTable table;
+	private JTextField txtCedulaCliente;
+	private JTextField txtImpuesto;
+	private JTable tblProductos;
 
 	/**
 	 * Create the frame.
@@ -61,34 +62,55 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),}));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		pnlFacturacionCrear.add(lblNewLabel, "2, 2");
+		JLabel lblCedulaCliente = new JLabel("Cédula Cliente");
+		pnlFacturacionCrear.add(lblCedulaCliente, "2, 2");
 		
-		textField = new JTextField();
-		pnlFacturacionCrear.add(textField, "12, 2, fill, default");
-		textField.setColumns(10);
+		txtCedulaCliente = new JTextField();
+		pnlFacturacionCrear.add(txtCedulaCliente, "12, 2, fill, default");
+		txtCedulaCliente.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		pnlFacturacionCrear.add(lblNewLabel_1, "2, 4");
+		JLabel lblImpuesto = new JLabel("Impuesto");
+		pnlFacturacionCrear.add(lblImpuesto, "2, 4");
 		
-		textField_1 = new JTextField();
-		pnlFacturacionCrear.add(textField_1, "12, 4, fill, default");
-		textField_1.setColumns(10);
+		txtImpuesto = new JTextField();
+		pnlFacturacionCrear.add(txtImpuesto, "12, 4, fill, default");
+		txtImpuesto.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		pnlFacturacionCrear.add(lblNewLabel_2, "2, 6");
+		JLabel lblProducto = new JLabel("Producto");
+		pnlFacturacionCrear.add(lblProducto, "2, 6");
 		
-		JComboBox comboBox = new JComboBox();
-		pnlFacturacionCrear.add(comboBox, "12, 6, fill, default");
+		JComboBox cbxProducto = new JComboBox();
+		pnlFacturacionCrear.add(cbxProducto, "12, 6, fill, default");
 		
-		JButton btnNewButton = new JButton("New button");
-		pnlFacturacionCrear.add(btnNewButton, "12, 8");
+		JButton btnAgregarProducto = new JButton("Agregar Producto");
+		pnlFacturacionCrear.add(btnAgregarProducto, "12, 8");
 		
-		table = new JTable();
-		getContentPane().add(table, BorderLayout.CENTER);
+		tblProductos = new JTable();
+		tblProductos.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+			},
+			new String[] {
+				"ID", "Nombre", "Precio"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		getContentPane().add(tblProductos, BorderLayout.CENTER);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		getContentPane().add(btnNewButton_1, BorderLayout.SOUTH);
+		JButton btnGenerarFactura = new JButton("Generar Factura");
+		getContentPane().add(btnGenerarFactura, BorderLayout.SOUTH);
 
 	}
 
