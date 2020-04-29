@@ -12,6 +12,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class FacturacionBuscarFormulario extends JInternalFrame {
 
@@ -21,11 +22,11 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 	 * Serial Version ID.
 	 */
 	private static final long serialVersionUID = 8397940004357463819L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTable table;
+	private JTextField txtIdFactura;
+	private JTextField txtCliente;
+	private JTextField txtImpuesto;
+	private JTextField txtTotal;
+	private JTable tblProductos;
 
 	/**
 	 * Create the frame.
@@ -33,7 +34,7 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 	public FacturacionBuscarFormulario() {
 		setTitle("Facturación - Buscar");
 		setClosable(true);
-		setBounds(100, 100, 450, 380);
+		setBounds(100, 100, 450, 388);
 		getContentPane().setLayout(null);
 		
 		JPanel pnlFacturacionBuscar = new JPanel();
@@ -65,40 +66,67 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		pnlFacturacionBuscar.add(lblNewLabel, "2, 2");
+		JLabel lblIdFactura = new JLabel("ID Factura");
+		pnlFacturacionBuscar.add(lblIdFactura, "2, 2");
 		
-		textField = new JTextField();
-		pnlFacturacionBuscar.add(textField, "12, 2, fill, default");
-		textField.setColumns(10);
+		txtIdFactura = new JTextField();
+		pnlFacturacionBuscar.add(txtIdFactura, "12, 2, fill, default");
+		txtIdFactura.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
-		pnlFacturacionBuscar.add(btnNewButton, "12, 4");
+		JButton btnBuscar = new JButton("Buscar");
+		pnlFacturacionBuscar.add(btnBuscar, "12, 4");
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		pnlFacturacionBuscar.add(lblNewLabel_1, "2, 6");
+		JLabel lblCliente = new JLabel("Cliente");
+		pnlFacturacionBuscar.add(lblCliente, "2, 6");
 		
-		textField_1 = new JTextField();
-		pnlFacturacionBuscar.add(textField_1, "12, 6, fill, default");
-		textField_1.setColumns(10);
+		txtCliente = new JTextField();
+		txtCliente.setEnabled(false);
+		pnlFacturacionBuscar.add(txtCliente, "12, 6, fill, default");
+		txtCliente.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		pnlFacturacionBuscar.add(lblNewLabel_2, "2, 8");
+		JLabel lblImpuesto = new JLabel("Impuesto");
+		pnlFacturacionBuscar.add(lblImpuesto, "2, 8");
 		
-		textField_2 = new JTextField();
-		pnlFacturacionBuscar.add(textField_2, "12, 8, fill, default");
-		textField_2.setColumns(10);
+		txtImpuesto = new JTextField();
+		txtImpuesto.setEnabled(false);
+		pnlFacturacionBuscar.add(txtImpuesto, "12, 8, fill, default");
+		txtImpuesto.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		pnlFacturacionBuscar.add(lblNewLabel_3, "2, 10");
+		JLabel lblTotal = new JLabel("Total");
+		pnlFacturacionBuscar.add(lblTotal, "2, 10");
 		
-		textField_3 = new JTextField();
-		pnlFacturacionBuscar.add(textField_3, "12, 10, fill, default");
-		textField_3.setColumns(10);
+		txtTotal = new JTextField();
+		txtTotal.setEnabled(false);
+		pnlFacturacionBuscar.add(txtTotal, "12, 10, fill, default");
+		txtTotal.setColumns(10);
 		
-		table = new JTable();
-		table.setBounds(10, 328, 414, -145);
-		getContentPane().add(table);
+		tblProductos = new JTable();
+		tblProductos.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Nombre", "Precio"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		tblProductos.setBounds(10, 350, 414, -145);
+		getContentPane().add(tblProductos);
+		
+		JLabel lblProductos = new JLabel("Productos");
+		lblProductos.setBounds(10, 182, 84, 14);
+		getContentPane().add(lblProductos);
 
 	}
 }
