@@ -200,6 +200,24 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 				double total = productosSeleccionados.stream().map(p -> p.getPrecioVenta()).reduce(0.0, (a, b) -> a + b);
 				total *= (1 + nuevaFactura.getImpuesto()/100.0);
 				
+				productosSeleccionados.stream().forEach(p -> nuevaFactura.agregarIdProducto(p.getId()));
+				
+				aplicacion.crearFactura(nuevaFactura);
+				
+				JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+						String.format("El total a pagar es: $%.2f", total), "Información",
+						JOptionPane.INFORMATION_MESSAGE);
+				
+				JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+						"La factura se ha creado de forma satisfactoria.", "Información",
+						JOptionPane.INFORMATION_MESSAGE);
+				
+				txtCedulaCliente.setText("");
+				txtImpuesto.setText("");
+				DefaultTableModel dtm = (DefaultTableModel) tblProductos.getModel();
+				dtm.setRowCount(0);
+				productosSeleccionados.clear();
+				
 			}
 		});
 		btnGenerarFactura.setEnabled(false);

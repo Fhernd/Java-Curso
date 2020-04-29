@@ -308,4 +308,8 @@ public class Aplicacion {
 	public Producto[] obtenerProductos() {
 		return gestionInventario.obtenerProductos();
 	}
+
+	public void crearFactura(Factura nuevaFactura) {
+		gestionInventario.crearFactura(nuevaFactura);
+	}
 }

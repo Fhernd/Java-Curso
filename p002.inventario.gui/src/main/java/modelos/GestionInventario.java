@@ -115,4 +115,8 @@ public class GestionInventario {
 		return productosCopia;
 	}
 
+	public void crearFactura(Factura nuevaFactura) {
+		facturas.add(nuevaFactura);
+	}
+
 }
