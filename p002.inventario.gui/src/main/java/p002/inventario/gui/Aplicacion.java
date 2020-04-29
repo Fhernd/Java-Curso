@@ -304,4 +304,8 @@ public class Aplicacion {
 	public void eliminarProductoPorId(int id) {
 		gestionInventario.eliminarProductoPorId(id);
 	}
+
+	public Producto[] obtenerProductos() {
+		return gestionInventario.obtenerProductos();
+	}
 }

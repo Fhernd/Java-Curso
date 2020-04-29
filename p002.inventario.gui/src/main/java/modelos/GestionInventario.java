@@ -107,5 +107,12 @@ public class GestionInventario {
 		Producto producto = buscarProductoPorId(id);
 		productos.remove(producto);
 	}
+	
+	public Producto[] obtenerProductos() {
+		Producto[] productosCopia = new Producto[productos.size()];
+		productos.toArray(productosCopia);
+		
+		return productosCopia;
+	}
 
 }

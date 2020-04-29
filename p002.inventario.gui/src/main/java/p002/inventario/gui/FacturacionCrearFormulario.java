@@ -3,9 +3,15 @@ package p002.inventario.gui;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import modelos.Producto;
+
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
@@ -25,11 +31,16 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 	private JTextField txtCedulaCliente;
 	private JTextField txtImpuesto;
 	private JTable tblProductos;
+	private Map<String, Integer> productos;
+	
+	private Aplicacion aplicacion;
 
 	/**
 	 * Create the frame.
 	 */
-	public FacturacionCrearFormulario() {
+	public FacturacionCrearFormulario(Aplicacion aplicacion) {
+		this.aplicacion = aplicacion;
+		
 		setTitle("Facturación - Crear");
 		setClosable(true);
 		setBounds(100, 100, 450, 300);
@@ -111,7 +122,16 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 		
 		JButton btnGenerarFactura = new JButton("Generar Factura");
 		getContentPane().add(btnGenerarFactura, BorderLayout.SOUTH);
+		
+		productos = new HashMap<>();
+		cargarProductos();
 
+	}
+
+	private void cargarProductos() {
+		Producto[] copiaProductos = aplicacion.obtenerProductos();
+		
+		
 	}
 
 }
