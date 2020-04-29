@@ -319,4 +319,8 @@ public class Aplicacion {
 	public void crearFactura(Factura nuevaFactura) {
 		gestionInventario.crearFactura(nuevaFactura);
 	}
+
+	public Factura buscarFacturaPorId(int id) {
+		return gestionInventario.buscarFacturaPorId(id);
+	}
 }

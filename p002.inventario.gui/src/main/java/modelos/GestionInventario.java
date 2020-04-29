@@ -119,4 +119,8 @@ public class GestionInventario {
 		facturas.add(nuevaFactura);
 	}
 
+	public Factura buscarFacturaPorId(int id) {
+		return facturas.stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+	}
+
 }
