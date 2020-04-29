@@ -3,6 +3,7 @@ package p002.inventario.gui;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,7 +153,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 					return;
 				}
 				
-				if (numero > 0) {
+				if (numero <= 0) {
 					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
 							"El campo Cédula Cliente debe ser un número positivo.", "Mensaje",
 							JOptionPane.WARNING_MESSAGE);
@@ -188,7 +189,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 					return;
 				}
 				
-				if (numero > 0) {
+				if (numero <= 0) {
 					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
 							"El campo Impuesto debe ser un número positivo.", "Mensaje",
 							JOptionPane.WARNING_MESSAGE);
@@ -234,6 +235,8 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 			btnAgregarProducto.setEnabled(false);
 			btnGenerarFactura.setEnabled(false);
 		}
+		
+		productosSeleccionados = new ArrayList<>();
 	}
 
 	private void cargarProductos() {
