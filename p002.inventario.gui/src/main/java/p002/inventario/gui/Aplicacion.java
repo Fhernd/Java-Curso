@@ -232,7 +232,9 @@ public class Aplicacion {
 		JMenuItem mniFacturacionBuscar = new JMenuItem("Buscar");
 		mniFacturacionBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Mostrar ventana de búsqueda de una factura.
+				FacturacionBuscarFormulario facturacionBuscarFormulario = new FacturacionBuscarFormulario(Aplicacion.this);
+				dpnEscritorio.add(facturacionBuscarFormulario);
+				facturacionBuscarFormulario.show();
 			}
 		});
 		mnuFacturacion.add(mniFacturacionBuscar);

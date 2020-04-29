@@ -7,7 +7,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import modelos.Cliente;
 import modelos.Factura;
+import modelos.Producto;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
@@ -99,10 +101,27 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 					JOptionPane.showMessageDialog(FacturacionBuscarFormulario.this,
 							"No existe una factura con el ID especificado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
 					
+					txtCliente.setText("");
+					txtImpuesto.setText("");
+					DefaultTableModel dtm = (DefaultTableModel) tblProductos.getModel();
+					dtm.setRowCount(0);
+					
 					return;
 				}
 				
+				Cliente cliente = aplicacion.buscarClientePorCedula(factura.getCedulaCliente());
+				txtCliente.setText(String.format("%s %s (%s)", cliente.getNombres(), cliente.getApellidos(), cliente.getCedula()));
+				txtImpuesto.setText(String.format("%.2f", factura.getImpuesto()) + "%");
 				
+				Integer[] idsProductos = factura.getIdsProductos();
+				DefaultTableModel dtm = (DefaultTableModel) tblProductos.getModel();
+				Producto producto;
+				
+				for (Integer id : idsProductos) {
+					producto = aplicacion.buscarProductoPorId(id);
+					
+					dtm.addRow(new Object[] {id, producto.getNombre(), producto.getPrecioVenta()});
+				}
 			}
 		});
 		pnlFacturacionBuscar.add(btnBuscar, "12, 4");
