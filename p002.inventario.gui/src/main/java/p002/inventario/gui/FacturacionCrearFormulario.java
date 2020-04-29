@@ -4,6 +4,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -21,6 +22,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FacturacionCrearFormulario extends JInternalFrame {
 
@@ -35,6 +38,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 	private JComboBox cbxProducto;
 
 	private Aplicacion aplicacion;
+	private List<Integer> idsProductos;
 
 	/**
 	 * Create the frame.
@@ -82,6 +86,17 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 		pnlFacturacionCrear.add(cbxProducto, "12, 6, fill, default");
 
 		JButton btnAgregarProducto = new JButton("Agregar Producto");
+		btnAgregarProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String productoSeleccionado = cbxProducto.getSelectedItem().toString();
+				Integer idProducto = mapaProductos.get(productoSeleccionado); 
+				
+				Producto producto = aplicacion.buscarProductoPorId(idProducto.intValue());
+				idsProductos.add(idProducto);
+				
+				
+			}
+		});
 		pnlFacturacionCrear.add(btnAgregarProducto, "12, 8");
 
 		tblProductos = new JTable();
@@ -102,6 +117,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 		getContentPane().add(tblProductos, BorderLayout.CENTER);
 
 		JButton btnGenerarFactura = new JButton("Generar Factura");
+		btnGenerarFactura.setEnabled(false);
 		getContentPane().add(btnGenerarFactura, BorderLayout.SOUTH);
 
 		mapaProductos = new HashMap<>();
