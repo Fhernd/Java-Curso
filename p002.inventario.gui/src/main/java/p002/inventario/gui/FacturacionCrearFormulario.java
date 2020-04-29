@@ -36,6 +36,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 	private JTable tblProductos;
 	private Map<String, Integer> mapaProductos;
 	private JComboBox cbxProducto;
+	private JButton btnGenerarFactura;
 
 	private Aplicacion aplicacion;
 	private List<Integer> idsProductos;
@@ -94,7 +95,13 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 				Producto producto = aplicacion.buscarProductoPorId(idProducto.intValue());
 				idsProductos.add(idProducto);
 				
+				DefaultTableModel dtm = (DefaultTableModel) tblProductos.getModel();
 				
+				dtm.addRow(new Object[] {idProducto, producto.getNombre(), producto.getPrecioVenta()});
+				
+				if (idsProductos.size() == 1) {
+					btnGenerarFactura.setEnabled(true);
+				}
 			}
 		});
 		pnlFacturacionCrear.add(btnAgregarProducto, "12, 8");
@@ -116,7 +123,23 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 		});
 		getContentPane().add(tblProductos, BorderLayout.CENTER);
 
-		JButton btnGenerarFactura = new JButton("Generar Factura");
+		btnGenerarFactura = new JButton("Generar Factura");
+		btnGenerarFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cedulaCliente = txtCedulaCliente.getText().trim();
+				String impuesto = txtImpuesto.getText().trim();
+				
+				if (cedulaCliente.isEmpty()) {
+					JOptionPane.showMessageDialog(FacturacionCrearFormulario.this,
+							"El campo Cédula Cliente es obligatorio.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
+					
+					return;
+				}
+				
+				
+			}
+		});
 		btnGenerarFactura.setEnabled(false);
 		getContentPane().add(btnGenerarFactura, BorderLayout.SOUTH);
 
