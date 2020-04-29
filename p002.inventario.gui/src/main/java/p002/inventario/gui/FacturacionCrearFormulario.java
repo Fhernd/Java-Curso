@@ -12,6 +12,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import modelos.Cliente;
+import modelos.Factura;
 import modelos.Producto;
 
 import javax.swing.border.TitledBorder;
@@ -43,7 +44,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 	private JButton btnGenerarFactura;
 
 	private Aplicacion aplicacion;
-	private List<Integer> idsProductos;
+	private List<Producto> productosSeleccionados;
 
 	/**
 	 * Create the frame.
@@ -97,13 +98,13 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 				Integer idProducto = mapaProductos.get(productoSeleccionado); 
 				
 				Producto producto = aplicacion.buscarProductoPorId(idProducto.intValue());
-				idsProductos.add(idProducto);
+				productosSeleccionados.add(producto);
 				
 				DefaultTableModel dtm = (DefaultTableModel) tblProductos.getModel();
 				
 				dtm.addRow(new Object[] {idProducto, producto.getNombre(), producto.getPrecioVenta()});
 				
-				if (idsProductos.size() == 1) {
+				if (productosSeleccionados.size() == 1) {
 					btnGenerarFactura.setEnabled(true);
 				}
 			}
@@ -195,6 +196,9 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 					return;
 				}
 				
+				Factura nuevaFactura = new Factura(cedulaCliente, Double.parseDouble(impuesto));
+				double total = productosSeleccionados.stream().map(p -> p.getPrecioVenta()).reduce(0.0, (a, b) -> a + b);
+				total *= (1 + nuevaFactura.getImpuesto()/100.0);
 				
 			}
 		});
