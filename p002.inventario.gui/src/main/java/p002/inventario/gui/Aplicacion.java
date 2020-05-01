@@ -81,6 +81,18 @@ public class Aplicacion {
 				}
 			}
 		});
+
+		JMenuItem mniGuardarDatos = new JMenuItem("Guardar datos");
+		mniGuardarDatos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				gestionInventario.guardarDatosInventario();
+
+				JOptionPane.showMessageDialog(frmSistemaDeGestion, "Se han guardado los datos del inventario.",
+						"Información", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		mnuArchivo.add(mniGuardarDatos);
 		mnuArchivo.add(mniSalir);
 
 		JMenu mnuClientes = new JMenu("Clientes");
@@ -199,7 +211,8 @@ public class Aplicacion {
 		JMenuItem mniProductosActualizar = new JMenuItem("Actualizar");
 		mniProductosActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductosActualizarFormulario productosActualizarFormulario = new ProductosActualizarFormulario(Aplicacion.this);
+				ProductosActualizarFormulario productosActualizarFormulario = new ProductosActualizarFormulario(
+						Aplicacion.this);
 				dpnEscritorio.add(productosActualizarFormulario);
 				productosActualizarFormulario.show();
 			}
@@ -209,7 +222,8 @@ public class Aplicacion {
 		JMenuItem mniProductosEliminar = new JMenuItem("Eliminar");
 		mniProductosEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductosEliminarFormulario productosEliminarFormulario = new ProductosEliminarFormulario(Aplicacion.this);
+				ProductosEliminarFormulario productosEliminarFormulario = new ProductosEliminarFormulario(
+						Aplicacion.this);
 				dpnEscritorio.add(productosEliminarFormulario);
 				productosEliminarFormulario.show();
 			}
@@ -232,7 +246,8 @@ public class Aplicacion {
 		JMenuItem mniFacturacionBuscar = new JMenuItem("Buscar");
 		mniFacturacionBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FacturacionBuscarFormulario facturacionBuscarFormulario = new FacturacionBuscarFormulario(Aplicacion.this);
+				FacturacionBuscarFormulario facturacionBuscarFormulario = new FacturacionBuscarFormulario(
+						Aplicacion.this);
 				dpnEscritorio.add(facturacionBuscarFormulario);
 				facturacionBuscarFormulario.show();
 			}
