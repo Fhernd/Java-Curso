@@ -200,7 +200,7 @@ public class FacturacionCrearFormulario extends JInternalFrame {
 				Factura nuevaFactura = new Factura(cedulaCliente, Double.parseDouble(impuesto));
 				double total = productosSeleccionados.stream().map(p -> p.getPrecioVenta()).reduce(0.0, (a, b) -> a + b);
 				total *= (1 + nuevaFactura.getImpuesto()/100.0);
-				
+				nuevaFactura.setTotal(total);
 				productosSeleccionados.stream().forEach(p -> nuevaFactura.agregarIdProducto(p.getId()));
 				
 				aplicacion.crearFactura(nuevaFactura);
