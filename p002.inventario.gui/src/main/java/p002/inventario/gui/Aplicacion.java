@@ -97,7 +97,7 @@ public class Aplicacion {
 
 				if (selectorCarpeta.showOpenDialog(frmSistemaDeGestion) == JFileChooser.APPROVE_OPTION) {
 					
-					File carpetaSeleccionada = selectorCarpeta.getCurrentDirectory();
+					File carpetaSeleccionada = selectorCarpeta.getSelectedFile();
 					
 					gestionInventario.guardarDatosInventario(carpetaSeleccionada);
 
