@@ -99,7 +99,7 @@ public class Aplicacion {
 					
 					File carpetaSeleccionada = selectorCarpeta.getCurrentDirectory();
 					
-					gestionInventario.guardarDatosInventario();
+					gestionInventario.guardarDatosInventario(carpetaSeleccionada);
 
 					JOptionPane.showMessageDialog(frmSistemaDeGestion, "Se han guardado los datos del inventario.",
 							"Información", JOptionPane.INFORMATION_MESSAGE);

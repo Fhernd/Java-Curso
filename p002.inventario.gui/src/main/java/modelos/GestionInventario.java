@@ -1,6 +1,7 @@
 package modelos;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,19 +16,19 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.StringUtils;
 
 public class GestionInventario {
-	
-	private static final String ARCHIVO_CSV_CLIENTES = "./clientes.csv";
-	private static final String ARCHIVO_CSV_PROVEEDORES = "./proveedores.csv";
-	private static final String ARCHIVO_CSV_PRODUCTOS = "./productos.csv";
-	private static final String ARCHIVO_CSV_FACTURAS = "./facturas.csv";
+
+	private static final String ARCHIVO_CSV_CLIENTES = "clientes.csv";
+	private static final String ARCHIVO_CSV_PROVEEDORES = "proveedores.csv";
+	private static final String ARCHIVO_CSV_PRODUCTOS = "productos.csv";
+	private static final String ARCHIVO_CSV_FACTURAS = "facturas.csv";
 
 	private static final char SEPARADOR = ';';
-	
+
 	private List<Cliente> clientes;
 	private List<Proveedor> proveedores;
 	private List<Producto> productos;
 	private List<Factura> facturas;
-	
+
 	public GestionInventario() {
 		clientes = new ArrayList<>();
 		proveedores = new ArrayList<>();
@@ -45,7 +46,7 @@ public class GestionInventario {
 
 	public void actualizarCliente(Cliente cliente) {
 		Cliente clienteActualizar = buscarClientePorCedula(cliente.getCedula());
-		
+
 		clienteActualizar.setNombres(cliente.getNombres());
 		clienteActualizar.setApellidos(cliente.getApellidos());
 		clienteActualizar.setTelefono(cliente.getTelefono());
@@ -59,7 +60,7 @@ public class GestionInventario {
 
 	public void eliminarClientePorNumeroCedula(String cedula) {
 		Cliente cliente = buscarClientePorCedula(cedula);
-		
+
 		clientes.remove(cliente);
 	}
 
@@ -73,7 +74,7 @@ public class GestionInventario {
 
 	public void actualizarProveedor(Proveedor proveedor) {
 		Proveedor proveedorExistente = buscarProveedorPorId(proveedor.getId());
-		
+
 		proveedorExistente.setNombre(proveedor.getNombre());
 		proveedorExistente.setDireccion(proveedor.getDireccion());
 		proveedorExistente.setTelefono(proveedor.getTelefono());
@@ -91,7 +92,7 @@ public class GestionInventario {
 	public Proveedor[] obtenerProveedores() {
 		Proveedor[] proveedoresCopia = new Proveedor[proveedores.size()];
 		proveedores.toArray(proveedoresCopia);
-		
+
 		return proveedoresCopia;
 	}
 
@@ -105,14 +106,14 @@ public class GestionInventario {
 
 	public void actualizarProducto(Producto producto) {
 		Producto productoActualizado = buscarProductoPorId(producto.getId());
-		
+
 		productoActualizado.setNombre(producto.getNombre());
 		productoActualizado.setDescripcion(producto.getDescripcion());
 		productoActualizado.setPrecioCompra(producto.getPrecioCompra());
 		productoActualizado.setPrecioVenta(producto.getPrecioVenta());
 		productoActualizado.setCantidad(producto.getCantidad());
 		productoActualizado.setCantidadMinimaStock(producto.getCantidadMinimaStock());
-		productoActualizado.setIdProveedor(producto.getIdProveedor());		
+		productoActualizado.setIdProveedor(producto.getIdProveedor());
 	}
 
 	public boolean productoEnFactura(int idProducto) {
@@ -123,11 +124,11 @@ public class GestionInventario {
 		Producto producto = buscarProductoPorId(id);
 		productos.remove(producto);
 	}
-	
+
 	public Producto[] obtenerProductos() {
 		Producto[] productosCopia = new Producto[productos.size()];
 		productos.toArray(productosCopia);
-		
+
 		return productosCopia;
 	}
 
@@ -138,11 +139,12 @@ public class GestionInventario {
 	public Factura buscarFacturaPorId(int id) {
 		return facturas.stream().filter(f -> f.getId() == id).findFirst().orElse(null);
 	}
-	
-	public void guardarDatosInventario() {
+
+	public void guardarDatosInventario(File carpetaSeleccionada) {
 
 		try {
-			BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_CLIENTES));
+			BufferedWriter writer = Files.newBufferedWriter(
+					Paths.get(carpetaSeleccionada.getAbsolutePath() + File.separator + ARCHIVO_CSV_CLIENTES));
 
 			CSVPrinter csvPrinter = new CSVPrinter(writer,
 					CSVFormat.DEFAULT.withHeader("cedula", "nombres", "apellidos", "telefono", "direccion", "correo")
@@ -162,7 +164,8 @@ public class GestionInventario {
 
 		if (!proveedores.isEmpty()) {
 			try {
-				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_PROVEEDORES));
+				BufferedWriter writer = Files.newBufferedWriter(Paths
+						.get(carpetaSeleccionada.getAbsolutePath() + File.separator + ARCHIVO_CSV_PROVEEDORES));
 
 				CSVPrinter csvPrinter = new CSVPrinter(writer,
 						CSVFormat.DEFAULT.withHeader("id", "nombre", "telefono", "direccion").withDelimiter(SEPARADOR));
@@ -181,7 +184,8 @@ public class GestionInventario {
 
 		if (!productos.isEmpty()) {
 			try {
-				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_PRODUCTOS));
+				BufferedWriter writer = Files.newBufferedWriter(
+						Paths.get(carpetaSeleccionada.getAbsolutePath() + File.separator + ARCHIVO_CSV_PRODUCTOS));
 
 				CSVPrinter csvPrinter = new CSVPrinter(writer,
 						CSVFormat.DEFAULT.withHeader("id", "nombre", "descripcion", "precioCompra", "precioVenta",
@@ -202,18 +206,19 @@ public class GestionInventario {
 
 		if (!facturas.isEmpty()) {
 			try {
-				BufferedWriter writer = Files.newBufferedWriter(Paths.get(ARCHIVO_CSV_FACTURAS));
+				BufferedWriter writer = Files.newBufferedWriter(
+						Paths.get(carpetaSeleccionada.getAbsolutePath() + File.separator + ARCHIVO_CSV_FACTURAS));
 
 				CSVPrinter csvPrinter = new CSVPrinter(writer,
 						CSVFormat.DEFAULT
 								.withHeader("id", "fecha", "cedulaCliente", "impuesto", "total", "idsProductos")
 								.withDelimiter(SEPARADOR));
-				
+
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 				for (Factura f : facturas) {
-					csvPrinter.printRecord(f.getId(), simpleDateFormat.format(f.getFecha()), f.getCedulaCliente(), f.getImpuesto(), f.getTotal(),
-							StringUtils.join(f.getIdsProductos(), ","));
+					csvPrinter.printRecord(f.getId(), simpleDateFormat.format(f.getFecha()), f.getCedulaCliente(),
+							f.getImpuesto(), f.getTotal(), StringUtils.join(f.getIdsProductos(), ","));
 				}
 
 				csvPrinter.flush();
