@@ -17,7 +17,10 @@ import modelos.Producto;
 import modelos.Proveedor;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -86,10 +89,21 @@ public class Aplicacion {
 		mniGuardarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				gestionInventario.guardarDatosInventario();
+				JFileChooser selectorCarpeta = new JFileChooser();
+				selectorCarpeta.setCurrentDirectory(new File("."));
+				selectorCarpeta.setDialogTitle("Seleccione la carpeta para guardar los archivos CSV...");
+				selectorCarpeta.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				selectorCarpeta.setAcceptAllFileFilterUsed(false);
 
-				JOptionPane.showMessageDialog(frmSistemaDeGestion, "Se han guardado los datos del inventario.",
-						"Información", JOptionPane.INFORMATION_MESSAGE);
+				if (selectorCarpeta.showOpenDialog(frmSistemaDeGestion) == JFileChooser.APPROVE_OPTION) {
+					
+					File carpetaSeleccionada = selectorCarpeta.getCurrentDirectory();
+					
+					gestionInventario.guardarDatosInventario();
+
+					JOptionPane.showMessageDialog(frmSistemaDeGestion, "Se han guardado los datos del inventario.",
+							"Información", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		mnuArchivo.add(mniGuardarDatos);
