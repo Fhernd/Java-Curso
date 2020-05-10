@@ -16,6 +16,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -23,6 +24,7 @@ import javax.swing.JProgressBar;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -32,7 +34,7 @@ public class VentanaPrincipal {
 	private JTable tblArchivos;
 	private JTextField txtTexto;
 	private JTable tblResultados;
-	
+
 	private List<File> archivosSeleccionados;
 
 	/**
@@ -69,13 +71,13 @@ public class VentanaPrincipal {
 		frmVentanaPrincipal.setBounds(100, 100, 508, 650);
 		frmVentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVentanaPrincipal.getContentPane().setLayout(null);
-		
+
 		JPanel pnlArchivos = new JPanel();
 		pnlArchivos.setBorder(new TitledBorder(null, "Archivos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlArchivos.setBounds(10, 11, 474, 186);
 		frmVentanaPrincipal.getContentPane().add(pnlArchivos);
 		pnlArchivos.setLayout(null);
-		
+
 		JButton btnSeleccionarArchivos = new JButton("Seleccionar archivos...");
 		btnSeleccionarArchivos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,131 +85,111 @@ public class VentanaPrincipal {
 				FileNameExtensionFilter fnef = new FileNameExtensionFilter("Archivos de texto", "txt", "text");
 				selectorArchivos.setFileFilter(fnef);
 				selectorArchivos.setMultiSelectionEnabled(true);
-				
+
 				if (selectorArchivos.showOpenDialog(frmVentanaPrincipal) == JFileChooser.APPROVE_OPTION) {
+					File[] archivos = selectorArchivos.getSelectedFiles();
+
+					archivosSeleccionados.addAll(Arrays.asList(archivos));
+
+					JOptionPane.showMessageDialog(frmVentanaPrincipal,
+							String.format("Se han agregado %d archivos.", archivos.length), "Información",
+							JOptionPane.INFORMATION_MESSAGE);
+					
 					
 				}
 			}
 		});
 		btnSeleccionarArchivos.setBounds(188, 22, 280, 23);
 		pnlArchivos.add(btnSeleccionarArchivos);
-		
+
 		JScrollPane spnArchivos = new JScrollPane();
 		spnArchivos.setBounds(10, 55, 454, 120);
 		pnlArchivos.add(spnArchivos);
-		
+
 		tblArchivos = new JTable();
-		tblArchivos.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nombre", "Tama\u00F1o"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class
-			};
+		tblArchivos.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Tama\u00F1o" }) {
+			Class[] columnTypes = new Class[] { String.class, String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false
-			};
+
+			boolean[] columnEditables = new boolean[] { false, false };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
 		spnArchivos.setViewportView(tblArchivos);
-		
+
 		JPanel pnlBusqueda = new JPanel();
-		pnlBusqueda.setBorder(new TitledBorder(null, "B\u00FAsqueda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlBusqueda
+				.setBorder(new TitledBorder(null, "B\u00FAsqueda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlBusqueda.setBounds(10, 208, 474, 115);
 		frmVentanaPrincipal.getContentPane().add(pnlBusqueda);
-		pnlBusqueda.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
+		pnlBusqueda.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC,
+						FormSpecs.RELATED_GAP_COLSPEC, FormSpecs.DEFAULT_COLSPEC, FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("default:grow"), },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+
 		JLabel lblTexto = new JLabel("Texto:");
 		pnlBusqueda.add(lblTexto, "2, 2");
-		
+
 		txtTexto = new JTextField();
 		txtTexto.setEnabled(false);
 		pnlBusqueda.add(txtTexto, "14, 2, 5, 1, fill, default");
 		txtTexto.setColumns(10);
-		
+
 		JCheckBox chkUsarBusquedaAvanzada = new JCheckBox("¿Usar búsqueda avanzada?");
 		chkUsarBusquedaAvanzada.setEnabled(false);
 		pnlBusqueda.add(chkUsarBusquedaAvanzada, "14, 4");
-		
+
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setEnabled(false);
 		pnlBusqueda.add(btnBuscar, "14, 6, 5, 1");
-		
+
 		JPanel pnlResultados = new JPanel();
-		pnlResultados.setBorder(new TitledBorder(null, "Resultados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlResultados
+				.setBorder(new TitledBorder(null, "Resultados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlResultados.setBounds(10, 331, 474, 279);
 		frmVentanaPrincipal.getContentPane().add(pnlResultados);
 		pnlResultados.setLayout(null);
-		
+
 		JProgressBar pgrProcesandoArchivos = new JProgressBar();
 		pgrProcesandoArchivos.setBounds(10, 25, 146, 23);
 		pnlResultados.add(pgrProcesandoArchivos);
-		
+
 		JButton btnDetenerBusqueda = new JButton("Detener búsqueda");
 		btnDetenerBusqueda.setEnabled(false);
 		btnDetenerBusqueda.setBounds(175, 25, 293, 23);
 		pnlResultados.add(btnDetenerBusqueda);
-		
+
 		JScrollPane spnResultados = new JScrollPane();
 		spnResultados.setBounds(10, 59, 454, 209);
 		pnlResultados.add(spnResultados);
-		
+
 		tblResultados = new JTable();
-		tblResultados.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nombre archivo"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class
-			};
+		tblResultados.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre archivo" }) {
+			Class[] columnTypes = new Class[] { String.class };
+
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false
-			};
+
+			boolean[] columnEditables = new boolean[] { false };
+
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
 		spnResultados.setViewportView(tblResultados);
-		
+
 		archivosSeleccionados = new ArrayList<>();
 	}
 }
