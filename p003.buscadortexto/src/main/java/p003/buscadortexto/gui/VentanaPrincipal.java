@@ -95,7 +95,18 @@ public class VentanaPrincipal {
 							String.format("Se han agregado %d archivos.", archivos.length), "Información",
 							JOptionPane.INFORMATION_MESSAGE);
 					
+					DefaultTableModel dtm = (DefaultTableModel) tblArchivos.getModel();
 					
+					for (File file : archivos) {
+						String tamagnio = "";
+						if (file.length() < 1_000_000) {
+							tamagnio = String.format("%.2fKB", file.length() / 1024.0);
+						} else {
+							tamagnio = String.format("%.2fMB", file.length() / 1024.0 / 1024.0);
+						}
+						
+						dtm.addRow(new Object[] {file.getName(), file.getParent(), tamagnio});
+					}
 				}
 			}
 		});
@@ -107,15 +118,22 @@ public class VentanaPrincipal {
 		pnlArchivos.add(spnArchivos);
 
 		tblArchivos = new JTable();
-		tblArchivos.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Tama\u00F1o" }) {
-			Class[] columnTypes = new Class[] { String.class, String.class };
-
+		tblArchivos.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Nombre", "Ruta", "Tama\u00F1o"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class
+			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-
-			boolean[] columnEditables = new boolean[] { false, false };
-
+			boolean[] columnEditables = new boolean[] {
+				true, false, true
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
