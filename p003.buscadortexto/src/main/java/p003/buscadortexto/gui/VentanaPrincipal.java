@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JProgressBar;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -64,7 +66,7 @@ public class VentanaPrincipal {
 		frmVentanaPrincipal.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
 		frmVentanaPrincipal.setTitle("Buscador Contenido Archivos de Texto Plano");
 		frmVentanaPrincipal.setResizable(false);
-		frmVentanaPrincipal.setBounds(100, 100, 500, 650);
+		frmVentanaPrincipal.setBounds(100, 100, 508, 650);
 		frmVentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVentanaPrincipal.getContentPane().setLayout(null);
 		
@@ -77,7 +79,14 @@ public class VentanaPrincipal {
 		JButton btnSeleccionarArchivos = new JButton("Seleccionar archivos...");
 		btnSeleccionarArchivos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFileChooser selectorArchivos = new JFileChooser("./");
+				FileNameExtensionFilter fnef = new FileNameExtensionFilter("Archivos de texto", "txt", "text");
+				selectorArchivos.setFileFilter(fnef);
+				selectorArchivos.setMultiSelectionEnabled(true);
 				
+				if (selectorArchivos.showOpenDialog(frmVentanaPrincipal) == JFileChooser.APPROVE_OPTION) {
+					
+				}
 			}
 		});
 		btnSeleccionarArchivos.setBounds(188, 22, 280, 23);
@@ -112,7 +121,7 @@ public class VentanaPrincipal {
 		
 		JPanel pnlBusqueda = new JPanel();
 		pnlBusqueda.setBorder(new TitledBorder(null, "B\u00FAsqueda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnlBusqueda.setBounds(10, 208, 474, 112);
+		pnlBusqueda.setBounds(10, 208, 474, 115);
 		frmVentanaPrincipal.getContentPane().add(pnlBusqueda);
 		pnlBusqueda.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
