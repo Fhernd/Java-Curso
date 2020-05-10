@@ -5,4 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Buscador Texto</name>
   <description>Buscador de texto en archivos de texto plano	</description>
+  
+  <properties>
+  	<maven.compiler.target>1.8</maven.compiler.target>
+  	<maven.compiler.source>1.8</maven.compiler.source>
+  </properties>
 </project>

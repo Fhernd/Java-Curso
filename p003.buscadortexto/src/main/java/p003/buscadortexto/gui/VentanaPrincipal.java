@@ -18,6 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JProgressBar;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal {
 
@@ -25,6 +30,8 @@ public class VentanaPrincipal {
 	private JTable tblArchivos;
 	private JTextField txtTexto;
 	private JTable tblResultados;
+	
+	private List<File> archivosSeleccionados;
 
 	/**
 	 * Launch the application.
@@ -68,11 +75,16 @@ public class VentanaPrincipal {
 		pnlArchivos.setLayout(null);
 		
 		JButton btnSeleccionarArchivos = new JButton("Seleccionar archivos...");
+		btnSeleccionarArchivos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnSeleccionarArchivos.setBounds(188, 22, 280, 23);
 		pnlArchivos.add(btnSeleccionarArchivos);
 		
 		JScrollPane spnArchivos = new JScrollPane();
-		spnArchivos.setBounds(10, 67, 454, 108);
+		spnArchivos.setBounds(10, 55, 454, 120);
 		pnlArchivos.add(spnArchivos);
 		
 		tblArchivos = new JTable();
@@ -156,6 +168,7 @@ public class VentanaPrincipal {
 		pnlResultados.add(pgrProcesandoArchivos);
 		
 		JButton btnDetenerBusqueda = new JButton("Detener búsqueda");
+		btnDetenerBusqueda.setEnabled(false);
 		btnDetenerBusqueda.setBounds(175, 25, 293, 23);
 		pnlResultados.add(btnDetenerBusqueda);
 		
@@ -185,5 +198,7 @@ public class VentanaPrincipal {
 			}
 		});
 		spnResultados.setViewportView(tblResultados);
+		
+		archivosSeleccionados = new ArrayList<>();
 	}
 }
