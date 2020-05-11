@@ -14,6 +14,9 @@ import javax.swing.JScrollPane;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import p003.buscadortexto.modelos.BusquedaArchivosTask;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -193,7 +196,18 @@ public class VentanaPrincipal {
 					}
 				}
 				
+				((DefaultTableModel) tblResultados.getModel()).setRowCount(0);
 				
+				BusquedaArchivosTask busqueda = new BusquedaArchivosTask(archivosSeleccionados, texto, chkUsarBusquedaAvanzada.isSelected());
+				
+				busqueda.addPropertyChangeListener((listener) -> {
+					if (listener.getPropertyName().equals("progress")) {
+						File archivo = (File) listener.getNewValue();
+						
+						DefaultTableModel dtmResultados = (DefaultTableModel) tblResultados.getModel();
+						dtmResultados.addRow(new Object[] {archivo.getName()});
+					}
+				});
 			}
 		});
 		btnBuscar.setEnabled(false);
