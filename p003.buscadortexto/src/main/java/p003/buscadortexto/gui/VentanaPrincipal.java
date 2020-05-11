@@ -43,6 +43,7 @@ public class VentanaPrincipal {
 	private JTable tblResultados;
 	private JCheckBox chkUsarBusquedaAvanzada;
 	private JButton btnBuscar;
+	private JButton btnDetenerBusqueda;
 
 	private List<File> archivosSeleccionados;
 
@@ -212,6 +213,15 @@ public class VentanaPrincipal {
 						dtmResultados.addRow(new Object[] { archivo.getName() });
 					}
 				});
+				
+				btnSeleccionarArchivos.setEnabled(false);
+				tblArchivos.setEnabled(false);
+				txtTexto.setEnabled(false);
+				chkUsarBusquedaAvanzada.setEnabled(false);
+				btnBuscar.setEnabled(false);
+				
+				btnDetenerBusqueda.setEnabled(true);
+				busqueda.execute();
 			}
 		});
 		btnBuscar.setEnabled(false);
@@ -228,7 +238,7 @@ public class VentanaPrincipal {
 		pgrProcesandoArchivos.setBounds(10, 25, 146, 23);
 		pnlResultados.add(pgrProcesandoArchivos);
 
-		JButton btnDetenerBusqueda = new JButton("Detener búsqueda");
+		btnDetenerBusqueda = new JButton("Detener búsqueda");
 		btnDetenerBusqueda.setEnabled(false);
 		btnDetenerBusqueda.setBounds(175, 25, 293, 23);
 		pnlResultados.add(btnDetenerBusqueda);
