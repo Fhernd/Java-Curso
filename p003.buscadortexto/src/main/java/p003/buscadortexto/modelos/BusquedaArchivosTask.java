@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
@@ -19,7 +20,7 @@ public class BusquedaArchivosTask extends SwingWorker<Void, Void> {
 			boolean buscarPorExpresionRegular) {
 		this.archivosSeleccionados = archivosSeleccionados;
 		this.dtmResultados = dtmResultados;
-		this.texto = texto;
+		this.texto = texto.toLowerCase();
 		this.buscarPorExpresionRegular = buscarPorExpresionRegular;
 	}
 
@@ -32,15 +33,25 @@ public class BusquedaArchivosTask extends SwingWorker<Void, Void> {
 		return null;
 	}
 
+	@SuppressWarnings("static-access")
 	private void buscarContenido(File archivo) {
 		try {
 			Scanner lector = new Scanner(archivo, "UTF-8");
 			String linea;
+			boolean continuar = true;
 			
-			while(lector.hasNextLine()) {
+			while(continuar && lector.hasNextLine()) {
 				linea = lector.nextLine();
 				
-				
+				if (buscarPorExpresionRegular) {
+					if (Pattern.compile(texto).matches(texto, linea)) {
+						continuar = false;
+					}
+				} else {
+					if (linea.toLowerCase().contains(texto)) {
+						continuar = false;
+					}
+				}
 			}
 		} catch(FileNotFoundException e) {
 			
