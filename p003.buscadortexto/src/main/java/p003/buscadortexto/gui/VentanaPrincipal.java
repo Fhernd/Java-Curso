@@ -34,6 +34,8 @@ public class VentanaPrincipal {
 	private JTable tblArchivos;
 	private JTextField txtTexto;
 	private JTable tblResultados;
+	private JCheckBox chkUsarBusquedaAvanzada;
+	private JButton btnBuscar;
 
 	private List<File> archivosSeleccionados;
 
@@ -94,9 +96,9 @@ public class VentanaPrincipal {
 					JOptionPane.showMessageDialog(frmVentanaPrincipal,
 							String.format("Se han agregado %d archivos.", archivos.length), "Información",
 							JOptionPane.INFORMATION_MESSAGE);
-					
+
 					DefaultTableModel dtm = (DefaultTableModel) tblArchivos.getModel();
-					
+
 					for (File file : archivos) {
 						String tamagnio = "";
 						if (file.length() < 1_000_000) {
@@ -104,8 +106,14 @@ public class VentanaPrincipal {
 						} else {
 							tamagnio = String.format("%.2fMB", file.length() / 1024.0 / 1024.0);
 						}
-						
-						dtm.addRow(new Object[] {file.getName(), file.getParent(), tamagnio});
+
+						dtm.addRow(new Object[] { file.getName(), file.getParent(), tamagnio });
+					}
+
+					if (!archivosSeleccionados.isEmpty()) {
+						txtTexto.setEnabled(true);
+						chkUsarBusquedaAvanzada.setEnabled(true);
+						btnBuscar.setEnabled(true);
 					}
 				}
 			}
@@ -118,26 +126,20 @@ public class VentanaPrincipal {
 		pnlArchivos.add(spnArchivos);
 
 		tblArchivos = new JTable();
-		tblArchivos.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nombre", "Ruta", "Tama\u00F1o"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				true, false, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		tblArchivos
+				.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Ruta", "Tama\u00F1o" }) {
+					Class[] columnTypes = new Class[] { String.class, String.class, String.class };
+
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+
+					boolean[] columnEditables = new boolean[] { true, false, true };
+
+					public boolean isCellEditable(int row, int column) {
+						return columnEditables[column];
+					}
+				});
 		spnArchivos.setViewportView(tblArchivos);
 
 		JPanel pnlBusqueda = new JPanel();
@@ -164,11 +166,24 @@ public class VentanaPrincipal {
 		pnlBusqueda.add(txtTexto, "14, 2, 5, 1, fill, default");
 		txtTexto.setColumns(10);
 
-		JCheckBox chkUsarBusquedaAvanzada = new JCheckBox("¿Usar búsqueda avanzada?");
+		chkUsarBusquedaAvanzada = new JCheckBox("¿Usar búsqueda avanzada?");
 		chkUsarBusquedaAvanzada.setEnabled(false);
 		pnlBusqueda.add(chkUsarBusquedaAvanzada, "14, 4");
 
-		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String texto = txtTexto.getText().trim();
+
+				if (texto.isEmpty()) {
+					JOptionPane.showMessageDialog(frmVentanaPrincipal, "El campo Texto es obligatorio.", "Atención",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				
+			}
+		});
 		btnBuscar.setEnabled(false);
 		pnlBusqueda.add(btnBuscar, "14, 6, 5, 1");
 
