@@ -35,23 +35,25 @@ public class BusquedaArchivosTask extends SwingWorker<Void, File> {
 		try {
 			Scanner lector = new Scanner(archivo, "UTF-8");
 			String linea;
-			boolean continuar = true;
+			boolean encontrado = false;
 			
-			while(continuar && lector.hasNextLine()) {
+			while(lector.hasNextLine()) {
 				linea = lector.nextLine();
 				
 				if (buscarPorExpresionRegular) {
 					if (Pattern.compile(texto).matches(texto, linea)) {
-						continuar = false;
+						encontrado = true;
+						break;
 					}
 				} else {
 					if (linea.toLowerCase().contains(texto)) {
-						continuar = false;
+						encontrado = true;
+						break;
 					}
 				}
 			}
 			
-			if (continuar) {
+			if (encontrado) {
 				publish(archivo);
 			}
 		} catch(FileNotFoundException e) {

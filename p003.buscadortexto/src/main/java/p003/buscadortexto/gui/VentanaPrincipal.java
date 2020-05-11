@@ -21,6 +21,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker.StateValue;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JProgressBar;
@@ -44,6 +45,7 @@ public class VentanaPrincipal {
 	private JCheckBox chkUsarBusquedaAvanzada;
 	private JButton btnBuscar;
 	private JButton btnDetenerBusqueda;
+	private JProgressBar pgrProcesandoArchivos;
 
 	private List<File> archivosSeleccionados;
 
@@ -212,6 +214,17 @@ public class VentanaPrincipal {
 						DefaultTableModel dtmResultados = (DefaultTableModel) tblResultados.getModel();
 						dtmResultados.addRow(new Object[] { archivo.getName() });
 					}
+					
+					if (busqueda != null && busqueda.getState() == StateValue.DONE) {
+						pgrProcesandoArchivos.setVisible(false);
+						btnDetenerBusqueda.setEnabled(false);
+						
+						btnSeleccionarArchivos.setEnabled(true);
+						tblArchivos.setEnabled(true);
+						txtTexto.setEnabled(true);
+						chkUsarBusquedaAvanzada.setEnabled(true);
+						btnBuscar.setEnabled(true);
+					}
 				});
 				
 				btnSeleccionarArchivos.setEnabled(false);
@@ -220,6 +233,9 @@ public class VentanaPrincipal {
 				chkUsarBusquedaAvanzada.setEnabled(false);
 				btnBuscar.setEnabled(false);
 				
+				pgrProcesandoArchivos.setIndeterminate(true);
+				pgrProcesandoArchivos.setVisible(true);
+				pgrProcesandoArchivos.setValue(0);
 				btnDetenerBusqueda.setEnabled(true);
 				busqueda.execute();
 			}
@@ -234,8 +250,9 @@ public class VentanaPrincipal {
 		frmVentanaPrincipal.getContentPane().add(pnlResultados);
 		pnlResultados.setLayout(null);
 
-		JProgressBar pgrProcesandoArchivos = new JProgressBar();
+		pgrProcesandoArchivos = new JProgressBar();
 		pgrProcesandoArchivos.setBounds(10, 25, 146, 23);
+		pgrProcesandoArchivos.setVisible(false);
 		pnlResultados.add(pgrProcesandoArchivos);
 
 		btnDetenerBusqueda = new JButton("Detener búsqueda");
