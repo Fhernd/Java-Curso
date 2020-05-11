@@ -26,6 +26,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal {
@@ -179,6 +181,16 @@ public class VentanaPrincipal {
 					JOptionPane.showMessageDialog(frmVentanaPrincipal, "El campo Texto es obligatorio.", "Atención",
 							JOptionPane.WARNING_MESSAGE);
 					return;
+				}
+				
+				if (chkUsarBusquedaAvanzada.isSelected()) {
+					try {
+						Pattern.compile(texto);
+					} catch(PatternSyntaxException ex) {
+						JOptionPane.showMessageDialog(frmVentanaPrincipal, "El campo Texto no representa una expresión regular.", "Atención",
+								JOptionPane.WARNING_MESSAGE);
+						return;
+					}
 				}
 				
 				
