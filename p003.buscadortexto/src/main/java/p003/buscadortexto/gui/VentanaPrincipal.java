@@ -25,6 +25,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JProgressBar;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -185,27 +187,29 @@ public class VentanaPrincipal {
 							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				if (chkUsarBusquedaAvanzada.isSelected()) {
 					try {
 						Pattern.compile(texto);
-					} catch(PatternSyntaxException ex) {
-						JOptionPane.showMessageDialog(frmVentanaPrincipal, "El campo Texto no representa una expresión regular.", "Atención",
+					} catch (PatternSyntaxException ex) {
+						JOptionPane.showMessageDialog(frmVentanaPrincipal,
+								"El campo Texto no representa una expresión regular.", "Atención",
 								JOptionPane.WARNING_MESSAGE);
 						return;
 					}
 				}
-				
+
 				((DefaultTableModel) tblResultados.getModel()).setRowCount(0);
-				
-				BusquedaArchivosTask busqueda = new BusquedaArchivosTask(archivosSeleccionados, texto, chkUsarBusquedaAvanzada.isSelected());
-				
+
+				BusquedaArchivosTask busqueda = new BusquedaArchivosTask(archivosSeleccionados, texto,
+						chkUsarBusquedaAvanzada.isSelected());
+
 				busqueda.addPropertyChangeListener((listener) -> {
 					if (listener.getPropertyName().equals("progress")) {
 						File archivo = (File) listener.getNewValue();
-						
+
 						DefaultTableModel dtmResultados = (DefaultTableModel) tblResultados.getModel();
-						dtmResultados.addRow(new Object[] {archivo.getName()});
+						dtmResultados.addRow(new Object[] { archivo.getName() });
 					}
 				});
 			}
@@ -250,5 +254,23 @@ public class VentanaPrincipal {
 		spnResultados.setViewportView(tblResultados);
 
 		archivosSeleccionados = new ArrayList<>();
+
+		tblArchivos.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+
+					int respuesta = JOptionPane.showConfirmDialog(frmVentanaPrincipal,
+							"¿Está seguro de querer eliminar este archivo del listado?", "Confirmación",
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+					if (respuesta == JOptionPane.YES_OPTION) {
+						int fila = tblArchivos.getSelectedRow();
+
+						((DefaultTableModel) tblArchivos.getModel()).removeRow(fila);
+						archivosSeleccionados.remove(fila);
+					}
+				}
+			}
+		});
 	}
 }
