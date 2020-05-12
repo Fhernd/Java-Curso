@@ -83,6 +83,7 @@ public class VentanaPrincipal {
 		frmVentanaPrincipal.setBounds(100, 100, 508, 650);
 		frmVentanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVentanaPrincipal.getContentPane().setLayout(null);
+		frmVentanaPrincipal.setLocationRelativeTo(null);
 
 		JPanel pnlArchivos = new JPanel();
 		pnlArchivos.setBorder(new TitledBorder(null, "Archivos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
