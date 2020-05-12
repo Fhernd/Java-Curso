@@ -205,16 +205,9 @@ public class VentanaPrincipal {
 				((DefaultTableModel) tblResultados.getModel()).setRowCount(0);
 
 				BusquedaArchivosTask busqueda = new BusquedaArchivosTask(archivosSeleccionados, texto,
-						chkUsarBusquedaAvanzada.isSelected());
+						chkUsarBusquedaAvanzada.isSelected(), (DefaultTableModel) tblResultados.getModel());
 
 				busqueda.addPropertyChangeListener((listener) -> {
-					if (listener.getPropertyName().equals("progress")) {
-						File archivo = (File) listener.getNewValue();
-
-						DefaultTableModel dtmResultados = (DefaultTableModel) tblResultados.getModel();
-						dtmResultados.addRow(new Object[] { archivo.getName() });
-					}
-					
 					if (busqueda != null && busqueda.getState() == StateValue.DONE) {
 						pgrProcesandoArchivos.setVisible(false);
 						btnDetenerBusqueda.setEnabled(false);
@@ -295,6 +288,16 @@ public class VentanaPrincipal {
 
 						((DefaultTableModel) tblArchivos.getModel()).removeRow(fila);
 						archivosSeleccionados.remove(fila);
+						
+						if (((DefaultTableModel) tblArchivos.getModel()).getRowCount() == 0) {
+							txtTexto.setText("");
+							txtTexto.setEnabled(false);
+							chkUsarBusquedaAvanzada.setSelected(false);
+							chkUsarBusquedaAvanzada.setEnabled(false);
+							btnBuscar.setEnabled(false);
+							
+							((DefaultTableModel) tblResultados.getModel()).setRowCount(0);
+						}
 					}
 				}
 			}

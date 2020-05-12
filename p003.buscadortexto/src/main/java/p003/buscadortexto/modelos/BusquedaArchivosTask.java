@@ -7,18 +7,21 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingWorker;
+import javax.swing.table.DefaultTableModel;
 
 public class BusquedaArchivosTask extends SwingWorker<Void, File> {
 	
 	private List<File> archivosSeleccionados;
 	private String texto;
 	private boolean buscarPorExpresionRegular;
+	private DefaultTableModel dtmResultados;
 
 	public BusquedaArchivosTask(List<File> archivosSeleccionados, String texto,
-			boolean buscarPorExpresionRegular) {
+			boolean buscarPorExpresionRegular, DefaultTableModel dtmResultados) {
 		this.archivosSeleccionados = archivosSeleccionados;
 		this.texto = texto.toLowerCase();
 		this.buscarPorExpresionRegular = buscarPorExpresionRegular;
+		this.dtmResultados = dtmResultados;
 	}
 
 	@Override
@@ -41,7 +44,7 @@ public class BusquedaArchivosTask extends SwingWorker<Void, File> {
 				linea = lector.nextLine();
 				
 				if (buscarPorExpresionRegular) {
-					if (Pattern.compile(texto).matches(texto, linea)) {
+					if (Pattern.compile(texto).matcher(linea).find()) {
 						encontrado = true;
 						break;
 					}
@@ -54,7 +57,7 @@ public class BusquedaArchivosTask extends SwingWorker<Void, File> {
 			}
 			
 			if (encontrado) {
-				publish(archivo);
+				dtmResultados.addRow(new Object[] { archivo.getName() });
 			}
 		} catch(FileNotFoundException e) {
 			
