@@ -50,22 +50,6 @@ public class VentanaPrincipal {
 	private List<File> archivosSeleccionados;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frmVentanaPrincipal.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public VentanaPrincipal() {
@@ -77,6 +61,7 @@ public class VentanaPrincipal {
 	 */
 	private void initialize() {
 		frmVentanaPrincipal = new JFrame();
+		frmVentanaPrincipal.setVisible(true);
 		frmVentanaPrincipal.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
 		frmVentanaPrincipal.setTitle("Buscador Contenido Archivos de Texto Plano");
 		frmVentanaPrincipal.setResizable(false);
