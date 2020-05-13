@@ -36,32 +36,60 @@ import com.jgoodies.forms.layout.RowSpec;
 import p003.buscadortexto.modelos.BusquedaArchivosTask;
 
 /**
+ * Representa la ventana principal de la aplicación.
  * 
- * @author johno
+ * @author John Ortiz Ordoñez
  *
  */
 public class VentanaPrincipal {
 
+	/**
+	 * Ventana (frame) contenedora de los demás componentes de la interfaz gráfica. 
+	 */
 	private JFrame frmVentanaPrincipal;
+	/**
+	 * Tabla con el conjunto de archivos seleccionados por el usuario.
+	 */
 	private JTable tblArchivos;
+	/**
+	 * Campo de texto con la clave de búsqueda.
+	 */
 	private JTextField txtTexto;
+	/**
+	 * Tabla para la visualización de los resultados de la búsqueda.
+	 */
 	private JTable tblResultados;
+	/**
+	 * Determina si la búsqueda se debe o no realizar con expresiones regulares.
+	 */
 	private JCheckBox chkUsarBusquedaAvanzada;
+	/**
+	 * Inicia la búsqueda de un texto en un conjunto de archivos seleccionados por el usuario.
+	 */
 	private JButton btnBuscar;
+	/**
+	 * Detiene el proceso de búsqueda.
+	 */
 	private JButton btnDetenerBusqueda;
+	/**
+	 * Barra de progreso indeterminada.
+	 */
 	private JProgressBar pgrProcesandoArchivos;
 
+	/**
+	 * Lista de los archivos que el usuario ha seleccionado.
+	 */
 	private List<File> archivosSeleccionados;
 
 	/**
-	 * Create the application.
+	 * Crea e inicializa la ventana principal de la aplicación.
 	 */
 	public VentanaPrincipal() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa los componentes que integran la interfaz gráfica de la ventana principal.
 	 */
 	private void initialize() {
 		frmVentanaPrincipal = new JFrame();
