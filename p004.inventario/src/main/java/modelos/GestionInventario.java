@@ -47,7 +47,7 @@ public class GestionInventario {
 	}
 
 	public void crearCliente(Cliente cliente) {
-		clientes.add(cliente);
+		conexionBD.crearCliente(cliente);
 	}
 
 	public void actualizarCliente(Cliente cliente) {

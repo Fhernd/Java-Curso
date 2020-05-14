@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import modelos.Cliente;
 
 public class ConexionBD {
+	
 	private Connection conectar() {
 		final String URL= "jdbc:sqlite::resource:base_datos/inventario_facturacion.db";
 		Connection conexion = null;
@@ -48,4 +49,35 @@ public class ConexionBD {
 		
 		return null;
 	}
+
+	public void crearCliente(Cliente cliente) {
+		final String SQL = "INSERT INTO cliente VALUES(?, ?, ?, ?, ?, ?)";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, cliente.getCedula());
+			pstmt.setString(2, cliente.getNombres());
+			pstmt.setString(3, cliente.getApellidos());
+			pstmt.setString(4, cliente.getTelefono());
+			pstmt.setString(5, cliente.getDireccion());
+			pstmt.setString(6, cliente.getCorreoElectronico());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
