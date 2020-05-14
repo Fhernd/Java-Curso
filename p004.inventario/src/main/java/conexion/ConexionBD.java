@@ -5,8 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import modelos.Cliente;
+import modelos.Factura;
 
 public class ConexionBD {
 
@@ -90,7 +94,55 @@ public class ConexionBD {
 		
 		return false;
 	}
+
+	public List<Factura> buscarFacturasCliente(String cedula) {
+		List<Factura> facturas = new ArrayList<>();
+		
+		final String SQL = "SELECT * FROM factura WHERE cliente_cedula = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, cedula);
+			
+			ResultSet rst = pstmt.executeQuery();
+			Factura factura;
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			while(rst.next()) {
+				factura = new Factura();
+				
+				factura.setId(rst.getInt("id"));
+				factura.setFecha(sdf.parse(rst.getString("fecha")));
+				factura.setImpuesto(rst.getDouble("impuesto"));
+				factura.setTotal(rst.getDouble("valor_total"));
+				factura.setCedulaCliente(cedula);
+				
+				facturas.add(factura);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return facturas;
+	}
+
+	public void eliminarClientePorNumeroCedula(String cedula) {
+		final String SQL = "DELETE FROM cliente WHERE cedula = ? LIMIT 1";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, cedula);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
+
+
+
 
 
 

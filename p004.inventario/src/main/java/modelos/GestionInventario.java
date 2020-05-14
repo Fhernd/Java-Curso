@@ -55,13 +55,11 @@ public class GestionInventario {
 	}
 
 	public List<Factura> buscarFacturasCliente(String cedula) {
-		return facturas.stream().filter(f -> f.getCedulaCliente().equals(cedula)).collect(Collectors.toList());
+		return conexionBD.buscarFacturasCliente(cedula);
 	}
 
 	public void eliminarClientePorNumeroCedula(String cedula) {
-		Cliente cliente = buscarClientePorCedula(cedula);
-
-		clientes.remove(cliente);
+		conexionBD.eliminarClientePorNumeroCedula(cedula);
 	}
 
 	public Proveedor buscarProveedorPorId(Long id) {
