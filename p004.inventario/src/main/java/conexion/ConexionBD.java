@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ConexionBD {
-	private Connection conectar() {
-		final String URL= "jdbc:sqlite:/base_datos/inventario_facturacion.db";
+	public Connection conectar() {
+		final String URL= "jdbc:sqlite::resource:base_datos/inventario_facturacion.db";
 		Connection conexion = null;
 		
 		try {
@@ -17,5 +17,10 @@ public class ConexionBD {
 		}
 		
 		return conexion;
+	}
+	
+	public static void main(String[] args) {
+		ConexionBD conexionBD = new ConexionBD();
+		conexionBD.conectar();
 	}
 }
