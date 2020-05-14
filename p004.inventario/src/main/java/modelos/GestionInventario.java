@@ -15,6 +15,8 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.StringUtils;
 
+import conexion.ConexionBD;
+
 public class GestionInventario {
 
 	private static final String ARCHIVO_CSV_CLIENTES = "clientes.csv";
@@ -28,16 +30,20 @@ public class GestionInventario {
 	private List<Proveedor> proveedores;
 	private List<Producto> productos;
 	private List<Factura> facturas;
+	
+	private ConexionBD conexionBD;
 
 	public GestionInventario() {
 		clientes = new ArrayList<>();
 		proveedores = new ArrayList<>();
 		productos = new ArrayList<>();
 		facturas = new ArrayList<>();
+		
+		conexionBD = new ConexionBD();
 	}
 
 	public Cliente buscarClientePorCedula(String cedula) {
-		return clientes.stream().filter(c -> c.getCedula().equals(cedula)).findFirst().orElse(null);
+		return conexionBD.buscarClientePorCedula(cedula);
 	}
 
 	public void crearCliente(Cliente cliente) {
