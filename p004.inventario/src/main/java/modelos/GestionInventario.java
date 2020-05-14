@@ -51,13 +51,7 @@ public class GestionInventario {
 	}
 
 	public void actualizarCliente(Cliente cliente) {
-		Cliente clienteActualizar = buscarClientePorCedula(cliente.getCedula());
-
-		clienteActualizar.setNombres(cliente.getNombres());
-		clienteActualizar.setApellidos(cliente.getApellidos());
-		clienteActualizar.setTelefono(cliente.getTelefono());
-		clienteActualizar.setDireccion(cliente.getDireccion());
-		clienteActualizar.setCorreoElectronico(cliente.getCorreoElectronico());
+		conexionBD.actualizarCliente(cliente);
 	}
 
 	public List<Factura> buscarFacturasCliente(String cedula) {
