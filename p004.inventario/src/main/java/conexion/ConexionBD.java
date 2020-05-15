@@ -33,9 +33,11 @@ public class ConexionBD {
 
 	public Cliente buscarClientePorCedula(String cedula) {
 		final String SQL = "SELECT * FROM cliente WHERE cedula = ?";
+		
+		Connection conexion = conectar();
 
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, cedula);
 
 			ResultSet rst = pstmt.executeQuery();
@@ -48,11 +50,20 @@ public class ConexionBD {
 				cliente.setTelefono(rst.getString("telefono"));
 				cliente.setDireccion(rst.getString("direccion"));
 				cliente.setCorreoElectronico(rst.getString("correoe"));
+				
+				conexion.close();
 
 				return cliente;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+		
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return null;
@@ -60,9 +71,11 @@ public class ConexionBD {
 
 	public void crearCliente(Cliente cliente) {
 		final String SQL = "INSERT INTO cliente VALUES(?, ?, ?, ?, ?, ?)";
+		
+		Connection conexion = conectar();
 
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, cliente.getCedula());
 			pstmt.setString(2, cliente.getNombres());
 			pstmt.setString(3, cliente.getApellidos());
@@ -71,6 +84,8 @@ public class ConexionBD {
 			pstmt.setString(6, cliente.getCorreoElectronico());
 
 			pstmt.executeUpdate();
+			
+			conexion.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -79,8 +94,10 @@ public class ConexionBD {
 	public boolean actualizarCliente(Cliente cliente) {
 		final String SQL = "UPDATE cliente SET nombres = ?, apellidos = ?, telefono = ?, direccion = ?, correoe = ? WHERE cedula = ?";
 		
+		Connection conexion = conectar();
+		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, cliente.getNombres());
 			pstmt.setString(2, cliente.getApellidos());
 			pstmt.setString(3, cliente.getTelefono());
@@ -89,6 +106,8 @@ public class ConexionBD {
 			pstmt.setString(6, cliente.getCedula());
 			
 			int registrosModificados = pstmt.executeUpdate();
+			
+			conexion.close();
 			
 			return registrosModificados > 0;
 			
@@ -103,9 +122,10 @@ public class ConexionBD {
 		List<Factura> facturas = new ArrayList<>();
 		
 		final String SQL = "SELECT * FROM factura WHERE cliente_cedula = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, cedula);
 			
 			ResultSet rst = pstmt.executeQuery();
@@ -126,6 +146,12 @@ public class ConexionBD {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return facturas;
@@ -133,22 +159,30 @@ public class ConexionBD {
 
 	public void eliminarClientePorNumeroCedula(String cedula) {
 		final String SQL = "DELETE FROM cliente WHERE cedula = ? LIMIT 1";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, cedula);
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public Proveedor buscarProveedorPorId(Long id) {
 		final String SQL = "SELECT * FROM proveedor WHERE id = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setLong(1, id);
 			
 			ResultSet rst = pstmt.executeQuery();
@@ -160,10 +194,18 @@ public class ConexionBD {
 				proveedor.setDireccion(rst.getString("direccion"));
 				proveedor.setTelefono(rst.getString("telefono"));
 				
+				conexion.close();
+				
 				return proveedor;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -171,9 +213,10 @@ public class ConexionBD {
 
 	public void crearProveedor(Proveedor proveedor) {
 		final String SQL = "INSERT INTO proveedor VALUES(DEFAULT, ?, ?, ?)";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, proveedor.getNombre());
 			pstmt.setString(2, proveedor.getDireccion());
 			pstmt.setString(3, proveedor.getTelefono());
@@ -181,14 +224,21 @@ public class ConexionBD {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void actualizarProveedor(Proveedor proveedor) {
 		final String SQL = "UPDATE proveedor SET nombre = ?, direccion = ?, telefono = ? WHERE id = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, proveedor.getNombre());
 			pstmt.setString(2, proveedor.getDireccion());
 			pstmt.setString(3, proveedor.getTelefono());
@@ -197,15 +247,22 @@ public class ConexionBD {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public List<Producto> buscarProductosPorIdProveedor(Long id) {
 		final String SQL = "SELECT * FROM producto WHERE proveedor_id = ?";
 		List<Producto> productos = new ArrayList<>();
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setLong(1, id);
 			
 			ResultSet rst = pstmt.executeQuery(SQL);
@@ -227,6 +284,12 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return productos;
@@ -234,24 +297,32 @@ public class ConexionBD {
 
 	public void eliminarProveedorPorId(long id) {
 		final String SQL = "DELETE FROM proveedor WHERE id = ? LIMIT 1";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setLong(1, id);
 			
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public List<Proveedor> obtenerProveedores() {
 		final String SQL = "SELECT * FROM proveedor";
 		List<Proveedor> proveedores = new ArrayList<>();
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			
 			ResultSet rst = pstmt.executeQuery();
 			Proveedor proveedor;
@@ -268,6 +339,12 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return proveedores;
@@ -275,9 +352,10 @@ public class ConexionBD {
 
 	public Producto buscarProductoPorId(int id) {
 		final String SQL = "SELECT * FROM producto WHERE id = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setInt(1, id);
 			
 			ResultSet rst = pstmt.executeQuery();
@@ -293,10 +371,18 @@ public class ConexionBD {
 				producto.setCantidadMinimaStock(rst.getInt("cantidad_minima_stock"));
 				producto.setIdProveedor(id);
 				
+				conexion.close();
+				
 				return producto;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
@@ -304,9 +390,10 @@ public class ConexionBD {
 
 	public void crearProducto(Producto producto) {
 		final String SQL = "INSERT INTO producto VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, producto.getNombre());
 			pstmt.setString(2, producto.getDescripcion());
 			pstmt.setDouble(3, producto.getPrecioCompra());
@@ -319,14 +406,21 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void actualizarProducto(Producto producto) {
 		final String SQL = "UPDATE producto SET nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, cantidad = ?, cantidad_minima_stock = ?, proveedor_id = ? WHERE id = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setString(1, producto.getNombre());
 			pstmt.setString(2, producto.getDescripcion());
 			pstmt.setDouble(3, producto.getPrecioCompra());
@@ -338,6 +432,8 @@ public class ConexionBD {
 			
 			pstmt.executeUpdate();
 			
+			conexion.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -345,39 +441,60 @@ public class ConexionBD {
 
 	public boolean productoEnFactura(int idProducto) {
 		final String SQL = "SELECT * FROM factura_producto WHERE producto_id = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setInt(1, idProducto);
 			
-			return pstmt.executeQuery().next();
+			boolean resultado = pstmt.executeQuery().next();
+			
+			conexion.close();
+			
+			return resultado;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void eliminarProductoPorId(int id) {
 		final String SQL = "DELETE FROM producto WHERE id = ? LIMIT 1";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setInt(1, id);
 			
 			pstmt.executeUpdate();
 			
+			conexion.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public List<Producto> obtenerProductos() {
 		final String SQL = "SELECT * FROM producto";
 		List<Producto> productos = new ArrayList<>();
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			
 			ResultSet rst = pstmt.executeQuery();
 			Producto producto;
@@ -398,6 +515,12 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return productos;
@@ -405,9 +528,10 @@ public class ConexionBD {
 
 	public void crearFactura(Factura nuevaFactura) {
 		final String SQL = "INSERT INTO factura VALUES (DEFAULT, ?, ?, ?, ?)";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date fechaActual = new Date();
@@ -421,14 +545,21 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public Factura buscarFacturaPorId(int id) {
 		final String SQL = "SELECT * FROM factura WHERE id = ?";
+		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setInt(1, id);
 			
 			ResultSet rst = pstmt.executeQuery();
@@ -443,6 +574,8 @@ public class ConexionBD {
 				factura.setImpuesto(rst.getDouble("impuesto"));
 				factura.setTotal(rst.getDouble("valor_total"));
 				
+				conexion.close();
+				
 				return factura;
 			}
 			
@@ -450,19 +583,14 @@ public class ConexionBD {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

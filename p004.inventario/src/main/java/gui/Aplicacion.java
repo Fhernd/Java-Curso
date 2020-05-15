@@ -84,29 +84,6 @@ public class Aplicacion {
 				}
 			}
 		});
-
-		JMenuItem mniGuardarDatos = new JMenuItem("Guardar datos");
-		mniGuardarDatos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				JFileChooser selectorCarpeta = new JFileChooser();
-				selectorCarpeta.setCurrentDirectory(new File("."));
-				selectorCarpeta.setDialogTitle("Seleccione la carpeta para guardar los archivos CSV...");
-				selectorCarpeta.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				selectorCarpeta.setAcceptAllFileFilterUsed(false);
-
-				if (selectorCarpeta.showOpenDialog(frmSistemaDeGestion) == JFileChooser.APPROVE_OPTION) {
-					
-					File carpetaSeleccionada = selectorCarpeta.getSelectedFile();
-					
-					gestionInventario.guardarDatosInventario(carpetaSeleccionada);
-
-					JOptionPane.showMessageDialog(frmSistemaDeGestion, "Se han guardado los datos del inventario.",
-							"Información", JOptionPane.INFORMATION_MESSAGE);
-				}
-			}
-		});
-		mnuArchivo.add(mniGuardarDatos);
 		mnuArchivo.add(mniSalir);
 
 		JMenu mnuClientes = new JMenu("Clientes");
