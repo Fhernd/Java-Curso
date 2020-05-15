@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -421,6 +422,37 @@ public class ConexionBD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Factura buscarFacturaPorId(int id) {
+		final String SQL = "SELECT * FROM factura WHERE id = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			ResultSet rst = pstmt.executeQuery();
+			
+			if (rst.next()) {
+				Factura factura = new Factura();
+				factura.setId(id);
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				factura.setFecha(sdf.parse(rst.getString("fecha")));
+				factura.setCedulaCliente(rst.getString("cedula_cliente"));
+				factura.setImpuesto(rst.getDouble("impuesto"));
+				factura.setTotal(rst.getDouble("valor_total"));
+				
+				return factura;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }
 

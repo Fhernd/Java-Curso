@@ -125,7 +125,7 @@ public class GestionInventario {
 	}
 
 	public Factura buscarFacturaPorId(int id) {
-		return facturas.stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+		return conexionBD.buscarFacturaPorId(id);
 	}
 
 	public void guardarDatosInventario(File carpetaSeleccionada) {
