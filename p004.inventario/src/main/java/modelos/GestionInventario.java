@@ -92,7 +92,7 @@ public class GestionInventario {
 	}
 
 	public Producto buscarProductoPorId(int id) {
-		return productos.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+		return conexionBD.buscarProductoPorId(id);
 	}
 
 	public void crearProducto(Producto producto) {

@@ -270,6 +270,35 @@ public class ConexionBD {
 		
 		return proveedores;
 	}
+
+	public Producto buscarProductoPorId(int id) {
+		final String SQL = "SELECT * FROM producto WHERE id = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			ResultSet rst = pstmt.executeQuery();
+			
+			if (rst.next()) {
+				Producto producto = new Producto();
+				producto.setId(id);
+				producto.setNombre(rst.getString("nombre"));
+				producto.setDescripcion(rst.getString("descripcion"));
+				producto.setPrecioCompra(rst.getDouble("precio_compra"));
+				producto.setPrecioVenta(rst.getDouble("precio_venta"));
+				producto.setCantidad(rst.getInt("cantidad"));
+				producto.setCantidadMinimaStock(rst.getInt("cantidad_minima_stock"));
+				producto.setIdProveedor(id);
+				
+				return producto;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }
 
 
