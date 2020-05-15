@@ -319,6 +319,42 @@ public class ConexionBD {
 			e.printStackTrace();
 		}
 	}
+
+	public void actualizarProducto(Producto producto) {
+		final String SQL = "UPDATE producto SET nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, cantidad = ?, cantidad_minima_stock = ?, proveedor_id = ? WHERE id = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, producto.getNombre());
+			pstmt.setString(2, producto.getDescripcion());
+			pstmt.setDouble(3, producto.getPrecioCompra());
+			pstmt.setDouble(4, producto.getPrecioVenta());
+			pstmt.setInt(5, producto.getCantidad());
+			pstmt.setInt(6, producto.getCantidadMinimaStock());
+			pstmt.setLong(7, producto.getIdProveedor());
+			pstmt.setInt(8, producto.getId());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean productoEnFactura(int idProducto) {
+		final String SQL = "SELECT * FROM factura_producto WHERE producto_id = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setInt(1, idProducto);
+			
+			return pstmt.executeQuery().next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
 
 

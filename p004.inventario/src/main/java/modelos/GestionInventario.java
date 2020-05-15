@@ -100,19 +100,11 @@ public class GestionInventario {
 	}
 
 	public void actualizarProducto(Producto producto) {
-		Producto productoActualizado = buscarProductoPorId(producto.getId());
-
-		productoActualizado.setNombre(producto.getNombre());
-		productoActualizado.setDescripcion(producto.getDescripcion());
-		productoActualizado.setPrecioCompra(producto.getPrecioCompra());
-		productoActualizado.setPrecioVenta(producto.getPrecioVenta());
-		productoActualizado.setCantidad(producto.getCantidad());
-		productoActualizado.setCantidadMinimaStock(producto.getCantidadMinimaStock());
-		productoActualizado.setIdProveedor(producto.getIdProveedor());
+		conexionBD.actualizarProducto(producto);
 	}
 
 	public boolean productoEnFactura(int idProducto) {
-		return facturas.stream().anyMatch(f -> Arrays.asList(f.getIdsProductos()).contains(idProducto));
+		return conexionBD.productoEnFactura(idProducto);
 	}
 
 	public void eliminarProductoPorId(int id) {
