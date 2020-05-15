@@ -108,11 +108,12 @@ public class GestionInventario {
 	}
 
 	public void eliminarProductoPorId(int id) {
-		Producto producto = buscarProductoPorId(id);
-		productos.remove(producto);
+		conexionBD.eliminarProductoPorId(id);
 	}
 
 	public Producto[] obtenerProductos() {
+		List<Producto> productos = conexionBD.obtenerProductos();
+		
 		Producto[] productosCopia = new Producto[productos.size()];
 		productos.toArray(productosCopia);
 
@@ -120,7 +121,7 @@ public class GestionInventario {
 	}
 
 	public void crearFactura(Factura nuevaFactura) {
-		facturas.add(nuevaFactura);
+		conexionBD.crearFactura(nuevaFactura);
 	}
 
 	public Factura buscarFacturaPorId(int id) {

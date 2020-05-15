@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import modelos.Cliente;
@@ -353,6 +354,72 @@ public class ConexionBD {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	public void eliminarProductoPorId(int id) {
+		final String SQL = "DELETE FROM producto WHERE id = ? LIMIT 1";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Producto> obtenerProductos() {
+		final String SQL = "SELECT * FROM producto";
+		List<Producto> productos = new ArrayList<>();
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			
+			ResultSet rst = pstmt.executeQuery();
+			Producto producto;
+			
+			while (rst.next()) {
+				producto = new Producto();
+				producto.setId(rst.getInt("id"));
+				producto.setNombre(rst.getString("nombre"));
+				producto.setDescripcion(rst.getString("descripcion"));
+				producto.setPrecioCompra(rst.getDouble("precio_compra"));
+				producto.setPrecioVenta(rst.getDouble("precio_venta"));
+				producto.setCantidad(rst.getInt("cantidad"));
+				producto.setCantidadMinimaStock(rst.getInt("cantidad_minima_stock"));
+				producto.setIdProveedor(rst.getLong("proveedor_id"));
+				
+				productos.add(producto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return productos;
+	}
+
+	public void crearFactura(Factura nuevaFactura) {
+		final String SQL = "INSERT INTO factura VALUES (DEFAULT, ?, ?, ?, ?)";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date fechaActual = new Date();
+			
+			pstmt.setString(1, sdf.format(fechaActual));
+			pstmt.setString(2, nuevaFactura.getCedulaCliente());
+			pstmt.setDouble(3, nuevaFactura.getImpuesto());
+			pstmt.setDouble(4, nuevaFactura.getTotal());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 }
