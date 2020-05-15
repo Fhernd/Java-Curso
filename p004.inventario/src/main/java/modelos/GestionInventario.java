@@ -63,7 +63,7 @@ public class GestionInventario {
 	}
 
 	public Proveedor buscarProveedorPorId(Long id) {
-		return proveedores.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+		return conexionBD.buscarProveedorPorId(id);
 	}
 
 	public void crearProveedor(Proveedor proveedor) {

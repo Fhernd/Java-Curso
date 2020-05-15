@@ -11,6 +11,7 @@ import java.util.List;
 
 import modelos.Cliente;
 import modelos.Factura;
+import modelos.Proveedor;
 
 public class ConexionBD {
 
@@ -138,6 +139,31 @@ public class ConexionBD {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Proveedor buscarProveedorPorId(Long id) {
+		final String SQL = "SELECT * FROM proveedor WHERE id = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setLong(1, id);
+			
+			ResultSet rst = pstmt.executeQuery();
+			
+			if (rst.next()) {
+				Proveedor proveedor = new Proveedor();
+				proveedor.setId(id);
+				proveedor.setNombre(rst.getString("nombre"));
+				proveedor.setDireccion(rst.getString("direccion"));
+				proveedor.setTelefono(rst.getString("telefono"));
+				
+				return proveedor;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }
 
