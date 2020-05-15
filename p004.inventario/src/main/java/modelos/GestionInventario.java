@@ -71,23 +71,20 @@ public class GestionInventario {
 	}
 
 	public void actualizarProveedor(Proveedor proveedor) {
-		Proveedor proveedorExistente = buscarProveedorPorId(proveedor.getId());
-
-		proveedorExistente.setNombre(proveedor.getNombre());
-		proveedorExistente.setDireccion(proveedor.getDireccion());
-		proveedorExistente.setTelefono(proveedor.getTelefono());
+		conexionBD.actualizarProveedor(proveedor);
 	}
 
-	public List<Producto> buscarProductosPorIdProveedor(Long numero) {
-		return productos.stream().filter(p -> p.getIdProveedor() == numero).collect(Collectors.toList());
+	public List<Producto> buscarProductosPorIdProveedor(Long id) {
+		return conexionBD.buscarProductosPorIdProveedor(id);
 	}
 
 	public void eliminarProveedorPorId(long id) {
-		Proveedor proveedor = buscarProveedorPorId(id);
-		proveedores.remove(proveedor);
+		conexionBD.eliminarProveedorPorId(id);
 	}
 
 	public Proveedor[] obtenerProveedores() {
+		List<Proveedor> proveedores = conexionBD.obtenerProveedores();
+		
 		Proveedor[] proveedoresCopia = new Proveedor[proveedores.size()];
 		proveedores.toArray(proveedoresCopia);
 

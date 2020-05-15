@@ -11,6 +11,7 @@ import java.util.List;
 
 import modelos.Cliente;
 import modelos.Factura;
+import modelos.Producto;
 import modelos.Proveedor;
 
 public class ConexionBD {
@@ -179,6 +180,95 @@ public class ConexionBD {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void actualizarProveedor(Proveedor proveedor) {
+		final String SQL = "UPDATE proveedor SET nombre = ?, direccion = ?, telefono = ? WHERE id = ?";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, proveedor.getNombre());
+			pstmt.setString(2, proveedor.getDireccion());
+			pstmt.setString(3, proveedor.getTelefono());
+			pstmt.setLong(4, proveedor.getId());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Producto> buscarProductosPorIdProveedor(Long id) {
+		final String SQL = "SELECT * FROM producto WHERE proveedor_id = ?";
+		List<Producto> productos = new ArrayList<>();
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setLong(1, id);
+			
+			ResultSet rst = pstmt.executeQuery(SQL);
+			Producto producto;
+			
+			while (rst.next()) {
+				producto = new Producto();
+				producto.setId(rst.getInt("id"));
+				producto.setNombre(rst.getString("nombre"));
+				producto.setDescripcion(rst.getString("descripcion"));
+				producto.setPrecioCompra(rst.getDouble("precio_compra"));
+				producto.setPrecioVenta(rst.getDouble("precio_venta"));
+				producto.setCantidad(rst.getInt("cantidad"));
+				producto.setCantidadMinimaStock(rst.getInt("cantidad_minima_stock"));
+				producto.setIdProveedor(id);
+				
+				productos.add(producto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return productos;
+	}
+
+	public void eliminarProveedorPorId(long id) {
+		final String SQL = "DELETE FROM proveedor WHERE id = ? LIMIT 1";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setLong(1, id);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Proveedor> obtenerProveedores() {
+		final String SQL = "SELECT * FROM proveedor";
+		List<Proveedor> proveedores = new ArrayList<>();
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			
+			ResultSet rst = pstmt.executeQuery();
+			Proveedor proveedor;
+			
+			while(rst.next()) {
+				proveedor = new Proveedor();
+				proveedor.setId(rst.getLong("id"));
+				proveedor.setNombre(rst.getString("nombre"));
+				proveedor.setDireccion(rst.getString("direccion"));
+				proveedor.setTelefono(rst.getString("telefono"));
+				
+				proveedores.add(proveedor);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return proveedores;
 	}
 }
 
