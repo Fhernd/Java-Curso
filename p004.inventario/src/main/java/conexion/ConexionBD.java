@@ -165,6 +165,21 @@ public class ConexionBD {
 		
 		return null;
 	}
+
+	public void crearProveedor(Proveedor proveedor) {
+		final String SQL = "INSERT INTO proveedor VALUES(DEFAULT, ?, ?, ?)";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, proveedor.getNombre());
+			pstmt.setString(2, proveedor.getDireccion());
+			pstmt.setString(3, proveedor.getTelefono());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 

@@ -67,7 +67,7 @@ public class GestionInventario {
 	}
 
 	public void crearProveedor(Proveedor proveedor) {
-		proveedores.add(proveedor);
+		conexionBD.crearProveedor(proveedor);
 	}
 
 	public void actualizarProveedor(Proveedor proveedor) {
