@@ -299,6 +299,26 @@ public class ConexionBD {
 		
 		return null;
 	}
+
+	public void crearProducto(Producto producto) {
+		final String SQL = "INSERT INTO producto VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			PreparedStatement pstmt = conectar().prepareStatement(SQL);
+			pstmt.setString(1, producto.getNombre());
+			pstmt.setString(2, producto.getDescripcion());
+			pstmt.setDouble(3, producto.getPrecioCompra());
+			pstmt.setDouble(4, producto.getPrecioVenta());
+			pstmt.setInt(5, producto.getCantidad());
+			pstmt.setInt(6, producto.getCantidadMinimaStock());
+			pstmt.setLong(7, producto.getIdProveedor());
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 

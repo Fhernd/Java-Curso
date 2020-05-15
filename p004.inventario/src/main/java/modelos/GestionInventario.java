@@ -96,7 +96,7 @@ public class GestionInventario {
 	}
 
 	public void crearProducto(Producto producto) {
-		productos.add(producto);
+		conexionBD.crearProducto(producto);
 	}
 
 	public void actualizarProducto(Producto producto) {
