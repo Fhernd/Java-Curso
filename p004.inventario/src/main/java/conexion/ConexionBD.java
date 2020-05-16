@@ -576,11 +576,11 @@ public class ConexionBD {
 	}
 
 	public Factura buscarFacturaPorId(int id) {
-		final String SQL = "SELECT * FROM factura WHERE id = ?";
+		String sql = "SELECT * FROM factura WHERE id = ?";
 		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conexion.prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			
 			ResultSet rst = pstmt.executeQuery();
@@ -591,9 +591,19 @@ public class ConexionBD {
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				factura.setFecha(sdf.parse(rst.getString("fecha")));
-				factura.setCedulaCliente(rst.getString("cedula_cliente"));
+				factura.setCedulaCliente(rst.getString("cliente_cedula"));
 				factura.setImpuesto(rst.getDouble("impuesto"));
 				factura.setTotal(rst.getDouble("valor_total"));
+				
+				sql = "SELECT * FROM factura_producto WHERE factura_id = ?";
+				pstmt = conexion.prepareStatement(sql);
+				pstmt.setInt(1, id);
+				
+				ResultSet resultado = pstmt.executeQuery();
+				
+				while(resultado.next()) {
+					factura.agregarIdProducto(resultado.getInt("producto_id"));
+				}
 				
 				conexion.close();
 				
