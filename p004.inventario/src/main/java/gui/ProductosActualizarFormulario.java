@@ -337,6 +337,7 @@ public class ProductosActualizarFormulario extends JInternalFrame {
 	private void cargarDatosProveedores() {
 		Proveedor[] proveedores = aplicacion.obtenerProveedores();
 		idsProveedores.clear();
+		cbxIdProveedor.removeAll();
 		String llave;
 		long valor;
 

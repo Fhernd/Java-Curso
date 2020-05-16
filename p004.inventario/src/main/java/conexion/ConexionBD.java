@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -266,7 +267,7 @@ public class ConexionBD {
 			PreparedStatement pstmt = conexion.prepareStatement(SQL);
 			pstmt.setLong(1, id);
 			
-			ResultSet rst = pstmt.executeQuery(SQL);
+			ResultSet rst = pstmt.executeQuery();
 			Producto producto;
 			
 			while (rst.next()) {
@@ -370,7 +371,7 @@ public class ConexionBD {
 				producto.setPrecioVenta(rst.getDouble("precio_venta"));
 				producto.setCantidad(rst.getInt("cantidad"));
 				producto.setCantidadMinimaStock(rst.getInt("cantidad_minima_stock"));
-				producto.setIdProveedor(id);
+				producto.setIdProveedor(rst.getLong("proveedor_id"));
 				
 				conexion.close();
 				
@@ -529,11 +530,11 @@ public class ConexionBD {
 	}
 
 	public void crearFactura(Factura nuevaFactura) {
-		final String SQL = "INSERT INTO factura (fecha, cedula_cliente, impuesto, valor_total) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO factura (fecha, cliente_cedula, impuesto, valor_total) VALUES (?, ?, ?, ?)";
 		Connection conexion = conectar();
 		
 		try {
-			PreparedStatement pstmt = conexion.prepareStatement(SQL);
+			PreparedStatement pstmt = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date fechaActual = new Date();
@@ -544,6 +545,24 @@ public class ConexionBD {
 			pstmt.setDouble(4, nuevaFactura.getTotal());
 			
 			pstmt.executeUpdate();
+			
+			ResultSet rst = pstmt.getGeneratedKeys();
+			
+			if (rst.next()) {
+				nuevaFactura.setId(rst.getInt(1));
+				
+				sql = "INSERT INTO factura_producto VALUES (?, ?, ?)";
+				
+				pstmt = conexion.prepareStatement(sql);
+				
+				for (int idProducto : nuevaFactura.getIdsProductos()) {
+					pstmt.setInt(1, nuevaFactura.getId());
+					pstmt.setInt(2, idProducto);
+					pstmt.setInt(3, 1);
+					
+					pstmt.executeUpdate();
+				}
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
