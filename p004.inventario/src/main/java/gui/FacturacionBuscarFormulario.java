@@ -25,6 +25,7 @@ import org.apache.commons.validator.routines.IntegerValidator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class FacturacionBuscarFormulario extends JInternalFrame {
 
@@ -150,26 +151,37 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 		pnlFacturacionBuscar.add(txtTotal, "12, 10, fill, default");
 		txtTotal.setColumns(10);
 
+		JLabel lblProductos = new JLabel("Productos");
+		lblProductos.setBounds(10, 182, 84, 14);
+		getContentPane().add(lblProductos);
+		
+		JScrollPane spnProductos = new JScrollPane();
+		spnProductos.setBounds(10, 207, 414, 140);
+		getContentPane().add(spnProductos);
+		
 		tblProductos = new JTable();
-		tblProductos.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nombre", "Precio" }) {
-			Class[] columnTypes = new Class[] { Integer.class, String.class, Double.class };
-
+		tblProductos.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Nombre", "ID", "Precio"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class, Double.class
+			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-
-			boolean[] columnEditables = new boolean[] { false, false, false };
-
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		tblProductos.setBounds(10, 350, 414, -145);
-		getContentPane().add(tblProductos);
-
-		JLabel lblProductos = new JLabel("Productos");
-		lblProductos.setBounds(10, 182, 84, 14);
-		getContentPane().add(lblProductos);
+		tblProductos.getColumnModel().getColumn(1).setPreferredWidth(77);
+		spnProductos.setViewportView(tblProductos);
 
 	}
 }
