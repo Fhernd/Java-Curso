@@ -17,8 +17,20 @@ import modelos.Factura;
 import modelos.Producto;
 import modelos.Proveedor;
 
+/**
+ * Represente la conexión a la base de datos y los métodos de CRUD (Cread, Read, Update y Delete), es 
+ * decir manipulación de datos.
+ * 
+ * @author John Ortiz Ordoñez.
+ *
+ */
 public class ConexionBD {
 
+	/**
+	 * Establece la conexión con la base de datos SQLite.
+	 * 
+	 * @return Conexión a la base de datos.
+	 */
 	private Connection conectar() {
 		final String URL = "jdbc:sqlite::resource:base_datos/inventario_facturacion.db";
 		Connection conexion = null;
@@ -32,6 +44,12 @@ public class ConexionBD {
 		return conexion;
 	}
 
+	/**
+	 * Busca un cliente a partir de su número de cédula.
+	 * 
+	 * @param cedula Número de cédula.
+	 * @return Cliente o null (cuando existe un cliente con en número de cédula especificado).
+	 */
 	public Cliente buscarClientePorCedula(String cedula) {
 		final String SQL = "SELECT * FROM cliente WHERE cedula = ?";
 		
@@ -70,6 +88,11 @@ public class ConexionBD {
 		return null;
 	}
 
+	/**
+	 * Crea un nuevo cliente en la base de datos.
+	 * 
+	 * @param cliente Cliente a crear.
+	 */
 	public void crearCliente(Cliente cliente) {
 		final String SQL = "INSERT INTO cliente VALUES(?, ?, ?, ?, ?, ?)";
 		
@@ -92,6 +115,12 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Actualiza los datos de un cliente.
+	 * 
+	 * @param cliente Datos del cliente a actualizar.
+	 * @return true si el cliente se actualizó de forma satisfactoria, false en caso contrario.
+	 */
 	public boolean actualizarCliente(Cliente cliente) {
 		final String SQL = "UPDATE cliente SET nombres = ?, apellidos = ?, telefono = ?, direccion = ?, correoe = ? WHERE cedula = ?";
 		
@@ -119,6 +148,12 @@ public class ConexionBD {
 		return false;
 	}
 
+	/**
+	 * Busca las facturas de un cliente a partir de su número de cédula.
+	 * 
+	 * @param cedula Número de cédula.
+	 * @return Listado de facturas del cliente.
+	 */
 	public List<Factura> buscarFacturasCliente(String cedula) {
 		List<Factura> facturas = new ArrayList<>();
 		
@@ -158,6 +193,11 @@ public class ConexionBD {
 		return facturas;
 	}
 
+	/**
+	 * Eliminar un cliente a partir de su número de cédula.
+	 * 
+	 * @param cedula Número de cédula.
+	 */
 	public void eliminarClientePorNumeroCedula(String cedula) {
 		final String SQL = "DELETE FROM cliente WHERE cedula = ?";
 		Connection conexion = conectar();
@@ -178,6 +218,12 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Busca un proveedor a partir de su número de ID.
+	 * 
+	 * @param id ID del proveedor.
+	 * @return Proveedor o null (cuando no existe un proveedor con el ID especificado).
+	 */
 	public Proveedor buscarProveedorPorId(Long id) {
 		final String SQL = "SELECT * FROM proveedor WHERE id = ?";
 		Connection conexion = conectar();
@@ -212,6 +258,11 @@ public class ConexionBD {
 		return null;
 	}
 
+	/**
+	 * Crea un nuevo proveedor en la base de datos.
+	 * 
+	 * @param proveedor Proveedor a crear.
+	 */
 	public void crearProveedor(Proveedor proveedor) {
 		final String SQL = "INSERT INTO proveedor (id, nombre, direccion, telefono) VALUES(?, ?, ?, ?)";
 		Connection conexion = conectar();
@@ -235,6 +286,11 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Actualiza los datos de un proveedor.
+	 * 
+	 * @param proveedor Datos del proveedor a actualizar.
+	 */
 	public void actualizarProveedor(Proveedor proveedor) {
 		final String SQL = "UPDATE proveedor SET nombre = ?, direccion = ?, telefono = ? WHERE id = ?";
 		Connection conexion = conectar();
@@ -258,6 +314,12 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Busca todos los productos de un proveedor a partir de su ID.
+	 * 
+	 * @param id ID del proveedor.
+	 * @return Listado de productos.
+	 */
 	public List<Producto> buscarProductosPorIdProveedor(Long id) {
 		final String SQL = "SELECT * FROM producto WHERE proveedor_id = ?";
 		List<Producto> productos = new ArrayList<>();
@@ -297,6 +359,10 @@ public class ConexionBD {
 		return productos;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void eliminarProveedorPorId(long id) {
 		final String SQL = "DELETE FROM proveedor WHERE id = ?";
 		Connection conexion = conectar();
