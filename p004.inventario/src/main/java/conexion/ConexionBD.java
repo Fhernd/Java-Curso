@@ -158,7 +158,7 @@ public class ConexionBD {
 	}
 
 	public void eliminarClientePorNumeroCedula(String cedula) {
-		final String SQL = "DELETE FROM cliente WHERE cedula = ? LIMIT 1";
+		final String SQL = "DELETE FROM cliente WHERE cedula = ?";
 		Connection conexion = conectar();
 		
 		try {
@@ -212,14 +212,15 @@ public class ConexionBD {
 	}
 
 	public void crearProveedor(Proveedor proveedor) {
-		final String SQL = "INSERT INTO proveedor VALUES(DEFAULT, ?, ?, ?)";
+		final String SQL = "INSERT INTO proveedor (id, nombre, direccion, telefono) VALUES(?, ?, ?, ?)";
 		Connection conexion = conectar();
 		
 		try {
 			PreparedStatement pstmt = conexion.prepareStatement(SQL);
-			pstmt.setString(1, proveedor.getNombre());
-			pstmt.setString(2, proveedor.getDireccion());
-			pstmt.setString(3, proveedor.getTelefono());
+			pstmt.setLong(1, proveedor.getId());
+			pstmt.setString(2, proveedor.getNombre());
+			pstmt.setString(3, proveedor.getDireccion());
+			pstmt.setString(4, proveedor.getTelefono());
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -296,7 +297,7 @@ public class ConexionBD {
 	}
 
 	public void eliminarProveedorPorId(long id) {
-		final String SQL = "DELETE FROM proveedor WHERE id = ? LIMIT 1";
+		final String SQL = "DELETE FROM proveedor WHERE id = ?";
 		Connection conexion = conectar();
 		
 		try {
@@ -389,18 +390,19 @@ public class ConexionBD {
 	}
 
 	public void crearProducto(Producto producto) {
-		final String SQL = "INSERT INTO producto VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+		final String SQL = "INSERT INTO producto VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conexion = conectar();
 		
 		try {
 			PreparedStatement pstmt = conexion.prepareStatement(SQL);
-			pstmt.setString(1, producto.getNombre());
-			pstmt.setString(2, producto.getDescripcion());
-			pstmt.setDouble(3, producto.getPrecioCompra());
-			pstmt.setDouble(4, producto.getPrecioVenta());
-			pstmt.setInt(5, producto.getCantidad());
-			pstmt.setInt(6, producto.getCantidadMinimaStock());
-			pstmt.setLong(7, producto.getIdProveedor());
+			pstmt.setInt(1, producto.getId());
+			pstmt.setString(2, producto.getNombre());
+			pstmt.setString(3, producto.getDescripcion());
+			pstmt.setDouble(4, producto.getPrecioCompra());
+			pstmt.setDouble(5, producto.getPrecioVenta());
+			pstmt.setInt(6, producto.getCantidad());
+			pstmt.setInt(7, producto.getCantidadMinimaStock());
+			pstmt.setLong(8, producto.getIdProveedor());
 			
 			pstmt.executeUpdate();
 			
@@ -466,7 +468,7 @@ public class ConexionBD {
 	}
 
 	public void eliminarProductoPorId(int id) {
-		final String SQL = "DELETE FROM producto WHERE id = ? LIMIT 1";
+		final String SQL = "DELETE FROM producto WHERE id = ?";
 		Connection conexion = conectar();
 		
 		try {
@@ -527,7 +529,7 @@ public class ConexionBD {
 	}
 
 	public void crearFactura(Factura nuevaFactura) {
-		final String SQL = "INSERT INTO factura VALUES (DEFAULT, ?, ?, ?, ?)";
+		final String SQL = "INSERT INTO factura (fecha, cedula_cliente, impuesto, valor_total) VALUES (?, ?, ?, ?)";
 		Connection conexion = conectar();
 		
 		try {
