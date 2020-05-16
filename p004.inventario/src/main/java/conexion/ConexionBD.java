@@ -360,8 +360,9 @@ public class ConexionBD {
 	}
 
 	/**
+	 * Eliminar un proveedor a partir de su ID.
 	 * 
-	 * @param id
+	 * @param id ID del proveedor.
 	 */
 	public void eliminarProveedorPorId(long id) {
 		final String SQL = "DELETE FROM proveedor WHERE id = ?";
@@ -384,6 +385,11 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Obtiene el listado de proveedores desde la base de datos.
+	 * 
+	 * @return Listado de proveedores.
+	 */
 	public List<Proveedor> obtenerProveedores() {
 		final String SQL = "SELECT * FROM proveedor";
 		List<Proveedor> proveedores = new ArrayList<>();
@@ -418,6 +424,11 @@ public class ConexionBD {
 		return proveedores;
 	}
 
+	/**
+	 * Busca un producto a partir de su ID.
+	 * @param id ID del producto.
+	 * @return Producto null (si no hay un producto con el ID especificado).
+	 */
 	public Producto buscarProductoPorId(int id) {
 		final String SQL = "SELECT * FROM producto WHERE id = ?";
 		Connection conexion = conectar();
@@ -456,6 +467,11 @@ public class ConexionBD {
 		return null;
 	}
 
+	/**
+	 * Crea un nuevo producto.
+	 * 
+	 * @param producto Datos del producto a crear.
+	 */
 	public void crearProducto(Producto producto) {
 		final String SQL = "INSERT INTO producto VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conexion = conectar();
@@ -484,6 +500,11 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Actualiza un producto a partir de nuevos datos.
+	 * 
+	 * @param producto Datos del producto.
+	 */
 	public void actualizarProducto(Producto producto) {
 		final String SQL = "UPDATE producto SET nombre = ?, descripcion = ?, precio_compra = ?, precio_venta = ?, cantidad = ?, cantidad_minima_stock = ?, proveedor_id = ? WHERE id = ?";
 		Connection conexion = conectar();
@@ -508,6 +529,13 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Comprueba si un producto está presente al menos en una factura.
+	 * 
+	 * @param idProducto ID del producto a buscar sobre las facturas.
+	 * 
+	 * @return true si existe el ID de producto en alguna factura, false en caso contrario.
+	 */
 	public boolean productoEnFactura(int idProducto) {
 		final String SQL = "SELECT * FROM factura_producto WHERE producto_id = ?";
 		Connection conexion = conectar();
@@ -534,6 +562,11 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Eliminar un producto a partir de su ID.
+	 * 
+	 * @param id ID del producto.
+	 */
 	public void eliminarProductoPorId(int id) {
 		final String SQL = "DELETE FROM producto WHERE id = ?";
 		Connection conexion = conectar();
@@ -557,6 +590,11 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Obtiene el listado de productos almacenados en la base de datos.
+	 * 
+	 * @return Listado de productos.
+	 */
 	public List<Producto> obtenerProductos() {
 		final String SQL = "SELECT * FROM producto";
 		List<Producto> productos = new ArrayList<>();
@@ -595,6 +633,11 @@ public class ConexionBD {
 		return productos;
 	}
 
+	/**
+	 * Crea una nueva factura en la base de datos.
+	 * 
+	 * @param nuevaFactura Datos de la nueva factura a crear.
+	 */
 	public void crearFactura(Factura nuevaFactura) {
 		String sql = "INSERT INTO factura (fecha, cliente_cedula, impuesto, valor_total) VALUES (?, ?, ?, ?)";
 		Connection conexion = conectar();
@@ -641,6 +684,12 @@ public class ConexionBD {
 		}
 	}
 
+	/**
+	 * Busca una factura a partir de su ID.
+	 * 
+	 * @param id ID de la factura.
+	 * @return Factura o null (cuando no existe una factura con el ID especificado).
+	 */
 	public Factura buscarFacturaPorId(int id) {
 		String sql = "SELECT * FROM factura WHERE id = ?";
 		Connection conexion = conectar();
