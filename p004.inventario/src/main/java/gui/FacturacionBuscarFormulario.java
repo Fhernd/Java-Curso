@@ -114,6 +114,8 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 				txtCliente.setText(String.format("%s %s (%s)", cliente.getNombres(), cliente.getApellidos(), cliente.getCedula()));
 				txtImpuesto.setText(String.format("%.2f", factura.getImpuesto()) + "%");
 				
+				txtTotal.setText(String.format("%.2f", factura.getTotal()));
+				
 				Integer[] idsProductos = factura.getIdsProductos();
 				DefaultTableModel dtm = (DefaultTableModel) tblProductos.getModel();
 				Producto producto;
@@ -164,11 +166,11 @@ public class FacturacionBuscarFormulario extends JInternalFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"Nombre", "ID", "Precio"
+				"ID", "Nombre", "Precio"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, Integer.class, Double.class
+				Integer.class, String.class, Double.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
