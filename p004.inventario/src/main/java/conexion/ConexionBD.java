@@ -18,8 +18,9 @@ import modelos.Producto;
 import modelos.Proveedor;
 
 /**
- * Represente la conexión a la base de datos y los métodos de CRUD (Cread, Read, Update y Delete), es 
+ * Represente la conexión a la base de datos y los métodos de CRUD (Create, Read, Update y Delete), es 
  * decir manipulación de datos.
+ * 
  * 
  * @author John Ortiz Ordoñez.
  *
