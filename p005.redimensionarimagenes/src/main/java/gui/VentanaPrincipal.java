@@ -4,17 +4,29 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JSeparator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -26,6 +38,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel pnlPrincipal;
 	private JTextField txtTamagnioPorcentaje;
 	private JTextField txtRotacionGrados;
+	private JLabel lblImagen;
 
 	/**
 	 * Launch the application.
@@ -56,7 +69,25 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(pnlPrincipal);
 		pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
 		
-		JLabel lblImagen = new JLabel("");
+		lblImagen = new JLabel("");
+		lblImagen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JFileChooser dialogoCargaImagen = new JFileChooser();
+				dialogoCargaImagen.addChoosableFileFilter(new FiltroSeleccionImagenes());
+				dialogoCargaImagen.setAcceptAllFileFilterUsed(false);
+				
+				int resultado = dialogoCargaImagen.showOpenDialog(VentanaPrincipal.this);
+				
+				if (resultado == JFileChooser.APPROVE_OPTION) {
+					File imagenSeleccionada = dialogoCargaImagen.getSelectedFile();
+					
+					ImageIcon imagen = new ImageIcon(imagenSeleccionada.getAbsolutePath());
+					
+					lblImagen.setIcon(imagen);
+				}
+			}
+		});
 		lblImagen.setToolTipText("Haga click aquí para cargar una imagen");
 		lblImagen.setSize(350, 500);
 		lblImagen.setMaximumSize(new Dimension(400, 450));
@@ -112,7 +143,59 @@ public class VentanaPrincipal extends JFrame {
 		pnlBotones.add(btnGuardarImagen);
 		
 		
-		
+		setLocationRelativeTo(null);
 	}
 
+	private BufferedImage convertirABufferedImage(Image imagen) {
+		if (imagen instanceof BufferedImage) {
+			return (BufferedImage) imagen;
+		}
+		
+		BufferedImage bi = new BufferedImage(imagen.getWidth(null), imagen.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		
+		Graphics g = bi.getGraphics();
+		g.drawImage(imagen, 0, 0, null);
+		g.dispose();
+		
+		return bi;
+	}
+}
+
+
+class FiltroSeleccionImagenes extends FileFilter {
+	public final static String JPEG = "jpeg";
+	public final static String JPG = "jpg";
+	public final static String PNG = "png";
+	
+	@Override
+	public boolean accept(File f) {
+		
+		if (f.isDirectory()) {
+			return true;
+		}
+		
+		String extension = obtenerExtensionArchivo(f);
+		
+		if (!extension.isEmpty()) {
+			return extension.equals(JPEG) || extension.equals(JPG) || extension.equals(PNG);
+		}
+		
+		return false;
+	}
+	@Override
+	public String getDescription() {
+		return "Sólo imágenes (JPEG, JPG, PNG).";
+	}
+	
+	String obtenerExtensionArchivo(File archivo) {
+		String extension = "";
+		String nombreArchivo = archivo.getName();
+		int indicePunto = nombreArchivo.lastIndexOf('.');
+		
+		if (indicePunto > 0 && indicePunto < nombreArchivo.length() - 1) {
+			extension = nombreArchivo.substring(indicePunto + 1).toLowerCase();
+		}
+		
+		return extension;
+	}
 }
