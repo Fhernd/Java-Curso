@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.GridLayout;
+import javax.swing.JSeparator;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -48,13 +50,14 @@ public class VentanaPrincipal extends JFrame {
 		setTitle("Redimensionar Imágenes");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 600);
+		setBounds(100, 100, 400, 560);
 		pnlPrincipal = new JPanel();
 		pnlPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlPrincipal);
 		pnlPrincipal.setLayout(new BoxLayout(pnlPrincipal, BoxLayout.Y_AXIS));
 		
 		JLabel lblImagen = new JLabel("");
+		lblImagen.setToolTipText("Haga click aquí para cargar una imagen");
 		lblImagen.setSize(350, 500);
 		lblImagen.setMaximumSize(new Dimension(400, 450));
 		lblImagen.setPreferredSize(new Dimension(400, 450));
@@ -63,9 +66,9 @@ public class VentanaPrincipal extends JFrame {
 		pnlPrincipal.add(lblImagen);
 		
 		JPanel pnlOperaciones = new JPanel();
-		pnlOperaciones.setMaximumSize(new Dimension(400, 150));
-		pnlOperaciones.setPreferredSize(new Dimension(400, 150));
-		pnlOperaciones.setMaximumSize(new Dimension(400, 150));
+		pnlOperaciones.setMaximumSize(new Dimension(400, 80));
+		pnlOperaciones.setPreferredSize(new Dimension(400, 80));
+		pnlOperaciones.setMaximumSize(new Dimension(400, 80));
 		pnlOperaciones.setBorder(new TitledBorder(null, "Operaciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		pnlPrincipal.add(pnlOperaciones);
 		pnlOperaciones.setLayout(new BoxLayout(pnlOperaciones, BoxLayout.Y_AXIS));
@@ -73,14 +76,14 @@ public class VentanaPrincipal extends JFrame {
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setLayout(new BoxLayout(pnlDatos, BoxLayout.X_AXIS));
 		
-		JLabel lblTamagnioPorcentaje = new JLabel("Tamaño (%):");
+		JLabel lblTamagnioPorcentaje = new JLabel("Tamaño (%):  ");
 		pnlDatos.add(lblTamagnioPorcentaje);
 		
 		txtTamagnioPorcentaje = new JTextField();
 		pnlDatos.add(txtTamagnioPorcentaje);
 		txtTamagnioPorcentaje.setColumns(10);
 		
-		JLabel lblRotacionGrados = new JLabel("Rotación (grados):");
+		JLabel lblRotacionGrados = new JLabel("  Rotación (grados):  ");
 		pnlDatos.add(lblRotacionGrados);
 		
 		txtRotacionGrados = new JTextField();
@@ -88,6 +91,25 @@ public class VentanaPrincipal extends JFrame {
 		txtRotacionGrados.setColumns(10);
 		
 		pnlOperaciones.add(pnlDatos);
+		
+		JSeparator separator = new JSeparator();
+		pnlOperaciones.add(separator);
+		
+		JPanel pnlBotones = new JPanel();
+		pnlBotones.setMaximumSize(new Dimension(400, 30));
+		pnlBotones.setPreferredSize(new Dimension(400, 30));
+		pnlBotones.setMaximumSize(new Dimension(400, 30));
+		pnlOperaciones.add(pnlBotones);
+		pnlBotones.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JButton btnAplicar = new JButton("Aplicar");
+		pnlBotones.add(btnAplicar);
+		
+		JButton btnRestaurarImagen = new JButton("Restaurar imagen");
+		pnlBotones.add(btnRestaurarImagen);
+		
+		JButton btnGuardarImagen = new JButton("Guardar imagen");
+		pnlBotones.add(btnGuardarImagen);
 		
 		
 		
