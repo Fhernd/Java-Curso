@@ -27,6 +27,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -84,6 +86,8 @@ public class VentanaPrincipal extends JFrame {
 					
 					ImageIcon imagen = new ImageIcon(imagenSeleccionada.getAbsolutePath());
 					
+					imagen = new ImageIcon(escalarImagen(convertirABufferedImage(imagen.getImage())));
+					
 					lblImagen.setIcon(imagen);
 				}
 			}
@@ -134,6 +138,16 @@ public class VentanaPrincipal extends JFrame {
 		pnlBotones.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JButton btnAplicar = new JButton("Aplicar");
+		btnAplicar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tamagnioPorcentaje = txtTamagnioPorcentaje.getText().trim();
+				String gradosRotacion = txtRotacionGrados.getText().trim();
+				
+				if (!tamagnioPorcentaje.isEmpty()) {
+					
+				}
+			}
+		});
 		pnlBotones.add(btnAplicar);
 		
 		JButton btnRestaurarImagen = new JButton("Restaurar imagen");
@@ -158,6 +172,10 @@ public class VentanaPrincipal extends JFrame {
 		g.dispose();
 		
 		return bi;
+	}
+	
+	private Image escalarImagen(BufferedImage imagen) {
+		return imagen.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
 	}
 }
 
