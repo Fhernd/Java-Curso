@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -30,7 +31,9 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -49,22 +52,6 @@ public class VentanaPrincipal extends JFrame {
 	private JButton btnAplicar;
 	private JButton btnRestaurarImagen;
 	private JButton btnGuardarImagen;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -98,7 +85,7 @@ public class VentanaPrincipal extends JFrame {
 					imagen = new ImageIcon(escalarImagen(convertirABufferedImage(imagen.getImage())));
 
 					lblImagen.setIcon(imagen);
-					
+
 					btnAplicar.setEnabled(true);
 					btnRestaurarImagen.setEnabled(true);
 					btnGuardarImagen.setEnabled(true);
@@ -173,7 +160,7 @@ public class VentanaPrincipal extends JFrame {
 						return;
 					}
 				}
-				
+
 				if (!gradosRotacion.isEmpty()) {
 					try {
 						int valor = Integer.parseInt(gradosRotacion);
@@ -189,25 +176,24 @@ public class VentanaPrincipal extends JFrame {
 						return;
 					}
 				}
-				
-				BufferedImage bi = convertirABufferedImage(((ImageIcon)lblImagen.getIcon()).getImage());
-				
+
+				BufferedImage bi = convertirABufferedImage(((ImageIcon) lblImagen.getIcon()).getImage());
+
 				int grado = gradosRotacion.isEmpty() ? 0 : Integer.parseInt(gradosRotacion);
-				
+
 				bi = rotarImagen(bi, grado);
-				
+
 				int porcentaje = tamagnioPorcentaje.isEmpty() ? 100 : Integer.parseInt(tamagnioPorcentaje);
-				
+
 				if (tamagnioPorcentaje.isEmpty() && grado % 90 != 0) {
 					porcentaje = 50;
 				}
-				
+
 				bi = redimensionarImagen(bi, porcentaje);
-				
+
 				lblImagen.setIcon(new ImageIcon(bi));
 			}
 
-			
 		});
 		pnlBotones.add(btnAplicar);
 
@@ -224,20 +210,25 @@ public class VentanaPrincipal extends JFrame {
 		btnGuardarImagen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser seleccionArchivo = new JFileChooser();
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes PNG", "png");
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes JPG", "jpg");
 				seleccionArchivo.setFileFilter(filtro);
-				
+
 				int resultado = seleccionArchivo.showSaveDialog(VentanaPrincipal.this);
-				
+
 				if (resultado == JFileChooser.APPROVE_OPTION) {
 					File archivoImagen = seleccionArchivo.getSelectedFile();
-					
+
 					try {
 						ImageIcon imagen = (ImageIcon) lblImagen.getIcon();
-						
-						
+
+						guardarImagen(archivoImagen, imagen);
+
+						JOptionPane.showMessageDialog(VentanaPrincipal.this, "La imagen se ha guardado en el sistema.",
+								"Información", JOptionPane.INFORMATION_MESSAGE);
 					} catch (Exception ex) {
-						
+						JOptionPane.showMessageDialog(VentanaPrincipal.this,
+								"Se ha producido un error a la hora de guardar la imagen.", "Mensaje",
+								JOptionPane.WARNING_MESSAGE);
 					}
 				}
 			}
@@ -247,11 +238,22 @@ public class VentanaPrincipal extends JFrame {
 
 		setLocationRelativeTo(null);
 	}
-	
+
+	protected void guardarImagen(File archivoImagen, ImageIcon imagen) throws IOException {
+		BufferedImage bi = convertirABufferedImage(imagen.getImage());
+
+		BufferedImage nuevaImagen = new BufferedImage(bi.getWidth(), bi.getHeight(), BufferedImage.TYPE_INT_RGB);
+		ColorConvertOp nuevaImagenOp = new ColorConvertOp(null);
+		nuevaImagenOp.filter(bi, nuevaImagen);
+
+		ImageIO.write(nuevaImagen, "jpg", archivoImagen);
+	}
+
 	protected void restaurarImagen() {
-		
-		int resultado = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer restaurar la imagen?", "Confirmación", JOptionPane.YES_NO_OPTION);
-		
+
+		int resultado = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer restaurar la imagen?",
+				"Confirmación", JOptionPane.YES_NO_OPTION);
+
 		if (resultado == JOptionPane.YES_OPTION) {
 			lblImagen.setIcon(new ImageIcon(escalarImagen(convertirABufferedImage(imagenOriginal.getImage()))));
 		}
@@ -259,30 +261,30 @@ public class VentanaPrincipal extends JFrame {
 
 	protected BufferedImage rotarImagen(BufferedImage bi, int grados) {
 		double radianes = Math.toRadians(grados);
-		
+
 		AffineTransform rotacion = AffineTransform.getRotateInstance(radianes);
-		
+
 		int ancho = bi.getWidth();
 		int alto = bi.getHeight();
-		
+
 		Rectangle rectangulo = rotacion.createTransformedShape(new Rectangle(ancho, alto)).getBounds();
-		
+
 		rotacion = new AffineTransform();
 		rotacion.translate(rectangulo.width * 0.5, rectangulo.height * 0.5);
 		rotacion.rotate(radianes);
 		rotacion.translate(-0.5 * ancho, -0.5 * alto);
-		
+
 		AffineTransformOp op = new AffineTransformOp(rotacion, AffineTransformOp.TYPE_BILINEAR);
-		
+
 		return op.filter(bi, null);
 	}
 
 	private BufferedImage redimensionarImagen(BufferedImage bi, int valor) {
 		double escala = valor / 100.0;
-		
+
 		AffineTransform redimensionamiento = AffineTransform.getScaleInstance(escala, escala);
 		AffineTransformOp op = new AffineTransformOp(redimensionamiento, AffineTransformOp.TYPE_BICUBIC);
-		
+
 		return op.filter(bi, null);
 	}
 
