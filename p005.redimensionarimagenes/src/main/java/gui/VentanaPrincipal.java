@@ -1,31 +1,13 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.border.TitledBorder;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Rectangle;
-
-import javax.swing.JSeparator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -34,9 +16,29 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+/**
+ * Ventana principal de la aplicación.
+ * 
+ * @author John Ortiz Ordoñez
+ *
+ */
 public class VentanaPrincipal extends JFrame {
 
 	/**
@@ -44,17 +46,41 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	private static final long serialVersionUID = 2969386564630328442L;
 
+	/**
+	 * Panel principal de la aplicaicón.
+	 */
 	private JPanel pnlPrincipal;
+	/**
+	 * Campo de texto para capturar el tamaño de redimensionamiento.
+	 */
 	private JTextField txtTamagnioPorcentaje;
+	/**
+	 * Campo de texto para capturar la rotación en grados.
+	 */
 	private JTextField txtRotacionGrados;
+	/**
+	 * Etiqueta de la imagen que se muestra en pantalla.
+	 */
 	private JLabel lblImagen;
+	/**
+	 * Representa la imagen que selección el usuario.
+	 */
 	private ImageIcon imagenOriginal;
+	/**
+	 * Botón para aplicar los cambios sobre la imagen.
+	 */
 	private JButton btnAplicar;
+	/**
+	 * Restaura la imagen original sobre la etiqueta.
+	 */
 	private JButton btnRestaurarImagen;
+	/**
+	 * Guarda la imagen en disco.
+	 */
 	private JButton btnGuardarImagen;
 
 	/**
-	 * Create the frame.
+	 * Inicializa la ventana principal de la aplicación.
 	 */
 	public VentanaPrincipal() {
 		setTitle("Redimensionar Imágenes");
@@ -239,6 +265,12 @@ public class VentanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
+	/**
+	 * Guarda una imagen en el sistema de almacenamiento sobre ruta y archivo específicos.
+	 * @param archivoImagen Archivo para la imagen que se va a guardar.
+	 * @param imagen Imagen que se va a guardar.
+	 * @throws IOException Captura cualquier excepción cuando se intenta guardar la imagen.
+	 */
 	protected void guardarImagen(File archivoImagen, ImageIcon imagen) throws IOException {
 		BufferedImage bi = convertirABufferedImage(imagen.getImage());
 
@@ -249,6 +281,10 @@ public class VentanaPrincipal extends JFrame {
 		ImageIO.write(nuevaImagen, "jpg", archivoImagen);
 	}
 
+	/**
+	 * Restaura la imagen original que seleccionó el usuario. La imagen se restaura sobre 
+	 * la etiqueta (o área).
+	 */
 	protected void restaurarImagen() {
 
 		int resultado = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer restaurar la imagen?",
@@ -259,6 +295,12 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 
+	/**
+	 * Rota cierta cantidad de grados (radianes) una imagen.
+	 * @param bi Imagen que se va a rotar.
+	 * @param grados Cantidad de grados a rotar la imagen.
+	 * @return Imagen modificada.
+	 */
 	protected BufferedImage rotarImagen(BufferedImage bi, int grados) {
 		double radianes = Math.toRadians(grados);
 
@@ -279,8 +321,14 @@ public class VentanaPrincipal extends JFrame {
 		return op.filter(bi, null);
 	}
 
-	private BufferedImage redimensionarImagen(BufferedImage bi, int valor) {
-		double escala = valor / 100.0;
+	/**
+	 * Redimensiona una imagen cierta cantidad porcentual.
+	 * @param bi Imagen a redimensionar.
+	 * @param porcentaje Porcentaje de redimensionamiento.
+	 * @return Imagen modificada.
+	 */
+	private BufferedImage redimensionarImagen(BufferedImage bi, int porcentaje) {
+		double escala = porcentaje / 100.0;
 
 		AffineTransform redimensionamiento = AffineTransform.getScaleInstance(escala, escala);
 		AffineTransformOp op = new AffineTransformOp(redimensionamiento, AffineTransformOp.TYPE_BICUBIC);
@@ -288,6 +336,11 @@ public class VentanaPrincipal extends JFrame {
 		return op.filter(bi, null);
 	}
 
+	/**
+	 * Convierte un objeto Image a un objeto BufferedImage.
+	 * @param imagen Imagen sobre la que se obtendrá el objeto BufferedImage.
+	 * @return Objeto BufferedImage.
+	 */
 	private BufferedImage convertirABufferedImage(Image imagen) {
 		if (imagen instanceof BufferedImage) {
 			return (BufferedImage) imagen;
@@ -303,16 +356,31 @@ public class VentanaPrincipal extends JFrame {
 		return bi;
 	}
 
+	/**
+	 * Escala una imagen para que quede visible dentro de un componente (JLabel).
+	 * @param imagen Imagen a escalar.
+	 * @return Imagen escalada.
+	 */
 	private Image escalarImagen(BufferedImage imagen) {
 		return imagen.getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_SMOOTH);
 	}
 }
 
+/**
+ * Filtro para la selección de archivos de tipo imagen.
+ * @author John Ortiz Ordoñez.
+ *
+ */
 class FiltroSeleccionImagenes extends FileFilter {
 	public final static String JPEG = "jpeg";
 	public final static String JPG = "jpg";
 	public final static String PNG = "png";
 
+	/**
+	 * Valida los archivos que se pueden escoger desde el diálogo de apertura.
+	 * @param f Archivo.
+	 * @return true si se puede seleccionar el archivo, false en caso contrario.
+	 */
 	@Override
 	public boolean accept(File f) {
 
@@ -329,11 +397,22 @@ class FiltroSeleccionImagenes extends FileFilter {
 		return false;
 	}
 
+	/**
+	 * Descripción para el filtro de selección de imagen desde el diálago de selección de archivo.
+	 * 
+	 * @return Indicador textual del tipo de imágenes que se pueden seleccionar.
+	 */
 	@Override
 	public String getDescription() {
 		return "Sólo imágenes (JPEG, JPG, PNG).";
 	}
 
+	/**
+	 * Obtiene la extensión de un nombre de archivo.
+	 * 
+	 * @param archivo Archivo.
+	 * @return Extensión del archivo.
+	 */
 	String obtenerExtensionArchivo(File archivo) {
 		String extension = "";
 		String nombreArchivo = archivo.getName();
