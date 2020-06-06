@@ -21,6 +21,7 @@ import javax.swing.JFileChooser;
 
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.JSeparator;
 import java.awt.event.MouseAdapter;
@@ -153,10 +154,12 @@ public class VentanaPrincipal extends JFrame {
 						if (valor <= 0 || valor > 100) {
 							JOptionPane.showMessageDialog(VentanaPrincipal.this,
 									"El campo Tamaño (porcentaje) debe ser un número entero positivo.");
+							return;
 						}
 					} catch (NumberFormatException ex) {
 						JOptionPane.showMessageDialog(VentanaPrincipal.this,
 								"El campo Tamaño (porcentaje) debe ser un número entero.");
+						return;
 					}
 				}
 				
@@ -167,10 +170,12 @@ public class VentanaPrincipal extends JFrame {
 						if (valor <= 0 || valor > 360) {
 							JOptionPane.showMessageDialog(VentanaPrincipal.this,
 									"El campo Rotación (grados) debe ser un número entero positivo.");
+							return;
 						}
 					} catch (NumberFormatException ex) {
 						JOptionPane.showMessageDialog(VentanaPrincipal.this,
 								"El campo Rotación (grados) debe ser un número entero.");
+						return;
 					}
 				}
 				
@@ -179,6 +184,12 @@ public class VentanaPrincipal extends JFrame {
 				int valor = tamagnioPorcentaje.isEmpty() ? 100 : Integer.parseInt(tamagnioPorcentaje);
 				
 				bi = redimensionarImagen(bi, valor);
+				
+				valor = gradosRotacion.isEmpty() ? 0 : Integer.parseInt(gradosRotacion);
+				
+				bi = rotarImagen(bi, valor);
+				
+				lblImagen.setIcon(new ImageIcon(bi));
 			}
 
 			
@@ -194,6 +205,26 @@ public class VentanaPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
+	protected BufferedImage rotarImagen(BufferedImage bi, int grados) {
+		double radianes = Math.toRadians(grados);
+		
+		AffineTransform rotacion = AffineTransform.getRotateInstance(radianes);
+		
+		int ancho = bi.getWidth();
+		int alto = bi.getHeight();
+		
+		Rectangle rectangulo = rotacion.createTransformedShape(new Rectangle(ancho, alto)).getBounds();
+		
+		rotacion = new AffineTransform();
+		rotacion.translate(rectangulo.width * 0.5, rectangulo.height * 0.5);
+		rotacion.rotate(radianes);
+		rotacion.translate(-0.5 * ancho, -0.5 * alto);
+		
+		AffineTransformOp op = new AffineTransformOp(rotacion, AffineTransformOp.TYPE_BILINEAR);
+		
+		return op.filter(bi, null);
+	}
+
 	private BufferedImage redimensionarImagen(BufferedImage bi, int valor) {
 		double escala = valor / 100.0;
 		
