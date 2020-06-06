@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -44,6 +45,10 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField txtTamagnioPorcentaje;
 	private JTextField txtRotacionGrados;
 	private JLabel lblImagen;
+	private ImageIcon imagenOriginal;
+	private JButton btnAplicar;
+	private JButton btnRestaurarImagen;
+	private JButton btnGuardarImagen;
 
 	/**
 	 * Launch the application.
@@ -88,10 +93,15 @@ public class VentanaPrincipal extends JFrame {
 					File imagenSeleccionada = dialogoCargaImagen.getSelectedFile();
 
 					ImageIcon imagen = new ImageIcon(imagenSeleccionada.getAbsolutePath());
+					imagenOriginal = new ImageIcon(imagenSeleccionada.getAbsolutePath());
 
 					imagen = new ImageIcon(escalarImagen(convertirABufferedImage(imagen.getImage())));
 
 					lblImagen.setIcon(imagen);
+					
+					btnAplicar.setEnabled(true);
+					btnRestaurarImagen.setEnabled(true);
+					btnGuardarImagen.setEnabled(true);
 				}
 			}
 		});
@@ -141,7 +151,8 @@ public class VentanaPrincipal extends JFrame {
 		pnlOperaciones.add(pnlBotones);
 		pnlBotones.setLayout(new GridLayout(0, 3, 0, 0));
 
-		JButton btnAplicar = new JButton("Aplicar");
+		btnAplicar = new JButton("Aplicar");
+		btnAplicar.setEnabled(false);
 		btnAplicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String tamagnioPorcentaje = txtTamagnioPorcentaje.getText().trim();
@@ -181,13 +192,17 @@ public class VentanaPrincipal extends JFrame {
 				
 				BufferedImage bi = convertirABufferedImage(((ImageIcon)lblImagen.getIcon()).getImage());
 				
-				int valor = tamagnioPorcentaje.isEmpty() ? 100 : Integer.parseInt(tamagnioPorcentaje);
+				int grado = gradosRotacion.isEmpty() ? 0 : Integer.parseInt(gradosRotacion);
 				
-				bi = redimensionarImagen(bi, valor);
+				bi = rotarImagen(bi, grado);
 				
-				valor = gradosRotacion.isEmpty() ? 0 : Integer.parseInt(gradosRotacion);
+				int porcentaje = tamagnioPorcentaje.isEmpty() ? 100 : Integer.parseInt(tamagnioPorcentaje);
 				
-				bi = rotarImagen(bi, valor);
+				if (tamagnioPorcentaje.isEmpty() && grado % 90 != 0) {
+					porcentaje = 50;
+				}
+				
+				bi = redimensionarImagen(bi, porcentaje);
 				
 				lblImagen.setIcon(new ImageIcon(bi));
 			}
@@ -196,15 +211,52 @@ public class VentanaPrincipal extends JFrame {
 		});
 		pnlBotones.add(btnAplicar);
 
-		JButton btnRestaurarImagen = new JButton("Restaurar imagen");
+		btnRestaurarImagen = new JButton("Restaurar");
+		btnRestaurarImagen.setEnabled(false);
+		btnRestaurarImagen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				restaurarImagen();
+			}
+		});
 		pnlBotones.add(btnRestaurarImagen);
 
-		JButton btnGuardarImagen = new JButton("Guardar imagen");
+		btnGuardarImagen = new JButton("Guardar");
+		btnGuardarImagen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser seleccionArchivo = new JFileChooser();
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes PNG", "png");
+				seleccionArchivo.setFileFilter(filtro);
+				
+				int resultado = seleccionArchivo.showSaveDialog(VentanaPrincipal.this);
+				
+				if (resultado == JFileChooser.APPROVE_OPTION) {
+					File archivoImagen = seleccionArchivo.getSelectedFile();
+					
+					try {
+						ImageIcon imagen = (ImageIcon) lblImagen.getIcon();
+						
+						
+					} catch (Exception ex) {
+						
+					}
+				}
+			}
+		});
+		btnGuardarImagen.setEnabled(false);
 		pnlBotones.add(btnGuardarImagen);
 
 		setLocationRelativeTo(null);
 	}
 	
+	protected void restaurarImagen() {
+		
+		int resultado = JOptionPane.showConfirmDialog(this, "¿Está seguro de querer restaurar la imagen?", "Confirmación", JOptionPane.YES_NO_OPTION);
+		
+		if (resultado == JOptionPane.YES_OPTION) {
+			lblImagen.setIcon(new ImageIcon(escalarImagen(convertirABufferedImage(imagenOriginal.getImage()))));
+		}
+	}
+
 	protected BufferedImage rotarImagen(BufferedImage bi, int grados) {
 		double radianes = Math.toRadians(grados);
 		
