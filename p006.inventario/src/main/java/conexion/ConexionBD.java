@@ -28,16 +28,18 @@ import modelos.Proveedor;
 public class ConexionBD {
 
 	/**
-	 * Establece la conexión con la base de datos SQLite.
+	 * Establece la conexión con la base de datos Apache Derby.
 	 * 
 	 * @return Conexión a la base de datos.
 	 */
 	private Connection conectar() {
-		final String URL = "jdbc:sqlite::resource:base_datos/inventario_facturacion.db";
+		final String URL = "jdbc:derby:G:\\Dropbox\\Pro\\Cursos\\Java-Curso\\p006.inventario\\src\\main\\resources\\base_datos";
+		final String USUARIO = "fhernd";
+		final String CLAVE = "User2k20";
 		Connection conexion = null;
 
 		try {
-			conexion = DriverManager.getConnection(URL);
+			conexion = DriverManager.getConnection(URL, USUARIO, CLAVE);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
