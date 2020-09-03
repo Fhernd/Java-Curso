@@ -8,7 +8,7 @@ public class Baldosa {
 	private int valor;
 	
 	public Baldosa() {
-		this(0);
+		this(BALDOSA_VACIA);
 	}
 
 	public Baldosa(int valor) {
@@ -46,5 +46,13 @@ public class Baldosa {
 		}
 		
 		return new Color(ColorBaldosa.COLOR_0.obtenerColorHex());
+	}
+
+	public int getValor() {
+		return valor;
+	}
+
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 }
