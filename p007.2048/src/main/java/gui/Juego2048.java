@@ -36,23 +36,67 @@ public class Juego2048 extends JPanel {
 	class ManejadorComandos extends KeyAdapter {
 		@Override
 		public void keyPressed(KeyEvent evento) {
+			if (evento.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				reiniciarJuego();
+			}
+			
+			if (!baldosasMovibles()) {
+				perdio = true;
+			}
+			
 			if (!perdio && !gano) {
 				switch(evento.getKeyCode()) {
 					case KeyEvent.VK_UP:
-						// TODO: Subir las baldosas
+						arriba();
 						break;
 					case KeyEvent.VK_RIGHT:
-						// TODO: Mover a la izquierda las baldosas
+						derecha();
 						break;
 					case KeyEvent.VK_DOWN:
-						// TODO: Bajas las baldosas
+						abajo();
 						break;
 					case KeyEvent.VK_LEFT:
-						// TODO: Mover a la derecha las baldosas
+						izquierda();
 						break;
 				}
 			}
+			
+			if (!gano && !baldosasMovibles()) {
+				perdio = true;
+			}
+			
+			repaint();
 		}
+	}
+
+	public void arriba() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean baldosasMovibles() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void reiniciarJuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void izquierda() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void abajo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void derecha() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
