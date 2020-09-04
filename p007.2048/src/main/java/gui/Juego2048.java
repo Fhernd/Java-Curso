@@ -121,8 +121,30 @@ public class Juego2048 extends JPanel {
 	}
 
 	public boolean baldosasMovibles() {
-		// TODO Auto-generated method stub
+		if (!tableroLleno()) {
+			return true;
+		}
+		
+		for (int i = 0; i < NUMERO_LADOS; i++) {
+			for (int j = 0; j < NUMERO_LADOS; j++) {
+				Baldosa baldosa = obtenerBaldosaDesdePosicion(i, j);
+				
+				if ((i < 3 && baldosa.getValor() == obtenerBaldosaDesdePosicion(i + 1, j).getValor())
+						|| (j < 3 && baldosa.getValor() == obtenerBaldosaDesdePosicion(i, j + 1).getValor())) {
+					return true;
+				}
+			}
+		}
+		
 		return false;
+	}
+
+	private Baldosa obtenerBaldosaDesdePosicion(int i, int j) {
+		return baldosas[i + j * NUMERO_LADOS];
+	}
+
+	private boolean tableroLleno() {
+		return obtenerEspacioDisonible().size() == 0;
 	}
 
 	public void izquierda() {
