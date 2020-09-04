@@ -116,8 +116,37 @@ public class Juego2048 extends JPanel {
 	}
 
 	public void arriba() {
-		// TODO Auto-generated method stub
+		baldosas = rotar(270);
+		izquierda();
+		baldosas = rotar(90);
+	}
+
+	private Baldosa[] rotar(int angulo) {
+		Baldosa[] baldosasModificadas = new Baldosa[NUMERO_LADOS * NUMERO_LADOS];
 		
+		int desplazamientoX = 3;
+		int desplazamientoY = 3;
+		
+		if (angulo == 90) {
+			desplazamientoY = 0;
+		} else if (angulo == 270 ) {
+			desplazamientoX = 0;
+		}
+		
+		double radianes = Math.toRadians(angulo);
+		int seno = (int) Math.sin(radianes);
+		int coseno = (int) Math.cos(radianes);
+		
+		for (int i = 0; i < NUMERO_LADOS; i++) {
+			for (int j = 0; j < NUMERO_LADOS; j++) {
+				int x = (i * coseno) - (j * seno) + desplazamientoX;
+				int y = (i * seno) + (j * coseno) + desplazamientoY;
+				
+				baldosasModificadas[x + y * NUMERO_LADOS] = obtenerBaldosaDesdePosicion(i, j);
+			}
+		}
+		
+		return baldosasModificadas;
 	}
 
 	public boolean baldosasMovibles() {
