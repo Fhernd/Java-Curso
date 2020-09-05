@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -177,8 +178,55 @@ public class Juego2048 extends JPanel {
 	}
 
 	public void izquierda() {
+		boolean seNecesitaBaldosa = false;
+		
+		for(int i = 0; i < NUMERO_LADOS; ++i) {
+			Baldosa[] baldosasSeleccionadas = obtenerBaldosa(i);
+			Baldosa[] baldosasFusionadas = fusionarLinea(moverLinea(baldosasSeleccionadas));
+		}
+	}
+
+	private Baldosa[] fusionarLinea(Object moverLinea) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Baldosa[] moverLinea(Baldosa[] baldosasSeleccionadas) {
+		LinkedList<Baldosa> listaBaldosas = new LinkedList<>();
+		
+		for(int i = 0; i < NUMERO_LADOS; ++i) {
+			if (!baldosasSeleccionadas[i].estaVacia()) {
+				listaBaldosas.add(baldosasSeleccionadas[i]);
+			}
+		}
+		
+		if (listaBaldosas.isEmpty()) {
+			return baldosasSeleccionadas;
+		} else {
+			Baldosa[] nuevasBaldosas = new Baldosa[NUMERO_LADOS];
+			mantenerTamagnio(listaBaldosas, NUMERO_LADOS);
+			
+			for(int i = 0; i < NUMERO_LADOS; ++i) {
+				nuevasBaldosas[i] = listaBaldosas.removeFirst();
+			}
+			
+			return nuevasBaldosas;
+		}
+	}
+
+	private void mantenerTamagnio(LinkedList<Baldosa> listaBaldosas, int numeroLados) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	private Baldosa[] obtenerBaldosa(int indiceBaldosa) {
+		Baldosa[] baldosasTemporales = new Baldosa[NUMERO_LADOS];
+		
+		for (int i = 0; i < NUMERO_LADOS; ++i) {
+			baldosasTemporales[i] = obtenerBaldosaDesdePosicion(i, indiceBaldosa); 
+		}
+		
+		return baldosasTemporales;
 	}
 
 	public void abajo() {
