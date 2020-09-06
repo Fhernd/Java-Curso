@@ -184,7 +184,37 @@ public class Juego2048 extends JPanel {
 		for(int i = 0; i < NUMERO_LADOS; ++i) {
 			Baldosa[] baldosasSeleccionadas = obtenerBaldosa(i);
 			Baldosa[] baldosasFusionadas = fusionarLinea(moverLinea(baldosasSeleccionadas));
+			
+			definirLinea(i, baldosasFusionadas);
+			
+			if (!seNecesitaBaldosa && !comparar(baldosasSeleccionadas, baldosasFusionadas)) {
+				seNecesitaBaldosa = true;
+			}
 		}
+		
+		if (seNecesitaBaldosa) {
+			agregarBaldosa();
+		}
+	}
+
+	private boolean comparar(Baldosa[] baldosasSeleccionadas, Baldosa[] baldosasFusionadas) {
+		if(baldosasSeleccionadas == baldosasFusionadas) {
+			return true;
+		} else if (baldosasSeleccionadas.length != baldosasFusionadas.length) {
+			return false;
+		}
+		
+		for (int i = 0; i < baldosasFusionadas.length; i++) {
+			if (baldosasSeleccionadas[i].getValor() != baldosasFusionadas[i].getValor()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	private void definirLinea(int posicion, Baldosa[] baldosasFusionadas) {
+		System.arraycopy(baldosasFusionadas, 0, baldosas, posicion * NUMERO_LADOS, NUMERO_LADOS);
 	}
 
 	private Baldosa[] fusionarLinea(Baldosa[] baldosasAnteriores) {
@@ -255,13 +285,15 @@ public class Juego2048 extends JPanel {
 	}
 
 	public void abajo() {
-		// TODO Auto-generated method stub
-		
+		baldosas = rotar(90);
+		izquierda();
+		baldosas =rotar(270); 
 	}
 
 	public void derecha() {
-		// TODO Auto-generated method stub
-		
+		baldosas = rotar(180);
+		izquierda();
+		baldosas = rotar(180);
 	}
 }
 
