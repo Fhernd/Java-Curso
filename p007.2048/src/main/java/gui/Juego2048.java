@@ -23,6 +23,7 @@ public class Juego2048 extends JPanel {
 	private static final int MARGEN_BALDOSA = 16;
 	private static final Color COLOR_FONDO_PANEL = new Color(0xffffff);
 	private static final int NUMERO_LADOS = 4;
+	private static final int VALOR_NUMERO_BALDOSA_GANADORA = 2048;
 	
 	private boolean gano;
 	private boolean perdio;
@@ -186,9 +187,32 @@ public class Juego2048 extends JPanel {
 		}
 	}
 
-	private Baldosa[] fusionarLinea(Object moverLinea) {
-		// TODO Auto-generated method stub
-		return null;
+	private Baldosa[] fusionarLinea(Baldosa[] baldosasAnteriores) {
+		LinkedList<Baldosa> listaBaldosas = new LinkedList<>();
+		
+		for(int i = 0; i < NUMERO_LADOS && !baldosasAnteriores[i].estaVacia(); ++i) {
+			int numero = baldosasAnteriores[i].getValor();
+			
+			if (i < 3 && baldosasAnteriores[i].getValor() == baldosasAnteriores[i + 1].getValor()) {
+				numero *= 2;
+				puntaje += numero;
+				
+				if (numero == VALOR_NUMERO_BALDOSA_GANADORA) {
+					gano = true;
+				}
+				
+				++i;
+			}
+			
+			listaBaldosas.add(new Baldosa(numero));
+		}
+		
+		if (listaBaldosas.isEmpty()) {
+			return baldosasAnteriores;
+		} else {
+			mantenerTamagnio(listaBaldosas, NUMERO_LADOS);
+			return listaBaldosas.toArray(new Baldosa[NUMERO_LADOS]);
+		}
 	}
 
 	private Baldosa[] moverLinea(Baldosa[] baldosasSeleccionadas) {
@@ -215,8 +239,9 @@ public class Juego2048 extends JPanel {
 	}
 
 	private void mantenerTamagnio(LinkedList<Baldosa> listaBaldosas, int numeroLados) {
-		// TODO Auto-generated method stub
-		
+		while (listaBaldosas.size() != numeroLados) {
+			listaBaldosas.add(new Baldosa());
+		}
 	}
 
 	private Baldosa[] obtenerBaldosa(int indiceBaldosa) {
