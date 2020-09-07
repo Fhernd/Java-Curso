@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -27,6 +29,7 @@ public class Juego2048 extends JPanel {
 	private static final Color COLOR_FONDO_PANEL = new Color(0xffffff);
 	private static final int NUMERO_LADOS = 4;
 	private static final int VALOR_NUMERO_BALDOSA_GANADORA = 2048;
+	private static final String FUENTE_BALDOSA = "Arial";
 	
 	private boolean gano;
 	private boolean perdio;
@@ -321,7 +324,27 @@ public class Juego2048 extends JPanel {
 		int valor = baldosa.getValor();
 		int desplazamientoX = calcularDesplazamiento(x);
 		int desplazamientoY = calcularDesplazamiento(y);
-		// TODO: Pendiente...
+		
+		dibujo.setColor(baldosa.obtenerColorBaldosa());
+		dibujo.fillRoundRect(desplazamientoX, desplazamientoY,  desplazamientoY, TAMAGNIO_BALDOSA, 14, 14);
+		dibujo.setColor(baldosa.obtenerColorPrincipalBaldosa());
+		
+		int tamagnioTexto = valor < 100 ? 36 : valor < 1000 ? 32 : 24;
+		Font fuente = new Font(FUENTE_BALDOSA, Font.BOLD, tamagnioTexto);
+		dibujo.setFont(fuente);
+		
+		String textoValor = String.valueOf(valor);
+		FontMetrics fm = getFontMetrics(fuente);
+		
+		int anchoFuente = fm.stringWidth(textoValor);
+		int altoFuente = -(int) fm.getLineMetrics(textoValor, dibujo).getBaselineOffsets()[2];
+		
+		if (valor != 0) {
+			dibujo.drawString(textoValor, desplazamientoX + (TAMAGNIO_BALDOSA - anchoFuente) / 2, 
+					desplazamientoY + TAMAGNIO_BALDOSA - (TAMAGNIO_BALDOSA - altoFuente) / 2 - 2);
+		}
+		
+		
 	}
 
 	private int calcularDesplazamiento(int cantidad) {

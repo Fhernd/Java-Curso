@@ -55,4 +55,8 @@ public class Baldosa {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
+
+	public Color obtenerColorPrincipalBaldosa() {
+		return valor < 16 ? new Color(0x776e65) : new Color(0xf9f6f2);
+	}
 }
