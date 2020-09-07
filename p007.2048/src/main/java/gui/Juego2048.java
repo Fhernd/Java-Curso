@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -294,6 +297,35 @@ public class Juego2048 extends JPanel {
 		baldosas = rotar(180);
 		izquierda();
 		baldosas = rotar(180);
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		
+		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
+		
+		for(int j = 0; j < NUMERO_LADOS; ++j) {
+			for(int i = 0; i < NUMERO_LADOS; ++i) {
+				dibujarBaldosa(g, baldosas[i + j * 4], i, j);
+			}
+		}
+	}
+
+	private void dibujarBaldosa(Graphics g, Baldosa baldosa, int x, int y) {
+		Graphics2D dibujo = ((Graphics2D) g);
+		
+		dibujo.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		dibujo.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
+		
+		int valor = baldosa.getValor();
+		int desplazamientoX = calcularDesplazamiento(x);
+		int desplazamientoY = calcularDesplazamiento(y);
+		// TODO: Pendiente...
+	}
+
+	private int calcularDesplazamiento(int cantidad) {
+		return cantidad * (MARGEN_BALDOSA + TAMAGNIO_BALDOSA) + MARGEN_BALDOSA;
 	}
 }
 
