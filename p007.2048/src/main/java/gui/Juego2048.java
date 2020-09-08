@@ -344,7 +344,29 @@ public class Juego2048 extends JPanel {
 					desplazamientoY + TAMAGNIO_BALDOSA - (TAMAGNIO_BALDOSA - altoFuente) / 2 - 2);
 		}
 		
+		if (gano || perdio) {
+			dibujo.setColor(new Color(255, 255, 255, 30));
+			dibujo.fillRect(0, 0, getWidth(), getHeight());
+			
+			dibujo.setColor(new Color(80, 140, 200));
+			dibujo.setFont(new Font(FUENTE_BALDOSA, Font.BOLD, 50));
+			
+			if (gano) {
+				dibujo.drawString("¡Has ganado!", 60, 150);
+			}
+			
+			if (gano || perdio) {
+				dibujo.setFont(new Font(FUENTE_BALDOSA, Font.PLAIN, 17));
+				dibujo.setColor(new Color(130, 130, 130, 130));
+				
+				dibujo.drawString("Presione Escape para Volver a Jugar", 20, getHeight() - 50);
+			}
+		}
 		
+		dibujo.setFont(new Font(FUENTE_BALDOSA, Font.PLAIN, 16));
+		dibujo.setColor(new Color(0, 0, 0));
+		
+		dibujo.drawString(String.format("Puntaje: %d", puntaje), 195, 365);
 	}
 
 	private int calcularDesplazamiento(int cantidad) {
