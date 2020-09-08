@@ -1,10 +1,18 @@
 package aplicacion;
 
+import javax.swing.SwingUtilities;
+
+import gui.Juego2048Ventana;
+
 public class Aplicacion {
 
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		SwingUtilities.invokeLater(() -> {
+			new Juego2048Ventana(); 
+		});
 	}
 
 }
