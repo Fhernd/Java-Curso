@@ -26,7 +26,7 @@ public class Juego2048 extends JPanel {
 	
 	private static final int TAMAGNIO_BALDOSA = 64;
 	private static final int MARGEN_BALDOSA = 16;
-	private static final Color COLOR_FONDO_PANEL = new Color(0xffffff);
+	private static final Color COLOR_FONDO_PANEL = new Color(0xbbada0);
 	private static final int NUMERO_LADOS = 4;
 	private static final int VALOR_NUMERO_BALDOSA_GANADORA = 2048;
 	private static final String FUENTE_BALDOSA = "Arial";
@@ -306,6 +306,7 @@ public class Juego2048 extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
+		g.setColor(COLOR_FONDO_PANEL);
 		g.fillRect(0, 0, this.getSize().width, this.getSize().height);
 		
 		for(int j = 0; j < NUMERO_LADOS; ++j) {
@@ -326,7 +327,7 @@ public class Juego2048 extends JPanel {
 		int desplazamientoY = calcularDesplazamiento(y);
 		
 		dibujo.setColor(baldosa.obtenerColorBaldosa());
-		dibujo.fillRoundRect(desplazamientoX, desplazamientoY,  desplazamientoY, TAMAGNIO_BALDOSA, 14, 14);
+		dibujo.fillRoundRect(desplazamientoX, desplazamientoY,  TAMAGNIO_BALDOSA, TAMAGNIO_BALDOSA, 14, 14);
 		dibujo.setColor(baldosa.obtenerColorPrincipalBaldosa());
 		
 		int tamagnioTexto = valor < 100 ? 36 : valor < 1000 ? 32 : 24;
@@ -366,7 +367,7 @@ public class Juego2048 extends JPanel {
 		dibujo.setFont(new Font(FUENTE_BALDOSA, Font.PLAIN, 16));
 		dibujo.setColor(new Color(0, 0, 0));
 		
-		dibujo.drawString(String.format("Puntaje: %d", puntaje), 195, 365);
+		dibujo.drawString(String.format("Puntaje: %d", puntaje), 190, 345);
 	}
 
 	private int calcularDesplazamiento(int cantidad) {
