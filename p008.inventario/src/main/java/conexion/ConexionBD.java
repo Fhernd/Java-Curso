@@ -33,9 +33,9 @@ public class ConexionBD {
 	 * @return Conexión a la base de datos.
 	 */
 	private Connection conectar() {
-		final String URL = "jdbc:derby:G:\\Dropbox\\Pro\\Cursos\\Java-Curso\\p006.inventario\\src\\main\\resources\\base_datos";
-		final String USUARIO = "fhernd";
-		final String CLAVE = "User2k20";
+		final String URL = "jdbc:derby://localhost:3307/inventario";
+		final String USUARIO = "gestor";
+		final String CLAVE = "_";
 		Connection conexion = null;
 
 		try {

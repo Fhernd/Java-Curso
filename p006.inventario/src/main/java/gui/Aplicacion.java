@@ -1,12 +1,15 @@
 package gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.BorderLayout;
-import javax.swing.JMenuBar;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
@@ -15,14 +18,6 @@ import modelos.Factura;
 import modelos.GestionInventario;
 import modelos.Producto;
 import modelos.Proveedor;
-
-import javax.swing.JDesktopPane;
-import javax.swing.JFileChooser;
-
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.List;
-import java.awt.event.ActionEvent;
 
 public class Aplicacion {
 
