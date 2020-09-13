@@ -13,6 +13,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class Principal extends JFrame {
 
@@ -22,6 +23,7 @@ public class Principal extends JFrame {
 	private static final long serialVersionUID = -7157629293555435045L;
 	private JPanel pnlPrincipal;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -44,7 +46,7 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 200);
+		setBounds(100, 100, 450, 292);
 		pnlPrincipal = new JPanel();
 		pnlPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlPrincipal);
@@ -65,7 +67,7 @@ public class Principal extends JFrame {
 		pnlEntrada.add(pnlEntradaComponentes);
 		pnlEntradaComponentes.setLayout(new BoxLayout(pnlEntradaComponentes, BoxLayout.X_AXIS));
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("Archivo:");
 		pnlEntradaComponentes.add(lblNewLabel);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -78,8 +80,58 @@ public class Principal extends JFrame {
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		pnlEntradaComponentes.add(horizontalStrut_1);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Seleccionar...");
 		pnlEntradaComponentes.add(btnNewButton);
+		
+		Component verticalStrut_1 = Box.createVerticalStrut(20);
+		pnlEntrada.add(verticalStrut_1);
+		
+		JPanel pnlSalida = new JPanel();
+		pnlSalida.setBorder(new TitledBorder(null, "Salida", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlPrincipal.add(pnlSalida);
+		pnlSalida.setLayout(new BoxLayout(pnlSalida, BoxLayout.Y_AXIS));
+		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		pnlSalida.add(verticalStrut_2);
+		
+		JPanel pnlSalidaComponentes = new JPanel();
+		pnlSalida.add(pnlSalidaComponentes);
+		pnlSalidaComponentes.setLayout(new BoxLayout(pnlSalidaComponentes, BoxLayout.X_AXIS));
+		
+		JLabel lblNewLabel_1 = new JLabel("Archivo:");
+		pnlSalidaComponentes.add(lblNewLabel_1);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		pnlSalidaComponentes.add(horizontalStrut_2);
+		
+		textField_1 = new JTextField();
+		pnlSalidaComponentes.add(textField_1);
+		textField_1.setColumns(10);
+		
+		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
+		pnlSalidaComponentes.add(horizontalStrut_3);
+		
+		JButton btnNewButton_1 = new JButton("Seleccionar...");
+		pnlSalidaComponentes.add(btnNewButton_1);
+		
+		Component verticalStrut_3 = Box.createVerticalStrut(10);
+		pnlSalida.add(verticalStrut_3);
+		
+		JComboBox comboBox = new JComboBox();
+		pnlSalida.add(comboBox);
+		
+		Component verticalStrut_5 = Box.createVerticalStrut(10);
+		pnlSalida.add(verticalStrut_5);
+		
+		Component verticalStrut_4 = Box.createVerticalStrut(20);
+		pnlPrincipal.add(verticalStrut_4);
+		
+		JPanel panel = new JPanel();
+		pnlPrincipal.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnNewButton_2 = new JButton("Convertir");
+		panel.add(btnNewButton_2);
 	}
 
 }
