@@ -9,11 +9,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.Box;
 import javax.swing.border.TitledBorder;
+
+import util.FiltroSeleccionMultimedia;
+
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
@@ -81,6 +88,13 @@ public class Principal extends JFrame {
 		pnlEntradaComponentes.add(hst2);
 		
 		JButton btnEntradaSeleccionarArchivo = new JButton("Seleccionar...");
+		btnEntradaSeleccionarArchivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser dialogoSeleccionMultimedia = new JFileChooser();
+				dialogoSeleccionMultimedia.addChoosableFileFilter(new FiltroSeleccionMultimedia());
+				
+			}
+		});
 		pnlEntradaComponentes.add(btnEntradaSeleccionarArchivo);
 		
 		Component vst2 = Box.createVerticalStrut(20);
