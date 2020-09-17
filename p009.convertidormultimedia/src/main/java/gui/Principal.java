@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
@@ -92,7 +93,15 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser dialogoSeleccionMultimedia = new JFileChooser();
 				dialogoSeleccionMultimedia.addChoosableFileFilter(new FiltroSeleccionMultimedia());
+				dialogoSeleccionMultimedia.setMultiSelectionEnabled(false);
 				
+				if (dialogoSeleccionMultimedia.showOpenDialog(Principal.this) == JFileChooser.APPROVE_OPTION) {
+					File archivoSeleccionado = dialogoSeleccionMultimedia.getSelectedFile();
+					
+					String ruta = archivoSeleccionado.getAbsolutePath();
+					
+					txtEntradaArchivo.setText(ruta);
+				}
 			}
 		});
 		pnlEntradaComponentes.add(btnEntradaSeleccionarArchivo);
