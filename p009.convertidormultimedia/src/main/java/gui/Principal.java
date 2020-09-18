@@ -22,6 +22,9 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
@@ -33,6 +36,8 @@ public class Principal extends JFrame {
 	private JPanel pnlPrincipal;
 	private JTextField txtEntradaArchivo;
 	private JTextField txtSalidaArchivo;
+	
+	Map<String, List<String>> formatosSalida;
 
 	/**
 	 * Launch the application.
@@ -57,7 +62,7 @@ public class Principal extends JFrame {
 		setResizable(false);
 		setTitle("Convertidor Multimedia");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 520, 292);
+		setBounds(100, 100, 520, 320);
 		pnlPrincipal = new JPanel();
 		pnlPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pnlPrincipal);
@@ -106,7 +111,7 @@ public class Principal extends JFrame {
 					String extension = identificarFormatoSalida(ruta);
 
 					if (!extension.isEmpty()) {
-						// ...
+						cargarFormatosSalida(extension);
 					} else {
 						JOptionPane.showMessageDialog(Principal.this, "El archivo seleccionado no tiene extensión.",
 								"Mensaje", JOptionPane.WARNING_MESSAGE);
@@ -166,6 +171,17 @@ public class Principal extends JFrame {
 
 		JButton btnConvertir = new JButton("Convertir");
 		pnlAccion.add(btnConvertir);
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		pnlPrincipal.add(verticalStrut);
+		
+		formatosSalida = new HashMap<>();
+		
+		formatosSalida.put(FiltroSeleccionMultimedia.MPEG4, List.of("MP3", "WAV"));
+	}
+
+	protected void cargarFormatosSalida(String extension) {
+		
 	}
 
 	protected String identificarFormatoSalida(String ruta) {

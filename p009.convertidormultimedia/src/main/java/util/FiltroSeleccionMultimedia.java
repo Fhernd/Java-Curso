@@ -6,9 +6,9 @@ import javax.swing.filechooser.FileFilter;
 
 public class FiltroSeleccionMultimedia extends FileFilter {
 	
-	private final static String MPEG4 = "mp4";
-	private final static String MP3 = "mp3";
-	private final static String WAV = "wav";
+	public final static String MPEG4 = "mp4";
+	public final static String MP3 = "mp3";
+	public final static String WAV = "wav";
 
 	@Override
 	public boolean accept(File f) {
