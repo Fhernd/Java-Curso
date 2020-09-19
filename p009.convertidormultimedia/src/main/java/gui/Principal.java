@@ -36,6 +36,7 @@ public class Principal extends JFrame {
 	private JPanel pnlPrincipal;
 	private JTextField txtEntradaArchivo;
 	private JTextField txtSalidaArchivo;
+	private JComboBox cbxFormatos;
 	
 	Map<String, List<String>> formatosSalida;
 
@@ -108,7 +109,7 @@ public class Principal extends JFrame {
 
 					txtEntradaArchivo.setText(ruta);
 
-					String extension = identificarFormatoSalida(ruta);
+					String extension = identificarFormatoSalida(ruta).toLowerCase();
 
 					if (!extension.isEmpty()) {
 						cargarFormatosSalida(extension);
@@ -156,7 +157,7 @@ public class Principal extends JFrame {
 		Component vst4 = Box.createVerticalStrut(10);
 		pnlSalida.add(vst4);
 
-		JComboBox cbxFormatos = new JComboBox();
+		cbxFormatos = new JComboBox();
 		pnlSalida.add(cbxFormatos);
 
 		Component vst5 = Box.createVerticalStrut(10);
@@ -177,11 +178,18 @@ public class Principal extends JFrame {
 		
 		formatosSalida = new HashMap<>();
 		
-		formatosSalida.put(FiltroSeleccionMultimedia.MPEG4, List.of("MP3", "WAV"));
+		formatosSalida.put(FiltroSeleccionMultimedia.MPEG4, List.of("mp3", "wav"));
+		formatosSalida.put(FiltroSeleccionMultimedia.MP3, List.of("wav", "ogg"));
 	}
 
 	protected void cargarFormatosSalida(String extension) {
+		List<String> extensionesDisponiblesSalida = formatosSalida.get(extension);
 		
+		if (extensionesDisponiblesSalida != null) {
+			cbxFormatos.removeAll();
+			
+			extensionesDisponiblesSalida.forEach(e -> cbxFormatos.addItem(e));
+		}
 	}
 
 	protected String identificarFormatoSalida(String ruta) {
