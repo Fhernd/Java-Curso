@@ -37,7 +37,7 @@ public class Principal extends JFrame {
 	private JTextField txtEntradaArchivo;
 	private JTextField txtSalidaArchivo;
 	private JComboBox cbxFormatos;
-	
+
 	Map<String, List<String>> formatosSalida;
 
 	/**
@@ -101,6 +101,8 @@ public class Principal extends JFrame {
 				JFileChooser dialogoSeleccionMultimedia = new JFileChooser();
 				dialogoSeleccionMultimedia.addChoosableFileFilter(new FiltroSeleccionMultimedia());
 				dialogoSeleccionMultimedia.setMultiSelectionEnabled(false);
+				dialogoSeleccionMultimedia
+						.removeChoosableFileFilter(dialogoSeleccionMultimedia.getAcceptAllFileFilter());
 
 				if (dialogoSeleccionMultimedia.showOpenDialog(Principal.this) == JFileChooser.APPROVE_OPTION) {
 					File archivoSeleccionado = dialogoSeleccionMultimedia.getSelectedFile();
@@ -152,6 +154,29 @@ public class Principal extends JFrame {
 		pnlSalidaComponentes.add(hst4);
 
 		JButton btnSalidaSeleccionarArchivo = new JButton("Seleccionar...");
+		btnSalidaSeleccionarArchivo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int indiceExtension = cbxFormatos.getSelectedIndex();
+
+				if (indiceExtension == 0) {
+					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar una extensión.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				JFileChooser selectorArchivoSalida = new JFileChooser();
+				selectorArchivoSalida.setMultiSelectionEnabled(false);
+				selectorArchivoSalida.setDialogTitle("Especique la ruta y el nombre del archivo a guardar...");
+				
+				int resultado = selectorArchivoSalida.showSaveDialog(Principal.this);
+				
+				if (resultado == JFileChooser.APPROVE_OPTION) {
+					File nuevoArchivo = selectorArchivoSalida.getSelectedFile();
+					
+					// nuevoArchivo.renameTo(dest)
+				}
+			}
+		});
 		pnlSalidaComponentes.add(btnSalidaSeleccionarArchivo);
 
 		Component vst4 = Box.createVerticalStrut(10);
@@ -172,22 +197,25 @@ public class Principal extends JFrame {
 
 		JButton btnConvertir = new JButton("Convertir");
 		pnlAccion.add(btnConvertir);
-		
+
 		Component verticalStrut = Box.createVerticalStrut(20);
 		pnlPrincipal.add(verticalStrut);
-		
+
 		formatosSalida = new HashMap<>();
-		
+
 		formatosSalida.put(FiltroSeleccionMultimedia.MPEG4, List.of("mp3", "wav"));
 		formatosSalida.put(FiltroSeleccionMultimedia.MP3, List.of("wav", "ogg"));
+		cbxFormatos.addItem("Seleccione tipo de archivo para la salida...");
 	}
 
 	protected void cargarFormatosSalida(String extension) {
 		List<String> extensionesDisponiblesSalida = formatosSalida.get(extension);
-		
+
 		if (extensionesDisponiblesSalida != null) {
-			cbxFormatos.removeAll();
-			
+			cbxFormatos.removeAllItems();
+
+			cbxFormatos.addItem("Seleccione tipo de archivo para la salida...");
+
 			extensionesDisponiblesSalida.forEach(e -> cbxFormatos.addItem(e));
 		}
 	}
