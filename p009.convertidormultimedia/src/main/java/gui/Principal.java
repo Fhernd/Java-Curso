@@ -172,8 +172,13 @@ public class Principal extends JFrame {
 				
 				if (resultado == JFileChooser.APPROVE_OPTION) {
 					File nuevoArchivo = selectorArchivoSalida.getSelectedFile();
+					String nombreArchivo = nuevoArchivo.toString();
 					
-					// nuevoArchivo.renameTo(dest)
+					if (!nombreArchivo.endsWith(cbxFormatos.getSelectedItem().toString())) {
+						nombreArchivo = nombreArchivo.concat(".".concat(cbxFormatos.getSelectedItem().toString()));
+					}
+					
+					txtSalidaArchivo.setText(nombreArchivo);
 				}
 			}
 		});
@@ -196,6 +201,23 @@ public class Principal extends JFrame {
 		pnlAccion.setLayout(new BorderLayout(0, 0));
 
 		JButton btnConvertir = new JButton("Convertir");
+		btnConvertir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(txtEntradaArchivo.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar un archivo de entrada.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (txtSalidaArchivo.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar un archivo de salida.",
+							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				
+			}
+		});
 		pnlAccion.add(btnConvertir);
 
 		Component verticalStrut = Box.createVerticalStrut(20);
