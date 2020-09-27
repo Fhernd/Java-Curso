@@ -4,6 +4,11 @@ import java.io.File;
 
 import javax.swing.SwingWorker;
 
+import ws.schild.jave.Encoder;
+import ws.schild.jave.MultimediaObject;
+import ws.schild.jave.encode.AudioAttributes;
+import ws.schild.jave.encode.EncodingAttributes;
+
 public class ConvertirMultimediaTask extends SwingWorker<Void, Void> {
 	
 	private String formatoEntrada;
@@ -36,7 +41,21 @@ public class ConvertirMultimediaTask extends SwingWorker<Void, Void> {
 
 
 	private void convertirMp4AMp3() {
-		
+		try {
+			AudioAttributes audioAttributes = new AudioAttributes();
+			audioAttributes.setCodec("libmp3lame");
+			audioAttributes.setBitRate(128000);
+			audioAttributes.setChannels(2);
+			audioAttributes.setSamplingRate(44100);
+			
+			EncodingAttributes encodingAttributes = new EncodingAttributes();
+			encodingAttributes.setAudioAttributes(audioAttributes);
+			
+			Encoder encoder = new Encoder();
+			encoder.encode(new MultimediaObject(archivoEntrada), archivoSalida, encodingAttributes);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.Box;
 import javax.swing.border.TitledBorder;
 
+import util.ConvertirMultimediaTask;
 import util.FiltroSeleccionMultimedia;
 
 import java.awt.Component;
@@ -39,6 +40,12 @@ public class Principal extends JFrame {
 	private JComboBox cbxFormatos;
 
 	Map<String, List<String>> formatosSalida;
+	
+	private String formatoEntrada;
+	private String formatoSalida;
+	
+	private File archivoEntrada;
+	private File archivoSalida;
 
 	/**
 	 * Launch the application.
@@ -105,9 +112,9 @@ public class Principal extends JFrame {
 						.removeChoosableFileFilter(dialogoSeleccionMultimedia.getAcceptAllFileFilter());
 
 				if (dialogoSeleccionMultimedia.showOpenDialog(Principal.this) == JFileChooser.APPROVE_OPTION) {
-					File archivoSeleccionado = dialogoSeleccionMultimedia.getSelectedFile();
+					archivoEntrada = dialogoSeleccionMultimedia.getSelectedFile();
 
-					String ruta = archivoSeleccionado.getAbsolutePath();
+					String ruta = archivoEntrada.getAbsolutePath();
 
 					txtEntradaArchivo.setText(ruta);
 
@@ -115,6 +122,7 @@ public class Principal extends JFrame {
 
 					if (!extension.isEmpty()) {
 						cargarFormatosSalida(extension);
+						formatoEntrada = extension;
 					} else {
 						JOptionPane.showMessageDialog(Principal.this, "El archivo seleccionado no tiene extensión.",
 								"Mensaje", JOptionPane.WARNING_MESSAGE);
@@ -159,25 +167,26 @@ public class Principal extends JFrame {
 				int indiceExtension = cbxFormatos.getSelectedIndex();
 
 				if (indiceExtension == 0) {
-					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar una extensión.",
-							"Mensaje", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar una extensión.", "Mensaje",
+							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				JFileChooser selectorArchivoSalida = new JFileChooser();
 				selectorArchivoSalida.setMultiSelectionEnabled(false);
 				selectorArchivoSalida.setDialogTitle("Especique la ruta y el nombre del archivo a guardar...");
-				
+
 				int resultado = selectorArchivoSalida.showSaveDialog(Principal.this);
-				
+
 				if (resultado == JFileChooser.APPROVE_OPTION) {
-					File nuevoArchivo = selectorArchivoSalida.getSelectedFile();
-					String nombreArchivo = nuevoArchivo.toString();
-					
+					archivoSalida = selectorArchivoSalida.getSelectedFile();
+					String nombreArchivo = archivoSalida.toString();
+
 					if (!nombreArchivo.endsWith(cbxFormatos.getSelectedItem().toString())) {
+						formatoSalida = cbxFormatos.getSelectedItem().toString();
 						nombreArchivo = nombreArchivo.concat(".".concat(cbxFormatos.getSelectedItem().toString()));
 					}
-					
+
 					txtSalidaArchivo.setText(nombreArchivo);
 				}
 			}
@@ -203,18 +212,22 @@ public class Principal extends JFrame {
 		JButton btnConvertir = new JButton("Convertir");
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(txtEntradaArchivo.getText().isEmpty()) {
+				if (txtEntradaArchivo.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar un archivo de entrada.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
-				
+
 				if (txtSalidaArchivo.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(Principal.this, "Primero debe seleccionar un archivo de salida.",
 							"Mensaje", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
+				archivoSalida = new File(txtSalidaArchivo.getText());
+
+				ConvertirMultimediaTask tareaConversiones = new ConvertirMultimediaTask(formatoEntrada, formatoSalida,
+						archivoEntrada, archivoSalida);
 				
 			}
 		});
