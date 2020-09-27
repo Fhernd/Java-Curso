@@ -229,6 +229,7 @@ public class Principal extends JFrame {
 				ConvertirMultimediaTask tareaConversiones = new ConvertirMultimediaTask(formatoEntrada, formatoSalida,
 						archivoEntrada, archivoSalida);
 				
+				tareaConversiones.execute();
 			}
 		});
 		pnlAccion.add(btnConvertir);
