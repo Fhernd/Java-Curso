@@ -239,7 +239,7 @@ public class Principal extends JFrame {
 
 		formatosSalida = new HashMap<>();
 
-		formatosSalida.put(FiltroSeleccionMultimedia.MPEG4, List.of("mp3", "wav"));
+		formatosSalida.put(FiltroSeleccionMultimedia.MPEG4, List.of("mp3", "wav", "mkv"));
 		formatosSalida.put(FiltroSeleccionMultimedia.MP3, List.of("wav", "ogg"));
 		cbxFormatos.addItem("Seleccione tipo de archivo para la salida...");
 	}

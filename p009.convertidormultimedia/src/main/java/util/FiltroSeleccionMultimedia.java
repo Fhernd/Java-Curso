@@ -9,6 +9,7 @@ public class FiltroSeleccionMultimedia extends FileFilter {
 	public final static String MPEG4 = "mp4";
 	public final static String MP3 = "mp3";
 	public final static String WAV = "wav";
+	public final static String MKV = "mkv";
 
 	@Override
 	public boolean accept(File f) {

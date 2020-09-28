@@ -8,6 +8,8 @@ import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.encode.EncodingAttributes;
+import ws.schild.jave.encode.VideoAttributes;
+import ws.schild.jave.info.VideoSize;
 
 public class ConvertirMultimediaTask extends SwingWorker<Void, Void> {
 	
@@ -33,9 +35,38 @@ public class ConvertirMultimediaTask extends SwingWorker<Void, Void> {
 		
 		if (formatoEntrada.equals(FiltroSeleccionMultimedia.MPEG4) && formatoSalida.equals(FiltroSeleccionMultimedia.MP3)) {
 			convertirMp4AMp3();
+		} else if (formatoEntrada.equals(FiltroSeleccionMultimedia.MPEG4) && formatoSalida.equals(FiltroSeleccionMultimedia.MKV)) {
+			convertirMp4AMkv();
 		}
 		
 		return null;
+	}
+
+
+
+	private void convertirMp4AMkv() {
+		try {
+			AudioAttributes audioAttributes = new AudioAttributes();
+			audioAttributes.setCodec("libmp3lame");
+			audioAttributes.setBitRate(64000);
+			audioAttributes.setChannels(1);
+			audioAttributes.setSamplingRate(22050);
+			
+			VideoAttributes videoAttributes = new VideoAttributes();
+			videoAttributes.setCodec("mpeg4");
+			videoAttributes.setBitRate(160000);
+			videoAttributes.setFrameRate(15);
+			videoAttributes.setSize(new VideoSize(400, 300));
+			
+			EncodingAttributes encodingAttributes = new EncodingAttributes();
+			encodingAttributes.setAudioAttributes(audioAttributes);
+			encodingAttributes.setVideoAttributes(videoAttributes);
+			
+			Encoder encoder = new Encoder();
+			encoder.encode(new MultimediaObject(archivoEntrada), archivoSalida, encodingAttributes);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
