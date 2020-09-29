@@ -38,6 +38,7 @@ public class Principal extends JFrame {
 	private JTextField txtEntradaArchivo;
 	private JTextField txtSalidaArchivo;
 	private JComboBox cbxFormatos;
+	private JButton btnConvertir;
 
 	Map<String, List<String>> formatosSalida;
 	
@@ -209,7 +210,7 @@ public class Principal extends JFrame {
 		pnlPrincipal.add(pnlAccion);
 		pnlAccion.setLayout(new BorderLayout(0, 0));
 
-		JButton btnConvertir = new JButton("Convertir");
+		btnConvertir = new JButton("Convertir");
 		btnConvertir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (txtEntradaArchivo.getText().isEmpty()) {
@@ -226,9 +227,10 @@ public class Principal extends JFrame {
 				
 				archivoSalida = new File(txtSalidaArchivo.getText());
 
-				ConvertirMultimediaTask tareaConversiones = new ConvertirMultimediaTask(formatoEntrada, formatoSalida,
+				ConvertirMultimediaTask tareaConversiones = new ConvertirMultimediaTask(Principal.this, formatoEntrada, formatoSalida,
 						archivoEntrada, archivoSalida);
 				
+				btnConvertir.setEnabled(false);
 				tareaConversiones.execute();
 			}
 		});
@@ -268,4 +270,8 @@ public class Principal extends JFrame {
 		return extension;
 	}
 
+	public void notificarFinalizacionConversion() {
+		JOptionPane.showMessageDialog(this, "La conversión ha finalizado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+		btnConvertir.setEnabled(true);
+	}
 }

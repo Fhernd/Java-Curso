@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.swing.SwingWorker;
 
+import gui.Principal;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.MultimediaObject;
 import ws.schild.jave.encode.AudioAttributes;
@@ -17,18 +18,17 @@ public class ConvertirMultimediaTask extends SwingWorker<Void, Void> {
 	private String formatoSalida;
 	private File archivoEntrada;
 	private File archivoSalida;
-	
+	private Principal principal;
 	
 
-	public ConvertirMultimediaTask(String formatoEntrada, String formatoSalida, File archivoEntrada,
+	public ConvertirMultimediaTask(Principal principal, String formatoEntrada, String formatoSalida, File archivoEntrada,
 			File archivoSalida) {
+		this.principal = principal;
 		this.formatoEntrada = formatoEntrada;
 		this.formatoSalida = formatoSalida;
 		this.archivoEntrada = archivoEntrada;
 		this.archivoSalida = archivoSalida;
 	}
-
-
 
 	@Override
 	protected Void doInBackground() throws Exception {
@@ -42,7 +42,10 @@ public class ConvertirMultimediaTask extends SwingWorker<Void, Void> {
 		return null;
 	}
 
-
+	@Override
+	protected void done() {
+		principal.notificarFinalizacionConversion();
+	}
 
 	private void convertirMp4AMkv() {
 		try {
