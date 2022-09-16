@@ -1,0 +1,20 @@
+
+Proyecto 10 - Sistema para Gestionar una Lavandería
+
+Nos ha contratado para crear un sistema de información que gestione la información de una lavandería.
+Los usuarios de tipo operario deben poder registrar servicios solicitados por los clientes.
+
+Es necesario mantener un registro de los usuarios y sus servicios.
+
+Al momento de crear un servicio se deben capturar los datos del cliente y los del servicio.
+Cuando el cliente pase por sus prendas se debe registrar los datos de entrega.
+
+Para ingresar a la aplicación el operario debe ingresar credenciales de acceso.
+
+Se pide, además, los siguientes reportes:
+1. Reporte de los clientes que más servicios han solicitado en un rango de fechas.
+2. Reporte con los tipos de servicio de lavandería más solicitado.
+3. Reporte con los empleados más activos en un rango de fechas.
+4. Reporte de ganancias para un rango de fechas dada.
+
+Los datos deben estar almacenados en una base de datos tipo MySQL.
