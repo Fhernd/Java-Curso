@@ -421,4 +421,27 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Modifica los datos de un empleado.
+     * @param empleado Empleado a modificar.
+     * @return true si se modificó correctamente, false en caso contrario.
+     */
+    public boolean modificarEmpleado(Empleado empleado) {
+        try {
+            final String SQL = "UPDATE empleado SET nombres = ?, apellidos = ?, sueldo = ?, rol_id = ? WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, empleado.getNombres());
+            sentencia.setString(2, empleado.getApellidos());
+            sentencia.setDouble(3, empleado.getSueldo());
+            sentencia.setInt(4, empleado.getRolId());
+            sentencia.setInt(5, empleado.getId());
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
