@@ -653,4 +653,38 @@ public class AccesoDatos {
 
         return servicios;
     }
+
+    /**
+     * Lista servicios a partir del ID de un empleado.
+     * @param empleadoId ID del empleado.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorEmpleadoId(int empleadoId) {
+        List<Servicio> servicios = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM servicio WHERE empleado_id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, empleadoId);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Servicio servicio = new Servicio();
+                servicio.setId(resultado.getInt("id"));
+                servicio.setDescripcion(resultado.getString("descripcion"));
+                servicio.setFechaHoraRecepcion(resultado.getTimestamp("fecha_hora_recepcion").toLocalDateTime());
+                servicio.setFechaHoraEntrega(resultado.getTimestamp("fecha_hora_entrega").toLocalDateTime());
+                servicio.setEmpleadoId(empleadoId);
+                servicio.setClienteId(resultado.getInt("cliente_id"));
+                servicio.setDireccionId(resultado.getInt("direccion_id"));
+
+                servicios.add(servicio);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return servicios;
+    }
 }
