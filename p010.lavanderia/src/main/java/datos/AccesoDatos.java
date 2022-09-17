@@ -269,4 +269,28 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Actualiza los datos de un cliente.
+     * @param cliente Cliente a actualizar.
+     * @return true si se actualizó correctamente, false en caso contrario.
+     */
+    public boolean actualizarCliente(Cliente cliente) {
+        try {
+            final String SQL = "UPDATE cliente SET documento = ?, nombres = ?, apellidos = ?, correo = ?, tipo_documento_id = ? WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, cliente.getDocumento());
+            sentencia.setString(2, cliente.getNombres());
+            sentencia.setString(3, cliente.getApellidos());
+            sentencia.setString(4, cliente.getCorreo());
+            sentencia.setInt(5, cliente.getTipoDocumentoId());
+            sentencia.setInt(6, cliente.getId());
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
