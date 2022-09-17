@@ -372,4 +372,23 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Elimina un usuario a partir de su correo.
+     * @param correo Correo del usuario.
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
+    public boolean eliminarUsuarioPorCorreo(String correo) {
+        try {
+            final String SQL = "DELETE FROM usuario WHERE correo = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, correo);
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
