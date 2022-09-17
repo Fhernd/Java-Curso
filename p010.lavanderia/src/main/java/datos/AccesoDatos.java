@@ -391,4 +391,34 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Crear un nuevo empleado.
+     * @param empleado Empleado a crear.
+     * @return Empleado Empleado creado.
+     */
+    public Empleado crearEmpleado(Empleado empleado) {
+        try {
+            final String SQL = "INSERT INTO empleado (nombres, apellidos, sueldo, rol_id) VALUES (?, ?, ?, ?)";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            sentencia.setString(1, empleado.getNombres());
+            sentencia.setString(2, empleado.getApellidos());
+            sentencia.setDouble(3, empleado.getSueldo());
+            sentencia.setInt(4, empleado.getRolId());
+
+            sentencia.executeUpdate();
+
+            ResultSet resultado = sentencia.getGeneratedKeys();
+
+            if (resultado.next()) {
+                empleado.setId(resultado.getInt(1));
+
+                return empleado;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
