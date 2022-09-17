@@ -6,26 +6,23 @@ public class Empleado {
     private String apellidos;
     private double sueldo;
     private int rolId;
-    private int usuarioId;
 
     public Empleado() {
     }
 
-    public Empleado(String nombres, String apellidos, double sueldo, int rolId, int usuarioId) {
+    public Empleado(String nombres, String apellidos, double sueldo, int rolId) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.sueldo = sueldo;
         this.rolId = rolId;
-        this.usuarioId = usuarioId;
     }
 
-    public Empleado(int id, String nombres, String apellidos, double sueldo, int rolId, int usuarioId) {
+    public Empleado(int id, String nombres, String apellidos, double sueldo, int rolId) {
         this.id = id;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.sueldo = sueldo;
         this.rolId = rolId;
-        this.usuarioId = usuarioId;
     }
 
     public int getId() {
@@ -66,13 +63,5 @@ public class Empleado {
 
     public void setRolId(int rolId) {
         this.rolId = rolId;
-    }
-
-    public int getUsuarioId() {
-        return usuarioId;
-    }
-
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
     }
 }

@@ -5,6 +5,8 @@ public class Usuario {
     private String correo;
     private String clave;
 
+    private int empleadoId;
+
     public Usuario() {
     }
 
@@ -17,6 +19,13 @@ public class Usuario {
         this.id = id;
         this.correo = correo;
         this.clave = clave;
+    }
+
+    public Usuario(int id, String correo, String clave, int empleadoId) {
+        this.id = id;
+        this.correo = correo;
+        this.clave = clave;
+        this.empleadoId = empleadoId;
     }
 
     public int getId() {
@@ -41,5 +50,13 @@ public class Usuario {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public int getEmpleadoId() {
+        return empleadoId;
+    }
+
+    public void setEmpleadoId(int empleadoId) {
+        this.empleadoId = empleadoId;
     }
 }

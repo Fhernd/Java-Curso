@@ -320,10 +320,11 @@ public class AccesoDatos {
      */
     public Usuario crearUsuario(Usuario usuario) {
         try {
-            final String SQL = "INSERT INTO usuario (correo, clave) VALUES (?, ?)";
+            final String SQL = "INSERT INTO usuario (correo, clave, empleado_id) VALUES (?, ?, ?)";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, usuario.getCorreo());
             sentencia.setString(2, usuario.getClave());
+            sentencia.setInt(3, usuario.getEmpleadoId());
 
             sentencia.executeUpdate();
 
@@ -340,4 +341,6 @@ public class AccesoDatos {
 
         return null;
     }
+
+
 }
