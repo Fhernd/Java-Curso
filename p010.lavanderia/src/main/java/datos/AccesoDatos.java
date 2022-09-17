@@ -342,5 +342,34 @@ public class AccesoDatos {
         return null;
     }
 
+    /**
+     * Inicia sesión a partir de las credenciales de un usuario.
+     * @param correo Correo del usuario.
+     * @param clave Clave del usuario.
+     *@return Usuario Usuario encontrado.
+     */
+    public Usuario iniciarSesion(String correo, String clave) {
+        try {
+            final String SQL = "SELECT * FROM usuario WHERE correo = ? AND clave = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, correo);
+            sentencia.setString(2, clave);
 
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(resultado.getInt("id"));
+                usuario.setCorreo(correo);
+                usuario.setClave(clave);
+                usuario.setEmpleadoId(resultado.getInt("empleado_id"));
+
+                return usuario;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
