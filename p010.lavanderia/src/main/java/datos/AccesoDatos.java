@@ -1,9 +1,6 @@
 package datos;
 
-import modelos.Direccion;
-import modelos.Rol;
-import modelos.TipoAtencion;
-import modelos.TipoDocumento;
+import modelos.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -178,5 +175,36 @@ public class AccesoDatos {
         }
 
         return direcciones;
+    }
+
+    /**
+     * Crea un nuevo cliente.
+     * @param cliente Cliente a crear.
+     * @return Cliente Cliente creado.
+     */
+    public Cliente crearCliente(Cliente cliente) {
+        try {
+            final String SQL = "INSERT INTO cliente (documento, nombres, apellidos, correo, tipo_documento_id) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            sentencia.setString(1, cliente.getDocumento());
+            sentencia.setString(2, cliente.getNombres());
+            sentencia.setString(3, cliente.getApellidos());
+            sentencia.setString(4, cliente.getCorreo());
+            sentencia.setInt(5, cliente.getTipoDocumentoId());
+
+            sentencia.executeUpdate();
+
+            ResultSet resultado = sentencia.getGeneratedKeys();
+
+            if (resultado.next()) {
+                cliente.setId(resultado.getInt(1));
+
+                return cliente;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
     }
 }
