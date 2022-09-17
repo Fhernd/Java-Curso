@@ -1,5 +1,6 @@
 package datos;
 
+import modelos.Direccion;
 import modelos.Rol;
 import modelos.TipoAtencion;
 import modelos.TipoDocumento;
@@ -92,5 +93,32 @@ public class AccesoDatos {
         }
 
         return tiposAtencion;
+    }
+
+    /**
+     * Crea una nueva dirección.
+     * @param direccion Direccion a crear.
+     */
+    public Direccion crearDireccion(Direccion direccion) {
+        try {
+            final String SQL = "INSERT INTO direccion (descripcion, client_id) VALUES (?, ?)";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            sentencia.setString(1, direccion.getDescripcion());
+            sentencia.setInt(2, direccion.getClienteId());
+
+            sentencia.executeUpdate();
+
+            ResultSet resultado = sentencia.getGeneratedKeys();
+
+            if (resultado.next()) {
+                direccion.setId(resultado.getInt(1));
+
+                return direccion;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
     }
 }
