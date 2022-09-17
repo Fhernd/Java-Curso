@@ -1,6 +1,7 @@
 package datos;
 
 import modelos.Rol;
+import modelos.TipoDocumento;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,15 +19,16 @@ public class AccesoDatos {
 
     /**
      * Obtiene todos los roles.
+     *
      * @return Lista de roles.
      */
     public List<Rol> obtenerRoles() {
+        List<Rol> roles = new ArrayList<>();
         try {
             final String SQL = "SELECT * FROM rol";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             ResultSet resultado = sentencia.executeQuery();
 
-            List<Rol> roles = new ArrayList<>();
 
             while (resultado.next()) {
                 Rol rol = new Rol();
@@ -37,5 +39,31 @@ public class AccesoDatos {
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
+
+        return roles;
+    }
+
+    /**
+     * Obtiene todos los tipos de documentos.
+     */
+    public List<TipoDocumento> obtenerTiposDocumentos() {
+        List<TipoDocumento> tiposDocumentos = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM tipo_documento";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                TipoDocumento tipoDocumento = new TipoDocumento();
+                tipoDocumento.setId(resultado.getInt("id"));
+                tipoDocumento.setNombre(resultado.getString("nombre"));
+                tiposDocumentos.add(tipoDocumento);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return tiposDocumentos;
     }
 }
