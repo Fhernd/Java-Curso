@@ -149,4 +149,34 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Obtener todas las direcciones de un cliente a partir de su ID.
+     * @param clienteId ID del cliente.
+     * @return Lista de direcciones.
+     */
+    public List<Direccion> obtenerDireccionesPorClientId(int clienteId) {
+        List<Direccion> direcciones = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM direccion WHERE client_id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, clienteId);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Direccion direccion = new Direccion();
+                direccion.setId(resultado.getInt("id"));
+                direccion.setDescripcion(resultado.getString("descripcion"));
+                direccion.setClienteId(clienteId);
+
+                direcciones.add(direccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return direcciones;
+    }
 }
