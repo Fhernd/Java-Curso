@@ -312,4 +312,32 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Crea un nuevo usuario.
+     * @param usuario Usuario a crear.
+     * @return Usuario Usuario creado.
+     */
+    public Usuario crearUsuario(Usuario usuario) {
+        try {
+            final String SQL = "INSERT INTO usuario (correo, clave) VALUES (?, ?)";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            sentencia.setString(1, usuario.getCorreo());
+            sentencia.setString(2, usuario.getClave());
+
+            sentencia.executeUpdate();
+
+            ResultSet resultado = sentencia.getGeneratedKeys();
+
+            if (resultado.next()) {
+                usuario.setId(resultado.getInt(1));
+
+                return usuario;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
