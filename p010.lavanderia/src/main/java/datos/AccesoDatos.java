@@ -493,4 +493,34 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Crea una nueva atención.
+     * @param atencion Atención a crear.
+     * @return Atencion Atención creada.
+     */
+    public Atencion crearAtencion(Atencion atencion) {
+        try {
+            final String SQL = "INSERT INTO atencion (cantidad, precio, tipo_atencion_id, servicio_id) VALUES (?, ?, ?, ?)";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            sentencia.setInt(1, atencion.getCantidad());
+            sentencia.setDouble(2, atencion.getPrecio());
+            sentencia.setInt(3, atencion.getTipoAtencionId());
+            sentencia.setInt(4, atencion.getServicioId());
+
+            sentencia.executeUpdate();
+
+            ResultSet resultado = sentencia.getGeneratedKeys();
+
+            if (resultado.next()) {
+                atencion.setId(resultado.getInt(1));
+
+                return atencion;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
