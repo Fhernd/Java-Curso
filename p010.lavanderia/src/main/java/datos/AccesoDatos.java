@@ -238,4 +238,35 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Obtiene un cliente a partir de su documento.
+     * @param documento Documento del cliente.
+     * @return Cliente Cliente encontrado.
+     */
+    public Cliente obtenerClientePorDocumento(String documento) {
+        try {
+            final String SQL = "SELECT * FROM cliente WHERE documento = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, documento);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(resultado.getInt("id"));
+                cliente.setDocumento(documento);
+                cliente.setNombres(resultado.getString("nombres"));
+                cliente.setApellidos(resultado.getString("apellidos"));
+                cliente.setCorreo(resultado.getString("correo"));
+                cliente.setTipoDocumentoId(resultado.getInt("tipo_documento_id"));
+
+                return cliente;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
