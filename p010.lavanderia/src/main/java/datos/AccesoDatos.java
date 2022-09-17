@@ -555,4 +555,36 @@ public class AccesoDatos {
 
         return atenciones;
     }
+
+    /**
+     * Listar atenciones a partir del ID de un tipo de atención.
+     * @param tipoAtencionId ID del tipo de atención.
+     * @return List<Atencion> Lista de atenciones.
+     */
+    public List<Atencion> obtenerAtencionesPorTipoAtencionId(int tipoAtencionId) {
+        List<Atencion> atenciones = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM atencion WHERE tipo_atencion_id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, tipoAtencionId);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Atencion atencion = new Atencion();
+                atencion.setId(resultado.getInt("id"));
+                atencion.setCantidad(resultado.getInt("cantidad"));
+                atencion.setPrecio(resultado.getDouble("precio"));
+                atencion.setTipoAtencionId(resultado.getInt("tipo_atencion_id"));
+                atencion.setServicioId(resultado.getInt("servicio_id"));
+
+                atenciones.add(atencion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return atenciones;
+    }
 }
