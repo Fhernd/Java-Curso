@@ -121,4 +121,32 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Obtener una dirección a partir del ID del cliente.
+     * @param clienteId ID del cliente.
+     * @return Direccion Dirección encontrada.
+     */
+    public Direccion obtenerDireccionPorClientId(int clienteId) {
+        try {
+            final String SQL = "SELECT * FROM direccion WHERE client_id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, clienteId);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                Direccion direccion = new Direccion();
+                direccion.setId(resultado.getInt("id"));
+                direccion.setDescripcion(resultado.getString("descripcion"));
+                direccion.setClienteId(clienteId);
+
+                return direccion;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
