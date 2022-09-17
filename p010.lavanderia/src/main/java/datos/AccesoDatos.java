@@ -474,4 +474,23 @@ public class AccesoDatos {
 
         return empleados;
     }
+
+    /**
+     * Elimina un empleado a partir de su ID.
+     * @param id ID del empleado.
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
+    public boolean eliminarEmpleadoPorId(int id) {
+        try {
+            final String SQL = "DELETE FROM empleado WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, id);
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
