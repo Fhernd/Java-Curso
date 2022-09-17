@@ -293,4 +293,23 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Elimina un cliente a partir de su documento.
+     * @param documento Documento del cliente.
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
+    public boolean eliminarClientePorDocumento(String documento) {
+        try {
+            final String SQL = "DELETE FROM cliente WHERE documento = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, documento);
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
