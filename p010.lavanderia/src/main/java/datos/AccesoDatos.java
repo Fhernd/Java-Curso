@@ -444,4 +444,34 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Recupera todos los empleados.
+     * @return List<Empleado> Lista de empleados.
+     */
+    public List<Empleado> obtenerEmpleados() {
+        List<Empleado> empleados = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM empleado";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Empleado empleado = new Empleado();
+                empleado.setId(resultado.getInt("id"));
+                empleado.setNombres(resultado.getString("nombres"));
+                empleado.setApellidos(resultado.getString("apellidos"));
+                empleado.setSueldo(resultado.getDouble("sueldo"));
+                empleado.setRolId(resultado.getInt("rol_id"));
+
+                empleados.add(empleado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return empleados;
+    }
 }
