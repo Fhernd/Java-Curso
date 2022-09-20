@@ -738,4 +738,35 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Obtener los clientes que más han solicitado servicios.
+     * @return List<Cliente> Lista de clientes.
+     */
+    public List<Cliente> obtenerClientesQueMasHanSolicitadoServicios(int cantidadClientes) {
+        List<Cliente> clientes = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT cliente.id, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, cantidadClientes);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(resultado.getInt("id"));
+                cliente.setNombres(resultado.getString("nombres"));
+                cliente.setApellidos(resultado.getString("apellidos"));
+                cliente.setCorreo(resultado.getString("correo"));
+                cliente.setTipoDocumentoId(resultado.getInt("tipo_documento_id"));
+
+                clientes.add(cliente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return clientes;
+    }
 }
