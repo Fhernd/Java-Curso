@@ -706,4 +706,36 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Busca un servicio a partir de su ID.
+     * @param servicioId ID del servicio.
+     * @return Servicio Servicio encontrado.
+     */
+    public Servicio obtenerServicioPorId(int servicioId) {
+        try {
+            final String SQL = "SELECT * FROM servicio WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, servicioId);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                Servicio servicio = new Servicio();
+                servicio.setId(servicioId);
+                servicio.setDescripcion(resultado.getString("descripcion"));
+                servicio.setFechaHoraRecepcion(resultado.getTimestamp("fecha_hora_recepcion").toLocalDateTime());
+                servicio.setFechaHoraEntrega(resultado.getTimestamp("fecha_hora_entrega").toLocalDateTime());
+                servicio.setEmpleadoId(resultado.getInt("empleado_id"));
+                servicio.setClienteId(resultado.getInt("cliente_id"));
+                servicio.setDireccionId(resultado.getInt("direccion_id"));
+
+                return servicio;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
