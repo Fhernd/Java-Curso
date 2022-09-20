@@ -687,4 +687,23 @@ public class AccesoDatos {
 
         return servicios;
     }
+
+    /**
+     * Actualiza la fecha de entrega de un servicio.
+     * @param servicioId ID del servicio.
+     * @return boolean Verdadero si se actualizó correctamente, false en caso contrario.
+     */
+    public boolean actualizarFechaEntregaServicio(int servicioId) {
+        try {
+            final String SQL = "UPDATE servicio SET fecha_hora_entrega = DEFAULT WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, servicioId);
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
