@@ -769,4 +769,31 @@ public class AccesoDatos {
 
         return clientes;
     }
+
+    /**
+     * Obtener los tipos de atención más solicitados.
+     * @return List<TipoAtencion> Lista de tipos de atención.
+     */
+    public List<TipoAtencion> obtenerTiposAtencionMasSolicitados() {
+        List<TipoAtencion> tiposAtencion = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT tipo_atencion.id, tipo_atencion.nombre, COUNT(servicio.id) AS cantidad_servicios FROM tipo_atencion INNER JOIN servicio ON tipo_atencion.id = servicio.tipo_atencion_id GROUP BY tipo_atencion.id ORDER BY cantidad_servicios DESC LIMIT 10";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                TipoAtencion tipoAtencion = new TipoAtencion();
+                tipoAtencion.setId(resultado.getInt("id"));
+                tipoAtencion.setNombre(resultado.getString("nombre"));
+
+                tiposAtencion.add(tipoAtencion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return tiposAtencion;
+    }
 }
