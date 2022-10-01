@@ -796,4 +796,32 @@ public class AccesoDatos {
 
         return tiposAtencion;
     }
+
+    /**
+     * Obtener los 10 empleados que más han atendido servicios.
+     * @return List<Empleado> Lista de empleados.
+     */
+    public List<Empleado> obtenerEmpleadosQueMasHanAtendidoServicios() {
+        List<Empleado> empleados = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT empleado.id, empleado.nombres, empleado.apellidos, COUNT(servicio.id) AS cantidad_servicios FROM empleado INNER JOIN servicio ON empleado.id = servicio.empleado_id GROUP BY empleado.id ORDER BY cantidad_servicios DESC LIMIT 10";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Empleado empleado = new Empleado();
+                empleado.setId(resultado.getInt("id"));
+                empleado.setNombres(resultado.getString("nombres"));
+                empleado.setApellidos(resultado.getString("apellidos"));
+
+                empleados.add(empleado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return empleados;
+    }
 }
