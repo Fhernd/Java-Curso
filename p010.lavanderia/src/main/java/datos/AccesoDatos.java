@@ -2,10 +2,12 @@ package datos;
 
 import modelos.*;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -823,5 +825,32 @@ public class AccesoDatos {
         }
 
         return empleados;
+    }
+
+    /**
+     * Obtener el total de ganancias por los servicios realizados en un rango de fechas.
+     * @param fechaInicio Fecha de inicio.
+     *                    @param fechaFin Fecha de fin.
+     * @return BigDecimal Total de ganancias.
+     */
+    public BigDecimal obtenerTotalGananciasPorServiciosRealizadosEnRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        BigDecimal totalGanancias = BigDecimal.ZERO;
+
+        try {
+            final String SQL = "SSELECT SUM(cantidad * precio) FROM atencion AS A INNER JOIN servicio AS S ON A.servicio_id = S.id  WHERE fecha_hora_atencion BETWEEN ? AND ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setTimestamp(1, Timestamp.valueOf(fechaInicio));
+            sentencia.setTimestamp(2, Timestamp.valueOf(fechaFin));
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                totalGanancias = resultado.getBigDecimal("total_ganancias");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return totalGanancias;
     }
 }
