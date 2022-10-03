@@ -216,4 +216,44 @@ public class GestorLavanderia {
     public List<Atencion> obtenerAtencionesPorTipoAtencionId(int tipoAtencionId) {
         return accesoDatos.obtenerAtencionesPorTipoAtencionId(tipoAtencionId);
     }
+
+    /**
+     * Crea un nuevo servicio.
+     *
+     * @param servicio Servicio a crear.
+     * @return Servicio Servicio creado.
+     */
+    public Servicio crearServicio(Servicio servicio) {
+        return accesoDatos.crearServicio(servicio);
+    }
+
+    /**
+     * Lista servicios a partir del ID de un cliente.
+     *
+     * @param clienteId ID del cliente.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorClienteId(int clienteId) {
+        return accesoDatos.obtenerServiciosPorClienteId(clienteId);
+    }
+
+    /**
+     * Lista servicios a partir del ID de un empleado.
+     *
+     * @param empleadoId ID del empleado.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorEmpleadoId(int empleadoId) {
+        return accesoDatos.obtenerServiciosPorEmpleadoId(empleadoId);
+    }
+
+    /**
+     * Actualiza la fecha de entrega de un servicio.
+     *
+     * @param servicioId ID del servicio.
+     * @return boolean Verdadero si se actualizó correctamente, false en caso contrario.
+     */
+    public boolean actualizarFechaEntregaServicio(int servicioId) {
+        return accesoDatos.actualizarFechaEntregaServicio(servicioId);
+    }
 }
