@@ -2,6 +2,8 @@ package modelos;
 
 import datos.AccesoDatos;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class GestorLavanderia {
@@ -255,5 +257,53 @@ public class GestorLavanderia {
      */
     public boolean actualizarFechaEntregaServicio(int servicioId) {
         return accesoDatos.actualizarFechaEntregaServicio(servicioId);
+    }
+
+    /**
+     * Busca un servicio a partir de su ID.
+     *
+     * @param servicioId ID del servicio.
+     * @return Servicio Servicio encontrado.
+     */
+    public Servicio obtenerServicioPorId(int servicioId) {
+        return accesoDatos.obtenerServicioPorId(servicioId);
+    }
+
+    /**
+     * Obtener los clientes que más han solicitado servicios.
+     *
+     * @return List<Cliente> Lista de clientes.
+     */
+    public List<Cliente> obtenerClientesQueMasHanSolicitadoServicios(int cantidadClientes) {
+        return accesoDatos.obtenerClientesQueMasHanSolicitadoServicios(cantidadClientes);
+    }
+
+    /**
+     * Obtener los tipos de atención más solicitados.
+     *
+     * @return List<TipoAtencion> Lista de tipos de atención.
+     */
+    public List<TipoAtencion> obtenerTiposAtencionMasSolicitados() {
+        return accesoDatos.obtenerTiposAtencionMasSolicitados();
+    }
+
+    /**
+     * Obtener los 10 empleados que más han atendido servicios.
+     *
+     * @return List<Empleado> Lista de empleados.
+     */
+    public List<Empleado> obtenerEmpleadosQueMasHanAtendidoServicios() {
+        return accesoDatos.obtenerEmpleadosQueMasHanAtendidoServicios();
+    }
+
+    /**
+     * Obtener el total de ganancias por los servicios realizados en un rango de fechas.
+     *
+     * @param fechaInicio Fecha de inicio.
+     * @param fechaFin    Fecha de fin.
+     * @return BigDecimal Total de ganancias.
+     */
+    public BigDecimal obtenerTotalGananciasPorServiciosRealizadosEnRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return accesoDatos.obtenerTotalGananciasPorServiciosRealizadosEnRangoFechas(fechaInicio, fechaFin);
     }
 }
