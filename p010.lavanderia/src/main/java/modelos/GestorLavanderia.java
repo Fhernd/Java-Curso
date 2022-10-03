@@ -126,4 +126,49 @@ public class GestorLavanderia {
     public Usuario crearUsuario(Usuario usuario) {
         return accesoDatos.crearUsuario(usuario);
     }
+
+    /**
+     * Inicia sesión a partir de las credenciales de un usuario.
+     * @param correo Correo del usuario.
+     * @param clave Clave del usuario.
+     *@return Usuario Usuario encontrado.
+     */
+    public Usuario iniciarSesion(String correo, String clave) {
+        return accesoDatos.iniciarSesion(correo, clave);
+    }
+
+    /**
+     * Elimina un usuario a partir de su correo.
+     * @param correo Correo del usuario.
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
+    public boolean eliminarUsuarioPorCorreo(String correo) {
+        return accesoDatos.eliminarUsuarioPorCorreo(correo);
+    }
+
+    /**
+     * Crear un nuevo empleado.
+     * @param empleado Empleado a crear.
+     * @return Empleado Empleado creado.
+     */
+    public Empleado crearEmpleado(Empleado empleado) {
+        return accesoDatos.crearEmpleado(empleado);
+    }
+
+    /**
+     * Modifica los datos de un empleado.
+     * @param empleado Empleado a modificar.
+     * @return true si se modificó correctamente, false en caso contrario.
+     */
+    public boolean modificarEmpleado(Empleado empleado) {
+        return accesoDatos.modificarEmpleado(empleado);
+    }
+
+    /**
+     * Recupera todos los empleados.
+     * @return List<Empleado> Lista de empleados.
+     */
+    public List<Empleado> obtenerEmpleados() {
+        return accesoDatos.obtenerEmpleados();
+    }
 }
