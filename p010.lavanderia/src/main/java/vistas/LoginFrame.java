@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Usuario;
 import org.apache.commons.validator.routines.EmailValidator;
+import utilidades.Utilidad;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -72,17 +73,14 @@ public class LoginFrame extends JInternalFrame {
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String email = txtEmail.getText().trim();
-				String password = new String(txtPassword.getPassword());
+				String password = new String(txtPassword.getPassword()).trim();
 
-				EmailValidator emailValidator = EmailValidator.getInstance();
-				if (!emailValidator.isValid(email)) {
+				if (Utilidad.validarEmail(email)) {
 					JOptionPane.showMessageDialog(LoginFrame.this, "El email no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
-				final String PASSWORD_PATTERN =
-						"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-				if (!password.matches(PASSWORD_PATTERN)) {
+				if (password.isEmpty()) {
 					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña no es válida. Debe tener al menos una letra en minúscula, mayúscula, un número, un carácter especial, y una longitud entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}

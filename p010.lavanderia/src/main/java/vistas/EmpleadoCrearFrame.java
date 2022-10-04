@@ -9,6 +9,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Rol;
 import org.apache.commons.validator.routines.IntegerValidator;
+import utilidades.Utilidad;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -142,6 +143,16 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 
 				if (sueldo > 0) {
 					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar un sueldo válido. Debe ser un valor numérico mayor a cero.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if (Utilidad.validarEmail(correo)) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar un correo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if (Utilidad.validarPassword(password)) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar una contraseña válida. Debe tener al menos un carácter en minúscula, en mayúscula, al menos un número, y debe tener entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 			}

@@ -13,4 +13,20 @@ public class Utilidad {
         EmailValidator emailValidator = EmailValidator.getInstance();
         return emailValidator.isValid(email);
     }
+
+    /**
+     * Comprueba si una contraseña es válida.
+     *
+     * @param password Contraseña a validar.
+     *                 Debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.
+     *                 Puede contener caracteres especiales.
+     *                 No puede contener espacios.
+     *                 No puede ser nula.
+     *                 No puede ser vacía.
+     *                 No puede ser una cadena de espacios.
+     * @return true si es válida, false en caso contrario.
+     */
+    public static boolean validarPassword(String password) {
+        return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,20}$");
+    }
 }
