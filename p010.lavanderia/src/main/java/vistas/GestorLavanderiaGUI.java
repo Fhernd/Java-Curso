@@ -1,5 +1,8 @@
 package vistas;
 
+import modelos.GestorLavanderia;
+import modelos.Usuario;
+
 import java.awt.EventQueue;
 
 import javax.swing.*;
@@ -10,6 +13,7 @@ import java.awt.event.ActionEvent;
 public class GestorLavanderiaGUI {
 
 	private JFrame frmGestorLavanderiaGUI;
+	private GestorLavanderia gestorLavanderia;
 
 	/**
 	 * Launch the application.
@@ -32,6 +36,7 @@ public class GestorLavanderiaGUI {
 	 */
 	public GestorLavanderiaGUI() {
 		initialize();
+		gestorLavanderia = new GestorLavanderia();
 	}
 
 	/**
@@ -73,5 +78,9 @@ public class GestorLavanderiaGUI {
 			}
 		});
 		mnuArchivo.add(mniSalir);
+	}
+
+	public Usuario iniciarSesion(String email, String password) {
+		return gestorLavanderia.iniciarSesion(email, password);
 	}
 }

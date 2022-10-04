@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.Usuario;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.awt.event.ActionListener;
@@ -86,7 +87,16 @@ public class LoginFrame extends JInternalFrame {
 					return;
 				}
 
-				// gestorLavanderiaGUI.iniciarSesion(email, password);
+				Usuario usuario = gestorLavanderiaGUI.iniciarSesion(email, password);
+
+				if (usuario == null) {
+					JOptionPane.showMessageDialog(LoginFrame.this, "El usuario no existe o la contraseña es incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				JOptionPane.showMessageDialog(LoginFrame.this, "¡Bienvenido!", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+				setVisible(false);
 			}
 		});
 		panel.add(btnIniciarSesion, "8, 6");
