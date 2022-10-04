@@ -44,8 +44,8 @@ public class GestorLavanderiaGUI {
 		frmGestorLavanderiaGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestorLavanderiaGUI.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JDesktopPane desktopPane = new JDesktopPane();
-		frmGestorLavanderiaGUI.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		JDesktopPane dtpPrincipal = new JDesktopPane();
+		frmGestorLavanderiaGUI.getContentPane().add(dtpPrincipal, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmGestorLavanderiaGUI.setJMenuBar(menuBar);
@@ -54,6 +54,13 @@ public class GestorLavanderiaGUI {
 		menuBar.add(mnuArchivo);
 		
 		JMenuItem mniIniciarSesion = new JMenuItem("Iniciar sesión...");
+		mniIniciarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginFrame login = new LoginFrame();
+				dtpPrincipal.add(login);
+				login.setVisible(true);
+			}
+		});
 		mnuArchivo.add(mniIniciarSesion);
 		
 		JMenuItem mniSalir = new JMenuItem("Salir");
