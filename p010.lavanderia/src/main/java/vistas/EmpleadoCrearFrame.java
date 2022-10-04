@@ -20,11 +20,11 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 	 * ID de clase.
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JPasswordField passwordField;
+	private JTextField txtNombres;
+	private JTextField txtApellidos;
+	private JTextField txtSueldo;
+	private JTextField txtCorreo;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Create the frame.
@@ -62,48 +62,48 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel = new JLabel("Nombres:");
-		pnlPrincipal.add(lblNewLabel, "2, 2");
+		JLabel lblNombres = new JLabel("Nombres:");
+		pnlPrincipal.add(lblNombres, "2, 2");
 		
-		textField = new JTextField();
-		pnlPrincipal.add(textField, "8, 2, fill, default");
-		textField.setColumns(10);
+		txtNombres = new JTextField();
+		pnlPrincipal.add(txtNombres, "8, 2, fill, default");
+		txtNombres.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Apellidos:");
-		pnlPrincipal.add(lblNewLabel_1, "2, 4");
+		JLabel lblApellidos = new JLabel("Apellidos:");
+		pnlPrincipal.add(lblApellidos, "2, 4");
 		
-		textField_1 = new JTextField();
-		pnlPrincipal.add(textField_1, "8, 4, fill, default");
-		textField_1.setColumns(10);
+		txtApellidos = new JTextField();
+		pnlPrincipal.add(txtApellidos, "8, 4, fill, default");
+		txtApellidos.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Sueldo:");
-		pnlPrincipal.add(lblNewLabel_2, "2, 6");
+		JLabel lblSueldo = new JLabel("Sueldo:");
+		pnlPrincipal.add(lblSueldo, "2, 6");
 		
-		textField_2 = new JTextField();
-		pnlPrincipal.add(textField_2, "8, 6, fill, default");
-		textField_2.setColumns(10);
+		txtSueldo = new JTextField();
+		pnlPrincipal.add(txtSueldo, "8, 6, fill, default");
+		txtSueldo.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Rol:");
-		pnlPrincipal.add(lblNewLabel_3, "2, 8");
+		JLabel lblRol = new JLabel("Rol:");
+		pnlPrincipal.add(lblRol, "2, 8");
 		
-		JComboBox comboBox = new JComboBox();
-		pnlPrincipal.add(comboBox, "8, 8, fill, default");
+		JComboBox cbxRoles = new JComboBox();
+		pnlPrincipal.add(cbxRoles, "8, 8, fill, default");
 		
-		JLabel lblNewLabel_4 = new JLabel("Correo:");
-		pnlPrincipal.add(lblNewLabel_4, "2, 10");
+		JLabel lblCorreo = new JLabel("Correo:");
+		pnlPrincipal.add(lblCorreo, "2, 10");
 		
-		textField_3 = new JTextField();
-		pnlPrincipal.add(textField_3, "8, 10, fill, default");
-		textField_3.setColumns(10);
+		txtCorreo = new JTextField();
+		pnlPrincipal.add(txtCorreo, "8, 10, fill, default");
+		txtCorreo.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("Contraseña:");
-		pnlPrincipal.add(lblNewLabel_5, "2, 12, right, top");
+		JLabel lblPassword = new JLabel("Contraseña:");
+		pnlPrincipal.add(lblPassword, "2, 12, right, top");
 		
-		passwordField = new JPasswordField();
-		pnlPrincipal.add(passwordField, "8, 12, fill, default");
+		txtPassword = new JPasswordField();
+		pnlPrincipal.add(txtPassword, "8, 12, fill, default");
 		
-		JButton btnNewButton = new JButton("Crear");
-		pnlPrincipal.add(btnNewButton, "8, 14");
+		JButton btnCrear = new JButton("Crear");
+		pnlPrincipal.add(btnCrear, "8, 14");
 
 	}
 
