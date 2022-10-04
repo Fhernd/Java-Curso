@@ -80,6 +80,16 @@ public class GestorLavanderiaGUI {
 				}
 			}
 		});
+		
+		JMenuItem mniEmpleadoUsuarioCrear = new JMenuItem("Crear nuevo empleado");
+		mniEmpleadoUsuarioCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmpleadoCrearFrame empleadoCrear = new EmpleadoCrearFrame(GestorLavanderiaGUI.this);
+				dtpPrincipal.add(empleadoCrear);
+				empleadoCrear.setVisible(true);
+			}
+		});
+		mnuArchivo.add(mniEmpleadoUsuarioCrear);
 		mnuArchivo.add(mniSalir);
 		
 		mnuEmpleados = new JMenu("Empleados");

@@ -37,6 +37,7 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public EmpleadoCrearFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		setClosable(true);
 		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
 
 		setTitle("Empleado - Crear");
