@@ -111,4 +111,8 @@ public class GestorLavanderiaGUI {
 	public List<Rol> getRoles() {
 		return gestorLavanderia.getRoles();
 	}
+
+	public Usuario obtenerUsuarioPorCorreo(String correo) {
+		return gestorLavanderia.obtenerUsuarioPorCorreo(correo);
+	}
 }

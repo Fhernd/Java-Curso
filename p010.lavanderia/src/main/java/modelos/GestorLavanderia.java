@@ -306,4 +306,14 @@ public class GestorLavanderia {
     public BigDecimal obtenerTotalGananciasPorServiciosRealizadosEnRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
         return accesoDatos.obtenerTotalGananciasPorServiciosRealizadosEnRangoFechas(fechaInicio, fechaFin);
     }
+
+    /**
+     * Obtener usuario a partir de su correo.
+     *
+     * @param correo Correo del usuario.
+     * @return Usuario Usuario.
+     */
+    public Usuario obtenerUsuarioPorCorreo(String correo) {
+        return accesoDatos.obtenerUsuarioPorCorreo(correo);
+    }
 }

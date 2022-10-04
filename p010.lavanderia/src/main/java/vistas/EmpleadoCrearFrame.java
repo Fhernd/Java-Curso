@@ -162,7 +162,12 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 					return;
 				}
 
+				Usuario usuario = gestorLavanderiaGUI.obtenerUsuarioPorCorreo(correo);
 
+				if (usuario != null) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Ya existe un usuario con el correo ingresado.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 
 				Empleado empleado = new Empleado();
 				empleado.setNombres(nombres);
@@ -170,7 +175,7 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 				empleado.setSueldo(sueldo);
 				empleado.setRolId(opcionesRoles.get(rolTexto));
 
-				Usuario usuario = new Usuario();
+				usuario = new Usuario();
 				usuario.setCorreo(correo);
 				usuario.setClave(password);
 			}

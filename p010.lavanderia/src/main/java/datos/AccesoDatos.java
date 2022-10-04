@@ -47,6 +47,7 @@ public class AccesoDatos {
 
     /**
      * Obtiene todos los tipos de documentos.
+     *
      * @return Lista de tipos de documentos.
      */
     public List<TipoDocumento> obtenerTiposDocumentos() {
@@ -72,6 +73,7 @@ public class AccesoDatos {
 
     /**
      * Obtiene todos los tipos de atencion.
+     *
      * @return Lista de tipos de atención.
      */
     public List<TipoAtencion> obtenerTiposAtencion() {
@@ -97,6 +99,7 @@ public class AccesoDatos {
 
     /**
      * Crea una nueva dirección.
+     *
      * @param direccion Direccion a crear.
      */
     public Direccion crearDireccion(Direccion direccion) {
@@ -124,6 +127,7 @@ public class AccesoDatos {
 
     /**
      * Obtener una dirección a partir del ID del cliente.
+     *
      * @param clienteId ID del cliente.
      * @return Direccion Dirección encontrada.
      */
@@ -152,6 +156,7 @@ public class AccesoDatos {
 
     /**
      * Obtener todas las direcciones de un cliente a partir de su ID.
+     *
      * @param clienteId ID del cliente.
      * @return Lista de direcciones.
      */
@@ -182,6 +187,7 @@ public class AccesoDatos {
 
     /**
      * Crea un nuevo cliente.
+     *
      * @param cliente Cliente a crear.
      * @return Cliente Cliente creado.
      */
@@ -213,6 +219,7 @@ public class AccesoDatos {
 
     /**
      * Obtiene un cliente a partir de su ID.
+     *
      * @param clienteId ID del cliente.
      * @return Cliente Cliente encontrado.
      */
@@ -244,6 +251,7 @@ public class AccesoDatos {
 
     /**
      * Obtiene un cliente a partir de su documento.
+     *
      * @param documento Documento del cliente.
      * @return Cliente Cliente encontrado.
      */
@@ -275,6 +283,7 @@ public class AccesoDatos {
 
     /**
      * Actualiza los datos de un cliente.
+     *
      * @param cliente Cliente a actualizar.
      * @return true si se actualizó correctamente, false en caso contrario.
      */
@@ -299,6 +308,7 @@ public class AccesoDatos {
 
     /**
      * Elimina un cliente a partir de su documento.
+     *
      * @param documento Documento del cliente.
      * @return true si se eliminó correctamente, false en caso contrario.
      */
@@ -318,6 +328,7 @@ public class AccesoDatos {
 
     /**
      * Crea un nuevo usuario.
+     *
      * @param usuario Usuario a crear.
      * @return Usuario Usuario creado.
      */
@@ -347,9 +358,10 @@ public class AccesoDatos {
 
     /**
      * Inicia sesión a partir de las credenciales de un usuario.
+     *
      * @param correo Correo del usuario.
-     * @param clave Clave del usuario.
-     *@return Usuario Usuario encontrado.
+     * @param clave  Clave del usuario.
+     * @return Usuario Usuario encontrado.
      */
     public Usuario iniciarSesion(String correo, String clave) {
         try {
@@ -378,6 +390,7 @@ public class AccesoDatos {
 
     /**
      * Elimina un usuario a partir de su correo.
+     *
      * @param correo Correo del usuario.
      * @return true si se eliminó correctamente, false en caso contrario.
      */
@@ -397,6 +410,7 @@ public class AccesoDatos {
 
     /**
      * Crear un nuevo empleado.
+     *
      * @param empleado Empleado a crear.
      * @return Empleado Empleado creado.
      */
@@ -427,6 +441,7 @@ public class AccesoDatos {
 
     /**
      * Modifica los datos de un empleado.
+     *
      * @param empleado Empleado a modificar.
      * @return true si se modificó correctamente, false en caso contrario.
      */
@@ -450,6 +465,7 @@ public class AccesoDatos {
 
     /**
      * Recupera todos los empleados.
+     *
      * @return List<Empleado> Lista de empleados.
      */
     public List<Empleado> obtenerEmpleados() {
@@ -480,6 +496,7 @@ public class AccesoDatos {
 
     /**
      * Elimina un empleado a partir de su ID.
+     *
      * @param id ID del empleado.
      * @return true si se eliminó correctamente, false en caso contrario.
      */
@@ -499,6 +516,7 @@ public class AccesoDatos {
 
     /**
      * Crea una nueva atención.
+     *
      * @param atencion Atención a crear.
      * @return Atencion Atención creada.
      */
@@ -529,6 +547,7 @@ public class AccesoDatos {
 
     /**
      * Lista atenciones a partir del ID de un servicio.
+     *
      * @param servicioId ID del servicio.
      * @return List<Atencion> Lista de atenciones.
      */
@@ -561,6 +580,7 @@ public class AccesoDatos {
 
     /**
      * Listar atenciones a partir del ID de un tipo de atención.
+     *
      * @param tipoAtencionId ID del tipo de atención.
      * @return List<Atencion> Lista de atenciones.
      */
@@ -593,6 +613,7 @@ public class AccesoDatos {
 
     /**
      * Crea un nuevo servicio.
+     *
      * @param servicio Servicio a crear.
      * @return Servicio Servicio creado.
      */
@@ -624,6 +645,7 @@ public class AccesoDatos {
 
     /**
      * Lista servicios a partir del ID de un cliente.
+     *
      * @param clienteId ID del cliente.
      * @return List<Servicio> Lista de servicios.
      */
@@ -658,6 +680,7 @@ public class AccesoDatos {
 
     /**
      * Lista servicios a partir del ID de un empleado.
+     *
      * @param empleadoId ID del empleado.
      * @return List<Servicio> Lista de servicios.
      */
@@ -692,6 +715,7 @@ public class AccesoDatos {
 
     /**
      * Actualiza la fecha de entrega de un servicio.
+     *
      * @param servicioId ID del servicio.
      * @return boolean Verdadero si se actualizó correctamente, false en caso contrario.
      */
@@ -711,6 +735,7 @@ public class AccesoDatos {
 
     /**
      * Busca un servicio a partir de su ID.
+     *
      * @param servicioId ID del servicio.
      * @return Servicio Servicio encontrado.
      */
@@ -743,6 +768,7 @@ public class AccesoDatos {
 
     /**
      * Obtener los clientes que más han solicitado servicios.
+     *
      * @return List<Cliente> Lista de clientes.
      */
     public List<Cliente> obtenerClientesQueMasHanSolicitadoServicios(int cantidadClientes) {
@@ -774,6 +800,7 @@ public class AccesoDatos {
 
     /**
      * Obtener los tipos de atención más solicitados.
+     *
      * @return List<TipoAtencion> Lista de tipos de atención.
      */
     public List<TipoAtencion> obtenerTiposAtencionMasSolicitados() {
@@ -801,6 +828,7 @@ public class AccesoDatos {
 
     /**
      * Obtener los 10 empleados que más han atendido servicios.
+     *
      * @return List<Empleado> Lista de empleados.
      */
     public List<Empleado> obtenerEmpleadosQueMasHanAtendidoServicios() {
@@ -829,8 +857,9 @@ public class AccesoDatos {
 
     /**
      * Obtener el total de ganancias por los servicios realizados en un rango de fechas.
+     *
      * @param fechaInicio Fecha de inicio.
-     *                    @param fechaFin Fecha de fin.
+     * @param fechaFin    Fecha de fin.
      * @return BigDecimal Total de ganancias.
      */
     public BigDecimal obtenerTotalGananciasPorServiciosRealizadosEnRangoFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
@@ -856,6 +885,7 @@ public class AccesoDatos {
 
     /**
      * Obtener usuario a partir de su correo.
+     *
      * @param correo Correo del usuario.
      * @return Usuario Usuario.
      */
