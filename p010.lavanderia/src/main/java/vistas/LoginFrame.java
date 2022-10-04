@@ -97,6 +97,8 @@ public class LoginFrame extends JInternalFrame {
 				JOptionPane.showMessageDialog(LoginFrame.this, "¡Bienvenido!", "Información", JOptionPane.INFORMATION_MESSAGE);
 
 				setVisible(false);
+
+				gestorLavanderiaGUI.mostrarMenus();
 			}
 		});
 		panel.add(btnIniciarSesion, "8, 6");

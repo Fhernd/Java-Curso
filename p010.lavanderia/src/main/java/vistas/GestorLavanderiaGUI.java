@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 public class GestorLavanderiaGUI {
 
 	private JFrame frmGestorLavanderiaGUI;
+	private JMenu mnuEmpleados;
 	private GestorLavanderia gestorLavanderia;
 
 	/**
@@ -78,9 +79,20 @@ public class GestorLavanderiaGUI {
 			}
 		});
 		mnuArchivo.add(mniSalir);
+		
+		mnuEmpleados = new JMenu("Empleados");
+		mnuEmpleados.setEnabled(false);
+		menuBar.add(mnuEmpleados);
+		
+		JMenuItem mniEmpleadosCrear = new JMenuItem("Crear");
+		mnuEmpleados.add(mniEmpleadosCrear);
 	}
 
 	public Usuario iniciarSesion(String email, String password) {
 		return gestorLavanderia.iniciarSesion(email, password);
+	}
+
+	public void mostrarMenus() {
+		mnuEmpleados.setEnabled(true);
 	}
 }
