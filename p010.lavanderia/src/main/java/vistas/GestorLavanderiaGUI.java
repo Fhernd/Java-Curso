@@ -56,7 +56,7 @@ public class GestorLavanderiaGUI {
 		JMenuItem mniIniciarSesion = new JMenuItem("Iniciar sesión...");
 		mniIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LoginFrame login = new LoginFrame();
+				LoginFrame login = new LoginFrame(GestorLavanderiaGUI.this);
 				dtpPrincipal.add(login);
 				login.setVisible(true);
 			}

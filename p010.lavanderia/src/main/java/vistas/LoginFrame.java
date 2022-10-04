@@ -25,25 +25,10 @@ public class LoginFrame extends JInternalFrame {
 	private JPasswordField txtPassword;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public LoginFrame() {
+	public LoginFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+
 		setClosable(true);
 		setTitle("Login");
 		setBounds(100, 100, 450, 170);
@@ -100,6 +85,8 @@ public class LoginFrame extends JInternalFrame {
 					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña no es válida. Debe tener al menos una letra en minúscula, mayúscula, un número, un carácter especial, y una longitud entre 8 y 20.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+
+				// gestorLavanderiaGUI.iniciarSesion(email, password);
 			}
 		});
 		panel.add(btnIniciarSesion, "8, 6");
