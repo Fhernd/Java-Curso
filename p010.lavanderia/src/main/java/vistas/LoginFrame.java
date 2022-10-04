@@ -83,7 +83,7 @@ public class LoginFrame extends JInternalFrame {
 				final String PASSWORD_PATTERN =
 						"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
 				if (!password.matches(PASSWORD_PATTERN)) {
-					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña no es válida. Debe tener al menos una letra en minúscula, mayúscula, un número, un carácter especial, y una longitud entre 8 y 20.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña no es válida. Debe tener al menos una letra en minúscula, mayúscula, un número, un carácter especial, y una longitud entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
