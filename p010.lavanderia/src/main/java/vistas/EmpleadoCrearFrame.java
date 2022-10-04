@@ -7,13 +7,17 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.Empleado;
 import modelos.Rol;
+import modelos.Usuario;
 import org.apache.commons.validator.routines.IntegerValidator;
 import utilidades.Utilidad;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmpleadoCrearFrame extends JInternalFrame {
 
@@ -21,13 +25,15 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 	 * ID de clase.
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtNombres;
-	private JTextField txtApellidos;
-	private JTextField txtSueldo;
-	private JTextField txtCorreo;
-	private JPasswordField txtPassword;
+	private final JTextField txtNombres;
+	private final JTextField txtApellidos;
+	private final JTextField txtSueldo;
+	private final JTextField txtCorreo;
+	private final JPasswordField txtPassword;
 
 	GestorLavanderiaGUI gestorLavanderiaGUI;
+
+	private Map<String, Integer> opcionesRoles;
 
 	/**
 	 * Create the frame.
@@ -155,6 +161,16 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar una contraseña válida. Debe tener al menos un carácter en minúscula, en mayúscula, al menos un número, y debe tener entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+
+				Empleado empleado = new Empleado();
+				empleado.setNombres(nombres);
+				empleado.setApellidos(apellidos);
+				empleado.setSueldo(sueldo);
+				empleado.setRolId(opcionesRoles.get(rolTexto));
+
+				Usuario usuario = new Usuario();
+				usuario.setCorreo(correo);
+				usuario.setClave(password);
 			}
 		});
 		pnlPrincipal.add(btnCrear, "8, 14");
@@ -164,8 +180,10 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 
 	private void cargarRoles(JComboBox cbxRoles) {
 		List<Rol> roles = gestorLavanderiaGUI.getRoles();
+		opcionesRoles = new HashMap<String, Integer>();
 		for (Rol rol : roles) {
 			cbxRoles.addItem(rol.getNombre());
+			opcionesRoles.put(rol.getNombre(), rol.getId());
 		}
 	}
 
