@@ -8,11 +8,16 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.Rol;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class EmpleadoCrearFrame extends JInternalFrame {
 
@@ -26,10 +31,14 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 	private JTextField txtCorreo;
 	private JPasswordField txtPassword;
 
+	GestorLavanderiaGUI gestorLavanderiaGUI;
+
 	/**
 	 * Create the frame.
 	 */
-	public EmpleadoCrearFrame() {
+	public EmpleadoCrearFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+
 		setTitle("Empleado - Crear");
 		setBounds(100, 100, 450, 270);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -103,8 +112,21 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 		pnlPrincipal.add(txtPassword, "8, 12, fill, default");
 		
 		JButton btnCrear = new JButton("Crear");
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		pnlPrincipal.add(btnCrear, "8, 14");
 
+		cargarRoles(cbxRoles);
+	}
+
+	private void cargarRoles(JComboBox cbxRoles) {
+		List<Rol> roles = gestorLavanderiaGUI.getRoles();
+		for (Rol rol : roles) {
+			cbxRoles.addItem(rol.getNombre());
+		}
 	}
 
 }

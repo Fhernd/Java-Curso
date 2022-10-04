@@ -1,6 +1,7 @@
 package vistas;
 
 import modelos.GestorLavanderia;
+import modelos.Rol;
 import modelos.Usuario;
 
 import java.awt.EventQueue;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class GestorLavanderiaGUI {
 
@@ -94,5 +96,9 @@ public class GestorLavanderiaGUI {
 
 	public void mostrarMenus() {
 		mnuEmpleados.setEnabled(true);
+	}
+
+	public List<Rol> getRoles() {
+		return gestorLavanderia.getRoles();
 	}
 }
