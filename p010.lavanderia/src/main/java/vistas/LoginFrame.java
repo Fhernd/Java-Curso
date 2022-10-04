@@ -2,18 +2,18 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
+import org.apache.commons.validator.routines.EmailValidator;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginFrame extends JInternalFrame {
 
@@ -44,6 +44,7 @@ public class LoginFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public LoginFrame() {
+		setClosable(true);
 		setTitle("Login");
 		setBounds(100, 100, 450, 170);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -82,6 +83,18 @@ public class LoginFrame extends JInternalFrame {
 		panel.add(txtPassword, "8, 4, fill, default");
 		
 		JButton btnIniciarSesion = new JButton("Iniciar sesión");
+		btnIniciarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String email = txtEmail.getText().trim();
+				String password = new String(txtPassword.getPassword());
+
+				EmailValidator emailValidator = EmailValidator.getInstance();
+				if (!emailValidator.isValid(email)) {
+					JOptionPane.showMessageDialog(LoginFrame.this, "El email no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+		});
 		panel.add(btnIniciarSesion, "8, 6");
 
 	}
