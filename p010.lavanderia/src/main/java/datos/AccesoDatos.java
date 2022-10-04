@@ -853,4 +853,33 @@ public class AccesoDatos {
 
         return totalGanancias;
     }
+
+    /**
+     * Obtener usuario a partir de su correo.
+     * @param correo Correo del usuario.
+     * @return Usuario Usuario.
+     */
+    public Usuario obtenerUsuarioPorCorreo(String correo) {
+        Usuario usuario = null;
+
+        try {
+            final String SQL = "SELECT * FROM usuario WHERE correo = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, correo);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                usuario = new Usuario();
+                usuario.setId(resultado.getInt("id"));
+                usuario.setCorreo(resultado.getString("correo"));
+                usuario.setClave(resultado.getString("clave"));
+                usuario.setEmpleadoId(resultado.getInt("empleado_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return usuario;
+    }
 }

@@ -162,6 +162,8 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 					return;
 				}
 
+
+
 				Empleado empleado = new Empleado();
 				empleado.setNombres(nombres);
 				empleado.setApellidos(apellidos);
