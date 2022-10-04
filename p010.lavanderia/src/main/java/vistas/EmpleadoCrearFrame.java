@@ -1,20 +1,15 @@
 package vistas;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Rol;
+import org.apache.commons.validator.routines.IntegerValidator;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -115,7 +110,40 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				String nombres = txtNombres.getText().trim();
+				String apellidos = txtApellidos.getText().trim();
+				String sueldoTexto = txtSueldo.getText().trim();
+				String rolTexto = cbxRoles.getSelectedItem().toString();
+				String correo = txtCorreo.getText().trim();
+				String password = new String(txtPassword.getPassword());
+
+				if (nombres.isEmpty()) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar nombres.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if (apellidos.isEmpty()) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar apellidos.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if (sueldoTexto.isEmpty()) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar sueldo.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				IntegerValidator integerValidator = new IntegerValidator();
+				if (!integerValidator.isValid(sueldoTexto)) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar un sueldo válido. Debe ser un valor numérico.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				int sueldo = Integer.parseInt(sueldoTexto);
+
+				if (sueldo > 0) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Debe ingresar un sueldo válido. Debe ser un valor numérico mayor a cero.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 			}
 		});
 		pnlPrincipal.add(btnCrear, "8, 14");
