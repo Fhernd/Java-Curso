@@ -4,6 +4,7 @@ import modelos.Empleado;
 import modelos.GestorLavanderia;
 import modelos.Rol;
 import modelos.Usuario;
+import utilidades.Utilidad;
 
 import java.awt.EventQueue;
 
@@ -102,7 +103,13 @@ public class GestorLavanderiaGUI {
     }
 
     public Usuario iniciarSesion(String email, String password) {
-        return gestorLavanderia.iniciarSesion(email, password);
+        Usuario usuario = gestorLavanderia.obtenerUsuarioPorCorreo(email);
+        boolean resultadoValidacion = Utilidad.comprobarPassword(usuario.getClave(), password);
+        if (resultadoValidacion) {
+            return usuario;
+        } else {
+            return null;
+        }
     }
 
     public void mostrarMenus() {

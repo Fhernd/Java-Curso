@@ -43,4 +43,8 @@ public class Utilidad {
 
         return hash.getResult();
     }
+
+    public static boolean comprobarPassword(String clave, String password) {
+        return Password.check(password, clave).withPBKDF2();
+    }
 }

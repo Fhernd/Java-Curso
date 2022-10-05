@@ -75,13 +75,13 @@ public class LoginFrame extends JInternalFrame {
 				String email = txtEmail.getText().trim();
 				String password = new String(txtPassword.getPassword()).trim();
 
-				if (Utilidad.validarEmail(email)) {
+				if (!Utilidad.validarEmail(email)) {
 					JOptionPane.showMessageDialog(LoginFrame.this, "El email no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
 				if (password.isEmpty()) {
-					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña no es válida. Debe tener al menos una letra en minúscula, mayúscula, un número, un carácter especial, y una longitud entre 8 y 20 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña debe tener al menos 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 
