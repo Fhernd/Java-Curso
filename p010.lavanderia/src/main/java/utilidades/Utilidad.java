@@ -1,5 +1,7 @@
 package utilidades;
 
+import com.password4j.Hash;
+import com.password4j.Password;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class Utilidad {
@@ -28,5 +30,17 @@ public class Utilidad {
      */
     public static boolean validarPassword(String password) {
         return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,20}$");
+    }
+
+    /**
+     * Encripta una contraseña utilizando el algoritmo PBKDF2.
+     *
+     * @param password Contraseña a encriptar.
+     * @return Contraseña encriptada.
+     */
+    public static String encriptar(String password) {
+        Hash hash = Password.hash(password).withPBKDF2();
+
+        return hash.getResult();
     }
 }

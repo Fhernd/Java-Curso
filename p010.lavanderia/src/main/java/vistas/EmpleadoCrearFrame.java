@@ -177,6 +177,9 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 
 				usuario = new Usuario();
 				usuario.setCorreo(correo);
+
+				String passwordEncriptado = Utilidad.encriptar(password);
+
 				usuario.setClave(password);
 			}
 		});
