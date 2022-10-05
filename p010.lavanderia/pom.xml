@@ -36,5 +36,10 @@
       <artifactId>commons-validator</artifactId>
       <version>1.7</version>
     </dependency>
+    <dependency>
+      <groupId>com.password4j</groupId>
+      <artifactId>password4j</artifactId>
+      <version>1.6.0</version>
+    </dependency>
   </dependencies>
 </project>
