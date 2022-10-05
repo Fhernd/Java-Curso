@@ -180,7 +180,9 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 
 				String passwordEncriptado = Utilidad.encriptar(password);
 
-				usuario.setClave(password);
+				usuario.setClave(passwordEncriptado);
+
+				empleado = gestorLavanderiaGUI.crearEmpleado(empleado);
 			}
 		});
 		pnlPrincipal.add(btnCrear, "8, 14");
