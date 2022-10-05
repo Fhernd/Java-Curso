@@ -126,4 +126,24 @@ public class GestorLavanderiaGUI {
     public Empleado crearEmpleado(Empleado empleado) {
         return gestorLavanderia.crearEmpleado(empleado);
     }
+
+    /**
+     * Crea un nuevo usuario.
+     *
+     * @param usuario Usuario a crear.
+     * @return Usuario Usuario creado.
+     */
+    public Usuario crearUsuario(Usuario usuario) {
+        return gestorLavanderia.crearUsuario(usuario);
+    }
+
+    /**
+     * Elimina un empleado a partir de su ID.
+     *
+     * @param id ID del empleado.
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
+    public boolean eliminarEmpleadoPorId(int id) {
+        return gestorLavanderia.eliminarEmpleadoPorId(id);
+    }
 }

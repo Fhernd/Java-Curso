@@ -183,11 +183,39 @@ public class EmpleadoCrearFrame extends JInternalFrame {
 				usuario.setClave(passwordEncriptado);
 
 				empleado = gestorLavanderiaGUI.crearEmpleado(empleado);
+
+				if (empleado == null) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "No se pudo crear el empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				usuario.setEmpleadoId(empleado.getId());
+
+				usuario = gestorLavanderiaGUI.crearUsuario(usuario);
+
+				if (usuario == null) {
+					JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "No se pudo crear el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
+					if (!gestorLavanderiaGUI.eliminarEmpleadoPorId(empleado.getId())) {
+						JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "No se pudo eliminar el empleado.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					return;
+				}
+
+				JOptionPane.showMessageDialog(EmpleadoCrearFrame.this, "Empleado creado exitosamente.", "Información", JOptionPane.INFORMATION_MESSAGE);
+				limpiarCampos();
 			}
 		});
 		pnlPrincipal.add(btnCrear, "8, 14");
 
 		cargarRoles(cbxRoles);
+	}
+
+	private void limpiarCampos() {
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtSueldo.setText("");
+		txtCorreo.setText("");
+		txtPassword.setText("");
 	}
 
 	private void cargarRoles(JComboBox cbxRoles) {
