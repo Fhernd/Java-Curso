@@ -39,12 +39,12 @@ public class Utilidad {
      * @return Contraseña encriptada.
      */
     public static String encriptar(String password) {
-        Hash hash = Password.hash(password).withPBKDF2();
+        Hash hash = Password.hash(password).addSalt("@#123-@").withPBKDF2();
 
         return hash.getResult();
     }
 
     public static boolean comprobarPassword(String clave, String password) {
-        return Password.check(password, clave).withPBKDF2();
+        return Password.check(password, clave).addSalt("@#123-@").withPBKDF2();
     }
 }

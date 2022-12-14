@@ -105,11 +105,8 @@ public class GestorLavanderiaGUI {
     public Usuario iniciarSesion(String email, String password) {
         Usuario usuario = gestorLavanderia.obtenerUsuarioPorCorreo(email);
         boolean resultadoValidacion = Utilidad.comprobarPassword(usuario.getClave(), password);
-        if (resultadoValidacion) {
-            return usuario;
-        } else {
-            return null;
-        }
+
+        return resultadoValidacion ? usuario : null;
     }
 
     public void mostrarMenus() {
