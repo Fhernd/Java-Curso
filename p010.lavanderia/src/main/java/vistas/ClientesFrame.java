@@ -13,6 +13,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 
 public class ClientesFrame extends JInternalFrame {
 
@@ -46,12 +47,12 @@ public class ClientesFrame extends JInternalFrame {
 	 */
 	public ClientesFrame() {
 		setTitle("Clientes");
-		setBounds(100, 100, 450, 610);
+		setBounds(100, 100, 450, 433);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(panel);
+		getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
@@ -118,15 +119,29 @@ public class ClientesFrame extends JInternalFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox, "12, 12, fill, default");
-
-		JPanel pnlBotones = new JPanel();
-		getContentPane().add(panel);
 		
 		JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1, BorderLayout.SOUTH);
-
-		JButton btnNuevo = new JButton("Nuevo");
-		pnlBotones.add(btnNuevo);
+		getContentPane().add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JButton btnNewButton = new JButton("New button");
+		panel_1.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("New button");
+		panel_1.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		panel_1.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("New button");
+		panel_1.add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton("New button");
+		panel_1.add(btnNewButton_4);
+		
+		JPanel panel_2 = new JPanel();
+		getContentPane().add(panel_2, BorderLayout.SOUTH);
+		panel_2.setLayout(new BorderLayout(0, 0));
 	}
 
 }
