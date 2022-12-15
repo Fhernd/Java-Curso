@@ -1,19 +1,18 @@
 package vistas;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.awt.GridLayout;
-import javax.swing.JPanel;
+import java.awt.LayoutManager;
+
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.JComboBox;
+import java.awt.BorderLayout;
 
 public class ClientesFrame extends JInternalFrame {
 
@@ -48,7 +47,7 @@ public class ClientesFrame extends JInternalFrame {
 	public ClientesFrame() {
 		setTitle("Clientes");
 		setBounds(100, 100, 450, 610);
-		getContentPane().setLayout(new GridLayout(3, 1, 0, 0));
+		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -120,6 +119,14 @@ public class ClientesFrame extends JInternalFrame {
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox, "12, 12, fill, default");
 
+		JPanel pnlBotones = new JPanel();
+		getContentPane().add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		getContentPane().add(panel_1, BorderLayout.SOUTH);
+
+		JButton btnNuevo = new JButton("Nuevo");
+		pnlBotones.add(btnNuevo);
 	}
 
 }
