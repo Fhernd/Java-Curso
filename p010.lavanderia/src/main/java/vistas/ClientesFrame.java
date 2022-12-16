@@ -22,11 +22,11 @@ public class ClientesFrame extends JInternalFrame {
 	 * Serial version ID.
 	 */
 	private static final long serialVersionUID = -2341366357765049257L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTable table;
+	private JTextField txtDocumento;
+	private JTextField txtNombres;
+	private JTextField txtApellidos;
+	private JTextField txtCorreo;
+	private JTable tblRegistros;
 
 	/**
 	 * Launch the application.
@@ -49,13 +49,13 @@ public class ClientesFrame extends JInternalFrame {
 	 */
 	public ClientesFrame() {
 		setTitle("Clientes");
-		setBounds(100, 100, 450, 690);
+		setBounds(100, 100, 500, 710);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
+		JPanel pnlDatos = new JPanel();
+		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlDatos, BorderLayout.NORTH);
+		pnlDatos.setLayout(new FormLayout(new ColumnSpec[] {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				FormSpecs.DEFAULT_COLSPEC,
 				FormSpecs.RELATED_GAP_COLSPEC,
@@ -82,75 +82,76 @@ public class ClientesFrame extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel = new JLabel("ID:");
-		panel.add(lblNewLabel, "2, 2");
+		JLabel lblId = new JLabel("ID:");
+		pnlDatos.add(lblId, "2, 2");
 		
-		JSpinner spinner = new JSpinner();
-		panel.add(spinner, "12, 2");
+		JSpinner spnId = new JSpinner();
+		pnlDatos.add(spnId, "12, 2");
 		
-		JLabel lblNewLabel_1 = new JLabel("Documento:");
-		panel.add(lblNewLabel_1, "2, 4");
+		JLabel lblDocumento = new JLabel("Documento:");
+		pnlDatos.add(lblDocumento, "2, 4");
 		
-		textField = new JTextField();
-		panel.add(textField, "12, 4, fill, default");
-		textField.setColumns(10);
+		txtDocumento = new JTextField();
+		pnlDatos.add(txtDocumento, "12, 4, fill, default");
+		txtDocumento.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Nombres:");
-		panel.add(lblNewLabel_2, "2, 6");
+		JLabel lblNombres = new JLabel("Nombres:");
+		pnlDatos.add(lblNombres, "2, 6");
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1, "12, 6, fill, default");
-		textField_1.setColumns(10);
+		txtNombres = new JTextField();
+		pnlDatos.add(txtNombres, "12, 6, fill, default");
+		txtNombres.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Apellidos:");
-		panel.add(lblNewLabel_3, "2, 8");
+		JLabel lblApellidos = new JLabel("Apellidos:");
+		pnlDatos.add(lblApellidos, "2, 8");
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2, "12, 8, fill, default");
-		textField_2.setColumns(10);
+		txtApellidos = new JTextField();
+		pnlDatos.add(txtApellidos, "12, 8, fill, default");
+		txtApellidos.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("Correo:");
-		panel.add(lblNewLabel_4, "2, 10");
+		JLabel lblCorreo = new JLabel("Correo:");
+		pnlDatos.add(lblCorreo, "2, 10");
 		
-		textField_3 = new JTextField();
-		panel.add(textField_3, "12, 10, fill, default");
-		textField_3.setColumns(10);
+		txtCorreo = new JTextField();
+		pnlDatos.add(txtCorreo, "12, 10, fill, default");
+		txtCorreo.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("Tipo documento:");
-		panel.add(lblNewLabel_5, "2, 12");
+		JLabel lblTipoDocumento = new JLabel("Tipo documento:");
+		pnlDatos.add(lblTipoDocumento, "2, 12");
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox, "12, 12, fill, default");
+		JComboBox cbxTipoDocumento = new JComboBox();
+		pnlDatos.add(cbxTipoDocumento, "12, 12, fill, default");
 		
-		JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(0, 5, 0, 0));
+		JPanel pnlBotones = new JPanel();
+		pnlBotones.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlBotones, BorderLayout.CENTER);
+		pnlBotones.setLayout(new GridLayout(0, 5, 0, 0));
 		
-		JButton btnNewButton = new JButton("New button");
-		panel_1.add(btnNewButton);
+		JButton btnNuevo = new JButton("Nuevo");
+		pnlBotones.add(btnNuevo);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel_1.add(btnNewButton_1);
+		JButton btnGuardar = new JButton("Guardar");
+		pnlBotones.add(btnGuardar);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		panel_1.add(btnNewButton_2);
+		JButton btnBuscar = new JButton("Buscar...");
+		pnlBotones.add(btnBuscar);
 		
-		JButton btnNewButton_3 = new JButton("New button");
-		panel_1.add(btnNewButton_3);
+		JButton btnEditar = new JButton("Editar");
+		pnlBotones.add(btnEditar);
 		
-		JButton btnNewButton_4 = new JButton("New button");
-		panel_1.add(btnNewButton_4);
+		JButton btnEliminar = new JButton("Eliminar...");
+		pnlBotones.add(btnEliminar);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel pnlRegistros = new JPanel();
+		pnlRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlRegistros, BorderLayout.SOUTH);
+		pnlRegistros.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		panel_2.add(scrollPane, BorderLayout.CENTER);
+		JScrollPane spnRegistros = new JScrollPane();
+		pnlRegistros.add(spnRegistros, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		tblRegistros = new JTable();
+		tblRegistros.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -170,7 +171,7 @@ public class ClientesFrame extends JInternalFrame {
 				return columnEditables[column];
 			}
 		});
-		scrollPane.setViewportView(table);
+		spnRegistros.setViewportView(tblRegistros);
 		
 		
 	}
