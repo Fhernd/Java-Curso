@@ -27,6 +27,10 @@ public class ClientesFrame extends JInternalFrame {
 	private JTextField txtCorreo;
 	private JTable tblRegistros;
 
+	private JSpinner spnId;
+
+	private JComboBox cbxTipoDocumento;
+
 	/**
 	 * Launch the application.
 	 */
@@ -84,7 +88,7 @@ public class ClientesFrame extends JInternalFrame {
 		JLabel lblId = new JLabel("ID:");
 		pnlDatos.add(lblId, "2, 2");
 		
-		JSpinner spnId = new JSpinner();
+		spnId = new JSpinner();
 		pnlDatos.add(spnId, "12, 2");
 		
 		JLabel lblDocumento = new JLabel("Documento:");
@@ -118,7 +122,7 @@ public class ClientesFrame extends JInternalFrame {
 		JLabel lblTipoDocumento = new JLabel("Tipo documento:");
 		pnlDatos.add(lblTipoDocumento, "2, 12");
 		
-		JComboBox cbxTipoDocumento = new JComboBox();
+		cbxTipoDocumento = new JComboBox();
 		pnlDatos.add(cbxTipoDocumento, "12, 12, fill, default");
 		
 		JPanel pnlBotones = new JPanel();
@@ -193,6 +197,8 @@ public class ClientesFrame extends JInternalFrame {
 		txtNombres.setText("");
 		txtApellidos.setText("");
 		txtCorreo.setText("");
+		spnId.setValue(0);
+		cbxTipoDocumento.setSelectedIndex(0);
 	}
 
 	protected boolean hayDatosPresentes() {
