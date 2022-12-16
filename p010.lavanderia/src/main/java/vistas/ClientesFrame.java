@@ -6,15 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -138,7 +130,13 @@ public class ClientesFrame extends JInternalFrame {
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (hayDatosPresentes()) {
-					
+					// Preguntar si desea limpiar los datos
+					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea limpiar los campos?", "Confirmación", JOptionPane.YES_NO_OPTION);
+					if (respuesta == JOptionPane.YES_OPTION) {
+						limpiarCampos();
+					}
+				} else {
+					limpiarCampos();
 				}
 			}
 		});
@@ -190,15 +188,18 @@ public class ClientesFrame extends JInternalFrame {
 		
 	}
 
+	private void limpiarCampos() {
+		txtDocumento.setText("");
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtCorreo.setText("");
+	}
+
 	protected boolean hayDatosPresentes() {
-		if (!txtDocumento.getText().trim().isEmpty() ||
+		return !txtDocumento.getText().trim().isEmpty() ||
 				!txtNombres.getText().trim().isEmpty() ||
 				!txtApellidos.getText().trim().isEmpty() ||
-				!txtCorreo.getText().trim().isEmpty()) {
-			return true;
-		}
-
-		return false;
+				!txtCorreo.getText().trim().isEmpty();
 	}
 
 }
