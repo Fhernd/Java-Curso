@@ -14,6 +14,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import org.apache.commons.validator.routines.EmailValidator;
 
 public class ClientesFrame extends JInternalFrame {
 
@@ -147,6 +148,37 @@ public class ClientesFrame extends JInternalFrame {
 		pnlBotones.add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String documento = txtDocumento.getText().trim();
+				String nombres = txtNombres.getText().trim();
+				String apellidos = txtApellidos.getText().trim();
+				String correo = txtCorreo.getText().trim();
+
+				if (documento.isEmpty() || nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Error", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				try {
+					Integer.parseInt(documento);
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "El documento debe ser un número entero", "Error", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				if (Integer.parseInt(documento) <= 0) {
+					JOptionPane.showMessageDialog(null, "El documento debe ser un número positivo", "Error", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
+				EmailValidator validator = EmailValidator.getInstance();
+				if (!validator.isValid(correo)) {
+					JOptionPane.showMessageDialog(null, "El correo no es válido", "Error", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+			}
+		});
 		pnlBotones.add(btnGuardar);
 		
 		JButton btnBuscar = new JButton("Buscar...");
