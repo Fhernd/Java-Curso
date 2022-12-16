@@ -14,6 +14,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
 
 public class ClientesFrame extends JInternalFrame {
 
@@ -25,6 +26,7 @@ public class ClientesFrame extends JInternalFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -47,7 +49,7 @@ public class ClientesFrame extends JInternalFrame {
 	 */
 	public ClientesFrame() {
 		setTitle("Clientes");
-		setBounds(100, 100, 450, 433);
+		setBounds(100, 100, 450, 690);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -140,8 +142,37 @@ public class ClientesFrame extends JInternalFrame {
 		panel_1.add(btnNewButton_4);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_2, BorderLayout.SOUTH);
 		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_2.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Documento", "Nombres", "Apellidos", "Correo", "Tipo documento"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		scrollPane.setViewportView(table);
+		
+		
 	}
 
 }
