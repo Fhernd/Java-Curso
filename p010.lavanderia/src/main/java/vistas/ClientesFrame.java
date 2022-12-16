@@ -1,20 +1,27 @@
 package vistas;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.*;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
-import javax.swing.border.TitledBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class ClientesFrame extends JInternalFrame {
 
@@ -128,6 +135,13 @@ public class ClientesFrame extends JInternalFrame {
 		pnlBotones.setLayout(new GridLayout(0, 5, 0, 0));
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (hayDatosPresentes()) {
+					
+				}
+			}
+		});
 		pnlBotones.add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("Guardar");
@@ -174,6 +188,17 @@ public class ClientesFrame extends JInternalFrame {
 		spnRegistros.setViewportView(tblRegistros);
 		
 		
+	}
+
+	protected boolean hayDatosPresentes() {
+		if (!txtDocumento.getText().trim().isEmpty() ||
+				!txtNombres.getText().trim().isEmpty() ||
+				!txtApellidos.getText().trim().isEmpty() ||
+				!txtCorreo.getText().trim().isEmpty()) {
+			return true;
+		}
+
+		return false;
 	}
 
 }
