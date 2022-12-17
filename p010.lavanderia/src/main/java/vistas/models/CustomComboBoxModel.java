@@ -6,12 +6,11 @@ import javax.swing.*;
 
 public class CustomComboBoxModel extends AbstractListModel implements ComboBoxModel {
     TipoDocumento[] tipoDocumentos;
+    TipoDocumento selection = null;
 
     public CustomComboBoxModel(TipoDocumento[] tipoDocumentos) {
         this.tipoDocumentos = tipoDocumentos;
     }
-
-    String selection = null;
 
     @Override
     public Object getElementAt(int index) {
@@ -24,7 +23,7 @@ public class CustomComboBoxModel extends AbstractListModel implements ComboBoxMo
     }
 
     public void setSelectedItem(Object anItem) {
-        selection = (String) anItem;
+        selection = (TipoDocumento) anItem;
     }
 
     @Override
