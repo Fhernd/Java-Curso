@@ -166,6 +166,11 @@ public class ClientesFrame extends JInternalFrame {
 					return;
 				}
 
+				if (gestorLavanderiaGUI.obtenerClientePorDocumento(documento) != null) {
+					JOptionPane.showMessageDialog(null, "Ya existe un cliente con el documento " + documento, "Error", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+
 				EmailValidator validator = EmailValidator.getInstance();
 				if (!validator.isValid(correo)) {
 					JOptionPane.showMessageDialog(null, "El correo no es válido", "Error", JOptionPane.WARNING_MESSAGE);

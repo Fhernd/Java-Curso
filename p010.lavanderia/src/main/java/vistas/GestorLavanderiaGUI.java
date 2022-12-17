@@ -172,4 +172,14 @@ public class GestorLavanderiaGUI {
 
         return tiposDocumento.toArray(new TipoDocumento[tiposDocumento.size()]);
     }
+
+    /**
+     * Obtiene un cliente a partir de su documento.
+     *
+     * @param documento Documento del cliente.
+     * @return Cliente Cliente encontrado.
+     */
+    public Cliente obtenerClientePorDocumento(String documento) {
+        return gestorLavanderia.obtenerClientePorDocumento(documento);
+    }
 }
