@@ -245,6 +245,8 @@ public class ClientesFrame extends JInternalFrame {
 
 		CustomComboBoxModel model = new CustomComboBoxModel(tiposDocumento);
 		cbxTipoDocumento.setModel(model);
+
+		cbxTipoDocumento.setSelectedIndex(0);
 	}
 
 	private void limpiarCampos() {
