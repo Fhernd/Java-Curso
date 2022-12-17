@@ -26,6 +26,7 @@ public class GestorLavanderiaGUI {
                 try {
                     GestorLavanderiaGUI window = new GestorLavanderiaGUI();
                     window.frmGestorLavanderiaGUI.setVisible(true);
+                    window.frmGestorLavanderiaGUI.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

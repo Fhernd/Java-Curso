@@ -48,6 +48,7 @@ public class ClientesFrame extends JInternalFrame {
 		setTitle("Clientes");
 		setBounds(100, 100, 500, 710);
 		getContentPane().setLayout(new BorderLayout(0, 0));
+		setClosable(true);
 		
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -129,7 +130,7 @@ public class ClientesFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (hayDatosPresentes()) {
 					// Preguntar si desea limpiar los datos
-					int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea limpiar los campos?", "Confirmación", JOptionPane.YES_NO_OPTION);
+					int respuesta = JOptionPane.showConfirmDialog(null, "Hay datos escritos en uno o más campos, ¿desea limpiar los campos?", "Confirmación", JOptionPane.YES_NO_OPTION);
 					if (respuesta == JOptionPane.YES_OPTION) {
 						limpiarCampos();
 					}
