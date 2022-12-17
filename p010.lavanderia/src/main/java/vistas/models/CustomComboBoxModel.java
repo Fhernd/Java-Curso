@@ -29,6 +29,6 @@ public class CustomComboBoxModel extends AbstractListModel implements ComboBoxMo
 
     @Override
     public Object getSelectedItem() {
-        return selection; // to add the selection to the combo box
+        return selection;
     }
 }
