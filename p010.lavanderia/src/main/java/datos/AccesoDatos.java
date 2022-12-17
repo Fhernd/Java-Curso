@@ -912,4 +912,35 @@ public class AccesoDatos {
 
         return usuario;
     }
+
+    /**
+     * Obtiene todos los clientes.
+     *
+     * @return List<Cliente> Lista de clientes.
+     */
+    public List<Cliente> obtenerClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM cliente";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setId(resultado.getInt("id"));
+                cliente.setNombres(resultado.getString("nombres"));
+                cliente.setApellidos(resultado.getString("apellidos"));
+                cliente.setDocumento(resultado.getString("documento"));
+                cliente.setTipoDocumentoId(resultado.getInt("tipo_documento_id"));
+
+                clientes.add(cliente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return clientes;
+    }
 }
