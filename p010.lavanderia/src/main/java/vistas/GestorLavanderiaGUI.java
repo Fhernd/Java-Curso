@@ -1,9 +1,6 @@
 package vistas;
 
-import modelos.Empleado;
-import modelos.GestorLavanderia;
-import modelos.Rol;
-import modelos.Usuario;
+import modelos.*;
 import utilidades.Utilidad;
 
 import java.awt.EventQueue;
@@ -149,5 +146,16 @@ public class GestorLavanderiaGUI {
      */
     public boolean eliminarEmpleadoPorId(int id) {
         return gestorLavanderia.eliminarEmpleadoPorId(id);
+    }
+
+    /**
+     * Obtiene el listado de tipos de documento.
+     *
+     * @return Listado de tipos de documento.
+     */
+    public TipoDocumento[] obtenerTiposDocumentos() {
+        List<TipoDocumento> tiposDocumento = gestorLavanderia.obtenerTiposDocumentos();
+
+        return tiposDocumento.toArray(new TipoDocumento[tiposDocumento.size()]);
     }
 }
