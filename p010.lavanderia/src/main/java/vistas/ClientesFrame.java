@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -250,15 +252,19 @@ public class ClientesFrame extends JInternalFrame {
     private void agregarRegistroClienteTabla(Cliente cliente) {
         DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
 
-        modelo.addRow(new Object[]{cliente.getId(), cliente.getDocumento(), cliente.getNombres(), cliente.getApellidos(), cliente.getCorreo(), cliente.getTipoDocumentoId()});
+        TipoDocumento[] tiposDocumento = gestorLavanderiaGUI.obtenerTiposDocumentos();
+
+        modelo.addRow(new Object[]{cliente.getId(), cliente.getDocumento(), cliente.getNombres(), cliente.getApellidos(), cliente.getCorreo(), Arrays.stream(tiposDocumento).filter(tipoDocumento -> tipoDocumento.getId() == cliente.getTipoDocumentoId()).findFirst().get().getNombre()});
     }
 
     private void cargarRegistrosClientes() {
         DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
         modelo.setRowCount(0);
 
+        TipoDocumento[] tiposDocumento = gestorLavanderiaGUI.obtenerTiposDocumentos();
+
         for (Cliente cliente : gestorLavanderiaGUI.obtenerClientes()) {
-            modelo.addRow(new Object[]{cliente.getId(), cliente.getDocumento(), cliente.getNombres(), cliente.getApellidos(), cliente.getCorreo(), cliente.getTipoDocumentoId()});
+            modelo.addRow(new Object[]{cliente.getId(), cliente.getDocumento(), cliente.getNombres(), cliente.getApellidos(), cliente.getCorreo(), Arrays.stream(tiposDocumento).filter(tipoDocumento -> tipoDocumento.getId() == cliente.getTipoDocumentoId()).findFirst().get().getNombre()});
         }
     }
 
