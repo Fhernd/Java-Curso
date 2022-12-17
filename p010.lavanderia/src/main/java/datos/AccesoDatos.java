@@ -933,6 +933,7 @@ public class AccesoDatos {
                 cliente.setNombres(resultado.getString("nombres"));
                 cliente.setApellidos(resultado.getString("apellidos"));
                 cliente.setDocumento(resultado.getString("documento"));
+                cliente.setCorreo(resultado.getString("correo"));
                 cliente.setTipoDocumentoId(resultado.getInt("tipo_documento_id"));
 
                 clientes.add(cliente);
