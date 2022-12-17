@@ -14,7 +14,9 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import modelos.TipoDocumento;
 import org.apache.commons.validator.routines.EmailValidator;
+import vistas.models.CustomComboBoxModel;
 
 public class ClientesFrame extends JInternalFrame {
 
@@ -32,26 +34,17 @@ public class ClientesFrame extends JInternalFrame {
 
 	private JComboBox cbxTipoDocumento;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ClientesFrame frame = new ClientesFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private GestorLavanderiaGUI gestorLavanderiaGUI;
+
 
 	/**
 	 * Create the frame.
+	 *
+	 * @param gestorLavanderiaGUI Gestor de la aplicación.
 	 */
-	public ClientesFrame() {
+	public ClientesFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+
 		setTitle("Clientes");
 		setBounds(100, 100, 500, 710);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -73,7 +66,7 @@ public class ClientesFrame extends JInternalFrame {
 				FormSpecs.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,	
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -177,6 +170,8 @@ public class ClientesFrame extends JInternalFrame {
 					JOptionPane.showMessageDialog(null, "El correo no es válido", "Error", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+
+				String tipoDocumento = cbxTipoDocumento.getSelectedItem().toString();
 			}
 		});
 		pnlBotones.add(btnGuardar);
@@ -221,7 +216,14 @@ public class ClientesFrame extends JInternalFrame {
 		});
 		spnRegistros.setViewportView(tblRegistros);
 		
-		
+		cargarTiposDocumento();
+	}
+
+	private void cargarTiposDocumento() {
+		TipoDocumento[] tiposDocumento = gestorLavanderiaGUI.obtenerTiposDocumentos();
+
+		CustomComboBoxModel model = new CustomComboBoxModel(tiposDocumento);
+		cbxTipoDocumento.setModel(model);
 	}
 
 	private void limpiarCampos() {
