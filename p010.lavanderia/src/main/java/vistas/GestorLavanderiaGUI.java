@@ -182,4 +182,14 @@ public class GestorLavanderiaGUI {
     public Cliente obtenerClientePorDocumento(String documento) {
         return gestorLavanderia.obtenerClientePorDocumento(documento);
     }
+
+    /**
+     * Crea un nuevo cliente.
+     *
+     * @param cliente Cliente a crear.
+     * @return Cliente Cliente creado.
+     */
+    public Cliente crearCliente(Cliente cliente) {
+        return gestorLavanderia.crearCliente(cliente);
+    }
 }

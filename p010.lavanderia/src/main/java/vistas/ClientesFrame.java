@@ -14,6 +14,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import modelos.Cliente;
 import modelos.TipoDocumento;
 import org.apache.commons.validator.routines.EmailValidator;
 import vistas.models.CustomComboBoxModel;
@@ -177,7 +178,21 @@ public class ClientesFrame extends JInternalFrame {
 					return;
 				}
 
-				String tipoDocumento = cbxTipoDocumento.getSelectedItem().toString();
+				TipoDocumento tipoDocumento = (TipoDocumento) cbxTipoDocumento.getSelectedItem();
+
+				Cliente cliente = new Cliente();
+				cliente.setDocumento(documento);
+				cliente.setNombres(nombres);
+				cliente.setApellidos(apellidos);
+				cliente.setCorreo(correo);
+				cliente.setTipoDocumentoId(tipoDocumento.getId());
+
+				if (gestorLavanderiaGUI.crearCliente(cliente) != null) {
+					JOptionPane.showMessageDialog(null, "Cliente creado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+					limpiarCampos();
+				} else {
+					JOptionPane.showMessageDialog(null, "No se pudo crear el cliente. Intente otra vez.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		pnlBotones.add(btnGuardar);
