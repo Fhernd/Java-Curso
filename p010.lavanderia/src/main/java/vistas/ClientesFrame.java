@@ -238,6 +238,17 @@ public class ClientesFrame extends JInternalFrame {
 		spnRegistros.setViewportView(tblRegistros);
 		
 		cargarTiposDocumento();
+
+		cargarRegistrosClientes();
+	}
+
+	private void cargarRegistrosClientes() {
+		DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
+		modelo.setRowCount(0);
+
+		for (Cliente cliente : gestorLavanderiaGUI.obtenerClientes()) {
+			modelo.addRow(new Object[] { cliente.getId(), cliente.getDocumento(), cliente.getNombres(), cliente.getApellidos(), cliente.getCorreo(), cliente.getTipoDocumentoId()});
+		}
 	}
 
 	private void cargarTiposDocumento() {

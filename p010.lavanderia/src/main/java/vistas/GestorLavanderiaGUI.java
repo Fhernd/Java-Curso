@@ -192,4 +192,8 @@ public class GestorLavanderiaGUI {
     public Cliente crearCliente(Cliente cliente) {
         return gestorLavanderia.crearCliente(cliente);
     }
+
+    public List<Cliente> obtenerClientes() {
+        return gestorLavanderia.obtenerClientes();
+    }
 }

@@ -316,4 +316,8 @@ public class GestorLavanderia {
     public Usuario obtenerUsuarioPorCorreo(String correo) {
         return accesoDatos.obtenerUsuarioPorCorreo(correo);
     }
+
+    public List<Cliente> obtenerClientes() {
+        return accesoDatos.obtenerClientes();
+    }
 }
