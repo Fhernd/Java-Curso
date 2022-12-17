@@ -97,6 +97,19 @@ public class GestorLavanderiaGUI {
 
         JMenuItem mniEmpleadosCrear = new JMenuItem("Crear");
         mnuEmpleados.add(mniEmpleadosCrear);
+
+        JMenu mnuClientes = new JMenu("Clientes");
+        menuBar.add(mnuClientes);
+
+        JMenuItem mniClientesOperaciones = new JMenuItem("Operaciones");
+        mniClientesOperaciones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ClientesFrame clientesFrame = new ClientesFrame(GestorLavanderiaGUI.this);
+                dtpPrincipal.add(clientesFrame);
+                clientesFrame.setVisible(true);
+            }
+        });
+        mnuClientes.add(mniClientesOperaciones);
     }
 
     public Usuario iniciarSesion(String email, String password) {
