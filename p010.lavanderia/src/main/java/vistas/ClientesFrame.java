@@ -202,6 +202,40 @@ public class ClientesFrame extends JInternalFrame {
         pnlBotones.add(btnGuardar);
 
         JButton btnBuscar = new JButton("Buscar...");
+        btnBuscar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String documento = JOptionPane.showInputDialog(ClientesFrame.this, "Ingrese el documento del cliente", "Buscar cliente", JOptionPane.QUESTION_MESSAGE);
+                documento = documento.trim();
+
+                if (!documento.isEmpty()) {
+                    try {
+                        Integer.parseInt(documento);
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(null, "El documento debe ser un número entero", "Error", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    if (Integer.parseInt(documento) <= 0) {
+                        JOptionPane.showMessageDialog(null, "El documento debe ser un número positivo", "Error", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
+
+                    if (cliente != null) {
+                        txtDocumento.setText(cliente.getDocumento());
+                        txtNombres.setText(cliente.getNombres());
+                        txtApellidos.setText(cliente.getApellidos());
+                        txtCorreo.setText(cliente.getCorreo());
+
+                        TipoDocumento tipoDocumento = gestorLavanderiaGUI.obtenerTipoDocumentoPorId(cliente.getTipoDocumentoId());
+                        cbxTipoDocumento.setSelectedItem(tipoDocumento);
+                    } else {
+                        JOptionPane.showMessageDialog(ClientesFrame.this, "No existe un cliente con el documento " + documento, "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+        	}
+        });
         pnlBotones.add(btnBuscar);
 
         JButton btnEditar = new JButton("Editar");
