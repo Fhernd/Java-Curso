@@ -944,4 +944,30 @@ public class AccesoDatos {
 
         return clientes;
     }
+
+    /**
+     * Buscar un documento a partir de su ID.
+     *
+     * @param id ID del documento.
+     * @return Documento Documento.
+     */
+    public TipoDocumento obtenerDocumentoPorId(int id) {
+        try {
+            final String SQL = "SELECT * FROM tipo_documento WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, id);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                TipoDocumento tipoDocumento = new TipoDocumento();
+                tipoDocumento.setId(id);
+                tipoDocumento.setNombre(resultado.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return null;
+    }
 }
