@@ -204,34 +204,41 @@ public class ClientesFrame extends JInternalFrame {
         JButton btnBuscar = new JButton("Buscar...");
         btnBuscar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		String documento = JOptionPane.showInputDialog(ClientesFrame.this, "Ingrese el documento del cliente", "Buscar cliente", JOptionPane.QUESTION_MESSAGE);
-                documento = documento.trim();
+        		// Mostrar un diálogo para capturar el documento del cliente:
+                String documento = JOptionPane.showInputDialog(ClientesFrame.this, "Ingrese el documento del cliente", "Buscar cliente", JOptionPane.QUESTION_MESSAGE).trim();
 
                 if (!documento.isEmpty()) {
                     try {
                         Integer.parseInt(documento);
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "El documento debe ser un número entero", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(ClientesFrame.this, "El documento debe ser un número entero", "Advertencia", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
                     if (Integer.parseInt(documento) <= 0) {
-                        JOptionPane.showMessageDialog(null, "El documento debe ser un número positivo", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(ClientesFrame.this, "El documento debe ser un número positivo", "Advertencia", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
                     Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
 
                     if (cliente != null) {
+                        // Mostrar los datos del cliente en los campos de texto
                         txtDocumento.setText(cliente.getDocumento());
                         txtNombres.setText(cliente.getNombres());
                         txtApellidos.setText(cliente.getApellidos());
                         txtCorreo.setText(cliente.getCorreo());
 
-                        TipoDocumento tipoDocumento = gestorLavanderiaGUI.obtenerTipoDocumentoPorId(cliente.getTipoDocumentoId());
-                        cbxTipoDocumento.setSelectedItem(tipoDocumento);
+                        // Seleccionar el tipo de documento en el combo box
+                        for (int i = 0; i < cbxTipoDocumento.getItemCount(); i++) {
+                            TipoDocumento tipoDocumento = (TipoDocumento) cbxTipoDocumento.getItemAt(i);
+                            if (tipoDocumento.getId() == cliente.getTipoDocumentoId()) {
+                                cbxTipoDocumento.setSelectedIndex(i);
+                                break;
+                            }
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(ClientesFrame.this, "No existe un cliente con el documento " + documento, "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No existe un cliente con el documento " + documento, "Error", JOptionPane.WARNING_MESSAGE);
                     }
                 }
         	}
