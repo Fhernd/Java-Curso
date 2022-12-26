@@ -223,13 +223,13 @@ public class ClientesFrame extends JInternalFrame {
                     Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
 
                     if (cliente != null) {
-                        // Mostrar los datos del cliente en los campos de texto
+                        spnId.setValue(cliente.getId());
+                        spnId.setEnabled(false);
                         txtDocumento.setText(cliente.getDocumento());
                         txtNombres.setText(cliente.getNombres());
                         txtApellidos.setText(cliente.getApellidos());
                         txtCorreo.setText(cliente.getCorreo());
 
-                        // Seleccionar el tipo de documento en el combo box
                         for (int i = 0; i < cbxTipoDocumento.getItemCount(); i++) {
                             TipoDocumento tipoDocumento = (TipoDocumento) cbxTipoDocumento.getItemAt(i);
                             if (tipoDocumento.getId() == cliente.getTipoDocumentoId()) {
@@ -239,10 +239,12 @@ public class ClientesFrame extends JInternalFrame {
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "No existe un cliente con el documento " + documento, "Error", JOptionPane.WARNING_MESSAGE);
+                        limpiarCampos();
                     }
                 }
         	}
         });
+
         pnlBotones.add(btnBuscar);
 
         JButton btnEditar = new JButton("Editar");
