@@ -253,6 +253,50 @@ public class ClientesFrame extends JInternalFrame {
         pnlBotones.add(btnBuscar);
 
         JButton btnEditar = new JButton("Editar");
+        btnEditar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (!clienteEncontrado) {
+                    JOptionPane.showMessageDialog(null, "Debe buscar un cliente primero", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int clienteId = (int) spnId.getValue();
+                String nombres = txtNombres.getText().trim();
+                String apellidos = txtApellidos.getText().trim();
+                String correo = txtCorreo.getText().trim();
+
+                if (nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Debe llenar los campos Nombres, Apellidos y Correo electrónico", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                EmailValidator validator = EmailValidator.getInstance();
+                if (!validator.isValid(correo)) {
+                    JOptionPane.showMessageDialog(null, "El correo no es válido", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                TipoDocumento tipoDocumento = (TipoDocumento) cbxTipoDocumento.getSelectedItem();
+
+                Cliente cliente = new Cliente();
+                cliente.setId(clienteId);
+                cliente.setNombres(nombres);
+                cliente.setApellidos(apellidos);
+                cliente.setCorreo(correo);
+                cliente.setTipoDocumentoId(tipoDocumento.getId());
+
+                if (gestorLavanderiaGUI.actualizarCliente(cliente)) {
+                    JOptionPane.showMessageDialog(null, "Cliente actualizado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+                    limpiarCampos();
+                    clienteEncontrado = false;
+                    spnId.setEnabled(true);
+                    spnId.setValue(0);
+                    spnId.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar el cliente. Intente otra vez.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+        	}
+        });
         pnlBotones.add(btnEditar);
 
         JButton btnEliminar = new JButton("Eliminar...");
@@ -292,7 +336,9 @@ public class ClientesFrame extends JInternalFrame {
         });
         spnRegistros.setViewportView(tblRegistros);
 
-        
+        cargarTiposDocumento();
+
+        cargarRegistrosClientes();
     }
 
     private void agregarRegistroClienteTabla(Cliente cliente) {

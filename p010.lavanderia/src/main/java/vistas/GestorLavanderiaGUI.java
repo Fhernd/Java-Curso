@@ -196,4 +196,8 @@ public class GestorLavanderiaGUI {
     public List<Cliente> obtenerClientes() {
         return gestorLavanderia.obtenerClientes();
     }
+
+    public boolean actualizarCliente(Cliente cliente) {
+        return gestorLavanderia.actualizarCliente(cliente);
+    }
 }
