@@ -39,6 +39,8 @@ public class ClientesFrame extends JInternalFrame {
 
     private GestorLavanderiaGUI gestorLavanderiaGUI;
 
+    private boolean clienteEncontrado = false;
+
 
     /**
      * Create the frame.
@@ -223,6 +225,7 @@ public class ClientesFrame extends JInternalFrame {
                     Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
 
                     if (cliente != null) {
+                        clienteEncontrado = true;
                         spnId.setValue(cliente.getId());
                         spnId.setEnabled(false);
                         txtDocumento.setText(cliente.getDocumento());
@@ -239,6 +242,7 @@ public class ClientesFrame extends JInternalFrame {
                             }
                         }
                     } else {
+                        clienteEncontrado = false;
                         JOptionPane.showMessageDialog(null, "No existe un cliente con el documento " + documento, "Warning", JOptionPane.WARNING_MESSAGE);
                         limpiarCampos();
                     }
@@ -288,9 +292,7 @@ public class ClientesFrame extends JInternalFrame {
         });
         spnRegistros.setViewportView(tblRegistros);
 
-        cargarTiposDocumento();
-
-        cargarRegistrosClientes();
+        
     }
 
     private void agregarRegistroClienteTabla(Cliente cliente) {
