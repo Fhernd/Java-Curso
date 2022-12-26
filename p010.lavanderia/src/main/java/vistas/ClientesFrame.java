@@ -238,7 +238,7 @@ public class ClientesFrame extends JInternalFrame {
                             }
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "No existe un cliente con el documento " + documento, "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No existe un cliente con el documento " + documento, "Warning", JOptionPane.WARNING_MESSAGE);
                         limpiarCampos();
                     }
                 }
