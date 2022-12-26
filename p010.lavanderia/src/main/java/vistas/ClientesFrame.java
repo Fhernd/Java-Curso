@@ -234,6 +234,7 @@ public class ClientesFrame extends JInternalFrame {
                             TipoDocumento tipoDocumento = (TipoDocumento) cbxTipoDocumento.getItemAt(i);
                             if (tipoDocumento.getId() == cliente.getTipoDocumentoId()) {
                                 cbxTipoDocumento.setSelectedIndex(i);
+                                cbxTipoDocumento.repaint();
                                 break;
                             }
                         }
