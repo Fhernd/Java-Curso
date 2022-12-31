@@ -211,4 +211,14 @@ public class GestorLavanderiaGUI {
     public boolean actualizarCliente(Cliente cliente) {
         return gestorLavanderia.actualizarCliente(cliente);
     }
+
+    /**
+     * Obtiene un cliente a partir de su ID.
+     *
+     * @param clienteId ID del cliente.
+     * @return Cliente Cliente encontrado.
+     */
+    public Cliente obtenerClientePorId(int clienteId) {
+        return gestorLavanderia.obtenerClientePorId(clienteId);
+    }
 }

@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -337,6 +339,35 @@ public class ClientesFrame extends JInternalFrame {
             }
         });
         spnRegistros.setViewportView(tblRegistros);
+
+        // Event handler for selected row:
+        tblRegistros.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (tblRegistros.getSelectedRow() != -1) {
+                    int clienteId = (int) tblRegistros.getValueAt(tblRegistros.getSelectedRow(), 0);
+                    Cliente cliente = gestorLavanderiaGUI.obtenerClientePorId(clienteId);
+
+                    if (cliente != null) {
+                        spnId.setValue(cliente.getId());
+                        spnId.setEnabled(false);
+                        txtDocumento.setText(cliente.getDocumento());
+                        txtNombres.setText(cliente.getNombres());
+                        txtApellidos.setText(cliente.getApellidos());
+                        txtCorreo.setText(cliente.getCorreo());
+
+                        for (int i = 0; i < cbxTipoDocumento.getItemCount(); i++) {
+                            TipoDocumento tipoDocumento = (TipoDocumento) cbxTipoDocumento.getItemAt(i);
+                            if (tipoDocumento.getId() == cliente.getTipoDocumentoId()) {
+                                cbxTipoDocumento.setSelectedIndex(i);
+                                cbxTipoDocumento.repaint();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
         cargarTiposDocumento();
 
