@@ -292,6 +292,8 @@ public class ClientesFrame extends JInternalFrame {
                     spnId.setEnabled(true);
                     spnId.setValue(0);
                     spnId.repaint();
+
+                    cargarRegistrosClientes();
                 } else {
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar el cliente. Intente otra vez.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -349,6 +351,9 @@ public class ClientesFrame extends JInternalFrame {
         modelo.addRow(new Object[]{cliente.getId(), cliente.getDocumento(), cliente.getNombres(), cliente.getApellidos(), cliente.getCorreo(), Arrays.stream(tiposDocumento).filter(tipoDocumento -> tipoDocumento.getId() == cliente.getTipoDocumentoId()).findFirst().get().getNombre()});
     }
 
+    /**
+     * Carga todos los registros de clientes en la tabla.
+     */
     private void cargarRegistrosClientes() {
         DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
         modelo.setRowCount(0);
