@@ -193,10 +193,21 @@ public class GestorLavanderiaGUI {
         return gestorLavanderia.crearCliente(cliente);
     }
 
+    /**
+     * Obtiene todos los clientes.
+     *
+     * @return List<Cliente> Lista de clientes.
+     */
     public List<Cliente> obtenerClientes() {
         return gestorLavanderia.obtenerClientes();
     }
 
+    /**
+     * Actualiza los datos de un cliente.
+     *
+     * @param cliente Cliente a actualizar.
+     * @return true si se actualizó correctamente, false en caso contrario.
+     */
     public boolean actualizarCliente(Cliente cliente) {
         return gestorLavanderia.actualizarCliente(cliente);
     }
