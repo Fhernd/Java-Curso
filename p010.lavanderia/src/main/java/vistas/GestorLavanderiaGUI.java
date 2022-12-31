@@ -221,4 +221,14 @@ public class GestorLavanderiaGUI {
     public Cliente obtenerClientePorId(int clienteId) {
         return gestorLavanderia.obtenerClientePorId(clienteId);
     }
+
+    /**
+     * Elimina un cliente a partir de su documento.
+     *
+     * @param documento Documento del cliente.
+     * @return true si se eliminó correctamente, false en caso contrario.
+     */
+    public boolean eliminarClientePorDocumento(String documento) {
+        return gestorLavanderia.eliminarClientePorDocumento(documento);
+    }
 }

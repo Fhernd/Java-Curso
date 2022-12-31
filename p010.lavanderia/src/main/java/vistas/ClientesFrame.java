@@ -305,6 +305,34 @@ public class ClientesFrame extends JInternalFrame {
 
         JButton btnEliminar = new JButton("Eliminar...");
         pnlBotones.add(btnEliminar);
+        // Evento click para el botón eliminar:
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!clienteEncontrado) {
+                    JOptionPane.showMessageDialog(null, "Debe buscar un cliente primero", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int clienteId = (int) spnId.getValue();
+
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el cliente?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    if (gestorLavanderiaGUI.eliminarClientePorDocumento(txtDocumento.getText())) {
+                        JOptionPane.showMessageDialog(null, "Cliente eliminado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarCampos();
+                        clienteEncontrado = false;
+                        spnId.setEnabled(true);
+                        spnId.setValue(0);
+                        spnId.repaint();
+
+                        cargarRegistrosClientes();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se pudo eliminar el cliente. Intente otra vez.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
 
         JPanel pnlRegistros = new JPanel();
         pnlRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
