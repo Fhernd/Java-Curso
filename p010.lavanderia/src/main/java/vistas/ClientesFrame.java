@@ -377,6 +377,8 @@ public class ClientesFrame extends JInternalFrame {
                     Cliente cliente = gestorLavanderiaGUI.obtenerClientePorId(clienteId);
 
                     if (cliente != null) {
+                        clienteEncontrado = true;
+
                         spnId.setValue(cliente.getId());
                         spnId.setEnabled(false);
                         txtDocumento.setText(cliente.getDocumento());
