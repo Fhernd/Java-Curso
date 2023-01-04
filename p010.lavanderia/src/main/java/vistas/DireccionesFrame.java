@@ -27,22 +27,6 @@ public class DireccionesFrame extends JInternalFrame {
 	private JTable tblRegistros;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DireccionesFrame frame = new DireccionesFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public DireccionesFrame() {
@@ -87,6 +71,11 @@ public class DireccionesFrame extends JInternalFrame {
 		pnlDatos.add(cbxClienteId, "10, 4, fill, default");
 		
 		JButton btnBuscarClientePordocumento = new JButton("Buscar cliente por documento...");
+		btnBuscarClientePordocumento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Buscar un cliente por documento
+			}
+		});
 		pnlDatos.add(btnBuscarClientePordocumento, "10, 6, default, bottom");
 		
 		JPanel pnlBotones = new JPanel();
