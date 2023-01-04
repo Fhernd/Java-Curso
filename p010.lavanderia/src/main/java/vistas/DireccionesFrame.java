@@ -19,6 +19,8 @@ import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DireccionesFrame extends JInternalFrame {
 	private JTextField txtDescripcion;
@@ -93,18 +95,43 @@ public class DireccionesFrame extends JInternalFrame {
 		pnlBotones.setLayout(new GridLayout(0, 5, 0, 0));
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Limpiar los campos del formulario
+			}
+		});
 		pnlBotones.add(btnNuevo);
 		
 		JButton btnNewButton = new JButton("Guardar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Guardar una nueva dirección en la base de datos
+			}
+		});
 		pnlBotones.add(btnNewButton);
 		
 		JButton btnBuscar = new JButton("Buscar...");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Buscar una dirección de un cliente
+			}
+		});
 		pnlBotones.add(btnBuscar);
 		
 		JButton btnEditar = new JButton(" Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Editar una dirección de un cliente
+			}
+		});
 		pnlBotones.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Eliminar una dirección de un cliente
+			}
+		});
 		pnlBotones.add(btnEliminar);
 		
 		JPanel pnlRegistros = new JPanel();
