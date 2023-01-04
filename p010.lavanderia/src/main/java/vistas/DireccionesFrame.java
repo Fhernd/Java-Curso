@@ -10,6 +10,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.GestorLavanderia;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -25,11 +27,14 @@ import java.awt.event.ActionEvent;
 public class DireccionesFrame extends JInternalFrame {
 	private JTextField txtDescripcion;
 	private JTable tblRegistros;
+	private GestorLavanderiaGUI gestorLavanderiaGUI;
 
 	/**
 	 * Create the frame.
 	 */
-	public DireccionesFrame() {
+	public DireccionesFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+
 		setTitle("Direcciones");
 		setMaximizable(true);
 		setClosable(true);
