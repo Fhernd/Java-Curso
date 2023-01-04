@@ -122,7 +122,15 @@ public class DireccionesFrame extends JInternalFrame {
 			new String[] {
 				"ID", "Direcci\u00F3n", "Cliente"
 			}
-		));
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		
 		spnRegistros.setViewportView(tblRegistros);
 	}
 
