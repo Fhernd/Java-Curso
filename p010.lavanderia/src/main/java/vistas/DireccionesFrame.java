@@ -16,9 +16,13 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import java.awt.GridLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class DireccionesFrame extends JInternalFrame {
 	private JTextField txtDescripcion;
+	private JTable tblRegistros;
 
 	/**
 	 * Launch the application.
@@ -43,7 +47,7 @@ public class DireccionesFrame extends JInternalFrame {
 		setTitle("Direcciones");
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 630);
 		
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -102,7 +106,24 @@ public class DireccionesFrame extends JInternalFrame {
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		pnlBotones.add(btnEliminar);
-
+		
+		JPanel pnlRegistros = new JPanel();
+		pnlRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlRegistros, BorderLayout.SOUTH);
+		pnlRegistros.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane spnRegistros = new JScrollPane();
+		pnlRegistros.add(spnRegistros, BorderLayout.CENTER);
+		
+		tblRegistros = new JTable();
+		tblRegistros.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Direcci\u00F3n", "Cliente"
+			}
+		));
+		spnRegistros.setViewportView(tblRegistros);
 	}
 
 }
