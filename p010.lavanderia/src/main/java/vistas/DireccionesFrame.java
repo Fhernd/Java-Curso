@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.border.BevelBorder;
+import java.awt.GridLayout;
 
 public class DireccionesFrame extends JInternalFrame {
 	private JTextField txtDescripcion;
@@ -80,6 +82,26 @@ public class DireccionesFrame extends JInternalFrame {
 		
 		JButton btnBuscarClientePordocumento = new JButton("Buscar cliente por documento...");
 		pnlDatos.add(btnBuscarClientePordocumento, "10, 6, default, bottom");
+		
+		JPanel pnlBotones = new JPanel();
+		pnlBotones.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlBotones, BorderLayout.CENTER);
+		pnlBotones.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		pnlBotones.add(btnNuevo);
+		
+		JButton btnNewButton = new JButton("Guardar");
+		pnlBotones.add(btnNewButton);
+		
+		JButton btnBuscar = new JButton("Buscar...");
+		pnlBotones.add(btnBuscar);
+		
+		JButton btnEditar = new JButton(" Editar");
+		pnlBotones.add(btnEditar);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		pnlBotones.add(btnEliminar);
 
 	}
 
