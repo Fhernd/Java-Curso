@@ -32,4 +32,19 @@ public class ClientesComboBoxModel extends AbstractListModel implements ComboBox
     public Object getElementAt(int index) {
         return clientes[index];
     }
+
+    /**
+     * Busca el índice de un cliente en el arreglo de clientes.
+     * @param documento El documento del cliente a buscar.
+     * @return El índice del cliente en el arreglo de clientes.
+     */
+    public int buscarIndiceDelCliente(String documento) {
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i].getDocumento().equals(documento)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
