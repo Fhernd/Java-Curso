@@ -83,7 +83,7 @@ public class DireccionesFrame extends JInternalFrame {
                     Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
 
                     if (cliente != null) {
-//                        cbxClienteId.setSelectedItem(cliente);
+                        cbxClienteId.setSelectedItem(cliente);
                     } else {
                         JOptionPane.showMessageDialog(DireccionesFrame.this, "No se encontró el cliente con documento " + documento, "Mensaje", JOptionPane.WARNING_MESSAGE);
                     }

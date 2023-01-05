@@ -111,6 +111,20 @@ public class GestorLavanderiaGUI {
             }
         });
         mnuClientes.add(mniClientesOperaciones);
+
+        JMenu mnuDirecciones = new JMenu("Direcciones");
+        mnuDirecciones.setMnemonic('D');
+        menuBar.add(mnuDirecciones);
+
+        JMenuItem mniDireccionesOperaciones = new JMenuItem("Operaciones");
+        mniDireccionesOperaciones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DireccionesFrame direccionesFrame = new DireccionesFrame(GestorLavanderiaGUI.this);
+                dtpPrincipal.add(direccionesFrame);
+                direccionesFrame.setVisible(true);
+            }
+        });
+        mnuDirecciones.add(mniDireccionesOperaciones);
     }
 
     public Usuario iniciarSesion(String email, String password) {
