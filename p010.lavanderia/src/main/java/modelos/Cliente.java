@@ -75,4 +75,9 @@ public class Cliente {
     public void setTipoDocumentoId(int tipoDocumentoId) {
         this.tipoDocumentoId = tipoDocumentoId;
     }
+
+    @Override
+    public String toString() {
+        return nombres + " " + apellidos + " (" + documento + ")";
+    }
 }
