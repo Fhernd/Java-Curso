@@ -28,6 +28,8 @@ public class DireccionesFrame extends JInternalFrame {
 
     private JComboBox cbxClienteId;
 
+    private ClientesComboBoxModel clientesComboBoxModel;
+
     /**
      * Create the frame.
      */
@@ -83,7 +85,9 @@ public class DireccionesFrame extends JInternalFrame {
                     Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
 
                     if (cliente != null) {
-                        cbxClienteId.setSelectedItem(cliente);
+                        int indice = clientesComboBoxModel.buscarIndiceDelCliente(documento);
+                        cbxClienteId.setSelectedIndex(indice);
+                        cbxClienteId.repaint();
                     } else {
                         JOptionPane.showMessageDialog(DireccionesFrame.this, "No se encontró el cliente con documento " + documento, "Mensaje", JOptionPane.WARNING_MESSAGE);
                     }
@@ -175,7 +179,7 @@ public class DireccionesFrame extends JInternalFrame {
 
         Cliente[] clientesArray = clientes.toArray(new Cliente[clientes.size()]);
 
-        ClientesComboBoxModel clientesComboBoxModel = new ClientesComboBoxModel(clientesArray);
+        clientesComboBoxModel = new ClientesComboBoxModel(clientesArray);
 
         cbxClienteId.setModel(clientesComboBoxModel);
 
