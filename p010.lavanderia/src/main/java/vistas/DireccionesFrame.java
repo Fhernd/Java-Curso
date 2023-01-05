@@ -12,17 +12,21 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Cliente;
 import modelos.GestorLavanderia;
+import vistas.models.ClientesComboBoxModel;
 
 import javax.swing.border.BevelBorder;
 import java.awt.GridLayout;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class DireccionesFrame extends JInternalFrame {
     private JTextField txtDescripcion;
     private JTable tblRegistros;
     private GestorLavanderiaGUI gestorLavanderiaGUI;
+
+    private JComboBox cbxClienteId;
 
     /**
      * Create the frame.
@@ -67,7 +71,7 @@ public class DireccionesFrame extends JInternalFrame {
         JLabel lblClienteId = new JLabel("Cliente:");
         pnlDatos.add(lblClienteId, "2, 4");
 
-        JComboBox cbxClienteId = new JComboBox();
+        cbxClienteId = new JComboBox();
         pnlDatos.add(cbxClienteId, "10, 4, fill, default");
 
         JButton btnBuscarClientePordocumento = new JButton("Buscar cliente por documento...");
@@ -159,6 +163,22 @@ public class DireccionesFrame extends JInternalFrame {
         });
 
         spnRegistros.setViewportView(tblRegistros);
+
+        cargarClientes();
     }
 
+    /**
+     * Carga los clientes en el combo box.
+     */
+    private void cargarClientes() {
+        List<Cliente> clientes = gestorLavanderiaGUI.obtenerClientes();
+
+        Cliente[] clientesArray = clientes.toArray(new Cliente[clientes.size()]);
+
+        ClientesComboBoxModel clientesComboBoxModel = new ClientesComboBoxModel(clientesArray);
+
+        cbxClienteId.setModel(clientesComboBoxModel);
+
+        cbxClienteId.setSelectedIndex(0);
+    }
 }
