@@ -104,7 +104,7 @@ public class AccesoDatos {
      */
     public Direccion crearDireccion(Direccion direccion) {
         try {
-            final String SQL = "INSERT INTO direccion (descripcion, client_id) VALUES (?, ?)";
+            final String SQL = "INSERT INTO direccion (descripcion, cliente_id) VALUES (?, ?)";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, direccion.getDescripcion());
             sentencia.setInt(2, direccion.getClienteId());

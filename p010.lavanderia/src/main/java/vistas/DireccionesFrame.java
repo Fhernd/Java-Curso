@@ -114,6 +114,7 @@ public class DireccionesFrame extends JInternalFrame {
                     if (respuesta == JOptionPane.YES_OPTION) {
                         txtDescripcion.setText("");
                         cbxClienteId.setSelectedIndex(0);
+                        cbxClienteId.repaint();
                     }
                 }
 
@@ -142,6 +143,7 @@ public class DireccionesFrame extends JInternalFrame {
                     JOptionPane.showMessageDialog(DireccionesFrame.this, "Dirección guardada correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                     txtDescripcion.setText("");
                     cbxClienteId.setSelectedIndex(0);
+                    cbxClienteId.repaint();
                     txtDescripcion.requestFocus();
                 } else {
                     JOptionPane.showMessageDialog(DireccionesFrame.this, "No se pudo guardar la dirección", "Mensaje", JOptionPane.ERROR_MESSAGE);
