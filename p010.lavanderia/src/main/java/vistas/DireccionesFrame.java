@@ -40,7 +40,7 @@ public class DireccionesFrame extends JInternalFrame {
         setTitle("Direcciones");
         setMaximizable(true);
         setClosable(true);
-        setBounds(100, 100, 450, 630);
+        setBounds(100, 100, 480, 645);
 
         JPanel pnlDatos = new JPanel();
         pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -123,8 +123,8 @@ public class DireccionesFrame extends JInternalFrame {
         });
         pnlBotones.add(btnNuevo);
 
-        JButton btnNewButton = new JButton("Guardar");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnGuardar = new JButton("Guardar");
+        btnGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String descripcion = txtDescripcion.getText().trim();
                 Cliente cliente = (Cliente) cbxClienteId.getSelectedItem();
@@ -145,12 +145,14 @@ public class DireccionesFrame extends JInternalFrame {
                     cbxClienteId.setSelectedIndex(0);
                     cbxClienteId.repaint();
                     txtDescripcion.requestFocus();
+
+                    cargarDirecciones();
                 } else {
                     JOptionPane.showMessageDialog(DireccionesFrame.this, "No se pudo guardar la dirección", "Mensaje", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-        pnlBotones.add(btnNewButton);
+        pnlBotones.add(btnGuardar);
 
         JButton btnBuscar = new JButton("Buscar...");
         btnBuscar.addActionListener(new ActionListener() {
@@ -216,9 +218,11 @@ public class DireccionesFrame extends JInternalFrame {
         modelo.setRowCount(0);
 
         List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
+        List<Cliente> clientes = gestorLavanderiaGUI.obtenerClientes();
 
         for (Direccion direccion : direcciones) {
-            modelo.addRow(new Object[]{direccion.getId(), direccion.getDescripcion(), direccion.getClienteId()});
+            Cliente cliente = clientes.stream().filter(c -> c.getId() == direccion.getClienteId()).findFirst().get();
+            modelo.addRow(new Object[]{direccion.getId(), direccion.getDescripcion(), String.format("%s %s (%s)", cliente.getNombres(), cliente.getApellidos(), cliente.getDocumento())});
         }
     }
 
