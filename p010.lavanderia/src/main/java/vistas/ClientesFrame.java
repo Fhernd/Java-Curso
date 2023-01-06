@@ -367,6 +367,7 @@ public class ClientesFrame extends JInternalFrame {
             }
         });
         spnRegistros.setViewportView(tblRegistros);
+        tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // Event handler for selected row:
         tblRegistros.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

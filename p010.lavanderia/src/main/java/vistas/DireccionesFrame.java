@@ -230,6 +230,7 @@ public class DireccionesFrame extends JInternalFrame {
         });
 
         spnRegistros.setViewportView(tblRegistros);
+        tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         cargarClientes();
 
