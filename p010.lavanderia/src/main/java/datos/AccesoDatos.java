@@ -164,7 +164,7 @@ public class AccesoDatos {
         List<Direccion> direcciones = new ArrayList<>();
 
         try {
-            final String SQL = "SELECT * FROM direccion WHERE client_id = ?";
+            final String SQL = "SELECT * FROM direccion WHERE cliente_id = ?";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             sentencia.setInt(1, clienteId);
 

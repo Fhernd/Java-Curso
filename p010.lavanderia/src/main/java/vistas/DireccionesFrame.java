@@ -40,7 +40,7 @@ public class DireccionesFrame extends JInternalFrame {
         setTitle("Direcciones");
         setMaximizable(true);
         setClosable(true);
-        setBounds(100, 100, 500, 645);
+        setBounds(100, 100, 550, 645);
 
         JPanel pnlDatos = new JPanel();
         pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -156,7 +156,7 @@ public class DireccionesFrame extends JInternalFrame {
         });
         pnlBotones.add(btnGuardar);
 
-        JButton btnBuscar = new JButton("Buscar direcciones...");
+        JButton btnBuscar = new JButton("Buscar direcciones");
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Buscar por el documento del cliente:
@@ -181,6 +181,7 @@ public class DireccionesFrame extends JInternalFrame {
                         cargarDirecciones(direcciones);
                     } else {
                         JOptionPane.showMessageDialog(DireccionesFrame.this, "No se encontró el cliente con documento " + documento, "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        borrarRegistrosDirecciones();
                     }
                 }
             }
