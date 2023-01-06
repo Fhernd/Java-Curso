@@ -47,4 +47,19 @@ public class ClientesComboBoxModel extends AbstractListModel implements ComboBox
 
         return -1;
     }
+
+    /**
+     * Busca el índice de un cliente en el arreglo de clientes.
+     * @param clienteId El ID del cliente a buscar.
+     * @return El índice del cliente en el arreglo de clientes.
+     */
+    public int buscarIndiceDelCliente(int clienteId) {
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i].getId() == clienteId) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
