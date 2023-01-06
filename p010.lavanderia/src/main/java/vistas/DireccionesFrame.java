@@ -17,6 +17,8 @@ import vistas.models.ClientesComboBoxModel;
 
 import javax.swing.border.BevelBorder;
 import java.awt.GridLayout;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -231,6 +233,27 @@ public class DireccionesFrame extends JInternalFrame {
 
         spnRegistros.setViewportView(tblRegistros);
         tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        // Evento para cuando se selecciona una fila de la tabla:
+        tblRegistros.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    return;
+                }
+
+                int filaSeleccionada = tblRegistros.getSelectedRow();
+
+                if (filaSeleccionada != -1) {
+                    int id = (int) tblRegistros.getValueAt(filaSeleccionada, 0);
+                    String descripcion = (String) tblRegistros.getValueAt(filaSeleccionada, 1);
+
+                    Direccion direccion = gestorLavanderiaGUI.obtenerDireccionPorId(id);
+
+                    txtDescripcion.setText(descripcion);
+                    cbxClienteId.setSelectedItem(clientesComboBoxModel.buscarIndiceDelCliente(direccion.getClienteId()));
+                    cbxClienteId.repaint();
+                }
+            }
+        });
 
         cargarClientes();
 

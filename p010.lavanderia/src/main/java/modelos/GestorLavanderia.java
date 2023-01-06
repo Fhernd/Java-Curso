@@ -344,4 +344,14 @@ public class GestorLavanderia {
     public List<Direccion> obtenerDireccionesPorClienteId(int clienteId) {
         return accesoDatos.obtenerDireccionesPorClienteId(clienteId);
     }
+
+    /**
+     * Obtener una dirección a partir de su ID.
+     *
+     * @param direccionId ID de la dirección.
+     * @return Direccion Dirección.
+     */
+    public Direccion obtenerDireccionPorId(int direccionId) {
+        return accesoDatos.obtenerDireccionPorId(direccionId);
+    }
 }
