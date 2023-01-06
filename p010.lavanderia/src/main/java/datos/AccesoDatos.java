@@ -969,4 +969,33 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Obtiene todas las direcciones.
+     *
+     * @return List<Direccion> Lista de direcciones.
+     */
+    public List<Direccion> obtenerDirecciones() {
+        List<Direccion> direcciones = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM direccion";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Direccion direccion = new Direccion();
+                direccion.setId(resultado.getInt("id"));
+                direccion.setDescripcion(resultado.getString("descripcion"));
+                direccion.setClienteId(resultado.getInt("cliente_id"));
+
+                direcciones.add(direccion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return direcciones;
+    }
 }
