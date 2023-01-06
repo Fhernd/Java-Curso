@@ -55,7 +55,7 @@ public class GestorLavanderia {
      * @param clienteId ID del cliente.
      * @return Direccion Dirección encontrada.
      */
-    public Direccion obtenerDireccionPorClientId(int clienteId) {
+    public Direccion obtenerDireccionPorClienteId(int clienteId) {
         return accesoDatos.obtenerDireccionPorClientId(clienteId);
     }
 
@@ -66,7 +66,7 @@ public class GestorLavanderia {
      * @return Lista de direcciones.
      */
     public List<Direccion> obtenerDireccionesPorClientId(int clienteId) {
-        return accesoDatos.obtenerDireccionesPorClientId(clienteId);
+        return accesoDatos.obtenerDireccionesPorClienteId(clienteId);
     }
 
     /**
@@ -333,5 +333,15 @@ public class GestorLavanderia {
      */
     public List<Direccion> obtenerDirecciones() {
         return accesoDatos.obtenerDirecciones();
+    }
+
+    /**
+     * Obtener todas las direcciones de un cliente a partir de su ID.
+     *
+     * @param clienteId ID del cliente.
+     * @return Lista de direcciones.
+     */
+    public List<Direccion> obtenerDireccionesPorClienteId(int clienteId) {
+        return accesoDatos.obtenerDireccionesPorClienteId(clienteId);
     }
 }

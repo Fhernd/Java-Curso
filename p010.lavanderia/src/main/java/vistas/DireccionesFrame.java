@@ -40,7 +40,7 @@ public class DireccionesFrame extends JInternalFrame {
         setTitle("Direcciones");
         setMaximizable(true);
         setClosable(true);
-        setBounds(100, 100, 480, 645);
+        setBounds(100, 100, 500, 645);
 
         JPanel pnlDatos = new JPanel();
         pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -146,7 +146,9 @@ public class DireccionesFrame extends JInternalFrame {
                     cbxClienteId.repaint();
                     txtDescripcion.requestFocus();
 
-                    cargarDirecciones();
+                    List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
+
+                    cargarDirecciones(direcciones);
                 } else {
                     JOptionPane.showMessageDialog(DireccionesFrame.this, "No se pudo guardar la dirección", "Mensaje", JOptionPane.ERROR_MESSAGE);
                 }
@@ -154,10 +156,33 @@ public class DireccionesFrame extends JInternalFrame {
         });
         pnlBotones.add(btnGuardar);
 
-        JButton btnBuscar = new JButton("Buscar...");
+        JButton btnBuscar = new JButton("Buscar direcciones...");
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Buscar una dirección de un cliente
+                // Buscar por el documento del cliente:
+                String documento = JOptionPane.showInputDialog("Documento del cliente:").trim();
+
+                if (!documento.isEmpty()) {
+                    Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
+
+                    if (cliente != null) {
+                        int indice = clientesComboBoxModel.buscarIndiceDelCliente(documento);
+                        cbxClienteId.setSelectedIndex(indice);
+                        cbxClienteId.repaint();
+
+                        List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDireccionesPorClienteId(cliente.getId());
+
+                        if (direcciones.isEmpty()) {
+                            borrarRegistrosDirecciones();
+                            JOptionPane.showMessageDialog(DireccionesFrame.this, "No se encontraron direcciones para el cliente con documento " + documento, "Mensaje", JOptionPane.WARNING_MESSAGE);
+                            return;
+                        }
+
+                        cargarDirecciones(direcciones);
+                    } else {
+                        JOptionPane.showMessageDialog(DireccionesFrame.this, "No se encontró el cliente con documento " + documento, "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             }
         });
         pnlBotones.add(btnBuscar);
@@ -207,17 +232,23 @@ public class DireccionesFrame extends JInternalFrame {
 
         cargarClientes();
 
-        cargarDirecciones();
+        List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
+
+        cargarDirecciones(direcciones);
+    }
+
+    private void borrarRegistrosDirecciones() {
+        DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
+        modelo.setRowCount(0);
     }
 
     /**
      * Carga todas las direcciones de la base de datos en la tabla de registros.
      */
-    private void cargarDirecciones() {
+    private void cargarDirecciones(List<Direccion> direcciones) {
         DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
         modelo.setRowCount(0);
 
-        List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
         List<Cliente> clientes = gestorLavanderiaGUI.obtenerClientes();
 
         for (Direccion direccion : direcciones) {

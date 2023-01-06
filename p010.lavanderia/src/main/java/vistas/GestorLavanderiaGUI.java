@@ -263,4 +263,14 @@ public class GestorLavanderiaGUI {
     public List<Direccion> obtenerDirecciones() {
         return gestorLavanderia.obtenerDirecciones();
     }
+
+    /**
+     * Obtener todas las direcciones de un cliente a partir de su ID.
+     *
+     * @param clienteId ID del cliente.
+     * @return Lista de direcciones.
+     */
+    public List<Direccion> obtenerDireccionesPorClienteId(int clienteId) {
+        return gestorLavanderia.obtenerDireccionesPorClienteId(clienteId);
+    }
 }

@@ -160,7 +160,7 @@ public class AccesoDatos {
      * @param clienteId ID del cliente.
      * @return Lista de direcciones.
      */
-    public List<Direccion> obtenerDireccionesPorClientId(int clienteId) {
+    public List<Direccion> obtenerDireccionesPorClienteId(int clienteId) {
         List<Direccion> direcciones = new ArrayList<>();
 
         try {
