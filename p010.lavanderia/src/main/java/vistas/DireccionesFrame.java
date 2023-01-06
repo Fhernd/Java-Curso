@@ -104,7 +104,19 @@ public class DireccionesFrame extends JInternalFrame {
         JButton btnNuevo = new JButton("Nuevo");
         btnNuevo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Limpiar los campos del formulario
+                String descripcion = txtDescripcion.getText().trim();
+                int indice = cbxClienteId.getSelectedIndex();
+
+                if (!descripcion.isEmpty() || indice > 0) {
+                    int respuesta = JOptionPane.showConfirmDialog(DireccionesFrame.this, "¿Desea quitar los datos ya escritos?", "Mensaje", JOptionPane.YES_NO_OPTION);
+
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                        txtDescripcion.setText("");
+                        cbxClienteId.setSelectedIndex(0);
+                    }
+                }
+
+                txtDescripcion.requestFocus();
             }
         });
         pnlBotones.add(btnNuevo);
