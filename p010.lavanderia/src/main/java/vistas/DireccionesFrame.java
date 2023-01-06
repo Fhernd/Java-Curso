@@ -204,6 +204,22 @@ public class DireccionesFrame extends JInternalFrame {
         spnRegistros.setViewportView(tblRegistros);
 
         cargarClientes();
+
+        cargarDirecciones();
+    }
+
+    /**
+     * Carga todas las direcciones de la base de datos en la tabla de registros.
+     */
+    private void cargarDirecciones() {
+        DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
+        modelo.setRowCount(0);
+
+        List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
+
+        for (Direccion direccion : direcciones) {
+            modelo.addRow(new Object[]{direccion.getId(), direccion.getDescripcion(), direccion.getClienteId()});
+        }
     }
 
     /**

@@ -254,4 +254,13 @@ public class GestorLavanderiaGUI {
     public Direccion crearDireccion(Direccion direccion) {
         return gestorLavanderia.crearDireccion(direccion);
     }
+
+    /**
+     * Obtiene todas las direcciones.
+     *
+     * @return List<Direccion> Lista de direcciones.
+     */
+    public List<Direccion> obtenerDirecciones() {
+        return gestorLavanderia.obtenerDirecciones();
+    }
 }

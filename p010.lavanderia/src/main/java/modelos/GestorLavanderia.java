@@ -325,4 +325,13 @@ public class GestorLavanderia {
     public List<Cliente> obtenerClientes() {
         return accesoDatos.obtenerClientes();
     }
+
+    /**
+     * Obtiene todas las direcciones.
+     *
+     * @return List<Direccion> Lista de direcciones.
+     */
+    public List<Direccion> obtenerDirecciones() {
+        return accesoDatos.obtenerDirecciones();
+    }
 }
