@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import modelos.Cliente;
+import modelos.Direccion;
 import modelos.GestorLavanderia;
 import vistas.models.ClientesComboBoxModel;
 
@@ -124,7 +125,27 @@ public class DireccionesFrame extends JInternalFrame {
         JButton btnNewButton = new JButton("Guardar");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Guardar una nueva dirección en la base de datos
+                String descripcion = txtDescripcion.getText().trim();
+                Cliente cliente = (Cliente) cbxClienteId.getSelectedItem();
+
+                if (descripcion.isEmpty()) {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "Debe ingresar una descripción para la dirección", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    txtDescripcion.requestFocus();
+                    return;
+                }
+
+                Direccion direccion = new Direccion();
+                direccion.setDescripcion(descripcion);
+                direccion.setClienteId(cliente.getId());
+
+                if (gestorLavanderiaGUI.crearDireccion(direccion) != null) {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "Dirección guardada correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    txtDescripcion.setText("");
+                    cbxClienteId.setSelectedIndex(0);
+                    txtDescripcion.requestFocus();
+                } else {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "No se pudo guardar la dirección", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         pnlBotones.add(btnNewButton);

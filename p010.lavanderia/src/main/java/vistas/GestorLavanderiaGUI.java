@@ -245,4 +245,13 @@ public class GestorLavanderiaGUI {
     public boolean eliminarClientePorDocumento(String documento) {
         return gestorLavanderia.eliminarClientePorDocumento(documento);
     }
+
+    /**
+     * Crea una nueva dirección.
+     *
+     * @param direccion Direccion a crear.
+     */
+    public Direccion crearDireccion(Direccion direccion) {
+        return gestorLavanderia.crearDireccion(direccion);
+    }
 }
