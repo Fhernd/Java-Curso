@@ -33,6 +33,8 @@ public class DireccionesFrame extends JInternalFrame {
 
     private ClientesComboBoxModel clientesComboBoxModel;
 
+    private int direccionId = -1;
+
     /**
      * Create the frame.
      */
@@ -243,13 +245,13 @@ public class DireccionesFrame extends JInternalFrame {
                 int filaSeleccionada = tblRegistros.getSelectedRow();
 
                 if (filaSeleccionada != -1) {
-                    int id = (int) tblRegistros.getValueAt(filaSeleccionada, 0);
+                    direccionId = (int) tblRegistros.getValueAt(filaSeleccionada, 0);
                     String descripcion = (String) tblRegistros.getValueAt(filaSeleccionada, 1);
 
-                    Direccion direccion = gestorLavanderiaGUI.obtenerDireccionPorId(id);
+                    Direccion direccion = gestorLavanderiaGUI.obtenerDireccionPorId(direccionId);
 
                     txtDescripcion.setText(descripcion);
-                    cbxClienteId.setSelectedItem(clientesComboBoxModel.buscarIndiceDelCliente(direccion.getClienteId()));
+                    cbxClienteId.setSelectedIndex(clientesComboBoxModel.buscarIndiceDelCliente(direccion.getClienteId()));
                     cbxClienteId.repaint();
                 }
             }
