@@ -2,22 +2,15 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JPasswordField;
+
 import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -123,7 +116,29 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 		JButton btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Limpiar los campos del formulario.
+				String nombres = txtNombres.getText().trim();
+				String apellidos = txtApellidos.getText().trim();
+				String sueldoTexto = txtSueldo.getText().trim();
+				int rolIndice = cbxRol.getSelectedIndex();
+				String correo = txtCorreo.getText().trim();
+				String clave = new String(pwdClave.getPassword());
+				String claveRepetir = new String(pwdClaveRepetir.getPassword());
+
+				if (!nombres.isEmpty() || !apellidos.isEmpty() || !sueldoTexto.isEmpty() || !correo.isEmpty() || !clave.isEmpty() || !claveRepetir.isEmpty() || rolIndice > 0) {
+
+					int opcion = JOptionPane.showConfirmDialog(null, "¿Desea limpiar los campos?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+					if (opcion == JOptionPane.YES_OPTION) {
+						txtNombres.setText("");
+						txtApellidos.setText("");
+						txtSueldo.setText("");
+						cbxRol.setSelectedIndex(0);
+						txtCorreo.setText("");
+						pwdClave.setText("");
+						pwdClaveRepetir.setText("");
+					}
+				}
+
 			}
 		});
 		pnlAcciones.add(btnNuevo);
