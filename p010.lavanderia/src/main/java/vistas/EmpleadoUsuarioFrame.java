@@ -16,6 +16,9 @@ import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class EmpleadoUsuarioFrame extends JInternalFrame {
 	private JTextField txtNombres;
@@ -24,6 +27,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 	private JTextField txtCorreo;
 	private JPasswordField pwdClave;
 	private JPasswordField pwdClaveRepetir;
+	private JTable tblRegistros;
 
 	/**
 	 * Create the frame.
@@ -31,7 +35,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 	public EmpleadoUsuarioFrame() {
 		setClosable(true);
 		setTitle("Empleados");
-		setBounds(100, 100, 600, 300);
+		setBounds(100, 100, 600, 735);
 		
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -128,7 +132,31 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		pnlAcciones.add(btnEliminar);
-
+		
+		JPanel pnlRegistros = new JPanel();
+		pnlRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlRegistros, BorderLayout.SOUTH);
+		pnlRegistros.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane spnRegistros = new JScrollPane();
+		pnlRegistros.add(spnRegistros, BorderLayout.CENTER);
+		
+		tblRegistros = new JTable();
+		tblRegistros.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Nombre completo", "Sueldo", "Rol", "Correo"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class, Double.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		spnRegistros.setViewportView(tblRegistros);
 	}
 
 }
