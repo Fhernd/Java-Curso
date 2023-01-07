@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
+import java.awt.GridLayout;
+import javax.swing.JButton;
 
 public class EmpleadoUsuarioFrame extends JInternalFrame {
 	private JTextField txtNombres;
@@ -29,7 +31,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 	public EmpleadoUsuarioFrame() {
 		setClosable(true);
 		setTitle("Empleados");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 300);
 		
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -106,6 +108,26 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 		
 		pwdClaveRepetir = new JPasswordField();
 		pnlDatos.add(pwdClaveRepetir, "10, 14, fill, default");
+		
+		JPanel pnlAcciones = new JPanel();
+		pnlAcciones.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlAcciones, BorderLayout.CENTER);
+		pnlAcciones.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		pnlAcciones.add(btnNuevo);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		pnlAcciones.add(btnGuardar);
+		
+		JButton btnBuscar = new JButton("Buscar...");
+		pnlAcciones.add(btnBuscar);
+		
+		JButton btnEditar = new JButton("Editar");
+		pnlAcciones.add(btnEditar);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		pnlAcciones.add(btnEliminar);
 
 	}
 
