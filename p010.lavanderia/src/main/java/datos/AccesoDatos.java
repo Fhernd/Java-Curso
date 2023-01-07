@@ -1027,4 +1027,26 @@ public class AccesoDatos {
 
         return direccion;
     }
+
+    /**
+     * Actualizar los datos de una dirección a partir de su ID
+     *
+     * @param direccion Dirección.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean actualizarDireccion(Direccion direccion) {
+        try {
+            final String SQL = "UPDATE direccion SET descripcion = ?, cliente_id = ? WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, direccion.getDescripcion());
+            sentencia.setInt(2, direccion.getClienteId());
+            sentencia.setInt(3, direccion.getId());
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
