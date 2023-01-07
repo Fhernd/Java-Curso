@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EmpleadoUsuarioFrame extends JInternalFrame {
 	private JTextField txtNombres;
@@ -119,18 +121,43 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 		pnlAcciones.setLayout(new GridLayout(0, 5, 0, 0));
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Limpiar los campos del formulario.
+			}
+		});
 		pnlAcciones.add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Guarda el nuevo empleado en la base de datos.
+			}
+		});
 		pnlAcciones.add(btnGuardar);
 		
 		JButton btnBuscar = new JButton("Buscar...");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Buscar un empleado usando su correo electrónico
+			}
+		});
 		pnlAcciones.add(btnBuscar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Edita los datos de un empleado.
+			}
+		});
 		pnlAcciones.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO: Elimina un empleado seleccionado.
+			}
+		});
 		pnlAcciones.add(btnEliminar);
 		
 		JPanel pnlRegistros = new JPanel();
