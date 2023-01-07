@@ -195,7 +195,38 @@ public class DireccionesFrame extends JInternalFrame {
         JButton btnEditar = new JButton(" Editar");
         btnEditar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Editar una dirección de un cliente
+                if (direccionId == -1) {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "No ha seleccionado una dirección para edición.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String descripcion = txtDescripcion.getText().trim();
+                Cliente cliente = (Cliente) cbxClienteId.getSelectedItem();
+
+                if (descripcion.isEmpty()) {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "Debe ingresar una descripción para la dirección.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    txtDescripcion.requestFocus();
+                    return;
+                }
+
+                Direccion direccion = new Direccion();
+                direccion.setId(direccionId);
+                direccion.setDescripcion(descripcion);
+                direccion.setClienteId(cliente.getId());
+
+                if (gestorLavanderiaGUI.actualizarDireccion(direccion)) {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "Dirección editada correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    txtDescripcion.setText("");
+                    cbxClienteId.setSelectedIndex(0);
+                    cbxClienteId.repaint();
+                    txtDescripcion.requestFocus();
+
+                    List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
+
+                    cargarDirecciones(direcciones);
+                } else {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "No se pudo editar la dirección.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
         pnlBotones.add(btnEditar);
