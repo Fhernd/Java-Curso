@@ -364,4 +364,14 @@ public class GestorLavanderia {
     public boolean actualizarDireccion(Direccion direccion) {
         return accesoDatos.actualizarDireccion(direccion);
     }
+
+    /**
+     * Eliminar una dirección a partir de su ID.
+     *
+     * @param direccionId ID de la dirección.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean eliminarDireccionPorId(int direccionId) {
+        return accesoDatos.eliminarDireccionPorId(direccionId);
+    }
 }

@@ -234,7 +234,26 @@ public class DireccionesFrame extends JInternalFrame {
         JButton btnEliminar = new JButton("Eliminar");
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Eliminar una dirección de un cliente
+                if (direccionId == -1) {
+                    JOptionPane.showMessageDialog(DireccionesFrame.this, "No ha seleccionado una dirección para eliminar.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                if (JOptionPane.showConfirmDialog(DireccionesFrame.this, "¿Está seguro de eliminar la dirección seleccionada?", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    if (gestorLavanderiaGUI.eliminarDireccionPorId(direccionId)) {
+                        JOptionPane.showMessageDialog(DireccionesFrame.this, "Dirección eliminada correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        txtDescripcion.setText("");
+                        cbxClienteId.setSelectedIndex(0);
+                        cbxClienteId.repaint();
+                        txtDescripcion.requestFocus();
+
+                        List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDirecciones();
+
+                        cargarDirecciones(direcciones);
+                    } else {
+                        JOptionPane.showMessageDialog(DireccionesFrame.this, "No se pudo eliminar la dirección.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
             }
         });
         pnlBotones.add(btnEliminar);
