@@ -1049,4 +1049,24 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Eliminar una dirección a partir de su ID.
+     *
+     * @param id ID de la dirección.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean eliminarDireccionPorId(int id) {
+        try {
+            final String SQL = "DELETE FROM direccion WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, id);
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
