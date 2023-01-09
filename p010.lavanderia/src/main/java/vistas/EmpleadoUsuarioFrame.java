@@ -5,7 +5,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import modelos.Empleado;
+import modelos.Rol;
 import org.apache.commons.validator.routines.EmailValidator;
+import vistas.models.RolesComboBoxModel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -13,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class EmpleadoUsuarioFrame extends JInternalFrame {
     private JTextField txtNombres;
@@ -22,11 +25,15 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     private JPasswordField pwdClave;
     private JPasswordField pwdClaveRepetir;
     private JTable tblRegistros;
+    private JComboBox cbxRol;
+    private GestorLavanderiaGUI gestorLavanderiaGUI;
 
     /**
      * Create the frame.
      */
-    public EmpleadoUsuarioFrame() {
+    public EmpleadoUsuarioFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+        this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+
         setClosable(true);
         setTitle("Empleados");
         setBounds(100, 100, 600, 735);
@@ -85,7 +92,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         JLabel lblRol = new JLabel("Rol:");
         pnlDatos.add(lblRol, "2, 8");
 
-        JComboBox cbxRol = new JComboBox();
+        cbxRol = new JComboBox();
         pnlDatos.add(cbxRol, "10, 8, fill, default");
 
         JLabel lblCorreo = new JLabel("Correo:");
@@ -148,7 +155,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                 String nombres = txtNombres.getText().trim();
                 String apellidos = txtApellidos.getText().trim();
                 String sueldoTexto = txtSueldo.getText().trim();
-                int rolIndice = cbxRol.getSelectedIndex();
+                int rolId = ((Rol) cbxRol.getSelectedItem()).getId();
                 String correo = txtCorreo.getText().trim();
                 String clave = new String(pwdClave.getPassword());
                 String claveRepetir = new String(pwdClaveRepetir.getPassword());
@@ -184,7 +191,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                     return;
                 }
 
-                Empleado empleado = new Empleado(nombres, apellidos, sueldo, -1);
+                Empleado empleado = new Empleado(nombres, apellidos, sueldo, rolId);
 
                 JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -240,6 +247,20 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
             }
         });
         spnRegistros.setViewportView(tblRegistros);
+
+        cargarRoles();
+    }
+
+    private void cargarRoles() {
+        List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
+
+        Rol[] rolesArreglo = roles.toArray(new Rol[roles.size()]);
+
+        RolesComboBoxModel rolesComboBoxModel = new RolesComboBoxModel(rolesArreglo);
+
+        cbxRol.setModel(rolesComboBoxModel);
+
+        cbxRol.setSelectedIndex(0);
     }
 
 }

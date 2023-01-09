@@ -303,4 +303,13 @@ public class GestorLavanderiaGUI {
     public boolean eliminarDireccionPorId(int direccionId) {
         return gestorLavanderia.eliminarDireccionPorId(direccionId);
     }
+
+    /**
+     * Obtiene todos los roles.
+     *
+     * @return Lista de roles.
+     */
+    public List<Rol> obtenerRoles() {
+        return gestorLavanderia.obtenerRoles();
+    }
 }
