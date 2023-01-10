@@ -1069,4 +1069,32 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Obtener todos los usuarios.
+     * @return List<Usuario> Lista de usuarios.
+     */
+    public List<Usuario> obtenerUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM usuario";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(resultado.getInt("id"));
+                usuario.setCorreo(resultado.getString("correo"));
+                usuario.setClave(resultado.getString("clave"));
+
+                usuarios.add(usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return usuarios;
+    }
 }
