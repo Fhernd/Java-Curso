@@ -21,6 +21,12 @@ public class Usuario {
         this.clave = clave;
     }
 
+    public Usuario(String correo, String clave, int empleadoId) {
+        this.correo = correo;
+        this.clave = clave;
+        this.empleadoId = empleadoId;
+    }
+
     public Usuario(int id, String correo, String clave, int empleadoId) {
         this.id = id;
         this.correo = correo;
