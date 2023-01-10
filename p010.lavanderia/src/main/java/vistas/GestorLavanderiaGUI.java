@@ -93,11 +93,20 @@ public class GestorLavanderiaGUI {
         mnuArchivo.add(mniSalir);
 
         mnuEmpleados = new JMenu("Empleados");
-        mnuEmpleados.setEnabled(false);
         menuBar.add(mnuEmpleados);
 
         JMenuItem mniEmpleadosCrear = new JMenuItem("Crear");
         mnuEmpleados.add(mniEmpleadosCrear);
+
+        JMenuItem mniEmpleadosOperaciones = new JMenuItem("Operaciones");
+        mniEmpleadosOperaciones.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EmpleadoUsuarioFrame empleadoUsuario = new EmpleadoUsuarioFrame(GestorLavanderiaGUI.this);
+                dtpPrincipal.add(empleadoUsuario);
+                empleadoUsuario.setVisible(true);
+            }
+        });
+        mnuEmpleados.add(mniEmpleadosOperaciones);
 
         JMenu mnuClientes = new JMenu("Clientes");
         menuBar.add(mnuClientes);

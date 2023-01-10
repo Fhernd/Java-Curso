@@ -186,9 +186,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                     return;
                 }
 
-                String rol = cbxRol.getSelectedItem().toString();
-
-                if (EmailValidator.getInstance().isValid(correo)) {
+                if (!EmailValidator.getInstance().isValid(correo)) {
                     JOptionPane.showMessageDialog(null, "El correo no es válido.", "Mensaje", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
