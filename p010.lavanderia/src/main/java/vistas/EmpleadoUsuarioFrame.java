@@ -6,7 +6,9 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import modelos.Empleado;
 import modelos.Rol;
+import modelos.Usuario;
 import org.apache.commons.validator.routines.EmailValidator;
+import utilidades.Utilidad;
 import vistas.models.RolesComboBoxModel;
 
 import javax.swing.*;
@@ -193,7 +195,26 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
                 Empleado empleado = new Empleado(nombres, apellidos, sueldo, rolId);
 
-                JOptionPane.showMessageDialog(null, "Usuario registrado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+                empleado = gestorLavanderiaGUI.crearEmpleado(empleado);
+
+                if (empleado == null) {
+                    JOptionPane.showMessageDialog(null, "No se pudo crear el empleado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                clave = Utilidad.encriptar(clave);
+                Usuario usuario = new Usuario(correo, clave, empleado.getId());
+
+                usuario = gestorLavanderiaGUI.crearUsuario(usuario);
+
+                if (usuario == null) {
+                    JOptionPane.showMessageDialog(null, "No se pudo crear el usuario.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(null, "Empleado correctamente creado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                limpiarCampos();
             }
         });
         pnlAcciones.add(btnGuardar);
@@ -249,6 +270,16 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         spnRegistros.setViewportView(tblRegistros);
 
         cargarRoles();
+    }
+
+    private void limpiarCampos() {
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        txtSueldo.setText("");
+        cbxRol.setSelectedIndex(0);
+        txtCorreo.setText("");
+        pwdClave.setText("");
+        pwdClaveRepetir.setText("");
     }
 
     private void cargarRoles() {
