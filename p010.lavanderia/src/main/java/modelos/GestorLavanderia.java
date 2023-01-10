@@ -383,4 +383,13 @@ public class GestorLavanderia {
     public List<Rol> obtenerRoles() {
         return accesoDatos.obtenerRoles();
     }
+
+    /**
+     * Obtener todos los usuarios.
+     *
+     * @return List<Usuario> Lista de usuarios.
+     */
+    public List<Usuario> obtenerUsuarios() {
+        return accesoDatos.obtenerUsuarios();
+    }
 }

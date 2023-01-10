@@ -321,4 +321,22 @@ public class GestorLavanderiaGUI {
     public List<Rol> obtenerRoles() {
         return gestorLavanderia.obtenerRoles();
     }
+
+    /**
+     * Recupera todos los empleados.
+     *
+     * @return List<Empleado> Lista de empleados.
+     */
+    public List<Empleado> obtenerEmpleados() {
+        return gestorLavanderia.obtenerEmpleados();
+    }
+
+    /**
+     * Obtener todos los usuarios.
+     *
+     * @return List<Usuario> Lista de usuarios.
+     */
+    public List<Usuario> obtenerUsuarios() {
+        return gestorLavanderia.obtenerUsuarios();
+    }
 }

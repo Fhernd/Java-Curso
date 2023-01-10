@@ -213,6 +213,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Empleado correctamente creado.", "Información", JOptionPane.INFORMATION_MESSAGE);
 
                 limpiarCampos();
+                cargarEmpleados();
             }
         });
         pnlAcciones.add(btnGuardar);
@@ -268,6 +269,28 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         spnRegistros.setViewportView(tblRegistros);
 
         cargarRoles();
+    }
+
+    private void cargarEmpleados() {
+        DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
+        modelo.setRowCount(0);
+
+        List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+        List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
+        List<Usuario> usuarios = gestorLavanderiaGUI.obtenerUsuarios();
+
+        for (Empleado empleado : empleados) {
+            Rol rol = roles.stream().filter(r -> r.getId() == empleado.getRolId()).findFirst().orElse(null);
+            Usuario usuario = usuarios.stream().filter(u -> u.getEmpleadoId() == empleado.getId()).findFirst().orElse(null);
+
+            modelo.addRow(new Object[]{
+                    empleado.getId(),
+                    empleado.getNombres() + " " + empleado.getApellidos(),
+                    empleado.getSueldo(),
+                    rol != null ? rol.getNombre() : "",
+                    usuario != null ? usuario.getCorreo() : ""
+            });
+        }
     }
 
     private void limpiarCampos() {

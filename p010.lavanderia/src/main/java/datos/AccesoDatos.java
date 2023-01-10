@@ -1072,6 +1072,7 @@ public class AccesoDatos {
 
     /**
      * Obtener todos los usuarios.
+     *
      * @return List<Usuario> Lista de usuarios.
      */
     public List<Usuario> obtenerUsuarios() {
