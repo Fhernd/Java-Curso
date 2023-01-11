@@ -269,6 +269,8 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         spnRegistros.setViewportView(tblRegistros);
 
         cargarRoles();
+
+        cargarEmpleados();
     }
 
     private void cargarEmpleados() {
