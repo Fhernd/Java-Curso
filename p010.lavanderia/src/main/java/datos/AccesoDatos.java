@@ -1099,4 +1099,35 @@ public class AccesoDatos {
 
         return usuarios;
     }
+
+    /**
+     * Buscar un empleado y usuario por correo.
+     *
+     * @param correo Correo del usuario.
+     * @return Empleado Empleado.
+     */
+    public Empleado obtenerEmpleadoPorCorreo(String correo) {
+        Empleado empleado = null;
+
+        try {
+            final String SQL = "SELECT * FROM empleado e INNER JOIN usuario u ON e.id = u.empleado_id WHERE u.correo = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, correo);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                empleado = new Empleado();
+                empleado.setId(resultado.getInt("id"));
+                empleado.setNombres(resultado.getString("nombres"));
+                empleado.setApellidos(resultado.getString("apellidos"));
+                empleado.setSueldo(resultado.getDouble("sueldo"));
+                empleado.setRolId(resultado.getInt("rol_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return empleado;
+    }
 }
