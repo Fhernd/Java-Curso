@@ -1089,6 +1089,7 @@ public class AccesoDatos {
                 usuario.setId(resultado.getInt("id"));
                 usuario.setCorreo(resultado.getString("correo"));
                 usuario.setClave(resultado.getString("clave"));
+                usuario.setEmpleadoId(resultado.getInt("empleado_id"));
 
                 usuarios.add(usuario);
             }
