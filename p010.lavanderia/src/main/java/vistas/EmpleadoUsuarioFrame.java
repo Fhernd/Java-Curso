@@ -29,6 +29,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     private JTable tblRegistros;
     private JComboBox cbxRol;
     private GestorLavanderiaGUI gestorLavanderiaGUI;
+    private RolesComboBoxModel rolesComboBoxModel;
 
     /**
      * Create the frame.
@@ -223,13 +224,13 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 final String[] opciones = {"Por correo", "Por rol"};
 
-                int opcion = JOptionPane.showOptionDialog(EmpleadoUsuarioFrame.this, "Seleccione el tipo de búsqueda", "Búsqueda", JOptionPane.QUESTION_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+                String opcion = (String) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el tipo de búsqueda", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
-                if (opcion == JOptionPane.CLOSED_OPTION) {
+                if (opcion == null) {
                     return;
                 }
 
-                if (opcion == 0) {
+                if (opcion.equals(opciones[0])) {
                     String correo = JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Ingrese el correo", "Búsqueda", JOptionPane.QUESTION_MESSAGE);
 
                     if (correo == null) {
@@ -345,11 +346,15 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         txtApellidos.setText(empleado.getApellidos());
         txtSueldo.setText(String.valueOf(empleado.getSueldo()));
 
+        int indiceRol = rolesComboBoxModel.buscarIndiceDelRol(empleado.getRolId());
+        cbxRol.setSelectedIndex(indiceRol);
+        cbxRol.repaint();
+
         Usuario usuario = gestorLavanderiaGUI.obtenerUsuarioPorEmpleadoId(empleado.getId());
 
         txtCorreo.setText(usuario.getCorreo());
-        pwdClave.setText(usuario.getClave());
-        pwdClaveRepetir.setText(usuario.getClave());
+        pwdClave.setText("abcxyz");
+        pwdClaveRepetir.setText("abcxyz");
     }
 
     private void cargarEmpleados() {
@@ -389,7 +394,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
         Rol[] rolesArreglo = roles.toArray(new Rol[roles.size()]);
 
-        RolesComboBoxModel rolesComboBoxModel = new RolesComboBoxModel(rolesArreglo);
+        rolesComboBoxModel = new RolesComboBoxModel(rolesArreglo);
 
         cbxRol.setModel(rolesComboBoxModel);
 
