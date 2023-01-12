@@ -258,37 +258,17 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
                     mostrarEmpleado(empleado);
                 } else {
-                    List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
+                    final String[] nombresRoles = {"Administrador", "Cajero", "Recepcionista"};
 
-                    if (roles == null) {
-                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    String nombreRol = (String) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el rol", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, nombresRoles, nombresRoles[1]);
+
+                    if (nombreRol == null) {
                         return;
                     }
 
-                    if (roles.isEmpty()) {
-                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron roles", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                        return;
-                    }
+                    int rolId = rolesComboBoxModel.buscarIdRolPorNombre(nombreRol);
 
-                    Rol[] rolesArray = roles.toArray(new Rol[roles.size()]);
-
-                    Rol rol = (Rol) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el rol", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, rolesArray, rolesArray[0]);
-
-                    if (rol == null) {
-                        return;
-                    }
-
-//                    List<Empleado> empleados = gestorLavanderiaGUI.buscarEmpleadosPorRol(rol.getId());
-//
-//                    if (empleados == null) {
-//                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
-//                        return;
-//                    }
-//
-//                    if (empleados.isEmpty()) {
-//                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron empleados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-//                        return;
-//                    }
+                    buscarEmpleadosPorRolId(rolId);
                 }
             }
         });
@@ -339,6 +319,17 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         cargarRoles();
 
         cargarEmpleados();
+    }
+
+    private void buscarEmpleadosPorRolId(int rolId) {
+        List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleadosPorRolId(rolId);
+
+        if (empleados == null) {
+            JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontró ningún empleado con el rol dado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // listarEmpleados(empleados);
     }
 
     private void mostrarEmpleado(Empleado empleado) {

@@ -359,4 +359,14 @@ public class GestorLavanderiaGUI {
     public Usuario obtenerUsuarioPorEmpleadoId(int empleadoId) {
         return gestorLavanderia.obtenerUsuarioPorEmpleadoId(empleadoId);
     }
+
+    /**
+     * Buscar empleados por el ID de rol.
+     *
+     * @param rolId ID del rol.
+     * @return Lista de roles.
+     */
+    public List<Empleado> obtenerEmpleadosPorRolId(int rolId) {
+        return gestorLavanderia.obtenerEmpleadosPorRolId(rolId);
+    }
 }
