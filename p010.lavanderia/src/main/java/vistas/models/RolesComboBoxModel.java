@@ -32,4 +32,14 @@ public class RolesComboBoxModel extends AbstractListModel implements ComboBoxMod
     public Object getElementAt(int index) {
         return roles[index];
     }
+
+    public int buscarIndiceDelRol(int rolId) {
+        for (int i = 0; i < roles.length; i++) {
+            if (roles[i].getId() == rolId) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
