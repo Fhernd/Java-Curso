@@ -221,7 +221,79 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         JButton btnBuscar = new JButton("Buscar...");
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Buscar un empleado usando su correo electrónico
+                final String[] opciones = {"Por correo", "Por rol"};
+
+                int opcion = JOptionPane.showOptionDialog(EmpleadoUsuarioFrame.this, "Seleccione el tipo de búsqueda", "Búsqueda", JOptionPane.QUESTION_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+                if (opcion == JOptionPane.CLOSED_OPTION) {
+                    return;
+                }
+
+                if (opcion == 0) {
+                    String correo = JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Ingrese el correo", "Búsqueda", JOptionPane.QUESTION_MESSAGE);
+
+                    if (correo == null) {
+                        return;
+                    }
+
+                    correo = correo.trim();
+
+                    if (correo.isEmpty()) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Debe ingresar el correo", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    if (!EmailValidator.getInstance().isValid(correo)) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "El correo no es válido", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    Empleado empleados = gestorLavanderiaGUI.buscarEmpleadoPorCorreo(correo);
+
+                    if (empleados == null) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    if (empleados.isEmpty()) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron empleados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    cargarEmpleados(empleados);
+                } else {
+                    List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
+
+                    if (roles == null) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    if (roles.isEmpty()) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron roles", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+
+                    Rol[] rolesArray = roles.toArray(new Rol[roles.size()]);
+
+                    Rol rol = (Rol) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el rol", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, rolesArray, rolesArray[0]);
+
+                    if (rol == null) {
+                        return;
+                    }
+
+                    List<Empleado> empleados = gestorLavanderiaGUI.buscarEmpleadosPorRol(rol.getId());
+
+                    if (empleados == null) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    if (empleados.isEmpty()) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron empleados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+                }
             }
         });
         pnlAcciones.add(btnBuscar);
