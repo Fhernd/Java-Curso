@@ -248,19 +248,14 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                         return;
                     }
 
-                    Empleado empleados = gestorLavanderiaGUI.buscarEmpleadoPorCorreo(correo);
+                    Empleado empleado = gestorLavanderiaGUI.obtenerEmpleadoPorCorreo(correo);
 
-                    if (empleados == null) {
-                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    if (empleado == null) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontró ningún empleado con el correo dado (" + correo +").", "Mensaje", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
 
-                    if (empleados.isEmpty()) {
-                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron empleados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                        return;
-                    }
-
-                    cargarEmpleados(empleados);
+                    mostrarEmpleado(empleado);
                 } else {
                     List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
 

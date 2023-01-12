@@ -392,4 +392,14 @@ public class GestorLavanderia {
     public List<Usuario> obtenerUsuarios() {
         return accesoDatos.obtenerUsuarios();
     }
+
+    /**
+     * Buscar un empleado y usuario por correo.
+     *
+     * @param correo Correo del usuario.
+     * @return Empleado Empleado.
+     */
+    public Empleado obtenerEmpleadoPorCorreo(String correo) {
+        return accesoDatos.obtenerEmpleadoPorCorreo(correo);
+    }
 }
