@@ -214,7 +214,8 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Empleado correctamente creado.", "Información", JOptionPane.INFORMATION_MESSAGE);
 
                 limpiarCampos();
-                cargarEmpleados();
+                List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+                cargarEmpleados(empleados);
             }
         });
         pnlAcciones.add(btnGuardar);
@@ -318,18 +319,20 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
         cargarRoles();
 
-        cargarEmpleados();
+        List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+        cargarEmpleados(empleados);
     }
 
     private void buscarEmpleadosPorRolId(int rolId) {
         List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleadosPorRolId(rolId);
 
-        if (empleados == null) {
+        if (empleados.isEmpty()) {
             JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontró ningún empleado con el rol dado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            cargarEmpleados(empleados);
             return;
         }
 
-        // listarEmpleados(empleados);
+        cargarEmpleados(empleados);
     }
 
     private void mostrarEmpleado(Empleado empleado) {
@@ -348,11 +351,10 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         pwdClaveRepetir.setText("abcxyz");
     }
 
-    private void cargarEmpleados() {
+    private void cargarEmpleados(List<Empleado> empleados) {
         DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
         modelo.setRowCount(0);
 
-        List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
         List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
         List<Usuario> usuarios = gestorLavanderiaGUI.obtenerUsuarios();
 
