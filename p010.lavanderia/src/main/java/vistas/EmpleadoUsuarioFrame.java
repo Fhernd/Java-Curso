@@ -277,17 +277,17 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                         return;
                     }
 
-                    List<Empleado> empleados = gestorLavanderiaGUI.buscarEmpleadosPorRol(rol.getId());
-
-                    if (empleados == null) {
-                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-
-                    if (empleados.isEmpty()) {
-                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron empleados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                        return;
-                    }
+//                    List<Empleado> empleados = gestorLavanderiaGUI.buscarEmpleadosPorRol(rol.getId());
+//
+//                    if (empleados == null) {
+//                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo realizar la búsqueda", "Mensaje", JOptionPane.WARNING_MESSAGE);
+//                        return;
+//                    }
+//
+//                    if (empleados.isEmpty()) {
+//                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontraron empleados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+//                        return;
+//                    }
                 }
             }
         });
@@ -338,6 +338,18 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         cargarRoles();
 
         cargarEmpleados();
+    }
+
+    private void mostrarEmpleado(Empleado empleado) {
+        txtNombres.setText(empleado.getNombres());
+        txtApellidos.setText(empleado.getApellidos());
+        txtSueldo.setText(String.valueOf(empleado.getSueldo()));
+
+        Usuario usuario = gestorLavanderiaGUI.obtenerUsuarioPorEmpleadoId(empleado.getId());
+
+        txtCorreo.setText(usuario.getCorreo());
+        pwdClave.setText(usuario.getClave());
+        pwdClaveRepetir.setText(usuario.getClave());
     }
 
     private void cargarEmpleados() {

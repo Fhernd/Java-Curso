@@ -402,4 +402,14 @@ public class GestorLavanderia {
     public Empleado obtenerEmpleadoPorCorreo(String correo) {
         return accesoDatos.obtenerEmpleadoPorCorreo(correo);
     }
+
+    /**
+     * Obtener un usuario a partir de su ID.
+     *
+     * @param empleadoId ID del empleado.
+     * @return Usuario Usuario.
+     */
+    public Usuario obtenerUsuarioPorEmpleadoId(int empleadoId) {
+        return accesoDatos.obtenerUsuarioPorEmpleadoId(empleadoId);
+    }
 }
