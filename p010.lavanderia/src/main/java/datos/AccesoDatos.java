@@ -1159,4 +1159,37 @@ public class AccesoDatos {
 
         return usuario;
     }
+
+    /**
+     * Buscar empleados por el ID de rol.
+     *
+     * @param rolId ID del rol.
+     * @return Lista de roles.
+     */
+    public List<Empleado> obtenerEmpleadosPorRolId(int rolId) {
+        List<Empleado> empleados = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT * FROM empleado WHERE rol_id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, rolId);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Empleado empleado = new Empleado();
+                empleado.setId(resultado.getInt("id"));
+                empleado.setNombres(resultado.getString("nombres"));
+                empleado.setApellidos(resultado.getString("apellidos"));
+                empleado.setSueldo(resultado.getDouble("sueldo"));
+                empleado.setRolId(rolId);
+
+                empleados.add(empleado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return empleados;
+    }
 }
