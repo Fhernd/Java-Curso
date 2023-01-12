@@ -42,4 +42,14 @@ public class RolesComboBoxModel extends AbstractListModel implements ComboBoxMod
 
         return -1;
     }
+
+    public int buscarIdRolPorNombre(String nombreRol) {
+        for (int i = 0; i < roles.length; i++) {
+            if (roles[i].getNombre().equals(nombreRol)) {
+                return roles[i].getId();
+            }
+        }
+
+        return -1;
+    }
 }
