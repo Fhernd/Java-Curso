@@ -30,6 +30,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     private JComboBox cbxRol;
     private GestorLavanderiaGUI gestorLavanderiaGUI;
     private RolesComboBoxModel rolesComboBoxModel;
+    private JTextField txtId;
 
     /**
      * Create the frame.
@@ -39,83 +40,93 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
         setClosable(true);
         setTitle("Empleados");
-        setBounds(100, 100, 600, 735);
+        setBounds(100, 100, 600, 760);
 
         JPanel pnlDatos = new JPanel();
         pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(pnlDatos, BorderLayout.NORTH);
-        pnlDatos.setLayout(new FormLayout(new ColumnSpec[]{
-                FormSpecs.RELATED_GAP_COLSPEC,
-                FormSpecs.DEFAULT_COLSPEC,
-                FormSpecs.RELATED_GAP_COLSPEC,
-                FormSpecs.DEFAULT_COLSPEC,
-                FormSpecs.RELATED_GAP_COLSPEC,
-                FormSpecs.DEFAULT_COLSPEC,
-                FormSpecs.RELATED_GAP_COLSPEC,
-                FormSpecs.DEFAULT_COLSPEC,
-                FormSpecs.RELATED_GAP_COLSPEC,
-                ColumnSpec.decode("default:grow"),},
-                new RowSpec[]{
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,
-                        FormSpecs.RELATED_GAP_ROWSPEC,
-                        FormSpecs.DEFAULT_ROWSPEC,}));
+        pnlDatos.setLayout(new FormLayout(new ColumnSpec[] {
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),},
+        	new RowSpec[] {
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		FormSpecs.DEFAULT_ROWSPEC,}));
+        
+        JLabel lblId = new JLabel("ID:");
+        pnlDatos.add(lblId, "2, 2, left, default");
+        
+        txtId = new JTextField();
+        txtId.setEditable(false);
+        pnlDatos.add(txtId, "10, 2, fill, top");
+        txtId.setColumns(10);
 
         JLabel lblNombres = new JLabel("Nombres:");
-        pnlDatos.add(lblNombres, "2, 2, left, bottom");
+        pnlDatos.add(lblNombres, "2, 4, left, bottom");
 
         txtNombres = new JTextField();
-        pnlDatos.add(txtNombres, "10, 2, fill, default");
+        pnlDatos.add(txtNombres, "10, 4, fill, default");
         txtNombres.setColumns(10);
 
         JLabel lblApellidos = new JLabel("Apellidos:");
-        pnlDatos.add(lblApellidos, "2, 4");
+        pnlDatos.add(lblApellidos, "2, 6");
 
         txtApellidos = new JTextField();
-        pnlDatos.add(txtApellidos, "10, 4, fill, default");
+        pnlDatos.add(txtApellidos, "10, 6, fill, default");
         txtApellidos.setColumns(10);
 
         JLabel lblSueldo = new JLabel("Sueldo:");
-        pnlDatos.add(lblSueldo, "2, 6");
+        pnlDatos.add(lblSueldo, "2, 8");
 
         txtSueldo = new JTextField();
-        pnlDatos.add(txtSueldo, "10, 6, fill, default");
+        pnlDatos.add(txtSueldo, "10, 8, fill, default");
         txtSueldo.setColumns(10);
 
         JLabel lblRol = new JLabel("Rol:");
-        pnlDatos.add(lblRol, "2, 8");
+        pnlDatos.add(lblRol, "2, 10");
 
         cbxRol = new JComboBox();
-        pnlDatos.add(cbxRol, "10, 8, fill, default");
+        pnlDatos.add(cbxRol, "10, 10, fill, default");
 
         JLabel lblCorreo = new JLabel("Correo:");
-        pnlDatos.add(lblCorreo, "2, 10");
+        pnlDatos.add(lblCorreo, "2, 12");
 
         txtCorreo = new JTextField();
-        pnlDatos.add(txtCorreo, "10, 10, fill, default");
+        pnlDatos.add(txtCorreo, "10, 12, fill, default");
         txtCorreo.setColumns(10);
 
         JLabel lblClave = new JLabel("Clave:");
-        pnlDatos.add(lblClave, "2, 12");
+        pnlDatos.add(lblClave, "2, 14");
 
         pwdClave = new JPasswordField();
-        pnlDatos.add(pwdClave, "10, 12, fill, default");
+        pnlDatos.add(pwdClave, "10, 14, fill, default");
 
         JLabel lblClaveRepetir = new JLabel("Clave (repetir):");
-        pnlDatos.add(lblClaveRepetir, "2, 14");
+        pnlDatos.add(lblClaveRepetir, "2, 16");
 
         pwdClaveRepetir = new JPasswordField();
-        pnlDatos.add(pwdClaveRepetir, "10, 14, fill, default");
+        pnlDatos.add(pwdClaveRepetir, "10, 16, fill, default");
 
         JPanel pnlAcciones = new JPanel();
         pnlAcciones.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
