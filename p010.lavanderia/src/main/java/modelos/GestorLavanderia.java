@@ -422,4 +422,14 @@ public class GestorLavanderia {
     public List<Empleado> obtenerEmpleadosPorRolId(int rolId) {
         return accesoDatos.obtenerEmpleadosPorRolId(rolId);
     }
+
+    /**
+     * Actualizar los datos de un empleado.
+     *
+     * @param empleado Empleado.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean actualizarEmpleado(Empleado empleado) {
+        return accesoDatos.actualizarEmpleado(empleado);
+    }
 }

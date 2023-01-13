@@ -294,7 +294,58 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         JButton btnEditar = new JButton("Editar");
         btnEditar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Edita los datos de un empleado.
+                if (empleadoId == 0) {
+                    JOptionPane.showMessageDialog(null, "Debe buscar o seleccionar un empleado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String nombres = txtNombres.getText().trim();
+                String apellidos = txtApellidos.getText().trim();
+                String sueldoTexto = txtSueldo.getText().trim();
+                String rolNombre = (String) cbxRol.getSelectedItem();
+                int rolId = rolesComboBoxModel.buscarIdRolPorNombre(rolNombre);
+                String correo = txtCorreo.getText().trim();
+                String clave = new String(pwdClave.getPassword());
+                String claveRepetir = new String(pwdClaveRepetir.getPassword());
+
+                if (nombres.isEmpty() || apellidos.isEmpty() || sueldoTexto.isEmpty() || rolId == -1 || correo.isEmpty() || clave.isEmpty() || claveRepetir.isEmpty()) {
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Debe llenar todos los campos", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                double sueldo;
+
+                try {
+                    sueldo = Double.parseDouble(sueldoTexto);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "El sueldo debe ser un valor numérico.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                if (sueldo < 0) {
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "El sueldo debe ser mayor a cero.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                if (!EmailValidator.getInstance().isValid(correo)) {
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "El correo no es válido", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                Empleado empleado = new Empleado(empleadoId, nombres, apellidos, sueldo, rolId);
+
+                boolean respuesta = gestorLavanderiaGUI.actualizarEmpleado(empleado);
+
+                if (!respuesta) {
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo editar el empleado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Empleado correctamente editado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                limpiarCampos();
+                List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+                cargarEmpleados(empleados);
             }
         });
         pnlAcciones.add(btnEditar);
