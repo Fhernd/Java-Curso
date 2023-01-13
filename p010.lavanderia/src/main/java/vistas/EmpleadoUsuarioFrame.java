@@ -267,6 +267,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
                     if (empleado == null) {
                         JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se encontró ningún empleado con el correo dado (" + correo +").", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        limpiarCampos();
                         return;
                     }
 
@@ -389,6 +390,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     }
 
     private void limpiarCampos() {
+        empleadoId = 0;
         txtId.setText("");
         txtNombres.setText("");
         txtApellidos.setText("");
