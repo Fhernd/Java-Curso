@@ -31,12 +31,14 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     private GestorLavanderiaGUI gestorLavanderiaGUI;
     private RolesComboBoxModel rolesComboBoxModel;
     private JTextField txtId;
+    private int empleadoId;
 
     /**
      * Create the frame.
      */
     public EmpleadoUsuarioFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
         this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+        empleadoId = 0;
 
         setClosable(true);
         setTitle("Empleados");
@@ -268,6 +270,8 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                         return;
                     }
 
+                    empleadoId = empleado.getId();
+
                     mostrarEmpleado(empleado);
                 } else {
                     final String[] nombresRoles = {"Administrador", "Cajero", "Recepcionista"};
@@ -347,6 +351,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     }
 
     private void mostrarEmpleado(Empleado empleado) {
+        txtId.setText(String.valueOf(empleado.getId()));
         txtNombres.setText(empleado.getNombres());
         txtApellidos.setText(empleado.getApellidos());
         txtSueldo.setText(String.valueOf(empleado.getSueldo()));
@@ -384,6 +389,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
     }
 
     private void limpiarCampos() {
+        txtId.setText("");
         txtNombres.setText("");
         txtApellidos.setText("");
         txtSueldo.setText("");
