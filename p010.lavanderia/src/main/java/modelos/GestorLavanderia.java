@@ -432,4 +432,15 @@ public class GestorLavanderia {
     public boolean actualizarEmpleado(Empleado empleado) {
         return accesoDatos.actualizarEmpleado(empleado);
     }
+
+    /**
+     * Actualizar los datos de un usuario.
+     *
+     * @param empleadoId ID del empleado.
+     * @param correo Correo del usuario.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean actualizarUsuarioCorreo(int empleadoId, String correo) {
+        return accesoDatos.actualizarUsuarioCorreo(empleadoId, correo);
+    }
 }

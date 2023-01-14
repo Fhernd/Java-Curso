@@ -379,4 +379,15 @@ public class GestorLavanderiaGUI {
     public boolean actualizarEmpleado(Empleado empleado) {
         return gestorLavanderia.actualizarEmpleado(empleado);
     }
+
+    /**
+     * Actualizar los datos de un usuario.
+     *
+     * @param empleadoId ID del empleado.
+     * @param correo Correo del usuario.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean actualizarUsuarioCorreo(int empleadoId, String correo) {
+        return gestorLavanderia.actualizarUsuarioCorreo(empleadoId, correo);
+    }
 }

@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class EmpleadoUsuarioFrame extends JInternalFrame {
+
+    private final static String CLAVE = "@$#&%-123-987-%&$#@";
     private JTextField txtNombres;
     private JTextField txtApellidos;
     private JTextField txtSueldo;
@@ -332,6 +334,11 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                     return;
                 }
 
+                if (!clave.equals(claveRepetir)) {
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Las claves no coinciden", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 Empleado empleado = new Empleado(empleadoId, nombres, apellidos, sueldo, rolId);
 
                 boolean respuesta = gestorLavanderiaGUI.actualizarEmpleado(empleado);
@@ -339,6 +346,22 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                 if (!respuesta) {
                     JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo editar el empleado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
                     return;
+                }
+
+                Usuario usuario = gestorLavanderiaGUI.obtenerUsuarioPorEmpleadoId(empleadoId);
+
+                if (!usuario.getCorreo().equals(correo)) {
+                    respuesta = gestorLavanderiaGUI.actualizarUsuarioCorreo(empleadoId, correo);
+
+                    if (!respuesta) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo editar el correo del usuario.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+
+                if (!clave.equals(CLAVE) && claveRepetir.equals(CLAVE)) {
+//                    clave = DigestUtils.md5Hex(clave);
+//                    respuesta = gestorLavanderiaGUI.actualizarUsuarioClave(empleadoId, clave);
                 }
 
                 JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Empleado correctamente editado.", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -415,8 +438,8 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         Usuario usuario = gestorLavanderiaGUI.obtenerUsuarioPorEmpleadoId(empleado.getId());
 
         txtCorreo.setText(usuario.getCorreo());
-        pwdClave.setText("abcxyz");
-        pwdClaveRepetir.setText("abcxyz");
+        pwdClave.setText(CLAVE);
+        pwdClaveRepetir.setText(CLAVE);
     }
 
     private void cargarEmpleados(List<Empleado> empleados) {
