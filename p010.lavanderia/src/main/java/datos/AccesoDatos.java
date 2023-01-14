@@ -1216,4 +1216,25 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Actualizar los datos de un usuario.
+     * @param idEmpleado ID del empleado.
+     * @param correo Correo del usuario.
+     * @return boolean Resultado de la operación.
+     */
+    public boolean actualizarUsuarioCorreo(int idEmpleado, String correo) {
+        try {
+            final String SQL = "UPDATE usuario SET correo = ? WHERE empleado_id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, usuario.getCorreo());
+            sentencia.setInt(2, usuario.getEmpleadoId());
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return false;
+    }
 }
