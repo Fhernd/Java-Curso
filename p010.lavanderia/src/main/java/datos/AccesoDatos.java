@@ -1227,8 +1227,8 @@ public class AccesoDatos {
         try {
             final String SQL = "UPDATE usuario SET correo = ? WHERE empleado_id = ?";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
-            sentencia.setString(1, usuario.getCorreo());
-            sentencia.setInt(2, usuario.getEmpleadoId());
+            sentencia.setString(1, correo);
+            sentencia.setInt(2, idEmpleado);
 
             return sentencia.executeUpdate() > 0;
         } catch (SQLException e) {
