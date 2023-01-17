@@ -277,7 +277,10 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
                     mostrarEmpleado(empleado);
                 } else {
-                    final String[] nombresRoles = {"Administrador", "Cajero", "Receptor"};
+                    List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
+
+                    // Expresión lambda para obtener únicamente los nombres de los roles en un arreglo de cadenas de caracteres:
+                    String[] nombresRoles = roles.stream().map(rol -> rol.getNombre()).toArray(String[]::new);
 
                     String nombreRol = (String) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el rol", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, nombresRoles, nombresRoles[1]);
 
