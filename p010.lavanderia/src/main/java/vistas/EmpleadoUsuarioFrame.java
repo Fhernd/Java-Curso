@@ -385,7 +385,27 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         JButton btnEliminar = new JButton("Eliminar");
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Elimina un empleado seleccionado.
+                if (empleadoId == 0) {
+                    JOptionPane.showMessageDialog(null, "Debe buscar o seleccionar un empleado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int respuesta = JOptionPane.showConfirmDialog(EmpleadoUsuarioFrame.this, "¿Está seguro de eliminar el empleado?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    boolean eliminado = gestorLavanderiaGUI.eliminarEmpleadoPorId(empleadoId);
+
+                    if (!eliminado) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo eliminar el empleado.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+
+                    JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Empleado correctamente eliminado.", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+                    limpiarCampos();
+                    List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+                    cargarEmpleados(empleados);
+                }
             }
         });
         pnlAcciones.add(btnEliminar);
@@ -417,7 +437,6 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
         spnRegistros.setViewportView(tblRegistros);
         tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Event handler for selected row:
         tblRegistros.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {

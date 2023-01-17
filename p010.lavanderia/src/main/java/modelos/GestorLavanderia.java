@@ -182,11 +182,12 @@ public class GestorLavanderia {
     /**
      * Elimina un empleado a partir de su ID.
      *
-     * @param id ID del empleado.
+     * @param empleadoId ID del empleado.
      * @return true si se eliminó correctamente, false en caso contrario.
      */
-    public boolean eliminarEmpleadoPorId(int id) {
-        return accesoDatos.eliminarEmpleadoPorId(id);
+    public boolean eliminarEmpleadoPorId(int empleadoId) {
+        accesoDatos.eliminarUsuarioPorEmpleadoId(empleadoId);
+        return accesoDatos.eliminarEmpleadoPorId(empleadoId);
     }
 
     /**
