@@ -399,4 +399,13 @@ public class GestorLavanderiaGUI {
     public boolean actualizarUsuarioClave(int empleadoId, String clave) {
         return gestorLavanderia.actualizarUsuarioClave(empleadoId, clave);
     }
+
+    /**
+     * Obtiene un empleado por su ID.
+     * @param empleadoId ID del empleado.
+     * @return Empleado.
+     */
+    public Empleado obtenerEmpleadoPorId(int empleadoId) {
+        return gestorLavanderia.obtenerEmpleadoPorId(empleadoId);
+    }
 }

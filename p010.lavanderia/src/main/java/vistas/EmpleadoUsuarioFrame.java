@@ -13,6 +13,8 @@ import vistas.models.RolesComboBoxModel;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -279,7 +281,6 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                 } else {
                     List<Rol> roles = gestorLavanderiaGUI.obtenerRoles();
 
-                    // Expresión lambda para obtener únicamente los nombres de los roles en un arreglo de cadenas de caracteres:
                     String[] nombresRoles = roles.stream().map(rol -> rol.getNombre()).toArray(String[]::new);
 
                     String nombreRol = (String) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el rol", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, nombresRoles, nombresRoles[1]);
@@ -414,6 +415,27 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
             }
         });
         spnRegistros.setViewportView(tblRegistros);
+        tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        // Event handler for selected row:
+        tblRegistros.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    return;
+                }
+
+                int selectedRow = tblRegistros.getSelectedRow();
+
+                if (selectedRow == -1) {
+                    return;
+                }
+
+                empleadoId = (int) tblRegistros.getValueAt(selectedRow, 0);
+                Empleado empleado = gestorLavanderiaGUI.obtenerEmpleadoPorId(empleadoId);
+                mostrarEmpleado(empleado);
+            }
+        });
 
         cargarRoles();
 
