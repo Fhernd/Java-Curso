@@ -277,7 +277,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
 
                     mostrarEmpleado(empleado);
                 } else {
-                    final String[] nombresRoles = {"Administrador", "Cajero", "Recepcionista"};
+                    final String[] nombresRoles = {"Administrador", "Cajero", "Receptor"};
 
                     String nombreRol = (String) JOptionPane.showInputDialog(EmpleadoUsuarioFrame.this, "Seleccione el rol", "Búsqueda", JOptionPane.QUESTION_MESSAGE, null, nombresRoles, nombresRoles[1]);
 
