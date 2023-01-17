@@ -1240,15 +1240,15 @@ public class AccesoDatos {
 
     /**
      * Actualizar la clave de un usuario.
-     * @param idEmpleado ID del empleado.
+     * @param empleadoId ID del empleado.
      * @param clave Clave del usuario.
      */
-    public boolean actualizarUsuarioClave(int idEmpleado, String clave) {
+    public boolean actualizarUsuarioClave(int empleadoId, String clave) {
         try {
             final String SQL = "UPDATE usuario SET clave = ? WHERE empleado_id = ?";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             sentencia.setString(1, clave);
-            sentencia.setInt(2, idEmpleado);
+            sentencia.setInt(2, empleadoId);
 
             return sentencia.executeUpdate() > 0;
         } catch (SQLException e) {

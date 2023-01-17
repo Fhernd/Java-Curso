@@ -304,7 +304,7 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                 String nombres = txtNombres.getText().trim();
                 String apellidos = txtApellidos.getText().trim();
                 String sueldoTexto = txtSueldo.getText().trim();
-                String rolNombre = (String) cbxRol.getSelectedItem();
+                String rolNombre = ((Rol) cbxRol.getSelectedItem()).getNombre();
                 int rolId = rolesComboBoxModel.buscarIdRolPorNombre(rolNombre);
                 String correo = txtCorreo.getText().trim();
                 String clave = new String(pwdClave.getPassword());
@@ -359,9 +359,14 @@ public class EmpleadoUsuarioFrame extends JInternalFrame {
                     }
                 }
 
-                if (!clave.equals(CLAVE) && claveRepetir.equals(CLAVE)) {
-//                    clave = DigestUtils.md5Hex(clave);
-//                    respuesta = gestorLavanderiaGUI.actualizarUsuarioClave(empleadoId, clave);
+                if (!clave.equals(CLAVE) && !claveRepetir.equals(CLAVE)) {
+                    clave = Utilidad.encriptar(clave);
+                    respuesta = gestorLavanderiaGUI.actualizarUsuarioClave(empleadoId, clave);
+
+                    if (!respuesta) {
+                        JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "No se pudo editar la clave del usuario.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                 }
 
                 JOptionPane.showMessageDialog(EmpleadoUsuarioFrame.this, "Empleado correctamente editado.", "Información", JOptionPane.INFORMATION_MESSAGE);

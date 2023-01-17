@@ -443,4 +443,13 @@ public class GestorLavanderia {
     public boolean actualizarUsuarioCorreo(int empleadoId, String correo) {
         return accesoDatos.actualizarUsuarioCorreo(empleadoId, correo);
     }
+
+    /**
+     * Actualizar la clave de un usuario.
+     * @param empleadoId ID del empleado.
+     * @param clave Clave del usuario.
+     */
+    public boolean actualizarUsuarioClave(int empleadoId, String clave) {
+        return accesoDatos.actualizarUsuarioClave(empleadoId, clave);
+    }
 }
