@@ -1257,4 +1257,34 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Obtiene un empleado por su ID.
+     * @param id ID del empleado.
+     * @return Empleado.
+     */
+    public Empleado obtenerEmpleadoPorId(int id) {
+        Empleado empleado = null;
+
+        try {
+            final String SQL = "SELECT * FROM empleado WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, id);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            if (resultado.next()) {
+                empleado = new Empleado();
+                empleado.setId(id);
+                empleado.setNombres(resultado.getString("nombres"));
+                empleado.setApellidos(resultado.getString("apellidos"));
+                empleado.setSueldo(resultado.getDouble("sueldo"));
+                empleado.setRolId(resultado.getInt("rol_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+
+        return empleado;
+    }
 }
