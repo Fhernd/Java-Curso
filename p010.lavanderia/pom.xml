@@ -1,45 +1,52 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>p010.lavanderia</groupId>
-  <artifactId>p010.lavanderia</artifactId>
-  <version>1.0.0</version>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>8</source>
-          <target>8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <name>Gestor Lavandería</name>
-  <description>Gestor para una lavandería</description>
-  <dependencies>
-    <!-- Add MySQL JDBC Driver -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.28</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.jgoodies/jgoodies-forms -->
-    <dependency>
-      <groupId>com.jgoodies</groupId>
-      <artifactId>jgoodies-forms</artifactId>
-      <version>1.8.0</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
-    <dependency>
-      <groupId>commons-validator</groupId>
-      <artifactId>commons-validator</artifactId>
-      <version>1.7</version>
-    </dependency>
-    <dependency>
-      <groupId>com.password4j</groupId>
-      <artifactId>password4j</artifactId>
-      <version>1.6.0</version>
-    </dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>p010.lavanderia</groupId>
+    <artifactId>p010.lavanderia</artifactId>
+    <version>1.0.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <name>Gestor Lavandería</name>
+    <description>Gestor para una lavandería</description>
+    <dependencies>
+        <!-- Add MySQL JDBC Driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jgoodies/jgoodies-forms -->
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>jgoodies-forms</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.password4j</groupId>
+            <artifactId>password4j</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+    </dependencies>
 </project>
