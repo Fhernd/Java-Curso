@@ -12,6 +12,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
@@ -52,6 +53,8 @@ public class ServicioFrame extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblServicioId = new JLabel("ID:");
@@ -71,6 +74,12 @@ public class ServicioFrame extends JInternalFrame {
 		
 		JLabel lblServicioFechaEntrega = new JLabel("Fecha entrega:");
 		pnlServiciosDatos.add(lblServicioFechaEntrega, "2, 6");
+		
+		JDateChooser dateChooser = new JDateChooser();
+		pnlServiciosDatos.add(dateChooser, "12, 6, fill, fill");
+		
+		JLabel lblServicioHoraEntrega = new JLabel("Hora entrega:");
+		pnlServiciosDatos.add(lblServicioHoraEntrega, "2, 8");
 
 	}
 
