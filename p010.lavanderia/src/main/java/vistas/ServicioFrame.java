@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
+	private JTextField txtServicioDescripcion;
 
 	/**
 	 * Create the frame.
@@ -47,14 +48,29 @@ public class ServicioFrame extends JInternalFrame {
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblServicioId = new JLabel("New label");
+		JLabel lblServicioId = new JLabel("ID:");
 		pnlServiciosDatos.add(lblServicioId, "2, 2");
 		
 		txtServicioId = new JTextField();
+		txtServicioId.setEditable(false);
 		pnlServiciosDatos.add(txtServicioId, "12, 2, fill, default");
 		txtServicioId.setColumns(10);
+		
+		JLabel lblServicioDescripcion = new JLabel("Descripción:");
+		pnlServiciosDatos.add(lblServicioDescripcion, "2, 4");
+		
+		txtServicioDescripcion = new JTextField();
+		pnlServiciosDatos.add(txtServicioDescripcion, "12, 4, fill, top");
+		txtServicioDescripcion.setColumns(10);
+		
+		JLabel lblServicioFechaEntrega = new JLabel("Fecha entrega:");
+		pnlServiciosDatos.add(lblServicioFechaEntrega, "2, 6");
 
 	}
 
