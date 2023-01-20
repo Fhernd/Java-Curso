@@ -20,11 +20,17 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JScrollPane;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
 	private JTextField txtServicioDescripcion;
 	private JTextField txtServicioHoraEntrega;
+	private JTable table;
 
 	/**
 	 * Create the frame.
@@ -32,7 +38,7 @@ public class ServicioFrame extends JInternalFrame {
 	public ServicioFrame() {
 		setClosable(true);
 		setTitle("Servicios");
-		setBounds(100, 100, 600, 450);
+		setBounds(100, 100, 600, 700);
 		
 		JPanel pnlServicios = new JPanel();
 		pnlServicios.setBorder(new TitledBorder(null, "Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -160,6 +166,31 @@ public class ServicioFrame extends JInternalFrame {
 			// TODO: Eliminar un servicio seleccionado
 		});
 		pnlServiciosAcciones.add(btnServicioEliminar);
+		
+		JPanel pnlServiciosRegistros = new JPanel();
+		pnlServiciosRegistros.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		pnlServicios.add(pnlServiciosRegistros, BorderLayout.SOUTH);
+		pnlServiciosRegistros.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane spnServicioRegistros = new JScrollPane();
+		pnlServiciosRegistros.add(spnServicioRegistros, BorderLayout.CENTER);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Descripci\u00F3n", "Fecha entrega", "Empleado", "Cliente", "Direcci\u00F3n"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		spnServicioRegistros.setViewportView(table);
 
 	}
 
