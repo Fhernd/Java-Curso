@@ -16,6 +16,8 @@ import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
@@ -28,7 +30,7 @@ public class ServicioFrame extends JInternalFrame {
 	public ServicioFrame() {
 		setClosable(true);
 		setTitle("Servicios");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 450);
 		
 		JPanel pnlServicios = new JPanel();
 		pnlServicios.setBorder(new TitledBorder(null, "Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -118,6 +120,26 @@ public class ServicioFrame extends JInternalFrame {
 		
 		JComboBox cbxServicioDireccionEntrega = new JComboBox();
 		pnlServiciosDatos.add(cbxServicioDireccionEntrega, "12, 16, fill, default");
+		
+		JPanel pnlServiciosAcciones = new JPanel();
+		pnlServiciosAcciones.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlServicios.add(pnlServiciosAcciones, BorderLayout.CENTER);
+		pnlServiciosAcciones.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JButton btnServicioNuevo = new JButton("Nuevo");
+		pnlServiciosAcciones.add(btnServicioNuevo);
+		
+		JButton btnServicioGuardar = new JButton("Guardar");
+		pnlServiciosAcciones.add(btnServicioGuardar);
+		
+		JButton btnServicioBuscar = new JButton("Buscar...");
+		pnlServiciosAcciones.add(btnServicioBuscar);
+		
+		JButton btnServicioEditar = new JButton("Editar");
+		pnlServiciosAcciones.add(btnServicioEditar);
+		
+		JButton btnServicioEliminar = new JButton("Eliminar");
+		pnlServiciosAcciones.add(btnServicioEliminar);
 
 	}
 
