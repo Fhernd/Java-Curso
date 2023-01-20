@@ -13,10 +13,14 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+import com.raven.swing.TimePicker;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
 	private JTextField txtServicioDescripcion;
+	private JTextField txtServicioHoraEntrega;
 
 	/**
 	 * Create the frame.
@@ -55,6 +59,14 @@ public class ServicioFrame extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblServicioId = new JLabel("ID:");
@@ -75,11 +87,37 @@ public class ServicioFrame extends JInternalFrame {
 		JLabel lblServicioFechaEntrega = new JLabel("Fecha entrega:");
 		pnlServiciosDatos.add(lblServicioFechaEntrega, "2, 6");
 		
-		JDateChooser dateChooser = new JDateChooser();
-		pnlServiciosDatos.add(dateChooser, "12, 6, fill, fill");
+		JDateChooser datServicioFechaEntrega = new JDateChooser();
+		pnlServiciosDatos.add(datServicioFechaEntrega, "12, 6, fill, fill");
 		
 		JLabel lblServicioHoraEntrega = new JLabel("Hora entrega:");
 		pnlServiciosDatos.add(lblServicioHoraEntrega, "2, 8");
+		
+		txtServicioHoraEntrega = new JTextField();
+		txtServicioHoraEntrega.setEditable(false);
+		pnlServiciosDatos.add(txtServicioHoraEntrega, "12, 8, fill, default");
+		txtServicioHoraEntrega.setColumns(10);
+		
+		JButton btnServicioSeleccionarHora = new JButton("Seleccionar hora...");
+		pnlServiciosDatos.add(btnServicioSeleccionarHora, "12, 10");
+		
+		JLabel lblServicioEmpleado = new JLabel("Empleado:");
+		pnlServiciosDatos.add(lblServicioEmpleado, "2, 12, left, default");
+		
+		JComboBox cbxServicioEmpleado = new JComboBox();
+		pnlServiciosDatos.add(cbxServicioEmpleado, "12, 12, fill, default");
+		
+		JLabel lblServicioCliente = new JLabel("Cliente:");
+		pnlServiciosDatos.add(lblServicioCliente, "2, 14");
+		
+		JComboBox cbxServicioCliente = new JComboBox();
+		pnlServiciosDatos.add(cbxServicioCliente, "12, 14, fill, default");
+		
+		JLabel lblServicioDireccion = new JLabel("Dirección entrega:");
+		pnlServiciosDatos.add(lblServicioDireccion, "2, 16");
+		
+		JComboBox cbxServicioDireccionEntrega = new JComboBox();
+		pnlServiciosDatos.add(cbxServicioDireccionEntrega, "12, 16, fill, default");
 
 	}
 
