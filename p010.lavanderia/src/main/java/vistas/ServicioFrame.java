@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
@@ -101,6 +103,9 @@ public class ServicioFrame extends JInternalFrame {
 		txtServicioHoraEntrega.setColumns(10);
 		
 		JButton btnServicioSeleccionarHora = new JButton("Seleccionar hora...");
+		btnServicioSeleccionarHora.addActionListener(e -> {
+			// TODO: Abrir ventana de selección de hora
+		});
 		pnlServiciosDatos.add(btnServicioSeleccionarHora, "12, 10");
 		
 		JLabel lblServicioEmpleado = new JLabel("Empleado:");
@@ -127,18 +132,33 @@ public class ServicioFrame extends JInternalFrame {
 		pnlServiciosAcciones.setLayout(new GridLayout(0, 5, 0, 0));
 		
 		JButton btnServicioNuevo = new JButton("Nuevo");
+		btnServicioNuevo.addActionListener(e -> {
+			// TODO: Iniciar un nuevo servicio
+		});
 		pnlServiciosAcciones.add(btnServicioNuevo);
 		
 		JButton btnServicioGuardar = new JButton("Guardar");
+		btnServicioGuardar.addActionListener(e -> {
+			// TODO: Guardar los datos de un nuevo servicio
+		});
 		pnlServiciosAcciones.add(btnServicioGuardar);
 		
 		JButton btnServicioBuscar = new JButton("Buscar...");
+		btnServicioBuscar.addActionListener(e -> {
+			// TODO: Buscar entre los registros de servicios
+		});
 		pnlServiciosAcciones.add(btnServicioBuscar);
 		
 		JButton btnServicioEditar = new JButton("Editar");
+		btnServicioEditar.addActionListener(e -> {
+			// TODO: Editar los datos de un servicio
+		});
 		pnlServiciosAcciones.add(btnServicioEditar);
 		
 		JButton btnServicioEliminar = new JButton("Eliminar");
+		btnServicioEliminar.addActionListener(e -> {
+			// TODO: Eliminar un servicio seleccionado
+		});
 		pnlServiciosAcciones.add(btnServicioEliminar);
 
 	}
