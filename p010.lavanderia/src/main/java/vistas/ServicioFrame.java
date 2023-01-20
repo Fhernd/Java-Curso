@@ -191,6 +191,10 @@ public class ServicioFrame extends JInternalFrame {
 			}
 		});
 		spnServicioRegistros.setViewportView(table);
+		
+		JPanel pnlAtenciones = new JPanel();
+		pnlAtenciones.setBorder(new TitledBorder(null, "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlAtenciones, BorderLayout.SOUTH);
 
 	}
 
