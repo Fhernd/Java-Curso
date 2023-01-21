@@ -118,6 +118,8 @@ public class ServicioFrame extends JInternalFrame {
 		JButton btnServicioSeleccionarHora = new JButton("Seleccionar hora...");
 		btnServicioSeleccionarHora.addActionListener(e -> {
 			// TODO: Abrir ventana de selección de hora
+			TimePicker timePicker = new TimePicker();
+			timePicker.showPopup(this, 100, 100);
 		});
 		pnlServiciosDatos.add(btnServicioSeleccionarHora, "12, 10");
 		
