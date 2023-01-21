@@ -37,6 +37,7 @@ public class ServicioFrame extends JInternalFrame {
 	private JTextField txtAtencionId;
 	private JTextField txtAtencionPrecio;
 	private JComboBox cbxAtencionTipo;
+	private JTable tblAtencionesRegistros;
 
 	/**
 	 * Create the frame.
@@ -44,7 +45,7 @@ public class ServicioFrame extends JInternalFrame {
 	public ServicioFrame() {
 		setClosable(true);
 		setTitle("Servicios");
-		setBounds(100, 100, 600, 700);
+		setBounds(100, 100, 600, 770);
 		
 		JPanel pnlServicios = new JPanel();
 		pnlServicios.setBorder(new TitledBorder(null, "Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -200,11 +201,11 @@ public class ServicioFrame extends JInternalFrame {
 		});
 		spnServiciosRegistros.setViewportView(tblServiciosRegistros);
 		tblServiciosRegistros.setSize(200, 200);
-		tblServiciosRegistros.setPreferredScrollableViewportSize(new Dimension(600, 150));
+		tblServiciosRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
 		
 		
 		JPanel pnlAtenciones = new JPanel();
-		pnlAtenciones.setBorder(new TitledBorder(null, "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlAtenciones.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(pnlAtenciones, BorderLayout.SOUTH);
 		pnlAtenciones.setLayout(new BorderLayout(0, 0));
 		
@@ -238,6 +239,8 @@ public class ServicioFrame extends JInternalFrame {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblAtencionId = new JLabel("ID:");
@@ -252,12 +255,14 @@ public class ServicioFrame extends JInternalFrame {
 		pnlAtencionesDatos.add(lblAtencionCantidad, "2, 4");
 		
 		JSpinner snnAtencionCantidad = new JSpinner();
+		snnAtencionCantidad.setEnabled(false);
 		pnlAtencionesDatos.add(snnAtencionCantidad, "18, 4");
 		
 		JLabel lblAtencionPrecio = new JLabel("Precio:");
 		pnlAtencionesDatos.add(lblAtencionPrecio, "2, 6");
 		
 		txtAtencionPrecio = new JTextField();
+		txtAtencionPrecio.setEnabled(false);
 		txtAtencionPrecio.setText("");
 		pnlAtencionesDatos.add(txtAtencionPrecio, "18, 6, fill, top");
 		txtAtencionPrecio.setColumns(10);
@@ -266,8 +271,44 @@ public class ServicioFrame extends JInternalFrame {
 		pnlAtencionesDatos.add(lblAtencionTipo, "2, 8");
 		
 		cbxAtencionTipo = new JComboBox();
+		cbxAtencionTipo.setEnabled(false);
 		pnlAtencionesDatos.add(cbxAtencionTipo, "18, 8, fill, default");
-
+		
+		JButton btnNewButton = new JButton("Agregar");
+		btnNewButton.setEnabled(false);
+		pnlAtencionesDatos.add(btnNewButton, "18, 10");
+		
+		JPanel pnlAtencionesRegistros = new JPanel();
+		pnlAtencionesRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlAtenciones.add(pnlAtencionesRegistros, BorderLayout.SOUTH);
+		pnlAtencionesRegistros.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane spnAtencionesRegistros = new JScrollPane();
+		pnlAtencionesRegistros.add(spnAtencionesRegistros, BorderLayout.CENTER);
+		
+		tblAtencionesRegistros = new JTable();
+		tblAtencionesRegistros.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Cantidad", "Precio", "Tipo"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, Integer.class, Double.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		spnAtencionesRegistros.setViewportView(tblAtencionesRegistros);
+		tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
 	}
 
 }
