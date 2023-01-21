@@ -12,6 +12,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
 import modelos.Cliente;
+import modelos.GestorLavanderia;
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -32,11 +33,18 @@ public class ServicioFrame extends JInternalFrame {
 	private JTextField txtAtencionPrecio;
 	private JComboBox cbxAtencionTipo;
 	private JTable tblAtencionesRegistros;
+	private JComboBox cbxServicioDireccionEntrega;
+	private JComboBox cbxServicioCliente;
+	private JComboBox cbxServicioEmpleado;
+
+	private GestorLavanderiaGUI gestorLavanderiaGUI;
 
 	/**
 	 * Create the frame.
 	 */
-	public ServicioFrame() {
+	public ServicioFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+
 		setClosable(true);
 		setTitle("Servicios");
 		setBounds(100, 100, 600, 770);
@@ -121,19 +129,19 @@ public class ServicioFrame extends JInternalFrame {
 		JLabel lblServicioEmpleado = new JLabel("Empleado:");
 		pnlServiciosDatos.add(lblServicioEmpleado, "2, 12, left, default");
 		
-		JComboBox cbxServicioEmpleado = new JComboBox();
+		cbxServicioEmpleado = new JComboBox();
 		pnlServiciosDatos.add(cbxServicioEmpleado, "12, 12, fill, default");
 		
 		JLabel lblServicioCliente = new JLabel("Cliente:");
 		pnlServiciosDatos.add(lblServicioCliente, "2, 14");
 		
-		JComboBox cbxServicioCliente = new JComboBox();
+		cbxServicioCliente = new JComboBox();
 		pnlServiciosDatos.add(cbxServicioCliente, "12, 14, fill, default");
 		
 		JLabel lblServicioDireccion = new JLabel("Dirección entrega:");
 		pnlServiciosDatos.add(lblServicioDireccion, "2, 16");
 		
-		JComboBox cbxServicioDireccionEntrega = new JComboBox();
+		cbxServicioDireccionEntrega = new JComboBox();
 		pnlServiciosDatos.add(cbxServicioDireccionEntrega, "12, 16, fill, default");
 		
 		JPanel pnlServiciosAcciones = new JPanel();
@@ -333,6 +341,8 @@ public class ServicioFrame extends JInternalFrame {
 		txtServicioDescripcion.setText("");
 		txtServicioHoraEntrega.setText("");
 		txtServicioHoraEntrega.setText("");
+		cbxServicioCliente.setSelectedIndex(0);
+		cbxServicioDireccionEntrega.setSelectedIndex(0);
 	}
 
 }
