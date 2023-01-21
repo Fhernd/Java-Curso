@@ -409,4 +409,12 @@ public class ServicioFrame extends JInternalFrame {
         txtAtencionPrecio.setText("");
         cbxAtencionTipo.setSelectedIndex(0);
     }
+
+    /**
+     * Limpiar tabla de atenciones.
+     */
+    private void limpiarTablaAtenciones() {
+        DefaultTableModel model = (DefaultTableModel) tblAtencionesRegistros.getModel();
+        model.setRowCount(0);
+    }
 }
