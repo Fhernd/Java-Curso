@@ -42,6 +42,7 @@ public class ServicioFrame extends JInternalFrame {
     private DireccionComboBoxModel direccionComboBoxModel;
     private ClientesComboBoxModel clientesComboBoxModel;
     private EmpleadosComboBoxModel empleadosComboBoxModel;
+    private JSpinner snnAtencionCantidad;
 
     /**
      * Create the frame.
@@ -279,7 +280,7 @@ public class ServicioFrame extends JInternalFrame {
         JLabel lblAtencionCantidad = new JLabel("Cantidad:");
         pnlAtencionesDatos.add(lblAtencionCantidad, "2, 4");
 
-        JSpinner snnAtencionCantidad = new JSpinner();
+        snnAtencionCantidad = new JSpinner();
         snnAtencionCantidad.setEnabled(false);
         pnlAtencionesDatos.add(snnAtencionCantidad, "18, 4");
 
@@ -397,5 +398,15 @@ public class ServicioFrame extends JInternalFrame {
         empleadosComboBoxModel = new EmpleadosComboBoxModel(empleadosArray);
         cbxServicioEmpleado.setModel(empleadosComboBoxModel);
         cbxServicioEmpleado.setSelectedItem(empleadoActual);
+    }
+
+    /**
+     * Limpiar los campos de atenciones.
+     */
+    private void limpiarCamposAtenciones() {
+        txtAtencionId.setText("");
+        snnAtencionCantidad.setValue(0);
+        txtAtencionPrecio.setText("");
+        cbxAtencionTipo.setSelectedIndex(0);
     }
 }
