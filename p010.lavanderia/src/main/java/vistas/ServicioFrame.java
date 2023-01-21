@@ -275,6 +275,9 @@ public class ServicioFrame extends JInternalFrame {
 		pnlAtencionesDatos.add(cbxAtencionTipo, "18, 8, fill, default");
 		
 		JButton btnNewButton = new JButton("Agregar");
+		btnNewButton.addActionListener(e -> {
+			// TODO: Agregar atención
+		});
 		btnNewButton.setEnabled(false);
 		pnlAtencionesDatos.add(btnNewButton, "18, 10");
 		
