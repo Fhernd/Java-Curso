@@ -27,12 +27,16 @@ import java.awt.Dimension;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JSpinner;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
 	private JTextField txtServicioDescripcion;
 	private JTextField txtServicioHoraEntrega;
 	private JTable tblServiciosRegistros;
+	private JTextField txtAtencionId;
+	private JTextField txtAtencionPrecio;
+	private JComboBox cbxAtencionTipo;
 
 	/**
 	 * Create the frame.
@@ -202,6 +206,67 @@ public class ServicioFrame extends JInternalFrame {
 		JPanel pnlAtenciones = new JPanel();
 		pnlAtenciones.setBorder(new TitledBorder(null, "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(pnlAtenciones, BorderLayout.SOUTH);
+		pnlAtenciones.setLayout(new BorderLayout(0, 0));
+		
+		JPanel pnlAtencionesDatos = new JPanel();
+		pnlAtencionesDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnlAtenciones.add(pnlAtencionesDatos, BorderLayout.NORTH);
+		pnlAtencionesDatos.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblAtencionId = new JLabel("ID:");
+		pnlAtencionesDatos.add(lblAtencionId, "2, 2");
+		
+		txtAtencionId = new JTextField();
+		txtAtencionId.setEditable(false);
+		pnlAtencionesDatos.add(txtAtencionId, "18, 2, fill, default");
+		txtAtencionId.setColumns(10);
+		
+		JLabel lblAtencionCantidad = new JLabel("Cantidad:");
+		pnlAtencionesDatos.add(lblAtencionCantidad, "2, 4");
+		
+		JSpinner snnAtencionCantidad = new JSpinner();
+		pnlAtencionesDatos.add(snnAtencionCantidad, "18, 4");
+		
+		JLabel lblAtencionPrecio = new JLabel("Precio:");
+		pnlAtencionesDatos.add(lblAtencionPrecio, "2, 6");
+		
+		txtAtencionPrecio = new JTextField();
+		txtAtencionPrecio.setText("");
+		pnlAtencionesDatos.add(txtAtencionPrecio, "18, 6, fill, top");
+		txtAtencionPrecio.setColumns(10);
+		
+		JLabel lblAtencionTipo = new JLabel("Tipo:");
+		pnlAtencionesDatos.add(lblAtencionTipo, "2, 8");
+		
+		cbxAtencionTipo = new JComboBox();
+		pnlAtencionesDatos.add(cbxAtencionTipo, "18, 8, fill, default");
 
 	}
 
