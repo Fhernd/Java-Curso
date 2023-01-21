@@ -8,6 +8,7 @@ import java.util.List;
 
 public class GestorLavanderia {
     private AccesoDatos accesoDatos;
+    private Empleado empleadoActual;
 
     public GestorLavanderia() {
         accesoDatos = new AccesoDatos();
@@ -461,5 +462,23 @@ public class GestorLavanderia {
      */
     public Empleado obtenerEmpleadoPorId(int empleadoId) {
         return accesoDatos.obtenerEmpleadoPorId(empleadoId);
+    }
+
+    /**
+     * Obtiene el empleado actual.
+     *
+     * @return Empleado.
+     */
+    public Empleado getEmpleadoActual() {
+        return empleadoActual;
+    }
+
+    /**
+     * Establece el empleado actual.
+     *
+     * @param empleadoActual Empleado.
+     */
+    public void setEmpleadoActual(Empleado empleadoActual) {
+        this.empleadoActual = empleadoActual;
     }
 }
