@@ -140,7 +140,7 @@ public class GestorLavanderiaGUI {
         
         JMenuItem mniServiciosGestiones = new JMenuItem("Gestiones");
         mniServiciosGestiones.addActionListener(e -> {
-            ServicioFrame serviciosFrame = new ServicioFrame();
+            ServicioFrame serviciosFrame = new ServicioFrame(this);
             dtpPrincipal.add(serviciosFrame);
             serviciosFrame.setVisible(true);
         });
