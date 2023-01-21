@@ -14,9 +14,11 @@ import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
 import modelos.Cliente;
 import modelos.Direccion;
+import modelos.Empleado;
 import modelos.GestorLavanderia;
 import vistas.models.ClientesComboBoxModel;
 import vistas.models.DireccionComboBoxModel;
+import vistas.models.EmpleadosComboBoxModel;
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -45,6 +47,7 @@ public class ServicioFrame extends JInternalFrame {
     private GestorLavanderiaGUI gestorLavanderiaGUI;
     private DireccionComboBoxModel direccionComboBoxModel;
     private ClientesComboBoxModel clientesComboBoxModel;
+    private EmpleadosComboBoxModel empleadosComboBoxModel;
 
     /**
      * Create the frame.
@@ -382,5 +385,18 @@ public class ServicioFrame extends JInternalFrame {
 
         clientesComboBoxModel = new ClientesComboBoxModel(clientesArray);
         cbxServicioCliente.setModel(clientesComboBoxModel);
+    }
+
+    /**
+     * Carga los empleados en el combo box.
+     */
+    private void cargarEmplesados() {
+        List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+
+        Empleado[] empleadosArray = new Empleado[empleados.size()];
+        empleados.toArray(empleadosArray);
+
+        empleadosComboBoxModel = new EmpleadosComboBoxModel(empleadosArray);
+        cbxServicioEmpleado.setModel(empleadosComboBoxModel);
     }
 }

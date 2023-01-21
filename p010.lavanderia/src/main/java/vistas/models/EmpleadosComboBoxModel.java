@@ -4,7 +4,7 @@ import modelos.Empleado;
 
 import javax.swing.*;
 
-public class EmpleadosComboBoxModel  extends AbstractListModel implements ComboBoxModel {
+public class EmpleadosComboBoxModel extends AbstractListModel implements ComboBoxModel {
     private Empleado[] empleados;
     private Empleado selection = null;
 
