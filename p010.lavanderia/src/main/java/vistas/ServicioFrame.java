@@ -15,6 +15,7 @@ import com.raven.swing.TimePicker;
 import modelos.Cliente;
 import modelos.Direccion;
 import modelos.GestorLavanderia;
+import vistas.models.ClientesComboBoxModel;
 import vistas.models.DireccionComboBoxModel;
 
 import java.awt.GridBagLayout;
@@ -43,6 +44,7 @@ public class ServicioFrame extends JInternalFrame {
 
     private GestorLavanderiaGUI gestorLavanderiaGUI;
     private DireccionComboBoxModel direccionComboBoxModel;
+    private ClientesComboBoxModel clientesComboBoxModel;
 
     /**
      * Create the frame.
@@ -367,5 +369,18 @@ public class ServicioFrame extends JInternalFrame {
 
         direccionComboBoxModel = new DireccionComboBoxModel(direccionesArray);
         cbxServicioDireccionEntrega.setModel(direccionComboBoxModel);
+    }
+
+    /**
+     * Carga los clientes en el combo box.
+     */
+    private void cargarClientes() {
+        List<Cliente> clientes = gestorLavanderiaGUI.obtenerClientes();
+
+        Cliente[] clientesArray = new Cliente[clientes.size()];
+        clientes.toArray(clientesArray);
+
+        clientesComboBoxModel = new ClientesComboBoxModel(clientesArray);
+        cbxServicioCliente.setModel(clientesComboBoxModel);
     }
 }
