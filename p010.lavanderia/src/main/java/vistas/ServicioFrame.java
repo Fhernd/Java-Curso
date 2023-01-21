@@ -166,9 +166,13 @@ public class ServicioFrame extends JInternalFrame {
 
                 if (opcion == JOptionPane.YES_OPTION) {
                     limpiarCamposServicio();
+                    limpiarCamposAtenciones();
+                    cambiarEstadoCamposAtenciones(false);
                 }
             } else {
                 limpiarCamposServicio();
+                limpiarCamposAtenciones();
+                cambiarEstadoCamposAtenciones(false);
             }
         });
         pnlServiciosAcciones.add(btnServicioNuevo);
@@ -437,5 +441,15 @@ public class ServicioFrame extends JInternalFrame {
                     tiposAtencion.stream().filter(tipoAtencion -> tipoAtencion.getId() == atencion.getTipoAtencionId()).findFirst().get().getNombre()
             });
         }
+    }
+
+    /**
+     * Deshabilitar los campos de atenciones.
+     */
+    private void cambiarEstadoCamposAtenciones(boolean estado) {
+        txtAtencionId.setEnabled(estado);
+        snnAtencionCantidad.setEnabled(estado);
+        txtAtencionPrecio.setEnabled(estado);
+        cbxAtencionTipo.setEnabled(estado);
     }
 }
