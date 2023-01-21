@@ -1,7 +1,5 @@
 package vistas;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
@@ -15,15 +13,11 @@ import com.raven.swing.TimePicker;
 import modelos.Cliente;
 import modelos.Direccion;
 import modelos.Empleado;
-import modelos.GestorLavanderia;
 import vistas.models.ClientesComboBoxModel;
 import vistas.models.DireccionComboBoxModel;
 import vistas.models.EmpleadosComboBoxModel;
 
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -161,23 +155,21 @@ public class ServicioFrame extends JInternalFrame {
 
         JButton btnServicioNuevo = new JButton("Nuevo");
         btnServicioNuevo.addActionListener(e -> {
-            // TODO: Iniciar un nuevo servicio
             String servicioId = txtServicioId.getText();
             String servicioDescripcion = txtServicioDescripcion.getText();
             String servicioFechaEntrega = datServicioFechaEntrega.getDate().toString();
             String servicioHoraEntrega = txtServicioHoraEntrega.getText();
-            int clienteId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
+            int clienteIndice = cbxServicioCliente.getSelectedIndex();
 
-            if (!servicioId.isEmpty() || !servicioDescripcion.isEmpty() || !servicioFechaEntrega.isEmpty() || !servicioHoraEntrega.isEmpty()) {
+            if (!servicioId.isEmpty() || !servicioDescripcion.isEmpty() || !servicioFechaEntrega.isEmpty() || !servicioHoraEntrega.isEmpty() || clienteIndice > 0) {
 
-                // Diálogo de confirmación:
                 int opcion = JOptionPane.showConfirmDialog(this, "¿Desea iniciar un nuevo servicio?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
                 if (opcion == JOptionPane.YES_OPTION) {
                     limpiarCamposServicio();
                 }
-
-                return;
+            } else {
+                limpiarCamposServicio();
             }
         });
         pnlServiciosAcciones.add(btnServicioNuevo);
@@ -357,6 +349,12 @@ public class ServicioFrame extends JInternalFrame {
         txtServicioHoraEntrega.setText("");
         cbxServicioCliente.setSelectedIndex(0);
         cbxServicioDireccionEntrega.setSelectedIndex(0);
+        Empleado empleadoActual = gestorLavanderiaGUI.obtenerEmpleadoActual();
+        cargarEmpleados(empleadoActual);
+
+        int clientId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
+
+        cargarDirecciones(clientId);
     }
 
     /**
@@ -390,7 +388,7 @@ public class ServicioFrame extends JInternalFrame {
     /**
      * Carga los empleados en el combo box.
      */
-    private void cargarEmplesados() {
+    private void cargarEmpleados(Empleado empleadoActual) {
         List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
 
         Empleado[] empleadosArray = new Empleado[empleados.size()];
@@ -398,5 +396,6 @@ public class ServicioFrame extends JInternalFrame {
 
         empleadosComboBoxModel = new EmpleadosComboBoxModel(empleadosArray);
         cbxServicioEmpleado.setModel(empleadosComboBoxModel);
+        cbxServicioEmpleado.setSelectedItem(empleadoActual);
     }
 }

@@ -134,10 +134,10 @@ public class GestorLavanderiaGUI {
             }
         });
         mnuDirecciones.add(mniDireccionesOperaciones);
-        
+
         JMenu mnuServicios = new JMenu("Servicios");
         menuBar.add(mnuServicios);
-        
+
         JMenuItem mniServiciosGestiones = new JMenuItem("Gestiones");
         mniServiciosGestiones.addActionListener(e -> {
             ServicioFrame serviciosFrame = new ServicioFrame(this);
@@ -401,7 +401,7 @@ public class GestorLavanderiaGUI {
      * Actualizar los datos de un usuario.
      *
      * @param empleadoId ID del empleado.
-     * @param correo Correo del usuario.
+     * @param correo     Correo del usuario.
      * @return boolean Resultado de la operación.
      */
     public boolean actualizarUsuarioCorreo(int empleadoId, String correo) {
@@ -410,8 +410,9 @@ public class GestorLavanderiaGUI {
 
     /**
      * Actualizar la clave de un usuario.
+     *
      * @param empleadoId ID del empleado.
-     * @param clave Clave del usuario.
+     * @param clave      Clave del usuario.
      */
     public boolean actualizarUsuarioClave(int empleadoId, String clave) {
         return gestorLavanderia.actualizarUsuarioClave(empleadoId, clave);
@@ -419,10 +420,20 @@ public class GestorLavanderiaGUI {
 
     /**
      * Obtiene un empleado por su ID.
+     *
      * @param empleadoId ID del empleado.
      * @return Empleado.
      */
     public Empleado obtenerEmpleadoPorId(int empleadoId) {
         return gestorLavanderia.obtenerEmpleadoPorId(empleadoId);
+    }
+
+    /**
+     * Obtiene el empleado actual.
+     *
+     * @return Empleado.
+     */
+    public Empleado obtenerEmpleadoActual() {
+        return gestorLavanderia.getEmpleadoActual();
     }
 }
