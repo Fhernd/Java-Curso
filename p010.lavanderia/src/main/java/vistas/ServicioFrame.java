@@ -120,6 +120,7 @@ public class ServicioFrame extends JInternalFrame {
 			// TODO: Abrir ventana de selección de hora
 			TimePicker timePicker = new TimePicker();
 			timePicker.showPopup(this, 100, 100);
+			//
 		});
 		pnlServiciosDatos.add(btnServicioSeleccionarHora, "12, 10");
 		
