@@ -2,32 +2,26 @@ package vistas;
 
 import java.awt.EventQueue;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+import modelos.Cliente;
+
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JSpinner;
 
 public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
@@ -150,6 +144,23 @@ public class ServicioFrame extends JInternalFrame {
 		JButton btnServicioNuevo = new JButton("Nuevo");
 		btnServicioNuevo.addActionListener(e -> {
 			// TODO: Iniciar un nuevo servicio
+			String servicioId = txtServicioId.getText();
+			String servicioDescripcion = txtServicioDescripcion.getText();
+			String servicioFechaEntrega = datServicioFechaEntrega.getDate().toString();
+			String servicioHoraEntrega = txtServicioHoraEntrega.getText();
+			int clienteId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
+
+			if (!servicioId.isEmpty() || !servicioDescripcion.isEmpty() || !servicioFechaEntrega.isEmpty() || !servicioHoraEntrega.isEmpty()) {
+
+				// Diálogo de confirmación:
+				int opcion = JOptionPane.showConfirmDialog(this, "¿Desea iniciar un nuevo servicio?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+				if (opcion == JOptionPane.YES_OPTION) {
+					limpiarCamposServicio();
+				}
+
+				return;
+			}
 		});
 		pnlServiciosAcciones.add(btnServicioNuevo);
 		
@@ -315,6 +326,13 @@ public class ServicioFrame extends JInternalFrame {
 		});
 		spnAtencionesRegistros.setViewportView(tblAtencionesRegistros);
 		tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
+	}
+
+	private void limpiarCamposServicio() {
+		txtServicioId.setText("");
+		txtServicioDescripcion.setText("");
+		txtServicioHoraEntrega.setText("");
+		txtServicioHoraEntrega.setText("");
 	}
 
 }
