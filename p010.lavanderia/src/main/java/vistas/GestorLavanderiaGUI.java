@@ -446,4 +446,13 @@ public class GestorLavanderiaGUI {
     public List<Atencion> obtenerAtencionesPorServicioId(int servicioId) {
         return gestorLavanderia.obtenerAtencionesPorServicioId(servicioId);
     }
+
+    /**
+     * Obtiene todos los tipos de atencion.
+     *
+     * @return Lista de tipos de atención.
+     */
+    public List<TipoAtencion> obtenerTiposAtencion() {
+        return gestorLavanderia.obtenerTiposAtencion();
+    }
 }

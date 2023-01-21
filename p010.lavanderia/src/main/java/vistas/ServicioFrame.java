@@ -10,10 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
-import modelos.Atencion;
-import modelos.Cliente;
-import modelos.Direccion;
-import modelos.Empleado;
+import modelos.*;
 import vistas.models.ClientesComboBoxModel;
 import vistas.models.DireccionComboBoxModel;
 import vistas.models.EmpleadosComboBoxModel;
@@ -421,6 +418,7 @@ public class ServicioFrame extends JInternalFrame {
 
     /**
      * Carga las atenciones para un ID de servicio dado.
+     *
      * @param servicioId ID del servicio.
      */
     private void cargarAtenciones(int servicioId) {
@@ -429,12 +427,14 @@ public class ServicioFrame extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblAtencionesRegistros.getModel();
         model.setRowCount(0);
 
+        List<TipoAtencion> tiposAtencion = gestorLavanderiaGUI.obtenerTiposAtencion();
+
         for (Atencion atencion : atenciones) {
             model.addRow(new Object[]{
                     atencion.getId(),
                     atencion.getCantidad(),
                     atencion.getPrecio(),
-                    ""
+                    tiposAtencion.stream().filter(tipoAtencion -> tipoAtencion.getId() == atencion.getTipoAtencionId()).findFirst().get().getNombre()
             });
         }
     }
