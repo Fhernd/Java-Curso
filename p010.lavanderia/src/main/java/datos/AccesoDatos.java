@@ -1219,8 +1219,9 @@ public class AccesoDatos {
 
     /**
      * Actualizar los datos de un usuario.
+     *
      * @param idEmpleado ID del empleado.
-     * @param correo Correo del usuario.
+     * @param correo     Correo del usuario.
      * @return boolean Resultado de la operación.
      */
     public boolean actualizarUsuarioCorreo(int idEmpleado, String correo) {
@@ -1240,8 +1241,9 @@ public class AccesoDatos {
 
     /**
      * Actualizar la clave de un usuario.
+     *
      * @param empleadoId ID del empleado.
-     * @param clave Clave del usuario.
+     * @param clave      Clave del usuario.
      */
     public boolean actualizarUsuarioClave(int empleadoId, String clave) {
         try {
@@ -1260,6 +1262,7 @@ public class AccesoDatos {
 
     /**
      * Obtiene un empleado por su ID.
+     *
      * @param id ID del empleado.
      * @return Empleado.
      */
@@ -1290,6 +1293,7 @@ public class AccesoDatos {
 
     /**
      * Eliminar un usuario a partir del ID del empleado.
+     *
      * @param empleadoId ID del empleado.
      * @return boolean Resultado de la operación.
      */

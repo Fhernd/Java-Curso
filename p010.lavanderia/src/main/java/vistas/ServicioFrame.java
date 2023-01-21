@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
+import modelos.Atencion;
 import modelos.Cliente;
 import modelos.Direccion;
 import modelos.Empleado;
@@ -416,5 +417,25 @@ public class ServicioFrame extends JInternalFrame {
     private void limpiarTablaAtenciones() {
         DefaultTableModel model = (DefaultTableModel) tblAtencionesRegistros.getModel();
         model.setRowCount(0);
+    }
+
+    /**
+     * Carga las atenciones para un ID de servicio dado.
+     * @param servicioId ID del servicio.
+     */
+    private void cargarAtenciones(int servicioId) {
+        List<Atencion> atenciones = gestorLavanderiaGUI.obtenerAtencionesPorServicioId(servicioId);
+
+        DefaultTableModel model = (DefaultTableModel) tblAtencionesRegistros.getModel();
+        model.setRowCount(0);
+
+        for (Atencion atencion : atenciones) {
+            model.addRow(new Object[]{
+                    atencion.getId(),
+                    atencion.getCantidad(),
+                    atencion.getPrecio(),
+                    ""
+            });
+        }
     }
 }

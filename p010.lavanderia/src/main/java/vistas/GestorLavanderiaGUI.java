@@ -436,4 +436,14 @@ public class GestorLavanderiaGUI {
     public Empleado obtenerEmpleadoActual() {
         return gestorLavanderia.getEmpleadoActual();
     }
+
+    /**
+     * Lista atenciones a partir del ID de un servicio.
+     *
+     * @param servicioId ID del servicio.
+     * @return List<Atencion> Lista de atenciones.
+     */
+    public List<Atencion> obtenerAtencionesPorServicioId(int servicioId) {
+        return gestorLavanderia.obtenerAtencionesPorServicioId(servicioId);
+    }
 }
