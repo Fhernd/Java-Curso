@@ -151,6 +151,12 @@ public class GestorLavanderiaGUI {
         Usuario usuario = gestorLavanderia.obtenerUsuarioPorCorreo(email);
         boolean resultadoValidacion = Utilidad.comprobarPassword(usuario.getClave(), password);
 
+        if (resultadoValidacion) {
+            Empleado empleado = gestorLavanderia.obtenerEmpleadoPorId(usuario.getEmpleadoId());
+
+            gestorLavanderia.setEmpleadoActual(empleado);
+        }
+
         return resultadoValidacion ? usuario : null;
     }
 
