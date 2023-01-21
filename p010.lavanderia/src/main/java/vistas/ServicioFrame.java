@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +32,7 @@ public class ServicioFrame extends JInternalFrame {
 	private JTextField txtServicioId;
 	private JTextField txtServicioDescripcion;
 	private JTextField txtServicioHoraEntrega;
-	private JTable table;
+	private JTable tblServiciosRegistros;
 
 	/**
 	 * Create the frame.
@@ -168,15 +170,17 @@ public class ServicioFrame extends JInternalFrame {
 		pnlServiciosAcciones.add(btnServicioEliminar);
 		
 		JPanel pnlServiciosRegistros = new JPanel();
+		pnlServiciosRegistros.setSize(200, 200);
 		pnlServiciosRegistros.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pnlServicios.add(pnlServiciosRegistros, BorderLayout.SOUTH);
 		pnlServiciosRegistros.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane spnServicioRegistros = new JScrollPane();
-		pnlServiciosRegistros.add(spnServicioRegistros, BorderLayout.CENTER);
+		JScrollPane spnServiciosRegistros = new JScrollPane();
+		spnServiciosRegistros.setSize(200, 200);
+		pnlServiciosRegistros.add(spnServiciosRegistros, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		tblServiciosRegistros = new JTable();
+		tblServiciosRegistros.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
@@ -190,7 +194,10 @@ public class ServicioFrame extends JInternalFrame {
 				return columnTypes[columnIndex];
 			}
 		});
-		spnServicioRegistros.setViewportView(table);
+		spnServiciosRegistros.setViewportView(tblServiciosRegistros);
+		tblServiciosRegistros.setSize(200, 200);
+		tblServiciosRegistros.setPreferredScrollableViewportSize(new Dimension(600, 150));
+		
 		
 		JPanel pnlAtenciones = new JPanel();
 		pnlAtenciones.setBorder(new TitledBorder(null, "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
