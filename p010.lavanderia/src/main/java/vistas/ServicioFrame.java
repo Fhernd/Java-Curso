@@ -348,6 +348,10 @@ public class ServicioFrame extends JInternalFrame {
         tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
 
         establecerFechaEntregaPorDefecto(datServicioFechaEntrega);
+
+        cargarClientes();
+        cargarEmpleados();
+        cargarDirecciones(4);
     }
 
     /**
@@ -367,8 +371,7 @@ public class ServicioFrame extends JInternalFrame {
         txtServicioHoraEntrega.setText("");
         cbxServicioCliente.setSelectedIndex(0);
         cbxServicioDireccionEntrega.setSelectedIndex(0);
-        Empleado empleadoActual = gestorLavanderiaGUI.obtenerEmpleadoActual();
-        cargarEmpleados(empleadoActual);
+        cargarEmpleados();
 
         int clientId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
 
@@ -406,7 +409,8 @@ public class ServicioFrame extends JInternalFrame {
     /**
      * Carga los empleados en el combo box.
      */
-    private void cargarEmpleados(Empleado empleadoActual) {
+    private void cargarEmpleados() {
+        Empleado empleadoActual = gestorLavanderiaGUI.obtenerEmpleadoActual();
         List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
 
         Empleado[] empleadosArray = new Empleado[empleados.size()];

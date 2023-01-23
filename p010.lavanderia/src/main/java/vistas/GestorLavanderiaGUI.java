@@ -40,6 +40,10 @@ public class GestorLavanderiaGUI {
     public GestorLavanderiaGUI() {
         initialize();
         gestorLavanderia = new GestorLavanderia();
+
+        // Asignación temporal del empleado actual:
+        Empleado empleado = gestorLavanderia.obtenerEmpleadoPorId(1);
+        gestorLavanderia.setEmpleadoActual(empleado);
     }
 
     /**
