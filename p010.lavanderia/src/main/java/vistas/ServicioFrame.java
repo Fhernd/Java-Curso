@@ -19,6 +19,7 @@ import java.awt.GridLayout;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -168,11 +169,13 @@ public class ServicioFrame extends JInternalFrame {
                     limpiarCamposServicio();
                     limpiarCamposAtenciones();
                     cambiarEstadoCamposAtenciones(false);
+                    establecerFechaEntregaPorDefecto(datServicioFechaEntrega);
                 }
             } else {
                 limpiarCamposServicio();
                 limpiarCamposAtenciones();
                 cambiarEstadoCamposAtenciones(false);
+                establecerFechaEntregaPorDefecto(datServicioFechaEntrega);
             }
         });
         pnlServiciosAcciones.add(btnServicioNuevo);
@@ -343,6 +346,18 @@ public class ServicioFrame extends JInternalFrame {
         });
         spnAtencionesRegistros.setViewportView(tblAtencionesRegistros);
         tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
+
+        establecerFechaEntregaPorDefecto(datServicioFechaEntrega);
+    }
+
+    /**
+     * Establece la fecha de entrega por defecto en la fecha actual.
+     *
+     * @param datServicioFechaEntrega Fecha de entrega del servicio.
+     */
+    private void establecerFechaEntregaPorDefecto(JDateChooser datServicioFechaEntrega) {
+        Date fechaActual = new Date();
+        datServicioFechaEntrega.setDate(fechaActual);
     }
 
     private void limpiarCamposServicio() {
