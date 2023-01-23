@@ -190,7 +190,7 @@ public class ServicioFrame extends JInternalFrame {
             String descripcion = txtServicioDescripcion.getText().trim();
             Date fechaEntrega = datServicioFechaEntrega.getDate();
             String horaEntrega = txtServicioHoraEntrega.getText().trim();
-            int empleadoId = ((Cliente) cbxServicioEmpleado.getSelectedItem()).getId();
+            int empleadoId = ((Empleado) cbxServicioEmpleado.getSelectedItem()).getId();
             int clienteId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
             int direccionId = ((Direccion) cbxServicioDireccionEntrega.getSelectedItem()).getId();
 
@@ -208,9 +208,9 @@ public class ServicioFrame extends JInternalFrame {
 
             String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
 
-            // Convertir fecha y hora de entrega a LocalDateTime:
-            DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse(fechaHoraEntrega, formatoFechaHora);
+            // Convertir fecha y hora de entrega (2023-01-27 3:14 PM) a LocalDateTime:
+            DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm A");
+            LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse("2023-01-27 3:14 PM", formatoFechaHora);
 
             servicio.setFechaHoraEntrega(fechaHoraEntregaLocalDateTime);
             servicio.setEmpleadoId(empleadoId);
