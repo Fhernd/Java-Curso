@@ -19,6 +19,10 @@ import java.awt.GridLayout;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -183,7 +187,46 @@ public class ServicioFrame extends JInternalFrame {
 
         JButton btnServicioGuardar = new JButton("Guardar");
         btnServicioGuardar.addActionListener(e -> {
-            // TODO: Guardar los datos de un nuevo servicio
+            String descripcion = txtServicioDescripcion.getText().trim();
+            Date fechaEntrega = datServicioFechaEntrega.getDate();
+            String horaEntrega = txtServicioHoraEntrega.getText().trim();
+            int empleadoId = ((Cliente) cbxServicioEmpleado.getSelectedItem()).getId();
+            int clienteId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
+            int direccionId = ((Direccion) cbxServicioDireccionEntrega.getSelectedItem()).getId();
+
+            if (descripcion.isEmpty() || fechaEntrega == null || horaEntrega.isEmpty() || empleadoId == 0 || clienteId == 0 || direccionId == 0) {
+                JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Servicio servicio = new Servicio();
+            servicio.setDescripcion(descripcion);
+
+            // Formatear la fecha de entrega a YYYY-MM-DD:
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaEntregaFormateada = formatoFecha.format(fechaEntrega);
+
+            String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
+
+            // Convertir fecha y hora de entrega a LocalDateTime:
+            DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse(fechaHoraEntrega, formatoFechaHora);
+
+            servicio.setFechaHoraEntrega(fechaHoraEntregaLocalDateTime);
+            servicio.setEmpleadoId(empleadoId);
+            servicio.setClienteId(clienteId);
+            servicio.setDireccionId(direccionId);
+
+            servicio = gestorLavanderiaGUI.crearServicio(servicio);
+
+            if (servicio == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo crear el servicio", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            limpiarCamposServicio();
         });
         pnlServiciosAcciones.add(btnServicioGuardar);
 
