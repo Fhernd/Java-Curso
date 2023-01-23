@@ -64,4 +64,9 @@ public class Empleado {
     public void setRolId(int rolId) {
         this.rolId = rolId;
     }
+
+    @Override
+    public String toString() {
+        return nombres + " " + apellidos + "(" + id + ")";
+    }
 }

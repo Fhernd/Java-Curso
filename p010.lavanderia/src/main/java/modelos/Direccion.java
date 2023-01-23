@@ -42,4 +42,9 @@ public class Direccion {
     public void setClienteId(int clienteId) {
         this.clienteId = clienteId;
     }
+
+    @Override
+    public String toString() {
+        return descripcion;
+    }
 }
