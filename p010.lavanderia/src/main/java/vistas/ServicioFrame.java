@@ -111,6 +111,7 @@ public class ServicioFrame extends JInternalFrame {
         pnlServiciosDatos.add(lblServicioFechaEntrega, "2, 6");
 
         JDateChooser datServicioFechaEntrega = new JDateChooser();
+        datServicioFechaEntrega.setSelectableDateRange(new Date(), null);
         pnlServiciosDatos.add(datServicioFechaEntrega, "12, 6, fill, fill");
 
         JLabel lblServicioHoraEntrega = new JLabel("Hora entrega:");
@@ -391,6 +392,7 @@ public class ServicioFrame extends JInternalFrame {
 
         direccionComboBoxModel = new DireccionComboBoxModel(direccionesArray);
         cbxServicioDireccionEntrega.setModel(direccionComboBoxModel);
+        cbxServicioDireccionEntrega.setSelectedIndex(0);
     }
 
     /**
