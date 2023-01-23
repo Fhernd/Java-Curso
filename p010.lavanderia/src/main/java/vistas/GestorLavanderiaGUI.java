@@ -459,4 +459,14 @@ public class GestorLavanderiaGUI {
     public List<TipoAtencion> obtenerTiposAtencion() {
         return gestorLavanderia.obtenerTiposAtencion();
     }
+
+    /**
+     * Crea un nuevo servicio.
+     *
+     * @param servicio Servicio a crear.
+     * @return Servicio Servicio creado.
+     */
+    public Servicio crearServicio(Servicio servicio) {
+        return gestorLavanderia.crearServicio(servicio);
+    }
 }
