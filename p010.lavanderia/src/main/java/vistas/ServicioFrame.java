@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -206,11 +207,16 @@ public class ServicioFrame extends JInternalFrame {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             String fechaEntregaFormateada = formatoFecha.format(fechaEntrega);
 
-            String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
+            String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega.toLowerCase();
+
+            // Convert hora de entrega a LocalTime:
+//            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+//            LocalTime horaEntregaLocalTime = LocalTime.parse("09:00 pm", formatoHora);
 
             // Convertir fecha y hora de entrega (2023-01-27 3:14 PM) a LocalDateTime:
-            DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm A");
-            LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse("2023-01-27 3:14 PM", formatoFechaHora);
+            DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+            LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse(fechaHoraEntrega, formatoFechaHora);
+            System.out.println("fechaHoraEntregaLocalDateTime: " + fechaHoraEntregaLocalDateTime);
 
             servicio.setFechaHoraEntrega(fechaHoraEntregaLocalDateTime);
             servicio.setEmpleadoId(empleadoId);
