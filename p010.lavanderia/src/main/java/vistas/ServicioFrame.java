@@ -470,6 +470,10 @@ public class ServicioFrame extends JInternalFrame {
 
         clientesComboBoxModel = new ClientesComboBoxModel(clientesArray);
         cbxServicioCliente.setModel(clientesComboBoxModel);
+        cbxServicioCliente.setSelectedIndex(0);
+
+        final int clienteId = clientes.get(0).getId();
+        cargarDirecciones(clienteId);
     }
 
     /**
