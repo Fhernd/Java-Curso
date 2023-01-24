@@ -210,13 +210,23 @@ public class ServicioFrame extends JInternalFrame {
             String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega.toLowerCase();
 
             // Convert hora de entrega a LocalTime:
-//            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
-//            LocalTime horaEntregaLocalTime = LocalTime.parse("09:00 pm", formatoHora);
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+            LocalTime horaEntregaLocalTime = LocalTime.parse(horaEntrega, formatoHora);
 
-            // Convertir fecha y hora de entrega (2023-01-27 3:14 PM) a LocalDateTime:
+            if (horaEntregaLocalTime.isBefore(LocalTime.of(5, 0)) || horaEntregaLocalTime.isAfter(LocalTime.of(20, 0))) {
+                JOptionPane.showMessageDialog(this, "La hora de entrega debe estar entre las 5AM y las 8PM.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            LocalTime horaActualLocalTime = LocalTime.now();
+
+            if (horaEntregaLocalTime.isBefore(horaActualLocalTime)) {
+                JOptionPane.showMessageDialog(this, "La hora de entrega debe ser mayor a la hora actual.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
             LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse(fechaHoraEntrega, formatoFechaHora);
-            System.out.println("fechaHoraEntregaLocalDateTime: " + fechaHoraEntregaLocalDateTime);
 
             servicio.setFechaHoraEntrega(fechaHoraEntregaLocalDateTime);
             servicio.setEmpleadoId(empleadoId);
