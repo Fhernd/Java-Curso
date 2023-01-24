@@ -484,7 +484,7 @@ public class ServicioFrame extends JInternalFrame {
 
         empleadosComboBoxModel = new EmpleadosComboBoxModel(empleadosArray);
         cbxServicioEmpleado.setModel(empleadosComboBoxModel);
-        cbxServicioEmpleado.setSelectedItem(empleadoActual);
+        cbxServicioEmpleado.setSelectedIndex(empleadosComboBoxModel.getIndexOf(empleadoActual.getId()));
     }
 
     /**
