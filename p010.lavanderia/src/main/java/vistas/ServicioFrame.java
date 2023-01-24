@@ -190,7 +190,7 @@ public class ServicioFrame extends JInternalFrame {
         btnServicioGuardar.addActionListener(e -> {
             String descripcion = txtServicioDescripcion.getText().trim();
             Date fechaEntrega = datServicioFechaEntrega.getDate();
-            String horaEntrega = txtServicioHoraEntrega.getText().trim();
+            String horaEntrega = txtServicioHoraEntrega.getText().trim().toLowerCase();
             int empleadoId = ((Empleado) cbxServicioEmpleado.getSelectedItem()).getId();
             int clienteId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
             int direccionId = ((Direccion) cbxServicioDireccionEntrega.getSelectedItem()).getId();
@@ -207,7 +207,7 @@ public class ServicioFrame extends JInternalFrame {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             String fechaEntregaFormateada = formatoFecha.format(fechaEntrega);
 
-            String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega.toLowerCase();
+            String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
 
             // Convert hora de entrega a LocalTime:
             DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
@@ -220,7 +220,12 @@ public class ServicioFrame extends JInternalFrame {
 
             LocalTime horaActualLocalTime = LocalTime.now();
 
-            if (horaEntregaLocalTime.isBefore(horaActualLocalTime)) {
+            Date fechaActual = new Date();
+
+            SimpleDateFormat formatoFechaActual = new SimpleDateFormat("yyyy-MM-dd");
+            final String fechaActualFormateada = formatoFechaActual.format(fechaActual);
+
+            if (fechaActualFormateada.equals(fechaEntregaFormateada) && horaEntregaLocalTime.isBefore(horaActualLocalTime)) {
                 JOptionPane.showMessageDialog(this, "La hora de entrega debe ser mayor a la hora actual.", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
