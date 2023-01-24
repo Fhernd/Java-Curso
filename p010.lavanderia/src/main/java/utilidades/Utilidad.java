@@ -53,6 +53,7 @@ public class Utilidad {
 
     /**
      * Convertir un objeto LocalDateTime a una cadena de caracteres.
+     *
      * @param fecha Fecha a convertir.
      *              No puede ser nula.
      * @return Cadena de caracteres con la fecha.

@@ -1,6 +1,7 @@
 package datos;
 
 import modelos.*;
+import utilidades.Utilidad;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -621,7 +622,7 @@ public class AccesoDatos {
             final String SQL = "INSERT INTO servicio (descripcion, fecha_hora_recepcion, fecha_hora_entrega, empleado_id, cliente_id, direccion_id) VALUES (?, DEFAULT, ?, ?, ?, ?)";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, servicio.getDescripcion());
-            sentencia.setTimestamp(2, Timestamp.valueOf(servicio.getFechaHoraEntrega()));
+            sentencia.setString(2, Utilidad.fechaToString(servicio.getFechaHoraEntrega()));
             sentencia.setInt(3, servicio.getEmpleadoId());
             sentencia.setInt(4, servicio.getClienteId());
             sentencia.setInt(5, servicio.getDireccionId());
