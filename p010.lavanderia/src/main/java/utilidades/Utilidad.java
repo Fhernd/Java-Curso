@@ -4,6 +4,9 @@ import com.password4j.Hash;
 import com.password4j.Password;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Utilidad {
     /**
      * Validar si una cadena de caracteres es un email válido.
@@ -46,5 +49,15 @@ public class Utilidad {
 
     public static boolean comprobarPassword(String clave, String password) {
         return Password.check(password, clave).addSalt("@#123-@").withPBKDF2();
+    }
+
+    /**
+     * Convertir un objeto LocalDateTime a una cadena de caracteres.
+     * @param fecha Fecha a convertir.
+     *              No puede ser nula.
+     * @return Cadena de caracteres con la fecha.
+     */
+    public static String fechaToString(LocalDateTime fecha) {
+        return fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
