@@ -541,4 +541,28 @@ public class ServicioFrame extends JInternalFrame {
         txtAtencionPrecio.setEnabled(estado);
         cbxAtencionTipo.setEnabled(estado);
     }
+
+    /**
+     * Cargar todos los servicios existentes sobre la tabla.
+     */
+    private void cargarServicios() {
+        List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
+
+        DefaultTableModel model = (DefaultTableModel) tblServiciosRegistros.getModel();
+        model.setRowCount(0);
+
+        for (Servicio servicio : servicios) {
+            Empleado empleado = servicio.getEmpleado();
+            Cliente cliente = servicio.getCliente();
+
+            model.addRow(new Object[]{
+                    servicio.getId(),
+                    servicio.getDescripcion(),
+                    servicio.getFechaHoraEntrega().toString(),
+                    String.format("%s %s (%d)", empleado.getNombres(), empleado.getApellidos(), empleado.getId()),
+                    String.format("%s %s (%d)", cliente.getNombres(), cliente.getApellidos(), cliente.getId()),
+                    servicio.getDireccion().getDescripcion()
+            });
+        }
+    }
 }

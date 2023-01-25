@@ -469,4 +469,13 @@ public class GestorLavanderiaGUI {
     public Servicio crearServicio(Servicio servicio) {
         return gestorLavanderia.crearServicio(servicio);
     }
+
+    /**
+     * Obtiene todos los servicios existentes con el empleado, el cliente y la dirección.
+     *
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServicios() {
+        return gestorLavanderia.obtenerServicios();
+    }
 }

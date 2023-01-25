@@ -481,4 +481,13 @@ public class GestorLavanderia {
     public void setEmpleadoActual(Empleado empleadoActual) {
         this.empleadoActual = empleadoActual;
     }
+
+    /**
+     * Obtiene todos los servicios existentes con el empleado, el cliente y la dirección.
+     *
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServicios() {
+        return accesoDatos.obtenerServicios();
+    }
 }
