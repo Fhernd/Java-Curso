@@ -1328,36 +1328,64 @@ public class AccesoDatos {
 
             ResultSet resultado = sentencia.executeQuery();
 
-            while (resultado.next()) {
-                Servicio servicio = new Servicio();
-                servicio.setId(resultado.getInt("id"));
-                servicio.setFechaHoraEntrega(convertirTextoAFecha(resultado.getString("fecha_hora_entrega")));
-                servicio.setDescripcion(resultado.getString("descripcion"));
-
-                Empleado empleado = new Empleado();
-                empleado.setId(resultado.getInt("empleado_id"));
-                empleado.setNombres(resultado.getString("empleado_nombres"));
-                empleado.setApellidos(resultado.getString("empleado_apellidos"));
-
-                Cliente cliente = new Cliente();
-                cliente.setId(resultado.getInt("cliente_id"));
-                cliente.setNombres(resultado.getString("cliente_nombres"));
-                cliente.setApellidos(resultado.getString("cliente_apellidos"));
-
-                Direccion direccion = new Direccion();
-                direccion.setId(resultado.getInt("direccion_id"));
-                direccion.setDescripcion(resultado.getString("direccion_descripcion"));
-
-                servicio.setEmpleado(empleado);
-                servicio.setCliente(cliente);
-                servicio.setDireccion(direccion);
-
-                servicios.add(servicio);
-            }
-
-            return servicios;
+            return llenarDatosServicios(servicios, resultado);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return servicios;
+    }
+
+    /**
+     * Obtiene todos los servicios existentes con el empleado, el cliente y la dirección.
+     *
+     * @param documento Documento del cliente.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorClienteDocumento(String documento) {
+        List<Servicio> servicios = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, s.cliente_id, s.empleado_id, s.direccion_id, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id WHERE c.documento = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, documento);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            return llenarDatosServicios(servicios, resultado);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return servicios;
+    }
+
+    private List<Servicio> llenarDatosServicios(List<Servicio> servicios, ResultSet resultado) throws SQLException {
+        while (resultado.next()) {
+            Servicio servicio = new Servicio();
+            servicio.setId(resultado.getInt("id"));
+            servicio.setFechaHoraEntrega(convertirTextoAFecha(resultado.getString("fecha_hora_entrega")));
+            servicio.setDescripcion(resultado.getString("descripcion"));
+
+            Empleado empleado = new Empleado();
+            empleado.setId(resultado.getInt("empleado_id"));
+            empleado.setNombres(resultado.getString("empleado_nombres"));
+            empleado.setApellidos(resultado.getString("empleado_apellidos"));
+
+            Cliente cliente = new Cliente();
+            cliente.setId(resultado.getInt("cliente_id"));
+            cliente.setNombres(resultado.getString("cliente_nombres"));
+            cliente.setApellidos(resultado.getString("cliente_apellidos"));
+
+            Direccion direccion = new Direccion();
+            direccion.setId(resultado.getInt("direccion_id"));
+            direccion.setDescripcion(resultado.getString("direccion_descripcion"));
+
+            servicio.setEmpleado(empleado);
+            servicio.setCliente(cliente);
+            servicio.setDireccion(direccion);
+
+            servicios.add(servicio);
         }
 
         return servicios;
