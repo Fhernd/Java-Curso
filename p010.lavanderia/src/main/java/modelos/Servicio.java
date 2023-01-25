@@ -10,6 +10,9 @@ public class Servicio {
     private int empleadoId;
     private int clienteId;
     private int direccionId;
+    private Empleado empleado;
+    private Cliente cliente;
+    private Direccion direccion;
 
     public Servicio() {
     }
@@ -87,5 +90,29 @@ public class Servicio {
 
     public void setDireccionId(int direccionId) {
         this.direccionId = direccionId;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 }

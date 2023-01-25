@@ -1311,4 +1311,50 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Obtiene todos los servicios existentes con el empleado, el cliente y la dirección.
+     *
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServicios() {
+        List<Servicio> servicios = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion, d.numero, d.colonia, d.municipio, d.estado AS direccion_estado FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            while (resultado.next()) {
+                Servicio servicio = new Servicio();
+                servicio.setId(resultado.getInt("id"));
+                servicio.setFechaHoraEntrega(resultado.getString("fecha_hora_entrega"));
+                servicio.setDescripcion(resultado.getString("descripcion"));
+
+                Empleado empleado = new Empleado();
+                empleado.setId(resultado.getInt("empleado_id"));
+                empleado.setNombres(resultado.getString("empleado_nombres"));
+                empleado.setApellidos(resultado.getString("empleado_apellidos"));
+
+                Cliente cliente = new Cliente();
+                cliente.setId(resultado.getInt("cliente_id"));
+                cliente.setNombres(resultado.getString("cliente_nombres"));
+                cliente.setApellidos(resultado.getString("cliente_apellidos"));
+
+                Direccion direccion = new Direccion();
+                direccion.setId(resultado.getInt("direccion_id"));
+                direccion.setDescripcion(resultado.getString("direccion_descripcion"));
+
+                servicio.setEmpleado(empleado);
+                servicio.setCliente(cliente);
+                servicio.setDireccion(direccion);
+
+                servicios.add(servicio);
+            }
+        } catch (SQLException e) {
+
+        }
+        return null;
+    }
 }
