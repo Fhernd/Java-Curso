@@ -439,7 +439,7 @@ public class GestorLavanderia {
      * Actualizar los datos de un usuario.
      *
      * @param empleadoId ID del empleado.
-     * @param correo Correo del usuario.
+     * @param correo     Correo del usuario.
      * @return boolean Resultado de la operación.
      */
     public boolean actualizarUsuarioCorreo(int empleadoId, String correo) {
@@ -448,8 +448,9 @@ public class GestorLavanderia {
 
     /**
      * Actualizar la clave de un usuario.
+     *
      * @param empleadoId ID del empleado.
-     * @param clave Clave del usuario.
+     * @param clave      Clave del usuario.
      */
     public boolean actualizarUsuarioClave(int empleadoId, String clave) {
         return accesoDatos.actualizarUsuarioClave(empleadoId, clave);
@@ -457,6 +458,7 @@ public class GestorLavanderia {
 
     /**
      * Obtiene un empleado por su ID.
+     *
      * @param empleadoId ID del empleado.
      * @return Empleado.
      */
@@ -489,5 +491,15 @@ public class GestorLavanderia {
      */
     public List<Servicio> obtenerServicios() {
         return accesoDatos.obtenerServicios();
+    }
+
+    /**
+     * Obtiene todos los servicios existentes con el empleado, el cliente y la dirección.
+     *
+     * @param documento Documento del cliente.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorClienteDocumento(String documento) {
+        return accesoDatos.obtenerServiciosPorClienteDocumento(documento);
     }
 }

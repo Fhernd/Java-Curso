@@ -23,7 +23,6 @@ import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -257,14 +256,13 @@ public class ServicioFrame extends JInternalFrame {
 
         JButton btnServicioBuscar = new JButton("Buscar...");
         btnServicioBuscar.addActionListener(e -> {
-            // JOptionPane con tres opciones: Cliente, Empleado, Rango de fechas
             final String[] opciones = {"Cliente", "Empleado", "Rango de fechas"};
 
             int opcionSeleccionada = JOptionPane.showOptionDialog(this, "Seleccione el tipo de búsqueda", "Buscar servicio", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
             switch (opcionSeleccionada) {
                 case BUSQUEDA_POR_CLIENTE:
-                    // Buscar por cliente
+                    buscarPorCliente();
                     break;
                 case BUSQUEDA_POR_EMPLEADO:
                     // Buscar por empleado
@@ -439,7 +437,42 @@ public class ServicioFrame extends JInternalFrame {
         cargarEmpleados();
         cargarDirecciones(4);
 
-        cargarServicios();
+        List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
+        cargarServicios(servicios);
+    }
+
+    private void buscarPorCliente() {
+        String documento = "";
+
+        // Mientras que no se digite un número usando JOptionPane, se seguirá solicitando:
+        while (!documento.matches("[0-9]+")) {
+            documento = JOptionPane.showInputDialog("Digite el número de documento del cliente:");
+        }
+
+        Cliente cliente = gestorLavanderiaGUI.obtenerClientePorDocumento(documento);
+
+        if (cliente == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró ningún cliente con el documento " + documento, "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorClienteDocumento(cliente.getDocumento());
+
+        if (servicios.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se encontraron servicios para el cliente " + cliente.getNombres(), "Mensaje", JOptionPane.WARNING_MESSAGE);
+            limpiarTablaServicios();
+            return;
+        }
+
+        cargarServicios(servicios);
+    }
+
+    /**
+     * Limpia la tabla de servicios.
+     */
+    private void limpiarTablaServicios() {
+        DefaultTableModel modelo = (DefaultTableModel) tblServiciosRegistros.getModel();
+        modelo.setRowCount(0);
     }
 
     /**
@@ -568,9 +601,7 @@ public class ServicioFrame extends JInternalFrame {
     /**
      * Cargar todos los servicios existentes sobre la tabla.
      */
-    private void cargarServicios() {
-        List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
-
+    private void cargarServicios(List<Servicio> servicios) {
         DefaultTableModel model = (DefaultTableModel) tblServiciosRegistros.getModel();
         model.setRowCount(0);
 

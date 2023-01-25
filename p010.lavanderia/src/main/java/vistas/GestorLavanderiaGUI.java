@@ -478,4 +478,14 @@ public class GestorLavanderiaGUI {
     public List<Servicio> obtenerServicios() {
         return gestorLavanderia.obtenerServicios();
     }
+
+    /**
+     * Obtiene todos los servicios existentes con el empleado, el cliente y la dirección.
+     *
+     * @param documento Documento del cliente.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorClienteDocumento(String documento) {
+        return gestorLavanderia.obtenerServiciosPorClienteDocumento(documento);
+    }
 }
