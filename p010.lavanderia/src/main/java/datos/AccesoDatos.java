@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1329,7 +1331,7 @@ public class AccesoDatos {
             while (resultado.next()) {
                 Servicio servicio = new Servicio();
                 servicio.setId(resultado.getInt("id"));
-                servicio.setFechaHoraEntrega(resultado.getString("fecha_hora_entrega"));
+                servicio.setFechaHoraEntrega(convertirTextoAFecha(resultado.getString("fecha_hora_entrega")));
                 servicio.setDescripcion(resultado.getString("descripcion"));
 
                 Empleado empleado = new Empleado();
@@ -1352,9 +1354,28 @@ public class AccesoDatos {
 
                 servicios.add(servicio);
             }
+
+            return servicios;
         } catch (SQLException e) {
 
         }
+
+        return servicios;
+    }
+
+    /**
+     * Convierte un texto a fecha.
+     *
+     * @param fechaHoraEntrega Texto con la fecha.
+     * @return LocalDateTime Fecha convertida.
+     */
+    private LocalDateTime convertirTextoAFecha(String fechaHoraEntrega) {
+        try {
+            return LocalDateTime.parse(fechaHoraEntrega, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        } catch (DateTimeParseException e) {
+            e.printStackTrace(System.out);
+        }
+
         return null;
     }
 }
