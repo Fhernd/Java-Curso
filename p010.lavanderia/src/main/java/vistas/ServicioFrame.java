@@ -31,6 +31,9 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class ServicioFrame extends JInternalFrame {
+    public static final int BUSQUEDA_POR_CLIENTE = 0;
+    public static final int BUSQUEDA_POR_EMPLEADO = 1;
+    public static final int BUSQUEDA_POR_RANGO_FECHAS = 2;
     private JTextField txtServicioId;
     private JTextField txtServicioDescripcion;
     private JTextField txtServicioHoraEntrega;
@@ -254,7 +257,24 @@ public class ServicioFrame extends JInternalFrame {
 
         JButton btnServicioBuscar = new JButton("Buscar...");
         btnServicioBuscar.addActionListener(e -> {
-            // TODO: Buscar entre los registros de servicios
+            // JOptionPane con tres opciones: Cliente, Empleado, Rango de fechas
+            final String[] opciones = {"Cliente", "Empleado", "Rango de fechas"};
+
+            int opcionSeleccionada = JOptionPane.showOptionDialog(this, "Seleccione el tipo de búsqueda", "Buscar servicio", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+            switch (opcionSeleccionada) {
+                case BUSQUEDA_POR_CLIENTE:
+                    // Buscar por cliente
+                    break;
+                case BUSQUEDA_POR_EMPLEADO:
+                    // Buscar por empleado
+                    break;
+                case BUSQUEDA_POR_RANGO_FECHAS:
+                    // Buscar por rango de fechas
+                    break;
+                default:
+                    break;
+            }
         });
         pnlServiciosAcciones.add(btnServicioBuscar);
 
