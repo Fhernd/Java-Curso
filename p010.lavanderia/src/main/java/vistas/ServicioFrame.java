@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.toedter.calendar.JDateChooser;
 import com.raven.swing.TimePicker;
 import modelos.*;
+import utilidades.Utilidad;
 import vistas.models.ClientesComboBoxModel;
 import vistas.models.DireccionComboBoxModel;
 import vistas.models.EmpleadosComboBoxModel;
@@ -417,6 +418,8 @@ public class ServicioFrame extends JInternalFrame {
         cargarClientes();
         cargarEmpleados();
         cargarDirecciones(4);
+
+        cargarServicios();
     }
 
     /**
@@ -558,7 +561,7 @@ public class ServicioFrame extends JInternalFrame {
             model.addRow(new Object[]{
                     servicio.getId(),
                     servicio.getDescripcion(),
-                    servicio.getFechaHoraEntrega().toString(),
+                    Utilidad.fechaToString(servicio.getFechaHoraEntrega()),
                     String.format("%s %s (%d)", empleado.getNombres(), empleado.getApellidos(), empleado.getId()),
                     String.format("%s %s (%d)", cliente.getNombres(), cliente.getApellidos(), cliente.getId()),
                     servicio.getDireccion().getDescripcion()
