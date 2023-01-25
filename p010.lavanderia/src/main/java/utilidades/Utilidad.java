@@ -59,6 +59,6 @@ public class Utilidad {
      * @return Cadena de caracteres con la fecha.
      */
     public static String fechaToString(LocalDateTime fecha) {
-        return fecha.format(DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm:ss"));
+        return fecha.format(DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm"));
     }
 }
