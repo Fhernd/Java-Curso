@@ -1323,7 +1323,7 @@ public class AccesoDatos {
         List<Servicio> servicios = new ArrayList<>();
 
         try {
-            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion, d.numero, d.colonia, d.municipio, d.estado AS direccion_estado FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id";
+            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, s.cliente_id, s.empleado_id, s.direccion_id, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
 
             ResultSet resultado = sentencia.executeQuery();
@@ -1357,7 +1357,7 @@ public class AccesoDatos {
 
             return servicios;
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
 
         return servicios;
