@@ -44,27 +44,29 @@ public class CapturaRangoFechasJPanel extends JPanel {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),}));
 		
-		JLabel lblNewLabel = new JLabel("Fecha inicio:");
-		add(lblNewLabel, "2, 2");
+		JLabel lblFechaInicio = new JLabel("Fecha inicio:");
+		add(lblFechaInicio, "2, 2");
 		
-		JDateChooser dateChooser = new JDateChooser();
-		add(dateChooser, "10, 2, fill, fill");
+		JDateChooser datFechaInicio = new JDateChooser();
+		add(datFechaInicio, "10, 2, fill, fill");
 		
-		JLabel lblNewLabel_1 = new JLabel("Fecha final:");
-		add(lblNewLabel_1, "2, 4");
+		JLabel lblFechaFinal = new JLabel("Fecha final:");
+		add(lblFechaFinal, "2, 4");
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		add(dateChooser_1, "10, 4, fill, fill");
+		JDateChooser datFechaFinal = new JDateChooser();
+		add(datFechaFinal, "10, 4, fill, fill");
 		
-		JPanel panel = new JPanel();
-		add(panel, "10, 8, fill, fill");
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel pnlBotones = new JPanel();
+		add(pnlBotones, "10, 8, fill, fill");
+		pnlBotones.setLayout(new GridLayout(0, 2, 15, 0));
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		panel.add(btnNewButton);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setMnemonic('A');
+		pnlBotones.add(btnAceptar);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel.add(btnNewButton_1);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setMnemonic('C');
+		pnlBotones.add(btnCancelar);
 
 	}
 
