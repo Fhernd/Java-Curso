@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.util.Date;
 
 public class CapturaRangoFechasJPanel extends JPanel {
 
@@ -17,6 +18,8 @@ public class CapturaRangoFechasJPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2309572527450541301L;
+	private JDateChooser datFechaInicio;
+	private JDateChooser datFechaFinal;
 
 	/**
 	 * Create the panel.
@@ -47,13 +50,13 @@ public class CapturaRangoFechasJPanel extends JPanel {
 		JLabel lblFechaInicio = new JLabel("Fecha inicio:");
 		add(lblFechaInicio, "2, 2");
 		
-		JDateChooser datFechaInicio = new JDateChooser();
+		datFechaInicio = new JDateChooser();
 		add(datFechaInicio, "10, 2, fill, fill");
 		
 		JLabel lblFechaFinal = new JLabel("Fecha final:");
 		add(lblFechaFinal, "2, 4");
 		
-		JDateChooser datFechaFinal = new JDateChooser();
+		datFechaFinal = new JDateChooser();
 		add(datFechaFinal, "10, 4, fill, fill");
 		
 		JPanel pnlBotones = new JPanel();
@@ -70,4 +73,11 @@ public class CapturaRangoFechasJPanel extends JPanel {
 
 	}
 
+	public Date getDatFechaInicio() {
+		return datFechaInicio.getDate();
+	}
+
+	public Date getDatFechaFinal() {
+		return datFechaFinal.getDate();
+	}
 }
