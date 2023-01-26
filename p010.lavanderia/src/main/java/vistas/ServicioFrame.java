@@ -265,7 +265,7 @@ public class ServicioFrame extends JInternalFrame {
                     buscarPorCliente();
                     break;
                 case BUSQUEDA_POR_EMPLEADO:
-                    // Buscar por empleado
+                    buscarPorEmpleado();
                     break;
                 case BUSQUEDA_POR_RANGO_FECHAS:
                     // Buscar por rango de fechas
@@ -439,6 +439,31 @@ public class ServicioFrame extends JInternalFrame {
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
         cargarServicios(servicios);
+    }
+
+    private void buscarPorEmpleado() {
+        List<Empleado> empleados = gestorLavanderiaGUI.obtenerEmpleados();
+
+        if (empleados.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay empleados registrados", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String[] opcionesEmpleados = new String[empleados.size()];
+
+        for (int i = 0; i < empleados.size(); i++) {
+            Empleado empleado = empleados.get(i);
+            opcionesEmpleados[i] = String.format("%s %s (%d)", empleado.getNombres(), empleado.getApellidos(), empleado.getId());
+        }
+
+        String opcionSeleccionada = (String) JOptionPane.showInputDialog(null, "Seleccione un empleado:", "Mensaje", JOptionPane.QUESTION_MESSAGE, null, opcionesEmpleados, opcionesEmpleados[0]);
+
+        final int idEmpleado = Integer.parseInt(opcionSeleccionada.substring(opcionSeleccionada.lastIndexOf("(") + 1, opcionSeleccionada.lastIndexOf(")")));
+
+        // Buscar en la lista de empleados el empleado con el id seleccionado:
+        Empleado empleado = empleados.stream().filter(e -> e.getId() == idEmpleado).findFirst().get();
+
+        List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorEmpleadoIdConClienteDireccion(empleado.getId());
     }
 
     private void buscarPorCliente() {

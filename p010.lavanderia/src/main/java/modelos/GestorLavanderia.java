@@ -502,4 +502,14 @@ public class GestorLavanderia {
     public List<Servicio> obtenerServiciosPorClienteDocumento(String documento) {
         return accesoDatos.obtenerServiciosPorClienteDocumento(documento);
     }
+
+    /**
+     * Buscar todos los servicios que tiene un empleado a partir de su ID.
+     *
+     * @param empleadoId ID del empleado.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorEmpleadoIdConClienteDireccion(int empleadoId) {
+        return accesoDatos.obtenerServiciosPorEmpleadoIdConClienteDireccion(empleadoId);
+    }
 }
