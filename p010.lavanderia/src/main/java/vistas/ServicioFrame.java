@@ -460,10 +460,10 @@ public class ServicioFrame extends JInternalFrame {
 
         final int idEmpleado = Integer.parseInt(opcionSeleccionada.substring(opcionSeleccionada.lastIndexOf("(") + 1, opcionSeleccionada.lastIndexOf(")")));
 
-        // Buscar en la lista de empleados el empleado con el id seleccionado:
         Empleado empleado = empleados.stream().filter(e -> e.getId() == idEmpleado).findFirst().get();
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorEmpleadoIdConClienteDireccion(empleado.getId());
+        cargarServicios(servicios);
     }
 
     private void buscarPorCliente() {
