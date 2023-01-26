@@ -300,19 +300,25 @@ public class ServicioFrame extends JInternalFrame {
 
         tblServiciosRegistros = new JTable();
         tblServiciosRegistros.setModel(new DefaultTableModel(
-                new Object[][]{
-                },
-                new String[]{
-                        "ID", "Descripci\u00F3n", "Fecha entrega", "Empleado", "Cliente", "Direcci\u00F3n"
-                }
+        	new Object[][] {
+        		{null, null, null, null, null, null},
+        	},
+        	new String[] {
+        		"ID", "Descripci\u00F3n", "Fecha entrega", "Empleado", "Cliente", "Direcci\u00F3n"
+        	}
         ) {
-            Class[] columnTypes = new Class[]{
-                    String.class, String.class, String.class, String.class, String.class, String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return columnTypes[columnIndex];
-            }
+        	Class[] columnTypes = new Class[] {
+        		String.class, String.class, String.class, String.class, String.class, String.class
+        	};
+        	public Class getColumnClass(int columnIndex) {
+        		return columnTypes[columnIndex];
+        	}
+        	boolean[] columnEditables = new boolean[] {
+        		false, false, false, false, false, false
+        	};
+        	public boolean isCellEditable(int row, int column) {
+        		return columnEditables[column];
+        	}
         });
         spnServiciosRegistros.setViewportView(tblServiciosRegistros);
         tblServiciosRegistros.setSize(200, 200);
@@ -406,27 +412,25 @@ public class ServicioFrame extends JInternalFrame {
 
         tblAtencionesRegistros = new JTable();
         tblAtencionesRegistros.setModel(new DefaultTableModel(
-                new Object[][]{
-                },
-                new String[]{
-                        "ID", "Cantidad", "Precio", "Tipo"
-                }
+        	new Object[][] {
+        		{null, null, null, null},
+        	},
+        	new String[] {
+        		"ID", "Cantidad", "Precio", "Tipo"
+        	}
         ) {
-            Class[] columnTypes = new Class[]{
-                    Integer.class, Integer.class, Double.class, String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return columnTypes[columnIndex];
-            }
-
-            boolean[] columnEditables = new boolean[]{
-                    false, false, false, true
-            };
-
-            public boolean isCellEditable(int row, int column) {
-                return columnEditables[column];
-            }
+        	Class[] columnTypes = new Class[] {
+        		Integer.class, Integer.class, Double.class, String.class
+        	};
+        	public Class getColumnClass(int columnIndex) {
+        		return columnTypes[columnIndex];
+        	}
+        	boolean[] columnEditables = new boolean[] {
+        		false, false, false, false
+        	};
+        	public boolean isCellEditable(int row, int column) {
+        		return columnEditables[column];
+        	}
         });
         spnAtencionesRegistros.setViewportView(tblAtencionesRegistros);
         tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
