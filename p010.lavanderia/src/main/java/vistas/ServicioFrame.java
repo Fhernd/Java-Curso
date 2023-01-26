@@ -268,7 +268,7 @@ public class ServicioFrame extends JInternalFrame {
                     buscarPorEmpleado();
                     break;
                 case BUSQUEDA_POR_RANGO_FECHAS:
-                    // Buscar por rango de fechas
+                    buscarPorRangoFechas();
                     break;
                 default:
                     break;
@@ -300,25 +300,28 @@ public class ServicioFrame extends JInternalFrame {
 
         tblServiciosRegistros = new JTable();
         tblServiciosRegistros.setModel(new DefaultTableModel(
-        	new Object[][] {
-        		{null, null, null, null, null, null},
-        	},
-        	new String[] {
-        		"ID", "Descripci\u00F3n", "Fecha entrega", "Empleado", "Cliente", "Direcci\u00F3n"
-        	}
+                new Object[][]{
+                        {null, null, null, null, null, null},
+                },
+                new String[]{
+                        "ID", "Descripci\u00F3n", "Fecha entrega", "Empleado", "Cliente", "Direcci\u00F3n"
+                }
         ) {
-        	Class[] columnTypes = new Class[] {
-        		String.class, String.class, String.class, String.class, String.class, String.class
-        	};
-        	public Class getColumnClass(int columnIndex) {
-        		return columnTypes[columnIndex];
-        	}
-        	boolean[] columnEditables = new boolean[] {
-        		false, false, false, false, false, false
-        	};
-        	public boolean isCellEditable(int row, int column) {
-        		return columnEditables[column];
-        	}
+            Class[] columnTypes = new Class[]{
+                    String.class, String.class, String.class, String.class, String.class, String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return columnTypes[columnIndex];
+            }
+
+            boolean[] columnEditables = new boolean[]{
+                    false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int row, int column) {
+                return columnEditables[column];
+            }
         });
         spnServiciosRegistros.setViewportView(tblServiciosRegistros);
         tblServiciosRegistros.setSize(200, 200);
@@ -412,25 +415,28 @@ public class ServicioFrame extends JInternalFrame {
 
         tblAtencionesRegistros = new JTable();
         tblAtencionesRegistros.setModel(new DefaultTableModel(
-        	new Object[][] {
-        		{null, null, null, null},
-        	},
-        	new String[] {
-        		"ID", "Cantidad", "Precio", "Tipo"
-        	}
+                new Object[][]{
+                        {null, null, null, null},
+                },
+                new String[]{
+                        "ID", "Cantidad", "Precio", "Tipo"
+                }
         ) {
-        	Class[] columnTypes = new Class[] {
-        		Integer.class, Integer.class, Double.class, String.class
-        	};
-        	public Class getColumnClass(int columnIndex) {
-        		return columnTypes[columnIndex];
-        	}
-        	boolean[] columnEditables = new boolean[] {
-        		false, false, false, false
-        	};
-        	public boolean isCellEditable(int row, int column) {
-        		return columnEditables[column];
-        	}
+            Class[] columnTypes = new Class[]{
+                    Integer.class, Integer.class, Double.class, String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return columnTypes[columnIndex];
+            }
+
+            boolean[] columnEditables = new boolean[]{
+                    false, false, false, false
+            };
+
+            public boolean isCellEditable(int row, int column) {
+                return columnEditables[column];
+            }
         });
         spnAtencionesRegistros.setViewportView(tblAtencionesRegistros);
         tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
@@ -443,6 +449,22 @@ public class ServicioFrame extends JInternalFrame {
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
         cargarServicios(servicios);
+    }
+
+    /**
+     * Búsqueda de los servicios por rango de fechas.
+     */
+    private void buscarPorRangoFechas() {
+        CapturaRangoFechasJPanel capturaRangoFechasJPanel = new CapturaRangoFechasJPanel();
+        int opcion = JOptionPane.showConfirmDialog(null, capturaRangoFechasJPanel, "Búsqueda por rango de fechas", JOptionPane.OK_CANCEL_OPTION);
+
+        if (opcion == JOptionPane.OK_OPTION) {
+            Date fechaInicio = capturaRangoFechasJPanel.getDatFechaInicio();
+            Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
+
+//            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
+//            cargarServicios(servicios);
+        }
     }
 
     private void buscarPorEmpleado() {
