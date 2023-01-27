@@ -455,16 +455,21 @@ public class ServicioFrame extends JInternalFrame {
      * Búsqueda de los servicios por rango de fechas.
      */
     private void buscarPorRangoFechas() {
+        JOptionPane pane = new JOptionPane("", JOptionPane.QUESTION_MESSAGE);
+        JDialog dialog = pane.createDialog("Título");
+        dialog.setSize(400, 200);
         CapturaRangoFechasJPanel capturaRangoFechasJPanel = new CapturaRangoFechasJPanel();
-        int opcion = JOptionPane.showConfirmDialog(null, capturaRangoFechasJPanel, "Búsqueda por rango de fechas", JOptionPane.OK_CANCEL_OPTION);
-
-        if (opcion == JOptionPane.OK_OPTION) {
-            Date fechaInicio = capturaRangoFechasJPanel.getDatFechaInicio();
-            Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
-
-//            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
-//            cargarServicios(servicios);
-        }
+        dialog.setContentPane(capturaRangoFechasJPanel);
+        dialog.setVisible(true);
+//        int opcion = pane.showConfirmDialog(null, capturaRangoFechasJPanel, "Rango de fechas", JOptionPane.OK_CANCEL_OPTION);
+//
+//        if (opcion == JOptionPane.OK_OPTION) {
+//            Date fechaInicio = capturaRangoFechasJPanel.getDatFechaInicio();
+//            Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
+//
+////            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
+////            cargarServicios(servicios);
+//        }
     }
 
     private void buscarPorEmpleado() {
