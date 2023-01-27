@@ -1416,6 +1416,32 @@ public class AccesoDatos {
     }
 
     /**
+     * Busca todos los servicios en un rango de fechas.
+     *
+     * @param fechaInicio Fecha de inicio.
+     * @param fechaFin Fecha de fin.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorRangoFechas(String fechaInicio, String fechaFin) {
+        List<Servicio> servicios = new ArrayList<>();
+
+        try {
+            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, s.cliente_id, s.empleado_id, s.direccion_id, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id WHERE s.fecha_hora_entrega BETWEEN ? AND ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, fechaInicio);
+            sentencia.setString(2, fechaFin);
+
+            ResultSet resultado = sentencia.executeQuery();
+
+            return llenarDatosServicios(servicios, resultado);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return servicios;
+    }
+
+    /**
      * Convierte un texto a fecha.
      *
      * @param fechaHoraEntrega Texto con la fecha.
