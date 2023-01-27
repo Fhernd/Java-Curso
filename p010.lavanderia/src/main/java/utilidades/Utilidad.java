@@ -4,8 +4,10 @@ import com.password4j.Hash;
 import com.password4j.Password;
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Utilidad {
     /**
@@ -60,5 +62,16 @@ public class Utilidad {
      */
     public static String fechaToString(LocalDateTime fecha) {
         return fecha.format(DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm"));
+    }
+
+    /**
+     * Convertir un objeto Date a su representación en texto con el formato YYYY-MM-DD.
+     *
+     * @param fecha Fecha a convertir.
+     * @return Cadena de caracteres con la fecha.
+     */
+    public static String fechaToString(Date fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        return formato.format(fecha);
     }
 }
