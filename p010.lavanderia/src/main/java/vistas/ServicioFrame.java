@@ -466,8 +466,10 @@ public class ServicioFrame extends JInternalFrame {
         Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
 
         if (fechaInicio != null && fechaFin != null) {
-            System.out.println("Fecha inicio: " + fechaInicio);
-            System.out.println("Fecha fin: " + fechaFin);
+            String fechaInicioStr = Utilidad.fechaToString(fechaInicio);
+            String fechaFinStr = Utilidad.fechaToString(fechaFin);
+
+            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorRangoFechas(fechaInicioStr, fechaFinStr);
         }
     }
 

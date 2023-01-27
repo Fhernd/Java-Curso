@@ -512,4 +512,15 @@ public class GestorLavanderia {
     public List<Servicio> obtenerServiciosPorEmpleadoIdConClienteDireccion(int empleadoId) {
         return accesoDatos.obtenerServiciosPorEmpleadoIdConClienteDireccion(empleadoId);
     }
+
+    /**
+     * Busca todos los servicios en un rango de fechas.
+     *
+     * @param fechaInicio Fecha de inicio.
+     * @param fechaFin    Fecha de fin.
+     * @return List<Servicio> Lista de servicios.
+     */
+    public List<Servicio> obtenerServiciosPorRangoFechas(String fechaInicio, String fechaFin) {
+        return accesoDatos.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
+    }
 }
