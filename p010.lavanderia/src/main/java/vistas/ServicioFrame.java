@@ -456,8 +456,8 @@ public class ServicioFrame extends JInternalFrame {
      */
     private void buscarPorRangoFechas() {
         JOptionPane pane = new JOptionPane("", JOptionPane.QUESTION_MESSAGE);
-        JDialog dialog = pane.createDialog("Título");
-        dialog.setSize(400, 200);
+        JDialog dialog = pane.createDialog("Selección de rango de fechas");
+        dialog.setSize(400, 180);
         CapturaRangoFechasJPanel capturaRangoFechasJPanel = new CapturaRangoFechasJPanel();
         dialog.setContentPane(capturaRangoFechasJPanel);
         dialog.setVisible(true);

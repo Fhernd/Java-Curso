@@ -53,7 +53,9 @@ public class CapturaRangoFechasJPanel extends JPanel {
         		FormSpecs.RELATED_GAP_ROWSPEC,
         		RowSpec.decode("default:grow"),
         		FormSpecs.RELATED_GAP_ROWSPEC,
-        		FormSpecs.DEFAULT_ROWSPEC,
+        		RowSpec.decode("default:grow"),
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),
         		FormSpecs.RELATED_GAP_ROWSPEC,
         		RowSpec.decode("default:grow"),}));
 
@@ -68,6 +70,18 @@ public class CapturaRangoFechasJPanel extends JPanel {
 
         datFechaFinal = new JDateChooser();
         add(datFechaFinal, "10, 4, fill, fill");
+        
+        JPanel pnlBotones = new JPanel();
+        add(pnlBotones, "10, 10, fill, fill");
+        pnlBotones.setLayout(new GridLayout(1, 0, 0, 0));
+        
+        JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.setMnemonic('A');
+        pnlBotones.add(btnAceptar);
+        
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setMnemonic('C');
+        pnlBotones.add(btnCancelar);
 
     }
 
