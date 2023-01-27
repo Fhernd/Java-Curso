@@ -79,7 +79,20 @@ public class CapturaRangoFechasJPanel extends JPanel {
         
         JButton btnAceptar = new JButton("Aceptar");
         btnAceptar.addActionListener(e -> {
-            // TODO: Validar las fechas ingresadas.
+            Date fechaInicio = datFechaInicio.getDate();
+            Date fechaFinal = datFechaFinal.getDate();
+
+            if (fechaInicio == null || fechaFinal == null) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha de inicio y final.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (fechaInicio.after(fechaFinal)) {
+                JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser menor a la fecha final.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            parent.dispose();
         });
         btnAceptar.setMnemonic('A');
         pnlBotones.add(btnAceptar);
