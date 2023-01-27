@@ -458,7 +458,7 @@ public class ServicioFrame extends JInternalFrame {
         JOptionPane pane = new JOptionPane("", JOptionPane.QUESTION_MESSAGE);
         JDialog dialog = pane.createDialog("Selección de rango de fechas");
         dialog.setSize(400, 180);
-        CapturaRangoFechasJPanel capturaRangoFechasJPanel = new CapturaRangoFechasJPanel();
+        CapturaRangoFechasJPanel capturaRangoFechasJPanel = new CapturaRangoFechasJPanel(dialog);
         dialog.setContentPane(capturaRangoFechasJPanel);
         dialog.setVisible(true);
 //        int opcion = pane.showConfirmDialog(null, capturaRangoFechasJPanel, "Rango de fechas", JOptionPane.OK_CANCEL_OPTION);

@@ -1,6 +1,6 @@
 package vistas;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -10,13 +10,12 @@ import javax.swing.border.TitledBorder;
 
 import com.jgoodies.forms.layout.FormSpecs;
 
-import javax.swing.JLabel;
-
 import com.toedter.calendar.JDateChooser;
 
-import javax.swing.JButton;
 import java.awt.*;
 import java.util.Date;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CapturaRangoFechasJPanel extends JPanel {
 
@@ -27,10 +26,13 @@ public class CapturaRangoFechasJPanel extends JPanel {
     private JDateChooser datFechaInicio;
     private JDateChooser datFechaFinal;
 
+    private JDialog parent;
+
     /**
      * Create the panel.
      */
-    public CapturaRangoFechasJPanel() {
+    public CapturaRangoFechasJPanel(JDialog parent) {
+        this.parent = parent;
         this.setSize(370, 100);
         this.setMinimumSize(new Dimension(300, 100));
         setBorder(new TitledBorder(null, "Fechas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -76,10 +78,16 @@ public class CapturaRangoFechasJPanel extends JPanel {
         pnlBotones.setLayout(new GridLayout(1, 0, 0, 0));
         
         JButton btnAceptar = new JButton("Aceptar");
+        btnAceptar.addActionListener(e -> {
+            // TODO: Validar las fechas ingresadas.
+        });
         btnAceptar.setMnemonic('A');
         pnlBotones.add(btnAceptar);
         
         JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.addActionListener(e -> {
+            parent.dispose();
+        });
         btnCancelar.setMnemonic('C');
         pnlBotones.add(btnCancelar);
 
