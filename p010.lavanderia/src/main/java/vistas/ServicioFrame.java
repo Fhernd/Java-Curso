@@ -461,15 +461,14 @@ public class ServicioFrame extends JInternalFrame {
         CapturaRangoFechasJPanel capturaRangoFechasJPanel = new CapturaRangoFechasJPanel(dialog);
         dialog.setContentPane(capturaRangoFechasJPanel);
         dialog.setVisible(true);
-//        int opcion = pane.showConfirmDialog(null, capturaRangoFechasJPanel, "Rango de fechas", JOptionPane.OK_CANCEL_OPTION);
-//
-//        if (opcion == JOptionPane.OK_OPTION) {
-//            Date fechaInicio = capturaRangoFechasJPanel.getDatFechaInicio();
-//            Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
-//
-////            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
-////            cargarServicios(servicios);
-//        }
+
+        Date fechaInicio = capturaRangoFechasJPanel.getDatFechaInicio();
+        Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
+
+        if (fechaInicio != null && fechaFin != null) {
+            System.out.println("Fecha inicio: " + fechaInicio);
+            System.out.println("Fecha fin: " + fechaFin);
+        }
     }
 
     private void buscarPorEmpleado() {
