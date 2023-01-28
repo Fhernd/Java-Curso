@@ -359,10 +359,16 @@ public class ServicioFrame extends JInternalFrame {
             String horaEntrega = String.format("%02d:%02d", fechaEntrega.getHours(), fechaEntrega.getMinutes());
             txtServicioHoraEntrega.setText(horaEntrega);
 
-//            txtServicioFechaHoraEntrega.setText(fechaHoraEntrega);
-//            txtServicioEmpleadoId.setText(empleadoId);
-//            txtServicioClienteId.setText(clienteId);
-//            txtServicioDireccionId.setText(direccionId);
+            cbxServicioEmpleado.setSelectedIndex(empleadosComboBoxModel.getIndexOf(servicio.getEmpleadoId()));
+            cbxServicioCliente.setSelectedIndex(clientesComboBoxModel.getIndexOf(servicio.getClienteId()));
+
+            cargarDirecciones(servicio.getClienteId());
+
+            cbxServicioDireccionEntrega.setSelectedIndex(direccionComboBoxModel.getIndexOf(servicio.getDireccionId()));
+
+            cbxServicioEmpleado.repaint();
+            cbxServicioCliente.repaint();
+            cbxServicioDireccionEntrega.repaint();
         });
 
         tblServiciosRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -608,7 +614,6 @@ public class ServicioFrame extends JInternalFrame {
      */
     private void cargarDirecciones(int clienteId) {
         List<Direccion> direcciones = gestorLavanderiaGUI.obtenerDireccionesPorClienteId(clienteId);
-
         Direccion[] direccionesArray = new Direccion[direcciones.size()];
         direcciones.toArray(direccionesArray);
 
