@@ -1442,6 +1442,30 @@ public class AccesoDatos {
     }
 
     /**
+     * Actualiza todos los datos de un servicio.
+     * @param servicio Servicio a actualizar.
+     * @return boolean True si se actualizó correctamente, false si no.
+     */
+    public boolean actualizarServicio(Servicio servicio) {
+        try {
+            final String SQL = "UPDATE servicio SET fecha_hora_entrega = ?, descripcion = ?, cliente_id = ?, empleado_id = ?, direccion_id = ? WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, servicio.getFechaHoraEntrega().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+            sentencia.setString(2, servicio.getDescripcion());
+            sentencia.setInt(3, servicio.getCliente().getId());
+            sentencia.setInt(4, servicio.getEmpleado().getId());
+            sentencia.setInt(5, servicio.getDireccion().getId());
+            sentencia.setInt(6, servicio.getId());
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
      * Convierte un texto a fecha.
      *
      * @param fechaHoraEntrega Texto con la fecha.
