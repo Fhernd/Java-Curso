@@ -624,7 +624,7 @@ public class AccesoDatos {
             final String SQL = "INSERT INTO servicio (descripcion, fecha_hora_recepcion, fecha_hora_entrega, empleado_id, cliente_id, direccion_id) VALUES (?, DEFAULT, ?, ?, ?, ?)";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
             sentencia.setString(1, servicio.getDescripcion());
-            sentencia.setString(2, Utilidad.fechaToString(servicio.getFechaHoraEntrega()));
+            sentencia.setString(2, Utilidad.fechaToString(servicio.getFechaHoraEntrega(), "yyyy-MM-dd HH:mm:ss"));
             sentencia.setInt(3, servicio.getEmpleadoId());
             sentencia.setInt(4, servicio.getClienteId());
             sentencia.setInt(5, servicio.getDireccionId());
@@ -1426,7 +1426,7 @@ public class AccesoDatos {
         List<Servicio> servicios = new ArrayList<>();
 
         try {
-            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, s.cliente_id, s.empleado_id, s.direccion_id, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id WHERE s.fecha_hora_entrega BETWEEN ? AND ?";
+            final String SQL = "SELECT s.id, s.fecha_hora_entrega, s.descripcion, s.cliente_id, s.empleado_id, s.direccion_id, e.nombres AS empleado_nombres, e.apellidos AS empleado_apellidos, c.nombres AS cliente_nombres, c.apellidos AS cliente_apellidos, d.descripcion AS direccion_descripcion FROM servicio s INNER JOIN empleado e ON s.empleado_id = e.id INNER JOIN cliente c ON s.cliente_id = c.id INNER JOIN direccion d ON s.direccion_id = d.id WHERE s.fecha_hora_recepcion BETWEEN ? AND ?";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             sentencia.setString(1, fechaInicio);
             sentencia.setString(2, fechaFin);

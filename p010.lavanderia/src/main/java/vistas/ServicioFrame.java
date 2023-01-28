@@ -466,10 +466,16 @@ public class ServicioFrame extends JInternalFrame {
         Date fechaFin = capturaRangoFechasJPanel.getDatFechaFinal();
 
         if (fechaInicio != null && fechaFin != null) {
-            String fechaInicioStr = Utilidad.fechaToString(fechaInicio);
-            String fechaFinStr = Utilidad.fechaToString(fechaFin);
+            String fechaInicioStr = Utilidad.fechaToString(fechaInicio) + " 00:00:00";
+            String fechaFinStr = Utilidad.fechaToString(fechaFin) + " 23:59:59";
 
             List<Servicio> servicios = gestorLavanderiaGUI.obtenerServiciosPorRangoFechas(fechaInicioStr, fechaFinStr);
+
+            if (servicios.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No hay servicios registrados en el rango de fechas seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            }
+
+            cargarServicios(servicios);
         }
     }
 
@@ -669,7 +675,7 @@ public class ServicioFrame extends JInternalFrame {
             model.addRow(new Object[]{
                     servicio.getId(),
                     servicio.getDescripcion(),
-                    Utilidad.fechaToString(servicio.getFechaHoraEntrega()),
+                    Utilidad.fechaToString(servicio.getFechaHoraEntrega(), "yyyy-MMM-dd HH:mm"),
                     String.format("%s %s (%d)", empleado.getNombres(), empleado.getApellidos(), empleado.getId()),
                     String.format("%s %s (%d)", cliente.getNombres(), cliente.getApellidos(), cliente.getId()),
                     servicio.getDireccion().getDescripcion()

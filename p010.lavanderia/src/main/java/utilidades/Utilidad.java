@@ -60,8 +60,8 @@ public class Utilidad {
      *              No puede ser nula.
      * @return Cadena de caracteres con la fecha.
      */
-    public static String fechaToString(LocalDateTime fecha) {
-        return fecha.format(DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm"));
+    public static String fechaToString(LocalDateTime fecha, String formato) {
+        return fecha.format(DateTimeFormatter.ofPattern(formato));
     }
 
     /**
