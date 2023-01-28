@@ -753,8 +753,9 @@ public class AccesoDatos {
                 Servicio servicio = new Servicio();
                 servicio.setId(servicioId);
                 servicio.setDescripcion(resultado.getString("descripcion"));
+                System.out.println(resultado.getString("fecha_hora_recepcion"));
                 servicio.setFechaHoraRecepcion(Utilidad.fechaALocalDateTime(resultado.getString("fecha_hora_recepcion")));
-                servicio.setFechaHoraEntrega(resultado.getTimestamp("fecha_hora_entrega").toLocalDateTime());
+                servicio.setFechaHoraEntrega(Utilidad.fechaALocalDateTime(resultado.getString("fecha_hora_entrega")));
                 servicio.setEmpleadoId(resultado.getInt("empleado_id"));
                 servicio.setClienteId(resultado.getInt("cliente_id"));
                 servicio.setDireccionId(resultado.getInt("direccion_id"));
