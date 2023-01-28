@@ -74,4 +74,9 @@ public class Utilidad {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         return formato.format(fecha);
     }
+
+    public static LocalDateTime fechaALocalDateTime(String fechaHoraRecepcion) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.parse(fechaHoraRecepcion, formatter);
+    }
 }

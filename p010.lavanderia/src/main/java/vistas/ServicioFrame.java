@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -342,11 +343,22 @@ public class ServicioFrame extends JInternalFrame {
                 return;
             }
 
-            final int servicioId = Integer.parseInt((String) tblServiciosRegistros.getValueAt(filaSeleccionada, 0));
+            final int servicioId = Integer.parseInt(tblServiciosRegistros.getValueAt(filaSeleccionada, 0).toString());
             Servicio servicio = gestorLavanderiaGUI.obtenerServicioPorId(servicioId);
 
             txtServicioId.setText(String.valueOf(servicio.getId()));
             txtServicioDescripcion.setText(servicio.getDescripcion());
+
+            LocalDateTime fechaHoraEntrega = servicio.getFechaHoraEntrega();
+
+            // Convertir LocalDateTime a Date:
+            Date fechaEntrega = Date.from(fechaHoraEntrega.atZone(ZoneId.systemDefault()).toInstant());
+            datServicioFechaEntrega.setDate(fechaEntrega);
+
+            // Obtener desde fechaEntrega solamente la hora:
+            String horaEntrega = String.format("%02d:%02d", fechaEntrega.getHours(), fechaEntrega.getMinutes());
+            txtServicioHoraEntrega.setText(horaEntrega);
+
 //            txtServicioFechaHoraEntrega.setText(fechaHoraEntrega);
 //            txtServicioEmpleadoId.setText(empleadoId);
 //            txtServicioClienteId.setText(clienteId);
