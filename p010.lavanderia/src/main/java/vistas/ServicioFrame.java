@@ -353,6 +353,8 @@ public class ServicioFrame extends JInternalFrame {
 //            txtServicioDireccionId.setText(direccionId);
         });
 
+        tblServiciosRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         JPanel pnlAtenciones = new JPanel();
         pnlAtenciones.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         getContentPane().add(pnlAtenciones, BorderLayout.SOUTH);
