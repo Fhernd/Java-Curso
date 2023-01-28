@@ -509,4 +509,14 @@ public class GestorLavanderiaGUI {
     public List<Servicio> obtenerServiciosPorRangoFechas(String fechaInicio, String fechaFin) {
         return gestorLavanderia.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
     }
+
+    /**
+     * Busca un servicio a partir de su ID.
+     *
+     * @param servicioId ID del servicio.
+     * @return Servicio Servicio encontrado.
+     */
+    public Servicio obtenerServicioPorId(int servicioId) {
+        return gestorLavanderia.obtenerServicioPorId(servicioId);
+    }
 }

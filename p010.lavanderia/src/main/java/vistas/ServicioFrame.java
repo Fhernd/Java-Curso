@@ -251,7 +251,7 @@ public class ServicioFrame extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
             limpiarCamposServicio();
-            
+
             List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
             cargarServicios(servicios);
         });
@@ -330,6 +330,28 @@ public class ServicioFrame extends JInternalFrame {
         tblServiciosRegistros.setSize(200, 200);
         tblServiciosRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
 
+        // Event listener para cuando se selecciona un registro de la tabla
+        tblServiciosRegistros.getSelectionModel().addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
+
+            int filaSeleccionada = tblServiciosRegistros.getSelectedRow();
+
+            if (filaSeleccionada == -1) {
+                return;
+            }
+
+            final int servicioId = Integer.parseInt((String) tblServiciosRegistros.getValueAt(filaSeleccionada, 0));
+            Servicio servicio = gestorLavanderiaGUI.obtenerServicioPorId(servicioId);
+
+            txtServicioId.setText(String.valueOf(servicio.getId()));
+            txtServicioDescripcion.setText(servicio.getDescripcion());
+//            txtServicioFechaHoraEntrega.setText(fechaHoraEntrega);
+//            txtServicioEmpleadoId.setText(empleadoId);
+//            txtServicioClienteId.setText(clienteId);
+//            txtServicioDireccionId.setText(direccionId);
+        });
 
         JPanel pnlAtenciones = new JPanel();
         pnlAtenciones.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Atenciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
