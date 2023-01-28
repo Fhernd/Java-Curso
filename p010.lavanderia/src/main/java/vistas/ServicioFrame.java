@@ -281,6 +281,7 @@ public class ServicioFrame extends JInternalFrame {
         pnlServiciosAcciones.add(btnServicioBuscar);
 
         JButton btnServicioEditar = new JButton("Editar");
+        btnServicioEditar.setEnabled(false);
         btnServicioEditar.addActionListener(e -> {
             // TODO: Editar los datos de un servicio
         });
@@ -333,6 +334,8 @@ public class ServicioFrame extends JInternalFrame {
 
         // Event listener para cuando se selecciona un registro de la tabla
         tblServiciosRegistros.getSelectionModel().addListSelectionListener(e -> {
+            btnServicioEditar.setEnabled(true);
+
             if (e.getValueIsAdjusting()) {
                 return;
             }
