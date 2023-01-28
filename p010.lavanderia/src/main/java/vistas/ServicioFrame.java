@@ -29,6 +29,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class ServicioFrame extends JInternalFrame {
     public static final int BUSQUEDA_POR_CLIENTE = 0;
@@ -51,6 +53,8 @@ public class ServicioFrame extends JInternalFrame {
     private ClientesComboBoxModel clientesComboBoxModel;
     private EmpleadosComboBoxModel empleadosComboBoxModel;
     private JSpinner snnAtencionCantidad;
+    private boolean fechaEntregaModificada = false;
+    private boolean modoEdicion = false;
 
     /**
      * Create the frame.
@@ -120,6 +124,9 @@ public class ServicioFrame extends JInternalFrame {
         pnlServiciosDatos.add(lblServicioFechaEntrega, "2, 6");
 
         JDateChooser datServicioFechaEntrega = new JDateChooser();
+        datServicioFechaEntrega.addPropertyChangeListener(evt -> {
+            fechaEntregaModificada = true;
+        });
         datServicioFechaEntrega.setSelectableDateRange(new Date(), null);
         pnlServiciosDatos.add(datServicioFechaEntrega, "12, 6, fill, fill");
 
@@ -207,13 +214,11 @@ public class ServicioFrame extends JInternalFrame {
             Servicio servicio = new Servicio();
             servicio.setDescripcion(descripcion);
 
-            // Formatear la fecha de entrega a YYYY-MM-DD:
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             String fechaEntregaFormateada = formatoFecha.format(fechaEntrega);
 
             String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
 
-            // Convert hora de entrega a LocalTime:
             DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
             LocalTime horaEntregaLocalTime = LocalTime.parse(horaEntrega, formatoHora);
 
@@ -284,6 +289,78 @@ public class ServicioFrame extends JInternalFrame {
         btnServicioEditar.setEnabled(false);
         btnServicioEditar.addActionListener(e -> {
             // TODO: Editar los datos de un servicio
+            String descripcion = txtServicioDescripcion.getText().trim();
+            Date fechaEntrega = datServicioFechaEntrega.getDate();
+            String horaEntrega = txtServicioHoraEntrega.getText().trim().toLowerCase();
+            int empleadoId = ((Empleado) cbxServicioEmpleado.getSelectedItem()).getId();
+            int clienteId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
+            int direccionId = ((Direccion) cbxServicioDireccionEntrega.getSelectedItem()).getId();
+
+            if (descripcion.isEmpty() || fechaEntrega == null || horaEntrega.isEmpty() || empleadoId == 0 || clienteId == 0 || direccionId == 0) {
+                JOptionPane.showMessageDialog(this, "Debe completar todos los campos", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Servicio servicio = new Servicio();
+            servicio.setDescripcion(descripcion);
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaEntregaFormateada = formatoFecha.format(fechaEntrega);
+
+            if (!modoEdicion || fechaEntregaModificada) {
+
+                String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
+
+                DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a");
+                LocalTime horaEntregaLocalTime = LocalTime.parse(horaEntrega, formatoHora);
+
+                if (horaEntregaLocalTime.isBefore(LocalTime.of(5, 0)) || horaEntregaLocalTime.isAfter(LocalTime.of(20, 0))) {
+                    JOptionPane.showMessageDialog(this, "La hora de entrega debe estar entre las 5AM y las 8PM.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                LocalTime horaActualLocalTime = LocalTime.now();
+
+                Date fechaActual = new Date();
+
+                SimpleDateFormat formatoFechaActual = new SimpleDateFormat("yyyy-MM-dd");
+                final String fechaActualFormateada = formatoFechaActual.format(fechaActual);
+
+                if (fechaActualFormateada.equals(fechaEntregaFormateada) && horaEntregaLocalTime.isBefore(horaActualLocalTime)) {
+                    JOptionPane.showMessageDialog(this, "La hora de entrega debe ser mayor a la hora actual.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+                LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse(fechaHoraEntrega, formatoFechaHora);
+
+
+                servicio.setFechaHoraEntrega(fechaHoraEntregaLocalDateTime);
+            } else {
+                String fechaHoraEntrega = fechaEntregaFormateada + " " + horaEntrega;
+
+                DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+                LocalDateTime fechaHoraEntregaLocalDateTime = LocalDateTime.parse(fechaHoraEntrega, formatoFechaHora);
+
+                servicio.setFechaHoraEntrega(fechaHoraEntregaLocalDateTime);
+            }
+
+            servicio.setEmpleadoId(empleadoId);
+            servicio.setClienteId(clienteId);
+            servicio.setDireccionId(direccionId);
+
+            servicio = gestorLavanderiaGUI.crearServicio(servicio);
+
+            if (servicio == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo crear el servicio", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            limpiarCamposServicio();
+
+            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
+            cargarServicios(servicios);
         });
         pnlServiciosAcciones.add(btnServicioEditar);
 
@@ -335,6 +412,7 @@ public class ServicioFrame extends JInternalFrame {
         // Event listener para cuando se selecciona un registro de la tabla
         tblServiciosRegistros.getSelectionModel().addListSelectionListener(e -> {
             btnServicioEditar.setEnabled(true);
+            modoEdicion = true;
 
             if (e.getValueIsAdjusting()) {
                 return;
