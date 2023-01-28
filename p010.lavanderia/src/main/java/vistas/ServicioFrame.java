@@ -251,6 +251,9 @@ public class ServicioFrame extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
             limpiarCamposServicio();
+            
+            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
+            cargarServicios(servicios);
         });
         pnlServiciosAcciones.add(btnServicioGuardar);
 
