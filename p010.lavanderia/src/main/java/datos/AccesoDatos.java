@@ -1467,6 +1467,26 @@ public class AccesoDatos {
     }
 
     /**
+     * Elimina un servicio a partir de su ID.
+     *
+     * @param servicioId ID del servicio.
+     * @return boolean True si se eliminó correctamente, false si no.
+     */
+    public boolean eliminarServicioPorId(int servicioId) {
+        try {
+            final String SQL = "DELETE FROM servicio WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setInt(1, servicioId);
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
      * Convierte un texto a fecha.
      *
      * @param fechaHoraEntrega Texto con la fecha.
