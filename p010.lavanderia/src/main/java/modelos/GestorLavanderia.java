@@ -523,4 +523,14 @@ public class GestorLavanderia {
     public List<Servicio> obtenerServiciosPorRangoFechas(String fechaInicio, String fechaFin) {
         return accesoDatos.obtenerServiciosPorRangoFechas(fechaInicio, fechaFin);
     }
+
+    /**
+     * Actualiza todos los datos de un servicio.
+     *
+     * @param servicio Servicio a actualizar.
+     * @return boolean True si se actualizó correctamente, false si no.
+     */
+    public boolean actualizarServicio(Servicio servicio) {
+        return accesoDatos.actualizarServicio(servicio);
+    }
 }

@@ -503,7 +503,7 @@ public class GestorLavanderiaGUI {
      * Busca todos los servicios en un rango de fechas.
      *
      * @param fechaInicio Fecha de inicio.
-     * @param fechaFin Fecha de fin.
+     * @param fechaFin    Fecha de fin.
      * @return List<Servicio> Lista de servicios.
      */
     public List<Servicio> obtenerServiciosPorRangoFechas(String fechaInicio, String fechaFin) {
@@ -518,5 +518,15 @@ public class GestorLavanderiaGUI {
      */
     public Servicio obtenerServicioPorId(int servicioId) {
         return gestorLavanderia.obtenerServicioPorId(servicioId);
+    }
+
+    /**
+     * Actualiza todos los datos de un servicio.
+     *
+     * @param servicio Servicio a actualizar.
+     * @return boolean True si se actualizó correctamente, false si no.
+     */
+    public boolean actualizarServicio(Servicio servicio) {
+        return gestorLavanderia.actualizarServicio(servicio);
     }
 }

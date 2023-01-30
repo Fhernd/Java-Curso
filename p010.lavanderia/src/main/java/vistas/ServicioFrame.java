@@ -348,14 +348,14 @@ public class ServicioFrame extends JInternalFrame {
             servicio.setClienteId(clienteId);
             servicio.setDireccionId(direccionId);
 
-            servicio = gestorLavanderiaGUI.crearServicio(servicio);
+            boolean resultado = gestorLavanderiaGUI.actualizarServicio(servicio);
 
-            if (servicio == null) {
-                JOptionPane.showMessageDialog(this, "No se pudo crear el servicio", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            if (!resultado) {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el servicio", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Servicio actualizado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
             limpiarCamposServicio();
 
