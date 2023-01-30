@@ -31,6 +31,8 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ServicioFrame extends JInternalFrame {
     public static final int BUSQUEDA_POR_CLIENTE = 0;
@@ -158,6 +160,12 @@ public class ServicioFrame extends JInternalFrame {
         pnlServiciosDatos.add(lblServicioCliente, "2, 14");
 
         cbxServicioCliente = new JComboBox();
+        cbxServicioCliente.addActionListener(e -> {
+            if (cbxServicioCliente.getSelectedIndex() != -1) {
+                Cliente cliente = (Cliente) cbxServicioCliente.getSelectedItem();
+                cargarDirecciones(cliente.getId());
+            }
+        });
         pnlServiciosDatos.add(cbxServicioCliente, "12, 14, fill, default");
 
         JLabel lblServicioDireccion = new JLabel("Dirección entrega:");
