@@ -1453,9 +1453,9 @@ public class AccesoDatos {
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             sentencia.setString(1, servicio.getFechaHoraEntrega().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             sentencia.setString(2, servicio.getDescripcion());
-            sentencia.setInt(3, servicio.getCliente().getId());
-            sentencia.setInt(4, servicio.getEmpleado().getId());
-            sentencia.setInt(5, servicio.getDireccion().getId());
+            sentencia.setInt(3, servicio.getClienteId());
+            sentencia.setInt(4, servicio.getEmpleadoId());
+            sentencia.setInt(5, servicio.getDireccionId());
             sentencia.setInt(6, servicio.getId());
 
             return sentencia.executeUpdate() > 0;

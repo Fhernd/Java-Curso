@@ -55,6 +55,7 @@ public class ServicioFrame extends JInternalFrame {
     private JSpinner snnAtencionCantidad;
     private boolean fechaEntregaModificada = false;
     private boolean modoEdicion = false;
+    private int servicioId;
 
     /**
      * Create the frame.
@@ -302,6 +303,7 @@ public class ServicioFrame extends JInternalFrame {
             }
 
             Servicio servicio = new Servicio();
+            servicio.setId(servicioId);
             servicio.setDescripcion(descripcion);
             SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
             String fechaEntregaFormateada = formatoFecha.format(fechaEntrega);
@@ -409,7 +411,6 @@ public class ServicioFrame extends JInternalFrame {
         tblServiciosRegistros.setSize(200, 200);
         tblServiciosRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
 
-        // Event listener para cuando se selecciona un registro de la tabla
         tblServiciosRegistros.getSelectionModel().addListSelectionListener(e -> {
             btnServicioEditar.setEnabled(true);
             modoEdicion = true;
@@ -424,7 +425,7 @@ public class ServicioFrame extends JInternalFrame {
                 return;
             }
 
-            final int servicioId = Integer.parseInt(tblServiciosRegistros.getValueAt(filaSeleccionada, 0).toString());
+            servicioId = Integer.parseInt(tblServiciosRegistros.getValueAt(filaSeleccionada, 0).toString());
             Servicio servicio = gestorLavanderiaGUI.obtenerServicioPorId(servicioId);
 
             txtServicioId.setText(String.valueOf(servicio.getId()));
@@ -432,12 +433,11 @@ public class ServicioFrame extends JInternalFrame {
 
             LocalDateTime fechaHoraEntrega = servicio.getFechaHoraEntrega();
 
-            // Convertir LocalDateTime a Date:
             Date fechaEntrega = Date.from(fechaHoraEntrega.atZone(ZoneId.systemDefault()).toInstant());
             datServicioFechaEntrega.setDate(fechaEntrega);
 
-            // Obtener desde fechaEntrega solamente la hora:
-            String horaEntrega = String.format("%02d:%02d", fechaEntrega.getHours(), fechaEntrega.getMinutes());
+            // Obtener desde fechaEntrega solamente la hora con formato AM o PM:
+            String horaEntrega = new SimpleDateFormat("hh:mm a").format(fechaEntrega);
             txtServicioHoraEntrega.setText(horaEntrega);
 
             cbxServicioEmpleado.setSelectedIndex(empleadosComboBoxModel.getIndexOf(servicio.getEmpleadoId()));
