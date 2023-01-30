@@ -382,13 +382,21 @@ public class ServicioFrame extends JInternalFrame {
                 return;
             }
 
-            boolean resultado = gestorLavanderiaGUI.eliminarAtencionesPorServicioId(servicioId);
+            final int cantidadAtenciones = gestorLavanderiaGUI.obtenerAtencionesPorServicioId(servicioId).size();
 
-            if (!resultado) {
-                JOptionPane.showMessageDialog(this, "No se pudo eliminar las atenciones del servicio seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
-                return;
+            boolean resultado = false;
+
+            if (cantidadAtenciones != 0) {
+                resultado = gestorLavanderiaGUI.eliminarAtencionesPorServicioId(servicioId);
+
+                if (!resultado) {
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar las atenciones del servicio seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
             }
+
             resultado = gestorLavanderiaGUI.eliminarServicioPorId(servicioId);
+
 
             if (!resultado) {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el servicio seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
@@ -396,6 +404,9 @@ public class ServicioFrame extends JInternalFrame {
             }
 
             JOptionPane.showMessageDialog(this, "Servicio eliminado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
+            cargarServicios(servicios);
         });
         pnlServiciosAcciones.add(btnServicioEliminar);
 
