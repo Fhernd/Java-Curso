@@ -297,7 +297,6 @@ public class ServicioFrame extends JInternalFrame {
         JButton btnServicioEditar = new JButton("Editar");
         btnServicioEditar.setEnabled(false);
         btnServicioEditar.addActionListener(e -> {
-            // TODO: Editar los datos de un servicio
             String descripcion = txtServicioDescripcion.getText().trim();
             Date fechaEntrega = datServicioFechaEntrega.getDate();
             String horaEntrega = txtServicioHoraEntrega.getText().trim().toLowerCase();
@@ -375,8 +374,22 @@ public class ServicioFrame extends JInternalFrame {
         pnlServiciosAcciones.add(btnServicioEditar);
 
         JButton btnServicioEliminar = new JButton("Eliminar");
+        btnServicioEliminar.setEnabled(false);
         btnServicioEliminar.addActionListener(e -> {
-            // TODO: Eliminar un servicio seleccionado
+            boolean resultado = gestorLavanderiaGUI.eliminarAtencionesPorServicioId(servicioId);
+
+            if (!resultado) {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar las atenciones del servicio seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            resultado = gestorLavanderiaGUI.eliminarServicioPorId(servicioId);
+
+            if (!resultado) {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el servicio seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            JOptionPane.showMessageDialog(this, "Servicio eliminado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         });
         pnlServiciosAcciones.add(btnServicioEliminar);
 
@@ -421,6 +434,7 @@ public class ServicioFrame extends JInternalFrame {
 
         tblServiciosRegistros.getSelectionModel().addListSelectionListener(e -> {
             btnServicioEditar.setEnabled(true);
+            btnServicioEliminar.setEnabled(true);
             modoEdicion = true;
 
             if (e.getValueIsAdjusting()) {

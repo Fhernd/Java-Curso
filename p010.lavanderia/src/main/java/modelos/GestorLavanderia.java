@@ -533,4 +533,24 @@ public class GestorLavanderia {
     public boolean actualizarServicio(Servicio servicio) {
         return accesoDatos.actualizarServicio(servicio);
     }
+
+    /**
+     * Eliminar todas las atenciones a partir del ID de un servicio.
+     *
+     * @param servicioId ID del servicio.
+     * @return boolean True si se eliminó correctamente, false si no.
+     */
+    public boolean eliminarAtencionesPorServicioId(int servicioId) {
+        return accesoDatos.eliminarAtencionesPorServicioId(servicioId);
+    }
+
+    /**
+     * Elimina un servicio a partir de su ID.
+     *
+     * @param servicioId ID del servicio.
+     * @return boolean True si se eliminó correctamente, false si no.
+     */
+    public boolean eliminarServicioPorId(int servicioId) {
+        return accesoDatos.eliminarServicioPorId(servicioId);
+    }
 }
