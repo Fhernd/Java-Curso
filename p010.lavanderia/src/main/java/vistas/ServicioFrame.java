@@ -376,6 +376,12 @@ public class ServicioFrame extends JInternalFrame {
         JButton btnServicioEliminar = new JButton("Eliminar");
         btnServicioEliminar.setEnabled(false);
         btnServicioEliminar.addActionListener(e -> {
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea eliminar el servicio seleccionado?", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+            if (opcion != JOptionPane.YES_OPTION) {
+                return;
+            }
+
             boolean resultado = gestorLavanderiaGUI.eliminarAtencionesPorServicioId(servicioId);
 
             if (!resultado) {
@@ -388,7 +394,7 @@ public class ServicioFrame extends JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el servicio seleccionado", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             JOptionPane.showMessageDialog(this, "Servicio eliminado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         });
         pnlServiciosAcciones.add(btnServicioEliminar);
