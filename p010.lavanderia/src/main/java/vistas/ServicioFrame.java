@@ -436,7 +436,6 @@ public class ServicioFrame extends JInternalFrame {
             Date fechaEntrega = Date.from(fechaHoraEntrega.atZone(ZoneId.systemDefault()).toInstant());
             datServicioFechaEntrega.setDate(fechaEntrega);
 
-            // Obtener desde fechaEntrega solamente la hora con formato AM o PM:
             String horaEntrega = new SimpleDateFormat("hh:mm a").format(fechaEntrega);
             txtServicioHoraEntrega.setText(horaEntrega);
 
@@ -686,6 +685,10 @@ public class ServicioFrame extends JInternalFrame {
         int clientId = ((Cliente) cbxServicioCliente.getSelectedItem()).getId();
 
         cargarDirecciones(clientId);
+
+        cbxServicioEmpleado.repaint();
+        cbxServicioCliente.repaint();
+        cbxServicioDireccionEntrega.repaint();
     }
 
     /**
