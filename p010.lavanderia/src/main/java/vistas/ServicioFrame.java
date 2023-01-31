@@ -577,25 +577,41 @@ public class ServicioFrame extends JInternalFrame {
             int cantidad = Integer.parseInt(snnAtencionCantidad.getValue().toString());
 
             if (cantidad < 1) {
-                JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a 0", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             String precioTexto = txtAtencionPrecio.getText().trim();
 
             if (precioTexto.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "El precio no puede estar vacío", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El precio no puede estar vacío", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             try {
                 Double.parseDouble(precioTexto);
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "El precio debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El precio debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
+            final int tipoAtencionId = ((TipoAtencion) cbxAtencionTipo.getSelectedItem()).getId();
 
+            Atencion atencion = new Atencion();
+            atencion.setCantidad(cantidad);
+            atencion.setPrecio(Double.parseDouble(precioTexto));
+            atencion.setTipoAtencionId(tipoAtencionId);
+
+            atencion = gestorLavanderiaGUI.crearAtencion(atencion);
+
+            if (atencion == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo crear la atención", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Atención creada con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            limpiarCamposAtencion();
         });
         btnAtencionAgregar.setEnabled(false);
         pnlAtencionesDatos.add(btnAtencionAgregar, "18, 10");
@@ -644,6 +660,13 @@ public class ServicioFrame extends JInternalFrame {
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
         cargarServicios(servicios);
+    }
+
+    /**
+     * Limpia los campos de la sección de atenciones.
+     */
+    private void limpiarCamposAtencion() {
+
     }
 
     /**
