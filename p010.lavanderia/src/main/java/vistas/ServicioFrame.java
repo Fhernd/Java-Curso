@@ -571,7 +571,28 @@ public class ServicioFrame extends JInternalFrame {
 
         btnAtencionAgregar = new JButton("Agregar");
         btnAtencionAgregar.addActionListener(e -> {
-            // TODO: Agregar atención
+            int cantidad = Integer.parseInt(snnAtencionCantidad.getValue().toString());
+
+            if (cantidad < 1) {
+                JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String precioTexto = txtAtencionPrecio.getText().trim();
+
+            if (precioTexto.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El precio no puede estar vacío", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try {
+                Double.parseDouble(precioTexto);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "El precio debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+
         });
         btnAtencionAgregar.setEnabled(false);
         pnlAtencionesDatos.add(btnAtencionAgregar, "18, 10");
