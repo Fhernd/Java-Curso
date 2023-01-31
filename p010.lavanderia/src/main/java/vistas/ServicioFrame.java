@@ -404,6 +404,10 @@ public class ServicioFrame extends JInternalFrame {
             }
 
             JOptionPane.showMessageDialog(this, "Servicio eliminado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            btnServicioEditar.setEnabled(false);
+            btnServicioEliminar.setEnabled(false);
+
+            servicioId = 0;
 
             List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
             cargarServicios(servicios);
