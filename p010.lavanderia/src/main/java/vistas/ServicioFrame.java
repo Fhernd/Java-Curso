@@ -1,7 +1,7 @@
 package vistas;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.border.TitledBorder;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -17,10 +17,9 @@ import vistas.models.DireccionComboBoxModel;
 import vistas.models.EmpleadosComboBoxModel;
 import vistas.models.TipoAtencionComboBoxModel;
 
-import java.awt.GridLayout;
 import javax.swing.border.EtchedBorder;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -949,5 +948,21 @@ public class ServicioFrame extends JInternalFrame {
                     servicio.getDireccion().getDescripcion()
             });
         }
+    }
+}
+
+class TableMouseListener extends MouseAdapter {
+
+    private JTable table;
+
+    public TableMouseListener(JTable table) {
+        this.table = table;
+    }
+
+    @Override
+    public void mousePressed(MouseEvent event) {
+        Point point = event.getPoint();
+        int currentRow = table.rowAtPoint(point);
+        table.setRowSelectionInterval(currentRow, currentRow);
     }
 }
