@@ -601,6 +601,7 @@ public class ServicioFrame extends JInternalFrame {
             atencion.setCantidad(cantidad);
             atencion.setPrecio(Double.parseDouble(precioTexto));
             atencion.setTipoAtencionId(tipoAtencionId);
+            atencion.setServicioId(servicioId);
 
             atencion = gestorLavanderiaGUI.crearAtencion(atencion);
 
@@ -666,7 +667,9 @@ public class ServicioFrame extends JInternalFrame {
      * Limpia los campos de la sección de atenciones.
      */
     private void limpiarCamposAtencion() {
-
+        snnAtencionCantidad.setValue(0);
+        txtAtencionPrecio.setText("");
+        cbxAtencionTipo.setSelectedIndex(0);
     }
 
     /**
