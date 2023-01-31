@@ -15,6 +15,7 @@ import utilidades.Utilidad;
 import vistas.models.ClientesComboBoxModel;
 import vistas.models.DireccionComboBoxModel;
 import vistas.models.EmpleadosComboBoxModel;
+import vistas.models.TipoAtencionComboBoxModel;
 
 import java.awt.GridLayout;
 import javax.swing.border.EtchedBorder;
@@ -54,6 +55,7 @@ public class ServicioFrame extends JInternalFrame {
     private DireccionComboBoxModel direccionComboBoxModel;
     private ClientesComboBoxModel clientesComboBoxModel;
     private EmpleadosComboBoxModel empleadosComboBoxModel;
+    private TipoAtencionComboBoxModel tipoAtencionComboBoxModel;
     private JSpinner snnAtencionCantidad;
     private boolean fechaEntregaModificada = false;
     private boolean modoEdicion = false;
@@ -495,6 +497,7 @@ public class ServicioFrame extends JInternalFrame {
             cbxServicioDireccionEntrega.repaint();
 
             activarSeccionAtenciones();
+            cargarTipoAtenciones();
         });
 
         tblServiciosRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -591,7 +594,7 @@ public class ServicioFrame extends JInternalFrame {
                 JOptionPane.showMessageDialog(null, "El precio debe ser un número.", "Mensaje", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
 
         });
         btnAtencionAgregar.setEnabled(false);
@@ -641,6 +644,17 @@ public class ServicioFrame extends JInternalFrame {
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
         cargarServicios(servicios);
+    }
+
+    /**
+     * Carga los tipos de atenciones en un JComboBox.
+     */
+    private void cargarTipoAtenciones() {
+        TipoAtencion[] tipoAtencionesArreglo = gestorLavanderiaGUI.obtenerTiposAtencion().toArray(new TipoAtencion[0]);
+
+        tipoAtencionComboBoxModel = new TipoAtencionComboBoxModel(tipoAtencionesArreglo);
+        cbxAtencionTipo.setModel(tipoAtencionComboBoxModel);
+        cbxAtencionTipo.setSelectedIndex(0);
     }
 
     /**
