@@ -58,6 +58,7 @@ public class ServicioFrame extends JInternalFrame {
     private boolean fechaEntregaModificada = false;
     private boolean modoEdicion = false;
     private int servicioId;
+    private JButton btnAtencionAgregar;
 
     /**
      * Create the frame.
@@ -492,6 +493,8 @@ public class ServicioFrame extends JInternalFrame {
             cbxServicioEmpleado.repaint();
             cbxServicioCliente.repaint();
             cbxServicioDireccionEntrega.repaint();
+
+            activarSeccionAtenciones();
         });
 
         tblServiciosRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -566,12 +569,12 @@ public class ServicioFrame extends JInternalFrame {
         cbxAtencionTipo.setEnabled(false);
         pnlAtencionesDatos.add(cbxAtencionTipo, "18, 8, fill, default");
 
-        JButton btnNewButton = new JButton("Agregar");
-        btnNewButton.addActionListener(e -> {
+        btnAtencionAgregar = new JButton("Agregar");
+        btnAtencionAgregar.addActionListener(e -> {
             // TODO: Agregar atención
         });
-        btnNewButton.setEnabled(false);
-        pnlAtencionesDatos.add(btnNewButton, "18, 10");
+        btnAtencionAgregar.setEnabled(false);
+        pnlAtencionesDatos.add(btnAtencionAgregar, "18, 10");
 
         JPanel pnlAtencionesRegistros = new JPanel();
         pnlAtencionesRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -617,6 +620,16 @@ public class ServicioFrame extends JInternalFrame {
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
         cargarServicios(servicios);
+    }
+
+    /**
+     * Activa la sección de atenciones.
+     */
+    private void activarSeccionAtenciones() {
+        snnAtencionCantidad.setEnabled(true);
+        txtAtencionPrecio.setEnabled(true);
+        cbxAtencionTipo.setEnabled(true);
+        btnAtencionAgregar.setEnabled(true);
     }
 
     /**
