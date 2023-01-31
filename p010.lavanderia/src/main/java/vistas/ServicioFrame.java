@@ -676,13 +676,13 @@ public class ServicioFrame extends JInternalFrame {
      * Asociar un menú contextual a la tabla de atenciones.
      */
     private void asociarMenuContextualTablaAtenciones() {
-        JPopupMenu popupMenu = new JPopupMenu();
+        JPopupMenu pmuOpcionesAtenciones = new JPopupMenu();
         JMenuItem mniEliminarRegistro = new JMenuItem("Eliminar este registro");
-        JMenuItem mniEliminarTodosRegistros = new JMenuItem("Elimientar todos los registros");
+        JMenuItem mniEliminarTodosRegistros = new JMenuItem("Eliminar todos los registros");
 
-        popupMenu.add(mniEliminarRegistro);
-        popupMenu.add(mniEliminarTodosRegistros);
-        tblAtencionesRegistros.setComponentPopupMenu(popupMenu);
+        pmuOpcionesAtenciones.add(mniEliminarRegistro);
+        pmuOpcionesAtenciones.add(mniEliminarTodosRegistros);
+        tblAtencionesRegistros.setComponentPopupMenu(pmuOpcionesAtenciones);
 
         tblAtencionesRegistros.addMouseListener(new TableMouseListener(tblAtencionesRegistros));
     }
