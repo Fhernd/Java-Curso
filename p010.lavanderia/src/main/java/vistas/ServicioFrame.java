@@ -498,6 +498,7 @@ public class ServicioFrame extends JInternalFrame {
 
             activarSeccionAtenciones();
             cargarTipoAtenciones();
+            cargarAtenciones(servicioId);
         });
 
         tblServiciosRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -595,6 +596,11 @@ public class ServicioFrame extends JInternalFrame {
                 return;
             }
 
+            if (Double.parseDouble(precioTexto) <= 0) {
+                JOptionPane.showMessageDialog(this, "El precio debe ser mayor a 0", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             final int tipoAtencionId = ((TipoAtencion) cbxAtencionTipo.getSelectedItem()).getId();
 
             Atencion atencion = new Atencion();
@@ -613,6 +619,8 @@ public class ServicioFrame extends JInternalFrame {
             JOptionPane.showMessageDialog(this, "Atención creada con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 
             limpiarCamposAtencion();
+
+            cargarAtenciones(servicioId);
         });
         btnAtencionAgregar.setEnabled(false);
         pnlAtencionesDatos.add(btnAtencionAgregar, "18, 10");
