@@ -661,6 +661,8 @@ public class ServicioFrame extends JInternalFrame {
         spnAtencionesRegistros.setViewportView(tblAtencionesRegistros);
         tblAtencionesRegistros.setPreferredScrollableViewportSize(new Dimension(600, 80));
 
+        asociarMenuContextualTablaAtenciones();
+
         establecerFechaEntregaPorDefecto(datServicioFechaEntrega);
 
         cargarClientes();
@@ -669,6 +671,19 @@ public class ServicioFrame extends JInternalFrame {
 
         List<Servicio> servicios = gestorLavanderiaGUI.obtenerServicios();
         cargarServicios(servicios);
+    }
+
+    /**
+     * Asociar un menú contextual a la tabla de atenciones.
+     */
+    private void asociarMenuContextualTablaAtenciones() {
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem mniEliminarRegistro = new JMenuItem("Eliminar este registro");
+        JMenuItem mniEliminarTodosRegistros = new JMenuItem("Elimientar todos los registros");
+
+        popupMenu.add(mniEliminarRegistro);
+        popupMenu.add(mniEliminarTodosRegistros);
+        tblAtencionesRegistros.setComponentPopupMenu(popupMenu);
     }
 
     /**
