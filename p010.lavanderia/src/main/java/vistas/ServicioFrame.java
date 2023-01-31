@@ -683,6 +683,8 @@ public class ServicioFrame extends JInternalFrame {
         popupMenu.add(mniEliminarRegistro);
         popupMenu.add(mniEliminarTodosRegistros);
         tblAtencionesRegistros.setComponentPopupMenu(popupMenu);
+
+        tblAtencionesRegistros.addMouseListener(new TableMouseListener(tblAtencionesRegistros));
     }
 
     /**
