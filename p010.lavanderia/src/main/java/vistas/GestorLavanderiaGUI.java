@@ -149,6 +149,17 @@ public class GestorLavanderiaGUI {
             serviciosFrame.setVisible(true);
         });
         mnuServicios.add(mniServiciosGestiones);
+        
+        JMenu mnuOtros = new JMenu("Otros");
+        menuBar.add(mnuOtros);
+        
+        JMenuItem mniTipoAtencion = new JMenuItem("Gestionar tipos atención");
+        mniTipoAtencion.addActionListener(e -> {
+            TipoAtencionFrame tipoAtencionFrame = new TipoAtencionFrame(this);
+            dtpPrincipal.add(tipoAtencionFrame);
+            tipoAtencionFrame.setVisible(true);
+        });
+        mnuOtros.add(mniTipoAtencion);
     }
 
     public Usuario iniciarSesion(String email, String password) {
