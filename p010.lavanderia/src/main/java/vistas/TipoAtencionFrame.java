@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TipoAtencionFrame extends JInternalFrame {
 
@@ -21,6 +23,7 @@ public class TipoAtencionFrame extends JInternalFrame {
 	private static final long serialVersionUID = 2632599037283355071L;
 	private JTextField txtId;
 	private JTextField txtNombre;
+	private JTable table;
 
 	/**
 	 * Create the frame.
@@ -28,7 +31,7 @@ public class TipoAtencionFrame extends JInternalFrame {
 	public TipoAtencionFrame() {
 		setTitle("Tipo Atención");
 		setClosable(true);
-		setBounds(100, 100, 500, 450);
+		setBounds(100, 100, 500, 575);
 		
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -74,6 +77,7 @@ public class TipoAtencionFrame extends JInternalFrame {
 		txtNombre.setColumns(10);
 		
 		JPanel pnlAcciones = new JPanel();
+		pnlAcciones.setBorder(new TitledBorder(null, "Acciones", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(pnlAcciones, BorderLayout.CENTER);
 		pnlAcciones.setLayout(new GridLayout(0, 3, 0, 0));
 		
@@ -85,6 +89,17 @@ public class TipoAtencionFrame extends JInternalFrame {
 		
 		JButton btnEditar = new JButton("Editar");
 		pnlAcciones.add(btnEditar);
+		
+		JPanel pnlRegistros = new JPanel();
+		pnlRegistros.setBorder(new TitledBorder(null, "Registros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(pnlRegistros, BorderLayout.SOUTH);
+		pnlRegistros.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane spnRegistros = new JScrollPane();
+		pnlRegistros.add(spnRegistros, BorderLayout.CENTER);
+		
+		table = new JTable();
+		spnRegistros.setViewportView(table);
 
 	}
 
