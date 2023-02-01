@@ -4,10 +4,7 @@ import modelos.*;
 import utilidades.Utilidad;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -1540,5 +1537,33 @@ public class AccesoDatos {
         }
 
         return false;
+    }
+
+    /**
+     * Crea un nuevo tipo de atención.
+     *
+     * @param tipoAtencion Tipo de atención a crear.
+     * @return TipoAtencion Tipo de atención creado.
+     */
+    public TipoAtencion crearTipoAtencion(TipoAtencion tipoAtencion) {
+        try {
+            final String SQL = "INSERT INTO tipo_atencion (nombre) VALUES (?)";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            sentencia.setString(1, tipoAtencion.getNombre());
+
+            if (sentencia.executeUpdate() > 0) {
+                ResultSet resultado = sentencia.getGeneratedKeys();
+
+                if (resultado.next()) {
+                    tipoAtencion.setId(resultado.getInt(1));
+
+                    return tipoAtencion;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
