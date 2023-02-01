@@ -149,10 +149,10 @@ public class GestorLavanderiaGUI {
             serviciosFrame.setVisible(true);
         });
         mnuServicios.add(mniServiciosGestiones);
-        
+
         JMenu mnuOtros = new JMenu("Otros");
         menuBar.add(mnuOtros);
-        
+
         JMenuItem mniTipoAtencion = new JMenuItem("Gestionar tipos atención");
         mniTipoAtencion.addActionListener(e -> {
             TipoAtencionFrame tipoAtencionFrame = new TipoAtencionFrame(this);
@@ -579,5 +579,15 @@ public class GestorLavanderiaGUI {
      */
     public boolean eliminarAtencionPorId(int atencionId) {
         return gestorLavanderia.eliminarAtencionPorId(atencionId);
+    }
+
+    /**
+     * Crea un nuevo tipo de atención.
+     *
+     * @param tipoAtencion Tipo de atención a crear.
+     * @return TipoAtencion Tipo de atención creado.
+     */
+    public TipoAtencion crearTipoAtencion(TipoAtencion tipoAtencion) {
+        return gestorLavanderia.crearTipoAtencion(tipoAtencion);
     }
 }

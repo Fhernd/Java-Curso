@@ -563,4 +563,14 @@ public class GestorLavanderia {
     public boolean eliminarAtencionPorId(int atencionId) {
         return accesoDatos.eliminarAtencionPorId(atencionId);
     }
+
+    /**
+     * Crea un nuevo tipo de atención.
+     *
+     * @param tipoAtencion Tipo de atención a crear.
+     * @return TipoAtencion Tipo de atención creado.
+     */
+    public TipoAtencion crearTipoAtencion(TipoAtencion tipoAtencion) {
+        return accesoDatos.crearTipoAtencion(tipoAtencion);
+    }
 }
