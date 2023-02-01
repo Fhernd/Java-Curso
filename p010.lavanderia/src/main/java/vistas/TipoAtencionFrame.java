@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import javax.swing.JButton;
 
 public class TipoAtencionFrame extends JInternalFrame {
 
@@ -75,6 +76,15 @@ public class TipoAtencionFrame extends JInternalFrame {
 		JPanel pnlAcciones = new JPanel();
 		getContentPane().add(pnlAcciones, BorderLayout.CENTER);
 		pnlAcciones.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JButton btnNuevo = new JButton("Nuevo");
+		pnlAcciones.add(btnNuevo);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		pnlAcciones.add(btnGuardar);
+		
+		JButton btnEditar = new JButton("Editar");
+		pnlAcciones.add(btnEditar);
 
 	}
 
