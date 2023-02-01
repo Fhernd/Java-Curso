@@ -1,20 +1,17 @@
 package vistas;
 
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+
 import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TipoAtencionFrame extends JInternalFrame {
 
@@ -25,7 +22,7 @@ public class TipoAtencionFrame extends JInternalFrame {
 	private JTextField txtId;
 	private JTextField txtNombre;
 	private JTable tblRegistros;
-	
+
 	private GestorLavanderiaGUI gestorLavanderiaGUI;
 
 	/**
@@ -35,7 +32,7 @@ public class TipoAtencionFrame extends JInternalFrame {
 		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
 		setTitle("Tipo Atención");
 		setClosable(true);
-		setBounds(100, 100, 500, 575);
+		setBounds(100, 100, 500, 600);
 		
 		JPanel pnlDatos = new JPanel();
 		pnlDatos.setBorder(new TitledBorder(null, "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -86,12 +83,21 @@ public class TipoAtencionFrame extends JInternalFrame {
 		pnlAcciones.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(e -> {
+			// TODO: Implementar la funcionalidad para crear un nuevo registro.
+		});
 		pnlAcciones.add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(e -> {
+			// TODO: Implementar la funcionalidad para guardar un registro.
+		});
 		pnlAcciones.add(btnGuardar);
 		
 		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(e -> {
+			// TODO: Implementar la funcionalidad para editar un registro.
+		});
 		pnlAcciones.add(btnEditar);
 		
 		JPanel pnlRegistros = new JPanel();
@@ -125,7 +131,14 @@ public class TipoAtencionFrame extends JInternalFrame {
 			}
 		});
 		spnRegistros.setViewportView(tblRegistros);
+		tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+		// Listener para la selección de una fila de la tabla:
+		tblRegistros.getSelectionModel().addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting()) {
+				
+			}
+		});
 	}
 
 }
