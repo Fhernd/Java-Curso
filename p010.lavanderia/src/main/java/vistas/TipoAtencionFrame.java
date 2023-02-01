@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.border.TitledBorder;
 
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.TipoAtencion;
 
 import java.awt.GridLayout;
 import javax.swing.table.DefaultTableModel;
@@ -90,7 +91,6 @@ public class TipoAtencionFrame extends JInternalFrame {
             String nombre = txtNombre.getText().trim();
 
             if (!nombre.isEmpty()) {
-                // Confirmar si se desea crear un nuevo registro:
                 int opcion = JOptionPane.showConfirmDialog(this, "¿Desea crear un nuevo registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
                 if (opcion == JOptionPane.YES_OPTION) {
@@ -105,6 +105,27 @@ public class TipoAtencionFrame extends JInternalFrame {
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(e -> {
             // TODO: Implementar la funcionalidad para guardar un registro.
+            String nombre = txtNombre.getText().trim();
+
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar un nombre.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            TipoAtencion tipoAtencion = new TipoAtencion();
+            tipoAtencion.setNombre(nombre);
+
+            tipoAtencion = gestorLavanderiaGUI.crearTipoAtencion(tipoAtencion);
+
+            if (tipoAtencion == null) {
+                JOptionPane.showMessageDialog(this, "No se pudo crear el registro.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Registro creado correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            limpiarCampos();
         });
         pnlAcciones.add(btnGuardar);
 
