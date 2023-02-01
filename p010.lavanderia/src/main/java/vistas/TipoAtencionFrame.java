@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class TipoAtencionFrame extends JInternalFrame {
 
@@ -23,7 +24,7 @@ public class TipoAtencionFrame extends JInternalFrame {
 	private static final long serialVersionUID = 2632599037283355071L;
 	private JTextField txtId;
 	private JTextField txtNombre;
-	private JTable table;
+	private JTable tblRegistros;
 
 	/**
 	 * Create the frame.
@@ -98,8 +99,29 @@ public class TipoAtencionFrame extends JInternalFrame {
 		JScrollPane spnRegistros = new JScrollPane();
 		pnlRegistros.add(spnRegistros, BorderLayout.CENTER);
 		
-		table = new JTable();
-		spnRegistros.setViewportView(table);
+		tblRegistros = new JTable();
+		tblRegistros.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+			},
+			new String[] {
+				"ID", "Nombre"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		spnRegistros.setViewportView(tblRegistros);
 
 	}
 
