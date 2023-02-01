@@ -685,6 +685,33 @@ public class ServicioFrame extends JInternalFrame {
         tblAtencionesRegistros.setComponentPopupMenu(pmuOpcionesAtenciones);
 
         tblAtencionesRegistros.addMouseListener(new TableMouseListener(tblAtencionesRegistros));
+
+        // Asociar el evento de eliminación del registro seleccionado:
+        mniEliminarRegistro.addActionListener(e -> {
+            int filaSeleccionada = tblAtencionesRegistros.getSelectedRow();
+            if (filaSeleccionada == -1) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un registro", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el registro?", "Mensaje", JOptionPane.YES_NO_OPTION);
+            if (opcion == JOptionPane.NO_OPTION) {
+                return;
+            }
+
+            int atencionId = (int) tblAtencionesRegistros.getValueAt(filaSeleccionada, 0);
+
+            boolean eliminado = gestorLavanderiaGUI.eliminarAtencionPorId(atencionId);
+
+            if (!eliminado) {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el registro.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Registro eliminado con éxito", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            cargarAtenciones(servicioId);
+        });
     }
 
     /**

@@ -557,6 +557,16 @@ public class GestorLavanderiaGUI {
      * @return Atencion Atención creada.
      */
     public Atencion crearAtencion(Atencion atencion) {
-       return gestorLavanderia.crearAtencion(atencion);
+        return gestorLavanderia.crearAtencion(atencion);
+    }
+
+    /**
+     * Eliminar una atención a partir de su ID.
+     *
+     * @param atencionId ID de la atención.
+     * @return boolean True si se eliminó correctamente, false si no.
+     */
+    public boolean eliminarAtencionPorId(int atencionId) {
+        return gestorLavanderia.eliminarAtencionPorId(atencionId);
     }
 }

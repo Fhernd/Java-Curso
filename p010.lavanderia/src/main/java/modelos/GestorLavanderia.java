@@ -553,4 +553,14 @@ public class GestorLavanderia {
     public boolean eliminarServicioPorId(int servicioId) {
         return accesoDatos.eliminarServicioPorId(servicioId);
     }
+
+    /**
+     * Eliminar una atención a partir de su ID.
+     *
+     * @param atencionId ID de la atención.
+     * @return boolean True si se eliminó correctamente, false si no.
+     */
+    public boolean eliminarAtencionPorId(int atencionId) {
+        return accesoDatos.eliminarAtencionPorId(atencionId);
+    }
 }
