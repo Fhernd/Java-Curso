@@ -25,11 +25,14 @@ public class TipoAtencionFrame extends JInternalFrame {
 	private JTextField txtId;
 	private JTextField txtNombre;
 	private JTable tblRegistros;
+	
+	private GestorLavanderiaGUI gestorLavanderiaGUI;
 
 	/**
 	 * Create the frame.
 	 */
-	public TipoAtencionFrame() {
+	public TipoAtencionFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
 		setTitle("Tipo Atención");
 		setClosable(true);
 		setBounds(100, 100, 500, 575);
