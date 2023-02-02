@@ -1566,4 +1566,25 @@ public class AccesoDatos {
 
         return null;
     }
+
+    /**
+     * Actualiza un tipo de atención.
+     *
+     * @param tipoAtencion Tipo de atención a actualizar.
+     * @return boolean True si se actualizó correctamente, false si no.
+     */
+    public boolean actualizarTipoAtencion(TipoAtencion tipoAtencion) {
+        try {
+            final String SQL = "UPDATE tipo_atencion SET nombre = ? WHERE id = ?";
+            PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
+            sentencia.setString(1, tipoAtencion.getNombre());
+            sentencia.setInt(2, tipoAtencion.getId());
+
+            return sentencia.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
