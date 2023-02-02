@@ -16,6 +16,7 @@ import java.awt.GridLayout;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class TipoAtencionFrame extends JInternalFrame {
 
@@ -104,7 +105,6 @@ public class TipoAtencionFrame extends JInternalFrame {
 
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(e -> {
-            // TODO: Implementar la funcionalidad para guardar un registro.
             String nombre = txtNombre.getText().trim();
 
             if (nombre.isEmpty()) {
@@ -178,6 +178,8 @@ public class TipoAtencionFrame extends JInternalFrame {
 
             }
         });
+
+        mostrarRegistros();
     }
 
     /**
@@ -188,4 +190,21 @@ public class TipoAtencionFrame extends JInternalFrame {
         txtNombre.setText("");
     }
 
+    /**
+     * Muestra todos los registros de tipo atención en la tabla.
+     */
+    private void mostrarRegistros() {
+        List<TipoAtencion> tipoAtenciones = gestorLavanderiaGUI.obtenerTiposAtencion();
+
+        DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();
+
+        modelo.setRowCount(0);
+
+        for (TipoAtencion tipoAtencion : tipoAtenciones) {
+            modelo.addRow(new Object[]{
+                    tipoAtencion.getId(),
+                    tipoAtencion.getNombre()
+            });
+        }
+    }
 }
