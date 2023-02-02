@@ -130,6 +130,7 @@ public class TipoAtencionFrame extends JInternalFrame {
         pnlAcciones.add(btnGuardar);
 
         JButton btnEditar = new JButton("Editar");
+        btnEditar.setEnabled(false);
         btnEditar.addActionListener(e -> {
             // TODO: Implementar la funcionalidad para editar un registro.
         });
@@ -173,9 +174,13 @@ public class TipoAtencionFrame extends JInternalFrame {
 
         // Listener para la selección de una fila de la tabla:
         tblRegistros.getSelectionModel().addListSelectionListener(e -> {
-            // TODO: Implementar la funcionalidad para mostrar los datos del registro seleccionado.
-            if (!e.getValueIsAdjusting()) {
+            if (tblRegistros.getSelectedRow() != -1) {
+                btnEditar.setEnabled(true);
+                int id = (int) tblRegistros.getValueAt(tblRegistros.getSelectedRow(), 0);
+                String nombre = (String) tblRegistros.getValueAt(tblRegistros.getSelectedRow(), 1);
 
+                txtId.setText(String.valueOf(id));
+                txtNombre.setText(nombre);
             }
         });
 
