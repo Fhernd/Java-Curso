@@ -14,8 +14,6 @@ import modelos.TipoAtencion;
 
 import java.awt.GridLayout;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.util.List;
 
 public class TipoAtencionFrame extends JInternalFrame {
@@ -132,7 +130,32 @@ public class TipoAtencionFrame extends JInternalFrame {
         JButton btnEditar = new JButton("Editar");
         btnEditar.setEnabled(false);
         btnEditar.addActionListener(e -> {
-            // TODO: Implementar la funcionalidad para editar un registro.
+            String nombre = txtNombre.getText().trim();
+
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar un nombre.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            TipoAtencion tipoAtencion = new TipoAtencion();
+            tipoAtencion.setId(Integer.parseInt(txtId.getText()));
+            tipoAtencion.setNombre(nombre);
+
+            boolean resultado = gestorLavanderiaGUI.actualizarTipoAtencion(tipoAtencion);
+
+            if (!resultado) {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el registro.", "Mensaje", JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
+            JOptionPane.showMessageDialog(this, "Registro actualizado correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+
+            limpiarCampos();
+
+            btnEditar.setEnabled(false);
+
+            cargarRegistros();
         });
         pnlAcciones.add(btnEditar);
 
@@ -172,7 +195,6 @@ public class TipoAtencionFrame extends JInternalFrame {
         spnRegistros.setViewportView(tblRegistros);
         tblRegistros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        // Listener para la selección de una fila de la tabla:
         tblRegistros.getSelectionModel().addListSelectionListener(e -> {
             if (tblRegistros.getSelectedRow() != -1) {
                 btnEditar.setEnabled(true);
@@ -184,7 +206,7 @@ public class TipoAtencionFrame extends JInternalFrame {
             }
         });
 
-        mostrarRegistros();
+        cargarRegistros();
     }
 
     /**
@@ -198,7 +220,7 @@ public class TipoAtencionFrame extends JInternalFrame {
     /**
      * Muestra todos los registros de tipo atención en la tabla.
      */
-    private void mostrarRegistros() {
+    private void cargarRegistros() {
         List<TipoAtencion> tipoAtenciones = gestorLavanderiaGUI.obtenerTiposAtencion();
 
         DefaultTableModel modelo = (DefaultTableModel) tblRegistros.getModel();

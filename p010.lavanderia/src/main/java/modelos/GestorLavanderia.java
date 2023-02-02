@@ -573,4 +573,14 @@ public class GestorLavanderia {
     public TipoAtencion crearTipoAtencion(TipoAtencion tipoAtencion) {
         return accesoDatos.crearTipoAtencion(tipoAtencion);
     }
+
+    /**
+     * Actualiza un tipo de atención.
+     *
+     * @param tipoAtencion Tipo de atención a actualizar.
+     * @return boolean True si se actualizó correctamente, false si no.
+     */
+    public boolean actualizarTipoAtencion(TipoAtencion tipoAtencion) {
+        return accesoDatos.actualizarTipoAtencion(tipoAtencion);
+    }
 }
