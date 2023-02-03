@@ -1,7 +1,7 @@
-insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (1, 1167249975, 'Nana', 'Horry', 'Nana.Horry@mail.co', 2);
+-- insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (1, 1167249975, 'Nana', 'Horry', 'Nana.Horry@mail.co', 2);
 insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (2, 1279955816, 'Burk', 'Sparkwill', 'Burk.Sparkwill@mail.co', 4);
 insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (3, 1135544156, 'Langsdon', 'Russen', 'Langsdon.Russen@mail.co', 4);
-insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (4, 1096453348, 'Kelsey', 'Kreutzer', 'Kelsey.Kreutzer@mail.co', 4);
+-- insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (4, 1096453348, 'Kelsey', 'Kreutzer', 'Kelsey.Kreutzer@mail.co', 4);
 insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (5, 1136095152, 'Kristofor', 'Duffy', 'Kristofor.Duffy@mail.co', 3);
 insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (6, 1178376370, 'Bernie', 'Mistry', 'Bernie.Mistry@mail.co', 3);
 insert into cliente (id, documento, nombres, apellidos, correo, tipo_documento_id) values (7, 1156714040, 'Belicia', 'Russilll', 'Belicia.Russilll@mail.co', 2);
