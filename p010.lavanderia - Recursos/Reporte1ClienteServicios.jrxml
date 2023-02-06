@@ -106,6 +106,20 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Nombre completo]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="140" height="26" uuid="4e50fe35-23d6-427d-8414-8daa76725a6b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8740bc37-2feb-4756-b8e1-eb8d6f78b764"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Correo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="75" height="26" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -125,6 +139,20 @@
 					</reportElement>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{nombres} + " " + $F{apellidos}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="340" y="0" width="140" height="18" uuid="08c205ad-db9a-4458-a6bf-809fc1c75499">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8740bc37-2feb-4756-b8e1-eb8d6f78b764"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{correo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="480" y="0" width="75" height="18" uuid="a41faa47-8cee-4a7c-a611-8700066d4ebd">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cantidad_servicios}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
