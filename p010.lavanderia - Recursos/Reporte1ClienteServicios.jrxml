@@ -99,6 +99,13 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Documento]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="128" y="0" width="212" height="26" uuid="14b92032-6dd3-4051-be40-523df4427548">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36118589-7e97-4c5d-afae-643727bd5ea0"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nombre completo]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -109,7 +116,15 @@
 					<reportElement x="0" y="0" width="128" height="18" uuid="7a2d08d2-ba68-46f2-91da-050fc4bcf002">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6298d418-5ebf-45a7-bb52-eff541bda8ba"/>
 					</reportElement>
+					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="128" y="0" width="212" height="18" uuid="841d604d-fe07-465a-ad25-d7418430e33a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36118589-7e97-4c5d-afae-643727bd5ea0"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nombres} + " " + $F{apellidos}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
