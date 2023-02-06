@@ -774,7 +774,7 @@ public class AccesoDatos {
         List<Cliente> clientes = new ArrayList<>();
 
         try {
-            final String SQL = "SELECT cliente.id, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT ?";
+            final String SQL = "SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT ?";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             sentencia.setInt(1, cantidadClientes);
 
