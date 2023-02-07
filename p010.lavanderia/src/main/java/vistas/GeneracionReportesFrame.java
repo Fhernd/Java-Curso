@@ -109,13 +109,17 @@ public class GeneracionReportesFrame extends JInternalFrame {
                 parametrosReporte.put("fechaInicio", fechaInicio);
                 parametrosReporte.put("fechaFinal", fechaFinal);
 
-                final String rutaReporte = "reportes/Reporte1ClienteServicios.jasper";
-                File reporte = new File(rutaReporte);
+//                final String rutaReporte = "reportes/Reporte1ClienteServicios.jasper";
+//                File reporte = new File(rutaReporte);
+
+                // Cargar el archivo Reporte1ClienteServicios.jasper desde la carpeta resources del proyecto:
+                File reporte = new File(getClass().getResource("/reportes/Reporte1ClienteServicios.jasper").getFile());
 
                 if (!reporte.exists()) {
                     JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+
                 try {
                     InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
                     JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
