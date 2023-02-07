@@ -3,6 +3,8 @@ package modelos;
 import datos.AccesoDatos;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -582,5 +584,14 @@ public class GestorLavanderia {
      */
     public boolean actualizarTipoAtencion(TipoAtencion tipoAtencion) {
         return accesoDatos.actualizarTipoAtencion(tipoAtencion);
+    }
+
+    /**
+     * Obtiene la conexión a la base de datos.
+     *
+     * @return Conexion Conexión a la base de datos.
+     */
+    public Connection getConexion() throws SQLException {
+        return accesoDatos.getConexion();
     }
 }

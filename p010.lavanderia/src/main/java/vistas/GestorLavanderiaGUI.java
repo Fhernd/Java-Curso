@@ -1,6 +1,7 @@
 package vistas;
 
 import modelos.*;
+import net.sf.jasperreports.engine.JRDataSource;
 import utilidades.Utilidad;
 
 import java.awt.EventQueue;
@@ -9,6 +10,8 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class GestorLavanderiaGUI {
@@ -160,7 +163,7 @@ public class GestorLavanderiaGUI {
             tipoAtencionFrame.setVisible(true);
         });
         mnuOtros.add(mniTipoAtencion);
-        
+
         JMenuItem mniGenerarReportes = new JMenuItem("Generar reportes...");
         mniGenerarReportes.addActionListener(e -> {
             GeneracionReportesFrame reportesFrame = new GeneracionReportesFrame(this);
@@ -607,5 +610,14 @@ public class GestorLavanderiaGUI {
      */
     public boolean actualizarTipoAtencion(TipoAtencion tipoAtencion) {
         return gestorLavanderia.actualizarTipoAtencion(tipoAtencion);
+    }
+
+    /**
+     * Obtiene la conexión a la base de datos.
+     *
+     * @return Conexion Conexión a la base de datos.
+     */
+    public Connection getConexion() throws SQLException {
+        return gestorLavanderia.getConexion();
     }
 }

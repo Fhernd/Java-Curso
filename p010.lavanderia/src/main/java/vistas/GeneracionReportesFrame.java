@@ -16,11 +16,13 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import utilidades.Utilidad;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,9 +121,11 @@ public class GeneracionReportesFrame extends JInternalFrame {
                     JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
 
                     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosReporte, gestorLavanderiaGUI.getConexion());
-
+                    JasperViewer.viewReport(jasperPrint, false);
                 } catch (JRException | FileNotFoundException e1) {
                     e1.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
