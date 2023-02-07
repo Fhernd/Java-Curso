@@ -160,6 +160,12 @@ public class GestorLavanderiaGUI {
             tipoAtencionFrame.setVisible(true);
         });
         mnuOtros.add(mniTipoAtencion);
+        
+        JMenuItem mniGenerarReportes = new JMenuItem("Generar reportes...");
+        mniGenerarReportes.addActionListener(e -> {
+            // TODO: Mostrar ventana de reportes
+        });
+        mnuOtros.add(mniGenerarReportes);
     }
 
     public Usuario iniciarSesion(String email, String password) {
