@@ -15,6 +15,8 @@ import javax.swing.JSpinner;
 
 public class GeneracionReportesFrame extends JInternalFrame {
 
+	private GestorLavanderiaGUI gestorLavanderiaGUI;
+
 	/**
 	 * Serial version ID.
 	 */
@@ -23,7 +25,9 @@ public class GeneracionReportesFrame extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GeneracionReportesFrame() {
+	public GeneracionReportesFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+		this.gestorLavanderiaGUI = gestorLavanderiaGUI;
+
 		setTitle("Generación de Reportes");
 		setBounds(100, 100, 500, 540);
 		getContentPane().setLayout(new GridLayout(4, 1, 0, 0));

@@ -163,7 +163,9 @@ public class GestorLavanderiaGUI {
         
         JMenuItem mniGenerarReportes = new JMenuItem("Generar reportes...");
         mniGenerarReportes.addActionListener(e -> {
-            // TODO: Mostrar ventana de reportes
+            GeneracionReportesFrame reportesFrame = new GeneracionReportesFrame(this);
+            dtpPrincipal.add(reportesFrame);
+            reportesFrame.setVisible(true);
         });
         mnuOtros.add(mniGenerarReportes);
     }
