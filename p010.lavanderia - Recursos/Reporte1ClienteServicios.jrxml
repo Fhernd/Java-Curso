@@ -13,11 +13,11 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="cantidadClientes" class="java.lang.Integer">
+	<parameter name="cantidadClientes" class="java.lang.Integer" evaluationTime="Late">
 		<parameterDescription><![CDATA[Cantidad de clientes a mostrar en el reporte]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT 13]]>
+		<![CDATA[SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT  $P{cantidadClientes} ]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -96,28 +96,28 @@
 	<columnHeader>
 		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="128" height="26" uuid="3f31368e-48be-4f46-95d3-6d2763996300">
+				<reportElement mode="Opaque" x="0" y="0" width="128" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="3f31368e-48be-4f46-95d3-6d2763996300">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6298d418-5ebf-45a7-bb52-eff541bda8ba"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="128" y="0" width="212" height="26" uuid="14b92032-6dd3-4051-be40-523df4427548">
+				<reportElement mode="Opaque" x="128" y="0" width="212" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="14b92032-6dd3-4051-be40-523df4427548">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36118589-7e97-4c5d-afae-643727bd5ea0"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Nombre completo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="0" width="140" height="26" uuid="4e50fe35-23d6-427d-8414-8daa76725a6b">
+				<reportElement mode="Opaque" x="340" y="0" width="140" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="4e50fe35-23d6-427d-8414-8daa76725a6b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8740bc37-2feb-4756-b8e1-eb8d6f78b764"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Correo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="0" width="75" height="26" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
+				<reportElement mode="Opaque" x="480" y="0" width="73" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
