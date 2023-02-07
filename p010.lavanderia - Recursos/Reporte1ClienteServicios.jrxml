@@ -13,6 +13,9 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
+	<parameter name="cantidadClientes" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Cantidad de clientes a mostrar en el reporte]]></parameterDescription>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT 13]]>
 	</queryString>
@@ -151,7 +154,7 @@
 					<reportElement x="480" y="0" width="75" height="18" uuid="a41faa47-8cee-4a7c-a611-8700066d4ebd">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
 					</reportElement>
-					<textElement verticalAlignment="Middle"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{cantidad_servicios}]]></textFieldExpression>
 				</textField>
 			</frame>
