@@ -16,8 +16,21 @@
 	<parameter name="cantidadClientes" class="java.lang.Integer" evaluationTime="Late">
 		<parameterDescription><![CDATA[Cantidad de clientes a mostrar en el reporte]]></parameterDescription>
 	</parameter>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<parameterDescription><![CDATA[Fecha inicio para el reporte]]></parameterDescription>
+	</parameter>
+	<parameter name="fechaFinal" class="java.lang.String">
+		<parameterDescription><![CDATA[Fecha final para el reporte]]></parameterDescription>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id GROUP BY cliente.id ORDER BY cantidad_servicios DESC LIMIT  $P{cantidadClientes} ]]>
+		<![CDATA[SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios 
+FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id 
+WHERE s.fecha_hora_recepcion BETWEEN $P{fechaInicio} AND $P{fechaFinal} 
+ GROUP BY cliente.id 
+ ORDER BY cantidad_servicios 
+ DESC LIMIT  $P{cantidadClientes} 
+ 
+]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -87,6 +100,11 @@
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="2" y="1" width="378" height="30" forecolor="#FFFFFF" backcolor="#CC0000" uuid="b5e7901b-8e94-403f-a4c1-cc1e84b89854"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Reporte desde " + $P{fechaInicio} + " hasta " + $P{fechaFinal}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</title>
@@ -117,7 +135,7 @@
 				<text><![CDATA[Correo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="480" y="0" width="73" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
+				<reportElement mode="Opaque" x="480" y="0" width="75" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
