@@ -1587,4 +1587,13 @@ public class AccesoDatos {
 
         return false;
     }
+
+    /**
+     * Obtiene la conexión a la base de datos.
+     *
+     * @return Conexion Conexión a la base de datos.
+     */
+    public Connection getConexion() throws SQLException {
+        return conexion.getConnection();
+    }
 }
