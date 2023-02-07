@@ -1,17 +1,17 @@
 package vistas;
 
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.awt.GridLayout;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JLabel;
 import com.toedter.calendar.JDateChooser;
-import javax.swing.JButton;
-import javax.swing.JSpinner;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.Date;
 
 public class GeneracionReportesFrame extends JInternalFrame {
 
@@ -21,6 +21,9 @@ public class GeneracionReportesFrame extends JInternalFrame {
 	 * Serial version ID.
 	 */
 	private static final long serialVersionUID = 8174451787899692365L;
+	private JSpinner spnCantidadClientes;
+	private JDateChooser datReporte1FechaInicio;
+	private JDateChooser datReporte1FechaFinal;
 
 	/**
 	 * Create the frame.
@@ -61,19 +64,19 @@ public class GeneracionReportesFrame extends JInternalFrame {
 		JLabel lblReporte1CantidadClientes = new JLabel("Cantidad clientes:");
 		pnlReporte1.add(lblReporte1CantidadClientes, "2, 2");
 		
-		JSpinner spnCantidadClientes = new JSpinner();
+		spnCantidadClientes = new JSpinner();
 		pnlReporte1.add(spnCantidadClientes, "12, 2");
 		
 		JLabel lblReporte1FechaInicio = new JLabel("Fecha inicio:");
 		pnlReporte1.add(lblReporte1FechaInicio, "2, 4");
 		
-		JDateChooser datReporte1FechaInicio = new JDateChooser();
+		datReporte1FechaInicio = new JDateChooser();
 		pnlReporte1.add(datReporte1FechaInicio, "12, 4, fill, fill");
 		
 		JLabel lblReporte1FechaFinal = new JLabel("Fecha final:");
 		pnlReporte1.add(lblReporte1FechaFinal, "2, 6");
 		
-		JDateChooser datReporte1FechaFinal = new JDateChooser();
+		datReporte1FechaFinal = new JDateChooser();
 		pnlReporte1.add(datReporte1FechaFinal, "12, 6, fill, fill");
 		
 		JPanel pnlReporte1Botones = new JPanel();
@@ -81,11 +84,49 @@ public class GeneracionReportesFrame extends JInternalFrame {
 		pnlReporte1Botones.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JButton btnReporte1Visualizar = new JButton("Visualizar");
+		btnReporte1Visualizar.addActionListener(e -> {
+			validarDatosReporte1();
+
+
+		});
 		pnlReporte1Botones.add(btnReporte1Visualizar);
 		
 		JButton btnReporte1Guardar = new JButton("Guardar...");
+		btnReporte1Guardar.addActionListener(e -> {
+			// TODO: Guardar reporte 1
+		});
 		pnlReporte1Botones.add(btnReporte1Guardar);
 
+	}
+
+	/**
+	 * Valida los datos ingresados para el reporte 1.
+	 */
+	private void validarDatosReporte1() {
+		final int cantidadClientes = (int) spnCantidadClientes.getValue();
+
+		if (cantidadClientes <= 0) {
+			JOptionPane.showMessageDialog(this, "La cantidad de clientes debe ser mayor a 0.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		final Date fechaInicio = datReporte1FechaInicio.getDate();
+		final Date fechaFinal = datReporte1FechaFinal.getDate();
+
+		if (fechaInicio == null) {
+			JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de inicio.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		if (fechaFinal == null) {
+			JOptionPane.showMessageDialog(this, "Debe ingresar una fecha final.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		if (fechaInicio != null && fechaFinal != null && fechaInicio.after(fechaFinal)) {
+			JOptionPane.showMessageDialog(this, "La fecha de inicio debe ser menor a la fecha final.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
 	}
 
 }
