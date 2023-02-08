@@ -104,7 +104,7 @@ WHERE servicio.fecha_hora_recepcion BETWEEN $P{fechaInicio} AND $P{fechaFinal}
 				<textField>
 					<reportElement mode="Opaque" x="2" y="1" width="378" height="30" forecolor="#FFFFFF" backcolor="#CC0000" uuid="b5e7901b-8e94-403f-a4c1-cc1e84b89854"/>
 					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Reporte desde " + $P{fechaInicio} + " hasta " + $P{fechaFinal}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Reporte desde " + $P{fechaInicio}.substring(0, 10) + " hasta " + $P{fechaFinal}.substring(0, 10)]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
