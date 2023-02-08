@@ -108,24 +108,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
                 parametrosReporte.put("fechaInicio", fechaInicio);
                 parametrosReporte.put("fechaFinal", fechaFinal);
 
-                File reporte = new File(getClass().getResource("/reportes/Reporte1ClienteServicios.jasper").getFile());
-
-                if (!reporte.exists()) {
-                    JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-
-                try {
-                    InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
-                    JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
-
-                    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosReporte, gestorLavanderiaGUI.getConexion());
-                    JasperViewer.viewReport(jasperPrint, false);
-                } catch (JRException | FileNotFoundException e1) {
-                    e1.printStackTrace();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                visualizarReporte(parametrosReporte, "/reportes/Reporte1ClienteServicios.jasper");
             }
         });
         pnlReporte1Botones.add(btnReporte1Visualizar);
@@ -192,6 +175,32 @@ public class GeneracionReportesFrame extends JInternalFrame {
             // TODO: Guardar reporte 2.
         });
         pnlReporte2.add(btnReporte2Guardar);
+    }
+
+    /**
+     * Visualización de un reporte con ciertos parámetros.
+     * @param parametrosReporte Parámetros del reporte.
+     * @param nombreReporte Nombre del reporte.
+     */
+    private void visualizarReporte(Map parametrosReporte, String nombreReporte) {
+        File reporte = new File(getClass().getResource(nombreReporte).getFile());
+
+        if (!reporte.exists()) {
+            JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosReporte, gestorLavanderiaGUI.getConexion());
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException | FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
