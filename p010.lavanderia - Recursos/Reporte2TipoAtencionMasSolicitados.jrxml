@@ -24,42 +24,22 @@
 		<parameterDescription><![CDATA[Fecha final para el reporte]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT cliente.id, cliente.documento, cliente.nombres, cliente.apellidos, cliente.correo, cliente.tipo_documento_id, COUNT(servicio.id) AS cantidad_servicios 
-FROM cliente INNER JOIN servicio ON cliente.id = servicio.cliente_id 
-WHERE servicio.fecha_hora_recepcion BETWEEN $P{fechaInicio} AND $P{fechaFinal} 
- GROUP BY cliente.id 
- ORDER BY cantidad_servicios 
- DESC LIMIT  $P{cantidadClientes}]]>
+		<![CDATA[SELECT tipo_atencion.id, tipo_atencion.nombre, COUNT(atencion.id) AS cantidad_servicios 
+FROM tipo_atencion 
+INNER JOIN atencion ON tipo_atencion.id = atencion.tipo_atencion_id 
+GROUP BY tipo_atencion.id 
+ORDER BY cantidad_servicios DESC LIMIT 10
+]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_atencion"/>
 	</field>
-	<field name="documento" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="documento"/>
-		<property name="com.jaspersoft.studio.field.label" value="documento"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
-	</field>
-	<field name="nombres" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nombres"/>
-		<property name="com.jaspersoft.studio.field.label" value="nombres"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
-	</field>
-	<field name="apellidos" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="apellidos"/>
-		<property name="com.jaspersoft.studio.field.label" value="apellidos"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
-	</field>
-	<field name="correo" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="correo"/>
-		<property name="com.jaspersoft.studio.field.label" value="correo"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
-	</field>
-	<field name="tipo_documento_id" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="tipo_documento_id"/>
-		<property name="com.jaspersoft.studio.field.label" value="tipo_documento_id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_atencion"/>
 	</field>
 	<field name="cantidad_servicios" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="cantidad_servicios"/>
@@ -112,24 +92,17 @@ WHERE servicio.fecha_hora_recepcion BETWEEN $P{fechaInicio} AND $P{fechaFinal}
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6298d418-5ebf-45a7-bb52-eff541bda8ba"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Documento]]></text>
+				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="128" y="0" width="212" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="14b92032-6dd3-4051-be40-523df4427548">
+				<reportElement mode="Opaque" x="128" y="0" width="278" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="14b92032-6dd3-4051-be40-523df4427548">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36118589-7e97-4c5d-afae-643727bd5ea0"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nombre completo]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="340" y="0" width="140" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="4e50fe35-23d6-427d-8414-8daa76725a6b">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8740bc37-2feb-4756-b8e1-eb8d6f78b764"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Correo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="480" y="0" width="75" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
+				<reportElement mode="Opaque" x="406" y="0" width="149" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -141,6 +114,27 @@ WHERE servicio.fecha_hora_recepcion BETWEEN $P{fechaInicio} AND $P{fechaFinal}
 		<band height="18" splitType="Stretch">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259"/>
+				<textField>
+					<reportElement x="0" y="0" width="128" height="18" uuid="66257e4c-2201-4ef3-84f8-2242fc830ea3">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="13bc0688-9f6f-4a70-adac-c725c1bd398a"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="128" y="0" width="278" height="18" uuid="f1846458-8398-453f-92e7-51ab18abb02a">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5630bef0-f730-4182-8a51-99987ecf8430"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="406" y="0" width="149" height="18" uuid="421a3fc4-87dd-4e71-b08f-a240cb7d673b">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="29d58cb8-6b2b-42ef-ad5a-dd88b440683f"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{cantidad_servicios}]]></textFieldExpression>
+				</textField>
 			</frame>
 		</band>
 	</detail>
