@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.BorderLayout;
 
 public class GeneracionReportesFrame extends JInternalFrame {
 
@@ -46,7 +47,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         setTitle("Generación de Reportes");
         setBounds(100, 100, 500, 540);
         getContentPane().setLayout(new GridLayout(4, 1, 0, 0));
-
+        
         JPanel pnlReporte1 = new JPanel();
         pnlReporte1.setBorder(new TitledBorder(null, "Clientes con m\u00E1s servicios solicitados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(pnlReporte1);
@@ -175,6 +176,22 @@ public class GeneracionReportesFrame extends JInternalFrame {
         });
         pnlReporte1Botones.add(btnReporte1Guardar);
 
+        JPanel pnlReporte2 = new JPanel();
+        pnlReporte2.setBorder(new TitledBorder(null, "Tipos de atenci\u00F3n m\u00E1s solicitados (10)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        getContentPane().add(pnlReporte2);
+        pnlReporte2.setLayout(new GridLayout(2, 1, 0, 15));
+        
+        JButton btnReporte2Visualizar = new JButton("Visualizar");
+        btnReporte2Visualizar.addActionListener(e -> {
+            // TODO: Visualizar reporte 2.
+        });
+        pnlReporte2.add(btnReporte2Visualizar);
+        
+        JButton btnReporte2Guardar = new JButton("Guardar...");
+        btnReporte2Guardar.addActionListener(e -> {
+            // TODO: Guardar reporte 2.
+        });
+        pnlReporte2.add(btnReporte2Guardar);
     }
 
     /**
