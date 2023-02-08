@@ -3,16 +3,14 @@ package vistas;
 import javax.swing.*;
 import java.awt.GridLayout;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.toedter.calendar.JDateChooser;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -133,7 +131,47 @@ public class GeneracionReportesFrame extends JInternalFrame {
 
         JButton btnReporte1Guardar = new JButton("Guardar...");
         btnReporte1Guardar.addActionListener(e -> {
-            // TODO: Guardar reporte 1
+            if (validarDatosReporte1()) {
+                final int cantidadClientes = (int) spnCantidadClientes.getValue();
+                final String fechaInicio = Utilidad.fechaToString(datReporte1FechaInicio.getDate()) + " 00:00:00";
+                final String fechaFinal = Utilidad.fechaToString(datReporte1FechaFinal.getDate()) + " 23:59:59";
+
+                Map parametrosReporte = new HashMap();
+                parametrosReporte.put("cantidadClientes", cantidadClientes);
+                parametrosReporte.put("fechaInicio", fechaInicio);
+                parametrosReporte.put("fechaFinal", fechaFinal);
+
+                File reporte = new File(getClass().getResource("/reportes/Reporte1ClienteServicios.jasper").getFile());
+
+                if (!reporte.exists()) {
+                    JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos PDF", "pdf"));
+
+                int seleccion = fileChooser.showSaveDialog(this);
+
+                if (seleccion == JFileChooser.APPROVE_OPTION) {
+                    File archivoSeleccionado = fileChooser.getSelectedFile();
+
+                    try {
+                        InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
+                        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
+
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosReporte, gestorLavanderiaGUI.getConexion());
+
+                        JasperExportManager.exportReportToPdfFile(jasperPrint, archivoSeleccionado.getAbsolutePath() + ".pdf");
+
+                        JOptionPane.showMessageDialog(this, "El reporte se guardó correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (JRException | FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
         });
         pnlReporte1Botones.add(btnReporte1Guardar);
 
