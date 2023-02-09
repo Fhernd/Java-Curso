@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.BorderLayout;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
 public class GeneracionReportesFrame extends JInternalFrame {
 
@@ -49,7 +51,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         getContentPane().setLayout(new GridLayout(4, 1, 0, 0));
 
         JPanel pnlReporte1 = new JPanel();
-        pnlReporte1.setBorder(new TitledBorder(null, "Clientes con m\u00E1s servicios solicitados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        pnlReporte1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Reporte 1: Clientes con m\u00E1s servicios solicitados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         getContentPane().add(pnlReporte1);
         pnlReporte1.setLayout(new FormLayout(new ColumnSpec[]{
                 FormSpecs.RELATED_GAP_COLSPEC,
@@ -94,7 +96,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
 
         JPanel pnlReporte1Botones = new JPanel();
         pnlReporte1.add(pnlReporte1Botones, "12, 8, fill, fill");
-        pnlReporte1Botones.setLayout(new GridLayout(0, 2, 0, 0));
+        pnlReporte1Botones.setLayout(new GridLayout(0, 2, 10, 0));
 
         JButton btnReporte1Visualizar = new JButton("Visualizar");
         btnReporte1Visualizar.addActionListener(e -> {
@@ -131,7 +133,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         pnlReporte1Botones.add(btnReporte1Guardar);
 
         JPanel pnlReporte2 = new JPanel();
-        pnlReporte2.setBorder(new TitledBorder(null, "Tipos de atenci\u00F3n m\u00E1s solicitados (10)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        pnlReporte2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Reporte 2: Tipos de atenci\u00F3n m\u00E1s solicitados (10)", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         getContentPane().add(pnlReporte2);
         pnlReporte2.setLayout(new GridLayout(2, 1, 0, 15));
 
@@ -148,6 +150,54 @@ public class GeneracionReportesFrame extends JInternalFrame {
             guardarReporte(parametrosReporte, "/reportes/Reporte2TipoAtencionMasSolicitados.jasper");
         });
         pnlReporte2.add(btnReporte2Guardar);
+        
+        JPanel pnlReporte3 = new JPanel();
+        pnlReporte3.setBorder(new TitledBorder(null, "Reporte 3: Empleados con Mayor N\u00FAmero de Atenci\u00F3n de Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        getContentPane().add(pnlReporte3);
+        pnlReporte3.setLayout(new FormLayout(new ColumnSpec[] {
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),},
+        	new RowSpec[] {
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),}));
+        
+        JLabel lblReporte3FechaInicio = new JLabel("Fecha inicio.");
+        pnlReporte3.add(lblReporte3FechaInicio, "2, 2");
+        
+        JDateChooser datReporte3FechaInicio = new JDateChooser();
+        pnlReporte3.add(datReporte3FechaInicio, "14, 2, fill, fill");
+        
+        JLabel lblReporte3FechaFinal = new JLabel("Fecha final:");
+        pnlReporte3.add(lblReporte3FechaFinal, "2, 4");
+        
+        JDateChooser datReporte3FechaFinal = new JDateChooser();
+        pnlReporte3.add(datReporte3FechaFinal, "14, 4, fill, fill");
+        
+        JPanel pnlReporte3Botones = new JPanel();
+        pnlReporte3.add(pnlReporte3Botones, "14, 6, fill, fill");
+        pnlReporte3Botones.setLayout(new GridLayout(0, 2, 10, 0));
+        
+        JButton btnReporte3Visualizar = new JButton("Visualizar");
+        pnlReporte3Botones.add(btnReporte3Visualizar);
+        
+        JButton btnReporte3Guardar = new JButton("Guardar...");
+        pnlReporte3Botones.add(btnReporte3Guardar);
     }
 
     /**
