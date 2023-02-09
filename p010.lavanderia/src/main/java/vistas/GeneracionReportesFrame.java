@@ -157,7 +157,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
      * @param nombreReporte     Nombre del reporte.
      */
     private void guardarReporte(Map parametrosReporte, String nombreReporte) {
-        File reporte = new File(getClass().getResource("/reportes/Reporte1ClienteServicios.jasper").getFile());
+        File reporte = new File(getClass().getResource(nombreReporte).getFile());
 
         if (!reporte.exists()) {
             JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
