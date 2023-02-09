@@ -11,20 +11,15 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.toedter.calendar.JDateChooser;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import utilidades.Utilidad;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.io.*;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.awt.BorderLayout;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 
@@ -39,6 +34,8 @@ public class GeneracionReportesFrame extends JInternalFrame {
     private JSpinner spnCantidadClientes;
     private JDateChooser datReporte1FechaInicio;
     private JDateChooser datReporte1FechaFinal;
+    private JDateChooser datReporte3FechaInicio;
+    private JDateChooser datReporte3FechaFinal;
 
     /**
      * Create the frame.
@@ -150,54 +147,89 @@ public class GeneracionReportesFrame extends JInternalFrame {
             guardarReporte(parametrosReporte, "/reportes/Reporte2TipoAtencionMasSolicitados.jasper");
         });
         pnlReporte2.add(btnReporte2Guardar);
-        
+
         JPanel pnlReporte3 = new JPanel();
         pnlReporte3.setBorder(new TitledBorder(null, "Reporte 3: Empleados con Mayor N\u00FAmero de Atenci\u00F3n de Servicios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(pnlReporte3);
-        pnlReporte3.setLayout(new FormLayout(new ColumnSpec[] {
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		FormSpecs.DEFAULT_COLSPEC,
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		FormSpecs.DEFAULT_COLSPEC,
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		FormSpecs.DEFAULT_COLSPEC,
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		FormSpecs.DEFAULT_COLSPEC,
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		FormSpecs.DEFAULT_COLSPEC,
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		FormSpecs.DEFAULT_COLSPEC,
-        		FormSpecs.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),},
-        	new RowSpec[] {
-        		FormSpecs.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("default:grow"),
-        		FormSpecs.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("default:grow"),
-        		FormSpecs.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("default:grow"),}));
-        
+        pnlReporte3.setLayout(new FormLayout(new ColumnSpec[]{
+                FormSpecs.RELATED_GAP_COLSPEC,
+                FormSpecs.DEFAULT_COLSPEC,
+                FormSpecs.RELATED_GAP_COLSPEC,
+                FormSpecs.DEFAULT_COLSPEC,
+                FormSpecs.RELATED_GAP_COLSPEC,
+                FormSpecs.DEFAULT_COLSPEC,
+                FormSpecs.RELATED_GAP_COLSPEC,
+                FormSpecs.DEFAULT_COLSPEC,
+                FormSpecs.RELATED_GAP_COLSPEC,
+                FormSpecs.DEFAULT_COLSPEC,
+                FormSpecs.RELATED_GAP_COLSPEC,
+                FormSpecs.DEFAULT_COLSPEC,
+                FormSpecs.RELATED_GAP_COLSPEC,
+                ColumnSpec.decode("default:grow"),},
+                new RowSpec[]{
+                        FormSpecs.RELATED_GAP_ROWSPEC,
+                        RowSpec.decode("default:grow"),
+                        FormSpecs.RELATED_GAP_ROWSPEC,
+                        RowSpec.decode("default:grow"),
+                        FormSpecs.RELATED_GAP_ROWSPEC,
+                        RowSpec.decode("default:grow"),}));
+
         JLabel lblReporte3FechaInicio = new JLabel("Fecha inicio.");
         pnlReporte3.add(lblReporte3FechaInicio, "2, 2");
-        
-        JDateChooser datReporte3FechaInicio = new JDateChooser();
+
+        datReporte3FechaInicio = new JDateChooser();
         pnlReporte3.add(datReporte3FechaInicio, "14, 2, fill, fill");
-        
+
         JLabel lblReporte3FechaFinal = new JLabel("Fecha final:");
         pnlReporte3.add(lblReporte3FechaFinal, "2, 4");
-        
-        JDateChooser datReporte3FechaFinal = new JDateChooser();
+
+        datReporte3FechaFinal = new JDateChooser();
         pnlReporte3.add(datReporte3FechaFinal, "14, 4, fill, fill");
-        
+
         JPanel pnlReporte3Botones = new JPanel();
         pnlReporte3.add(pnlReporte3Botones, "14, 6, fill, fill");
         pnlReporte3Botones.setLayout(new GridLayout(0, 2, 10, 0));
-        
+
         JButton btnReporte3Visualizar = new JButton("Visualizar");
+        btnReporte3Visualizar.addActionListener(e -> {
+            if (validarDatosReporte3()) {
+
+            }
+        });
         pnlReporte3Botones.add(btnReporte3Visualizar);
-        
+
         JButton btnReporte3Guardar = new JButton("Guardar...");
+        btnReporte3Guardar.addActionListener(e -> {
+            // TODO: Guardar reporte 3.
+        });
         pnlReporte3Botones.add(btnReporte3Guardar);
+    }
+
+    /**
+     * Valida los datos del reporte 3.
+     *
+     * @return true si los datos son válidos, false en caso contrario.
+     */
+    private boolean validarDatosReporte3() {
+        final Date fechaInicio = datReporte3FechaInicio.getDate();
+        final Date fechaFinal = datReporte3FechaFinal.getDate();
+
+        if (fechaInicio == null) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de inicio.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (fechaFinal == null) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una fecha final.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        if (fechaInicio.after(fechaFinal)) {
+            JOptionPane.showMessageDialog(this, "La fecha de inicio no puede ser mayor a la fecha final.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+
+        return true;
     }
 
     /**
