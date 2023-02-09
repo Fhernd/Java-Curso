@@ -14,9 +14,6 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="cantidadClientes" class="java.lang.Integer" evaluationTime="Late">
-		<parameterDescription><![CDATA[Cantidad de clientes a mostrar en el reporte]]></parameterDescription>
-	</parameter>
 	<parameter name="fechaInicio" class="java.lang.String">
 		<parameterDescription><![CDATA[Fecha inicio para el reporte]]></parameterDescription>
 	</parameter>
