@@ -47,7 +47,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         setTitle("Generación de Reportes");
         setBounds(100, 100, 500, 540);
         getContentPane().setLayout(new GridLayout(4, 1, 0, 0));
-        
+
         JPanel pnlReporte1 = new JPanel();
         pnlReporte1.setBorder(new TitledBorder(null, "Clientes con m\u00E1s servicios solicitados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(pnlReporte1);
@@ -125,36 +125,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
                 parametrosReporte.put("fechaInicio", fechaInicio);
                 parametrosReporte.put("fechaFinal", fechaFinal);
 
-                File reporte = new File(getClass().getResource("/reportes/Reporte1ClienteServicios.jasper").getFile());
-
-                if (!reporte.exists()) {
-                    JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos PDF", "pdf"));
-
-                int seleccion = fileChooser.showSaveDialog(this);
-
-                if (seleccion == JFileChooser.APPROVE_OPTION) {
-                    File archivoSeleccionado = fileChooser.getSelectedFile();
-
-                    try {
-                        InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
-                        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
-
-                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosReporte, gestorLavanderiaGUI.getConexion());
-
-                        JasperExportManager.exportReportToPdfFile(jasperPrint, archivoSeleccionado.getAbsolutePath() + ".pdf");
-
-                        JOptionPane.showMessageDialog(this, "El reporte se guardó correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (JRException | FileNotFoundException e1) {
-                        e1.printStackTrace();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+                guardarReporte(parametrosReporte, "/reportes/Reporte1ClienteServicios.jasper");
             }
         });
         pnlReporte1Botones.add(btnReporte1Guardar);
@@ -163,25 +134,66 @@ public class GeneracionReportesFrame extends JInternalFrame {
         pnlReporte2.setBorder(new TitledBorder(null, "Tipos de atenci\u00F3n m\u00E1s solicitados (10)", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         getContentPane().add(pnlReporte2);
         pnlReporte2.setLayout(new GridLayout(2, 1, 0, 15));
-        
+
         JButton btnReporte2Visualizar = new JButton("Visualizar");
         btnReporte2Visualizar.addActionListener(e -> {
             Map parametrosReporte = new HashMap();
             visualizarReporte(parametrosReporte, "/reportes/Reporte2TipoAtencionMasSolicitados.jasper");
         });
         pnlReporte2.add(btnReporte2Visualizar);
-        
+
         JButton btnReporte2Guardar = new JButton("Guardar...");
         btnReporte2Guardar.addActionListener(e -> {
-            // TODO: Guardar reporte 2.
+            Map parametrosReporte = new HashMap();
+            guardarReporte(parametrosReporte, "/reportes/Reporte2TipoAtencionMasSolicitados.jasper");
         });
         pnlReporte2.add(btnReporte2Guardar);
     }
 
     /**
-     * Visualización de un reporte con ciertos parámetros.
+     * Guarda el reporte en un archivo PDF.
+     *
      * @param parametrosReporte Parámetros del reporte.
-     * @param nombreReporte Nombre del reporte.
+     * @param nombreReporte     Nombre del reporte.
+     */
+    private void guardarReporte(Map parametrosReporte, String nombreReporte) {
+        File reporte = new File(getClass().getResource("/reportes/Reporte1ClienteServicios.jasper").getFile());
+
+        if (!reporte.exists()) {
+            JOptionPane.showMessageDialog(this, "No se encontró el reporte.", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos PDF", "pdf"));
+
+        int seleccion = fileChooser.showSaveDialog(this);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivoSeleccionado = fileChooser.getSelectedFile();
+
+            try {
+                InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(is);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametrosReporte, gestorLavanderiaGUI.getConexion());
+
+                JasperExportManager.exportReportToPdfFile(jasperPrint, archivoSeleccionado.getAbsolutePath() + ".pdf");
+
+                JOptionPane.showMessageDialog(this, "El reporte se guardó correctamente.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            } catch (JRException | FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Visualización de un reporte con ciertos parámetros.
+     *
+     * @param parametrosReporte Parámetros del reporte.
+     * @param nombreReporte     Nombre del reporte.
      */
     private void visualizarReporte(Map parametrosReporte, String nombreReporte) {
         File reporte = new File(getClass().getResource(nombreReporte).getFile());
