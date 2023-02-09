@@ -166,7 +166,8 @@ public class GeneracionReportesFrame extends JInternalFrame {
         
         JButton btnReporte2Visualizar = new JButton("Visualizar");
         btnReporte2Visualizar.addActionListener(e -> {
-            // TODO: Visualizar reporte 2.
+            Map parametrosReporte = new HashMap();
+            visualizarReporte(parametrosReporte, "/reportes/Reporte2TipoAtencionMasSolicitados.jasper");
         });
         pnlReporte2.add(btnReporte2Visualizar);
         
