@@ -79,7 +79,7 @@ WHERE servicio.fecha_hora_recepcion BETWEEN  $P{fechaInicio}  AND  $P{fechaFinal
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="40" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="128" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="3f31368e-48be-4f46-95d3-6d2763996300">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6298d418-5ebf-45a7-bb52-eff541bda8ba"/>
@@ -88,9 +88,9 @@ WHERE servicio.fecha_hora_recepcion BETWEEN  $P{fechaInicio}  AND  $P{fechaFinal
 				<text><![CDATA[Ganancias:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="128" y="0" width="252" height="26" uuid="be0ffae1-232b-4c8b-a79e-38e6853668b4"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$V{TotalGanancias1}]]></textFieldExpression>
+				<reportElement x="128" y="0" width="182" height="26" uuid="c9c90ad9-160d-4f74-a18a-2e9153b7ff81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["$" + $F{TotalGanancias}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
