@@ -21,31 +21,18 @@
 		<parameterDescription><![CDATA[Fecha final para el reporte]]></parameterDescription>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT empleado.id, empleado.nombres, empleado.apellidos, COUNT(servicio.id) AS cantidad_servicios 
-FROM empleado INNER JOIN servicio ON empleado.id = servicio.empleado_id 
-WHERE servicio.fecha_hora_recepcion BETWEEN  $P{fechaInicio} AND $P{fechaFinal} 
-GROUP BY empleado.id 
-ORDER BY cantidad_servicios DESC LIMIT 10 ]]>
+		<![CDATA[SELECT SUM(cantidad * precio)  AS TotalGanancias
+FROM atencion AS A INNER JOIN servicio ON A.servicio_id = servicio.id  
+WHERE servicio.fecha_hora_recepcion BETWEEN  $P{fechaInicio}  AND  $P{fechaFinal} 
+]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="id"/>
-		<property name="com.jaspersoft.studio.field.label" value="id"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
+	<field name="TotalGanancias" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="TotalGanancias"/>
+		<property name="com.jaspersoft.studio.field.label" value="TotalGanancias"/>
 	</field>
-	<field name="nombres" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="nombres"/>
-		<property name="com.jaspersoft.studio.field.label" value="nombres"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
-	</field>
-	<field name="apellidos" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="apellidos"/>
-		<property name="com.jaspersoft.studio.field.label" value="apellidos"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
-	</field>
-	<field name="cantidad_servicios" class="java.lang.Long">
-		<property name="com.jaspersoft.studio.field.name" value="cantidad_servicios"/>
-		<property name="com.jaspersoft.studio.field.label" value="cantidad_servicios"/>
-	</field>
+	<variable name="TotalGanancias1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalGanancias}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -92,58 +79,21 @@ ORDER BY cantidad_servicios DESC LIMIT 10 ]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="26" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="128" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="3f31368e-48be-4f46-95d3-6d2763996300">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6298d418-5ebf-45a7-bb52-eff541bda8ba"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[ID]]></text>
+				<text><![CDATA[Ganancias:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="128" y="0" width="278" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="14b92032-6dd3-4051-be40-523df4427548">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36118589-7e97-4c5d-afae-643727bd5ea0"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Nombre completo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="406" y="0" width="149" height="26" forecolor="#FFFFFF" backcolor="#030303" uuid="6807d3da-8ca6-429d-832a-a64d41ed787c">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Cantidad]]></text>
-			</staticText>
+			<textField>
+				<reportElement x="128" y="0" width="252" height="26" uuid="be0ffae1-232b-4c8b-a79e-38e6853668b4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{TotalGanancias1}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
-	<detail>
-		<band height="18" splitType="Stretch">
-			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259"/>
-				<textField>
-					<reportElement x="0" y="0" width="128" height="18" uuid="7a2d08d2-ba68-46f2-91da-050fc4bcf002">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6298d418-5ebf-45a7-bb52-eff541bda8ba"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="128" y="0" width="278" height="18" uuid="841d604d-fe07-465a-ad25-d7418430e33a">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="36118589-7e97-4c5d-afae-643727bd5ea0"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{nombres} + " " + $F{apellidos}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="406" y="0" width="149" height="18" uuid="a41faa47-8cee-4a7c-a611-8700066d4ebd">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b4af6e00-adb7-4206-ae4c-c1763f46ba1b"/>
-					</reportElement>
-					<textElement textAlignment="Center" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{cantidad_servicios}]]></textFieldExpression>
-				</textField>
-			</frame>
-		</band>
-	</detail>
 	<columnFooter>
 		<band height="7" splitType="Stretch">
 			<line>
