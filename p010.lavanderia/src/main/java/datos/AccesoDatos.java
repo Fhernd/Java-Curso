@@ -865,7 +865,7 @@ public class AccesoDatos {
         BigDecimal totalGanancias = BigDecimal.ZERO;
 
         try {
-            final String SQL = "SSELECT SUM(cantidad * precio) FROM atencion AS A INNER JOIN servicio AS S ON A.servicio_id = S.id  WHERE fecha_hora_atencion BETWEEN ? AND ?";
+            final String SQL = "SELECT SUM(cantidad * precio) FROM atencion AS A INNER JOIN servicio AS S ON A.servicio_id = S.id  WHERE fecha_hora_atencion BETWEEN ? AND ?";
             PreparedStatement sentencia = conexion.getConnection().prepareStatement(SQL);
             sentencia.setTimestamp(1, Timestamp.valueOf(fechaInicio));
             sentencia.setTimestamp(2, Timestamp.valueOf(fechaFin));
