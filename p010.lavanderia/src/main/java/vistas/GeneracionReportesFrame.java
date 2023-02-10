@@ -219,6 +219,54 @@ public class GeneracionReportesFrame extends JInternalFrame {
             }
         });
         pnlReporte3Botones.add(btnReporte3Guardar);
+        
+        JPanel pnlReporte4 = new JPanel();
+        pnlReporte4.setBorder(new TitledBorder(null, "Reporte 4: Reporte de Ganancias para un Intervalo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        getContentPane().add(pnlReporte4);
+        pnlReporte4.setLayout(new FormLayout(new ColumnSpec[] {
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		FormSpecs.DEFAULT_COLSPEC,
+        		FormSpecs.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),},
+        	new RowSpec[] {
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),
+        		FormSpecs.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("default:grow"),}));
+        
+        JLabel lblReporte4FechaInicio = new JLabel("Fecha inicio:");
+        pnlReporte4.add(lblReporte4FechaInicio, "2, 2");
+        
+        JDateChooser datReporte4FechaInicio = new JDateChooser();
+        pnlReporte4.add(datReporte4FechaInicio, "14, 2, fill, fill");
+        
+        JLabel lblReporte4FechaFinal = new JLabel("Fecha final:");
+        pnlReporte4.add(lblReporte4FechaFinal, "2, 4");
+        
+        JDateChooser datReporte4FechaFinal = new JDateChooser();
+        pnlReporte4.add(datReporte4FechaFinal, "14, 4, fill, fill");
+        
+        JPanel pnlReporte4Botones = new JPanel();
+        pnlReporte4.add(pnlReporte4Botones, "14, 6, fill, fill");
+        pnlReporte4Botones.setLayout(new GridLayout(0, 2, 10, 0));
+        
+        JButton btnReporte4Visualizar = new JButton("Visualizar");
+        pnlReporte4Botones.add(btnReporte4Visualizar);
+        
+        JButton btnReporte4Guardar = new JButton("Guardar...");
+        pnlReporte4Botones.add(btnReporte4Guardar);
     }
 
     /**
