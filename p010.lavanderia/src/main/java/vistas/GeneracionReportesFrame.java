@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GeneracionReportesFrame extends JInternalFrame {
 
@@ -263,9 +265,15 @@ public class GeneracionReportesFrame extends JInternalFrame {
         pnlReporte4Botones.setLayout(new GridLayout(0, 2, 10, 0));
         
         JButton btnReporte4Visualizar = new JButton("Visualizar");
+        btnReporte4Visualizar.addActionListener(e -> {
+            // TODO: Visualizar reporte 4.
+        });
         pnlReporte4Botones.add(btnReporte4Visualizar);
         
         JButton btnReporte4Guardar = new JButton("Guardar...");
+        btnReporte4Guardar.addActionListener(e -> {
+            // TODO: Guardar reporte 4.
+        });
         pnlReporte4Botones.add(btnReporte4Guardar);
     }
 
