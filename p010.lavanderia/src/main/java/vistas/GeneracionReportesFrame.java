@@ -264,7 +264,16 @@ public class GeneracionReportesFrame extends JInternalFrame {
         
         JButton btnReporte4Visualizar = new JButton("Visualizar");
         btnReporte4Visualizar.addActionListener(e -> {
+            if (validarDatosReporte3y4()) {
+                final String fechaInicio = Utilidad.fechaToString(datReporte4FechaInicio.getDate()) + " 00:00:00";
+                final String fechaFinal = Utilidad.fechaToString(datReporte4FechaFinal.getDate()) + " 23:59:59";
 
+                Map parametrosReporte = new HashMap();
+                parametrosReporte.put("fechaInicio", fechaInicio);
+                parametrosReporte.put("fechaFinal", fechaFinal);
+
+                visualizarReporte(parametrosReporte, "/reportes/Reporte4GananciasIntervaloFechas.jasper");
+            }
         });
         pnlReporte4Botones.add(btnReporte4Visualizar);
         
