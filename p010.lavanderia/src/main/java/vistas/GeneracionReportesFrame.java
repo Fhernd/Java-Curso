@@ -44,8 +44,8 @@ public class GeneracionReportesFrame extends JInternalFrame {
         this.gestorLavanderiaGUI = gestorLavanderiaGUI;
 
         setTitle("Generación de Reportes");
-        setBounds(100, 100, 500, 540);
-        getContentPane().setLayout(new GridLayout(4, 1, 0, 0));
+        setBounds(100, 100, 500, 570);
+        getContentPane().setLayout(new GridLayout(4, 1, 0, 10));
 
         JPanel pnlReporte1 = new JPanel();
         pnlReporte1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Reporte 1: Clientes con m\u00E1s servicios solicitados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -132,7 +132,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         JPanel pnlReporte2 = new JPanel();
         pnlReporte2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Reporte 2: Tipos de atenci\u00F3n m\u00E1s solicitados (10)", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         getContentPane().add(pnlReporte2);
-        pnlReporte2.setLayout(new GridLayout(2, 1, 0, 15));
+        pnlReporte2.setLayout(new GridLayout(3, 1, 0, 15));
 
         JButton btnReporte2Visualizar = new JButton("Visualizar");
         btnReporte2Visualizar.addActionListener(e -> {
