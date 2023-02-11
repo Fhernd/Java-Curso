@@ -90,7 +90,7 @@ WHERE servicio.fecha_hora_recepcion BETWEEN  $P{fechaInicio}  AND  $P{fechaFinal
 			<textField>
 				<reportElement x="128" y="0" width="182" height="26" uuid="c9c90ad9-160d-4f74-a18a-2e9153b7ff81"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["$" + $F{TotalGanancias}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["$" + new java.text.DecimalFormat("#,##0").format($F{TotalGanancias}.intValue())]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
