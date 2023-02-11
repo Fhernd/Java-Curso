@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class GeneracionReportesFrame extends JInternalFrame {
 
@@ -194,7 +192,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
 
         JButton btnReporte3Visualizar = new JButton("Visualizar");
         btnReporte3Visualizar.addActionListener(e -> {
-            if (validarDatosReporte3()) {
+            if (validarDatosReporte3y4()) {
                 final String fechaInicio = Utilidad.fechaToString(datReporte3FechaInicio.getDate()) + " 00:00:00";
                 final String fechaFinal = Utilidad.fechaToString(datReporte3FechaFinal.getDate()) + " 23:59:59";
 
@@ -209,7 +207,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
 
         JButton btnReporte3Guardar = new JButton("Guardar...");
         btnReporte3Guardar.addActionListener(e -> {
-            if (validarDatosReporte3()) {
+            if (validarDatosReporte3y4()) {
                 final String fechaInicio = Utilidad.fechaToString(datReporte3FechaInicio.getDate()) + " 00:00:00";
                 final String fechaFinal = Utilidad.fechaToString(datReporte3FechaFinal.getDate()) + " 23:59:59";
 
@@ -266,7 +264,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         
         JButton btnReporte4Visualizar = new JButton("Visualizar");
         btnReporte4Visualizar.addActionListener(e -> {
-            // TODO: Visualizar reporte 4.
+
         });
         pnlReporte4Botones.add(btnReporte4Visualizar);
         
@@ -282,7 +280,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
      *
      * @return true si los datos son válidos, false en caso contrario.
      */
-    private boolean validarDatosReporte3() {
+    private boolean validarDatosReporte3y4() {
         final Date fechaInicio = datReporte3FechaInicio.getDate();
         final Date fechaFinal = datReporte3FechaFinal.getDate();
 
