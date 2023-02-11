@@ -192,7 +192,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
 
         JButton btnReporte3Visualizar = new JButton("Visualizar");
         btnReporte3Visualizar.addActionListener(e -> {
-            if (validarDatosReporte3y4()) {
+            if (validarDatosReporte3y4(datReporte3FechaInicio, datReporte3FechaFinal)) {
                 final String fechaInicio = Utilidad.fechaToString(datReporte3FechaInicio.getDate()) + " 00:00:00";
                 final String fechaFinal = Utilidad.fechaToString(datReporte3FechaFinal.getDate()) + " 23:59:59";
 
@@ -207,7 +207,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
 
         JButton btnReporte3Guardar = new JButton("Guardar...");
         btnReporte3Guardar.addActionListener(e -> {
-            if (validarDatosReporte3y4()) {
+            if (validarDatosReporte3y4(datReporte3FechaInicio, datReporte3FechaFinal)) {
                 final String fechaInicio = Utilidad.fechaToString(datReporte3FechaInicio.getDate()) + " 00:00:00";
                 final String fechaFinal = Utilidad.fechaToString(datReporte3FechaFinal.getDate()) + " 23:59:59";
 
@@ -264,7 +264,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
         
         JButton btnReporte4Visualizar = new JButton("Visualizar");
         btnReporte4Visualizar.addActionListener(e -> {
-            if (validarDatosReporte3y4()) {
+            if (validarDatosReporte3y4(datReporte4FechaInicio, datReporte4FechaFinal)) {
                 final String fechaInicio = Utilidad.fechaToString(datReporte4FechaInicio.getDate()) + " 00:00:00";
                 final String fechaFinal = Utilidad.fechaToString(datReporte4FechaFinal.getDate()) + " 23:59:59";
 
@@ -279,7 +279,16 @@ public class GeneracionReportesFrame extends JInternalFrame {
         
         JButton btnReporte4Guardar = new JButton("Guardar...");
         btnReporte4Guardar.addActionListener(e -> {
-            // TODO: Guardar reporte 4.
+            if (validarDatosReporte3y4(datReporte4FechaInicio, datReporte4FechaFinal)) {
+                final String fechaInicio = Utilidad.fechaToString(datReporte4FechaInicio.getDate()) + " 00:00:00";
+                final String fechaFinal = Utilidad.fechaToString(datReporte4FechaFinal.getDate()) + " 23:59:59";
+
+                Map parametrosReporte = new HashMap();
+                parametrosReporte.put("fechaInicio", fechaInicio);
+                parametrosReporte.put("fechaFinal", fechaFinal);
+
+                guardarReporte(parametrosReporte, "/reportes/Reporte4GananciasIntervaloFechas.jasper");
+            }
         });
         pnlReporte4Botones.add(btnReporte4Guardar);
     }
@@ -289,9 +298,9 @@ public class GeneracionReportesFrame extends JInternalFrame {
      *
      * @return true si los datos son válidos, false en caso contrario.
      */
-    private boolean validarDatosReporte3y4() {
-        final Date fechaInicio = datReporte3FechaInicio.getDate();
-        final Date fechaFinal = datReporte3FechaFinal.getDate();
+    private boolean validarDatosReporte3y4(JDateChooser fechaInicioControl, JDateChooser fechaFinalControl) {
+        final Date fechaInicio = fechaInicioControl.getDate();
+        final Date fechaFinal = fechaFinalControl.getDate();
 
         if (fechaInicio == null) {
             JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de inicio.", "Mensaje", JOptionPane.WARNING_MESSAGE);
