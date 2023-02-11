@@ -19,6 +19,10 @@ public class GestorLavanderiaGUI {
     private JFrame frmGestorLavanderiaGUI;
     private JMenu mnuEmpleados;
     private GestorLavanderia gestorLavanderia;
+    private JMenu mnuDirecciones;
+    private JMenu mnuServicios;
+    private JMenu mnuOtros;
+    private JMenu mnuClientes;
 
     /**
      * Launch the application.
@@ -115,7 +119,7 @@ public class GestorLavanderiaGUI {
         });
         mnuEmpleados.add(mniEmpleadosOperaciones);
 
-        JMenu mnuClientes = new JMenu("Clientes");
+        mnuClientes = new JMenu("Clientes");
         menuBar.add(mnuClientes);
 
         JMenuItem mniClientesOperaciones = new JMenuItem("Operaciones");
@@ -128,7 +132,7 @@ public class GestorLavanderiaGUI {
         });
         mnuClientes.add(mniClientesOperaciones);
 
-        JMenu mnuDirecciones = new JMenu("Direcciones");
+        mnuDirecciones = new JMenu("Direcciones");
         mnuDirecciones.setMnemonic('D');
         menuBar.add(mnuDirecciones);
 
@@ -142,7 +146,7 @@ public class GestorLavanderiaGUI {
         });
         mnuDirecciones.add(mniDireccionesOperaciones);
 
-        JMenu mnuServicios = new JMenu("Servicios");
+        mnuServicios = new JMenu("Servicios");
         menuBar.add(mnuServicios);
 
         JMenuItem mniServiciosGestiones = new JMenuItem("Gestiones");
@@ -153,7 +157,7 @@ public class GestorLavanderiaGUI {
         });
         mnuServicios.add(mniServiciosGestiones);
 
-        JMenu mnuOtros = new JMenu("Otros");
+        mnuOtros = new JMenu("Otros");
         menuBar.add(mnuOtros);
 
         JMenuItem mniTipoAtencion = new JMenuItem("Gestionar tipos atención");
@@ -188,6 +192,10 @@ public class GestorLavanderiaGUI {
 
     public void mostrarMenus() {
         mnuEmpleados.setEnabled(true);
+        mnuClientes.setEnabled(true);
+        mnuDirecciones.setEnabled(true);
+        mnuServicios.setEnabled(true);
+        mnuOtros.setEnabled(true);
     }
 
     public List<Rol> getRoles() {

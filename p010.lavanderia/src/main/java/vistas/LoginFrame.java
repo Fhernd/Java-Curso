@@ -70,34 +70,34 @@ public class LoginFrame extends JInternalFrame {
 		panel.add(txtPassword, "8, 4, fill, default");
 		
 		JButton btnIniciarSesion = new JButton("Iniciar sesión");
-		btnIniciarSesion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String email = txtEmail.getText().trim();
-				String password = new String(txtPassword.getPassword()).trim();
+		btnIniciarSesion.addActionListener(e -> {
+			String email = txtEmail.getText().trim();
+			String password = new String(txtPassword.getPassword()).trim();
 
-				if (!Utilidad.validarEmail(email)) {
-					JOptionPane.showMessageDialog(LoginFrame.this, "El email no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				if (password.isEmpty()) {
-					JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña debe tener al menos 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				Usuario usuario = gestorLavanderiaGUI.iniciarSesion(email, password);
-
-				if (usuario == null) {
-					JOptionPane.showMessageDialog(LoginFrame.this, "El usuario no existe o la contraseña es incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				JOptionPane.showMessageDialog(LoginFrame.this, "¡Bienvenido!", "Información", JOptionPane.INFORMATION_MESSAGE);
-
-				setVisible(false);
-
-				gestorLavanderiaGUI.mostrarMenus();
+			if (!Utilidad.validarEmail(email)) {
+				JOptionPane.showMessageDialog(LoginFrame.this, "El email no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
 			}
+
+			if (password.isEmpty()) {
+				JOptionPane.showMessageDialog(LoginFrame.this, "La contraseña debe tener al menos 8 caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			Usuario usuario = gestorLavanderiaGUI.iniciarSesion(email, password);
+
+			if (usuario == null) {
+				JOptionPane.showMessageDialog(LoginFrame.this, "El usuario no existe o la contraseña es incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			JOptionPane.showMessageDialog(LoginFrame.this, "¡Bienvenido!", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+			setVisible(false);
+
+			gestorLavanderiaGUI.mostrarMenus();
+
+			
 		});
 		panel.add(btnIniciarSesion, "8, 6");
 
