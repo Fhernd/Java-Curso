@@ -99,7 +99,10 @@ public class GestorLavanderiaGUI {
         
         JMenuItem mnuCerrarSesion = new JMenuItem("Cerrar sesión");
         mnuCerrarSesion.addActionListener(e -> {
-            deshabilitarMenus();
+            mostrarMenus(false);
+            gestorLavanderia.setEmpleadoActual(null);
+
+            JOptionPane.showMessageDialog(frmGestorLavanderiaGUI, "Sesión cerrada correctamente", "Cerrar sesión", JOptionPane.INFORMATION_MESSAGE);
         });
         mnuArchivo.add(mnuCerrarSesion);
         
@@ -197,12 +200,17 @@ public class GestorLavanderiaGUI {
         return resultadoValidacion ? usuario : null;
     }
 
-    public void mostrarMenus() {
-        mnuEmpleados.setEnabled(true);
-        mnuClientes.setEnabled(true);
-        mnuDirecciones.setEnabled(true);
-        mnuServicios.setEnabled(true);
-        mnuOtros.setEnabled(true);
+    /**
+     * Habilita o deshabilita los menús.
+     *
+     * @param estado Estado de los menús.
+     */
+    public void mostrarMenus(boolean estado) {
+        mnuEmpleados.setEnabled(estado);
+        mnuClientes.setEnabled(estado);
+        mnuDirecciones.setEnabled(estado);
+        mnuServicios.setEnabled(estado);
+        mnuOtros.setEnabled(estado);
     }
 
     public List<Rol> getRoles() {

@@ -98,7 +98,7 @@ public class LoginFrame extends JInternalFrame {
 
 			Empleado empleado = gestorLavanderiaGUI.obtenerEmpleadoPorId(usuario.getEmpleadoId());
 
-			gestorLavanderiaGUI.mostrarMenus();
+			gestorLavanderiaGUI.mostrarMenus(true);
 			gestorLavanderiaGUI.setEmpleadoActual(empleado);
 
 		});
