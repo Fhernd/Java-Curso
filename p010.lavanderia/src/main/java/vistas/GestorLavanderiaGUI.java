@@ -104,6 +104,7 @@ public class GestorLavanderiaGUI {
         mnuArchivo.add(mniSalir);
 
         mnuEmpleados = new JMenu("Empleados");
+        mnuEmpleados.setEnabled(false);
         menuBar.add(mnuEmpleados);
 
         JMenuItem mniEmpleadosCrear = new JMenuItem("Crear");
@@ -120,6 +121,7 @@ public class GestorLavanderiaGUI {
         mnuEmpleados.add(mniEmpleadosOperaciones);
 
         mnuClientes = new JMenu("Clientes");
+        mnuClientes.setEnabled(false);
         menuBar.add(mnuClientes);
 
         JMenuItem mniClientesOperaciones = new JMenuItem("Operaciones");
@@ -133,6 +135,7 @@ public class GestorLavanderiaGUI {
         mnuClientes.add(mniClientesOperaciones);
 
         mnuDirecciones = new JMenu("Direcciones");
+        mnuDirecciones.setEnabled(false);
         mnuDirecciones.setMnemonic('D');
         menuBar.add(mnuDirecciones);
 
@@ -147,6 +150,7 @@ public class GestorLavanderiaGUI {
         mnuDirecciones.add(mniDireccionesOperaciones);
 
         mnuServicios = new JMenu("Servicios");
+        mnuServicios.setEnabled(false);
         menuBar.add(mnuServicios);
 
         JMenuItem mniServiciosGestiones = new JMenuItem("Gestiones");
@@ -158,6 +162,7 @@ public class GestorLavanderiaGUI {
         mnuServicios.add(mniServiciosGestiones);
 
         mnuOtros = new JMenu("Otros");
+        mnuOtros.setEnabled(false);
         menuBar.add(mnuOtros);
 
         JMenuItem mniTipoAtencion = new JMenuItem("Gestionar tipos atención");
@@ -627,5 +632,14 @@ public class GestorLavanderiaGUI {
      */
     public Connection getConexion() throws SQLException {
         return gestorLavanderia.getConexion();
+    }
+
+    /**
+     * Obtiene el empleado actual.
+     *
+     * @param empleado Empleado actual.
+     */
+    public void setEmpleadoActual(Empleado empleado) {
+        gestorLavanderia.setEmpleadoActual(empleado);
     }
 }

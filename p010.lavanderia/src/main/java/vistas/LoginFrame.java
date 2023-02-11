@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
+import modelos.Empleado;
 import modelos.Usuario;
 import org.apache.commons.validator.routines.EmailValidator;
 import utilidades.Utilidad;
@@ -95,9 +96,11 @@ public class LoginFrame extends JInternalFrame {
 
 			setVisible(false);
 
-			gestorLavanderiaGUI.mostrarMenus();
+			Empleado empleado = gestorLavanderiaGUI.obtenerEmpleadoPorId(usuario.getEmpleadoId());
 
-			
+			gestorLavanderiaGUI.mostrarMenus();
+			gestorLavanderiaGUI.setEmpleadoActual(empleado);
+
 		});
 		panel.add(btnIniciarSesion, "8, 6");
 
