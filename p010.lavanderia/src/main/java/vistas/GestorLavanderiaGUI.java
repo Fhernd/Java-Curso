@@ -96,6 +96,15 @@ public class GestorLavanderiaGUI {
                 empleadoCrear.setVisible(true);
             }
         });
+        
+        JMenuItem mnuCerrarSesion = new JMenuItem("Cerrar sesión");
+        mnuCerrarSesion.addActionListener(e -> {
+            deshabilitarMenus();
+        });
+        mnuArchivo.add(mnuCerrarSesion);
+        
+        JSeparator separator = new JSeparator();
+        mnuArchivo.add(separator);
         mnuArchivo.add(mniEmpleadoUsuarioCrear);
         mnuArchivo.add(mniSalir);
 
