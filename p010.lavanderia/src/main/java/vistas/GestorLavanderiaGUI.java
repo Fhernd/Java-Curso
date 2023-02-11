@@ -103,9 +103,6 @@ public class GestorLavanderiaGUI {
         mnuEmpleados.setEnabled(false);
         menuBar.add(mnuEmpleados);
 
-        JMenuItem mniEmpleadosCrear = new JMenuItem("Crear");
-        mnuEmpleados.add(mniEmpleadosCrear);
-
         JMenuItem mniEmpleadosOperaciones = new JMenuItem("Operaciones");
         mniEmpleadosOperaciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
