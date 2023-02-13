@@ -68,6 +68,7 @@ public class GestorLavanderiaGUI {
         frmGestorLavanderiaGUI.setJMenuBar(menuBar);
 
         JMenu mnuArchivo = new JMenu("Archivo");
+        mnuArchivo.setMnemonic('A');
         menuBar.add(mnuArchivo);
 
         mniIniciarSesion = new JMenuItem("Iniciar sesión...");
@@ -108,6 +109,7 @@ public class GestorLavanderiaGUI {
         mnuArchivo.add(mniSalir);
 
         mnuEmpleados = new JMenu("Empleados");
+        mnuEmpleados.setMnemonic('E');
         mnuEmpleados.setEnabled(false);
         menuBar.add(mnuEmpleados);
 
@@ -122,6 +124,7 @@ public class GestorLavanderiaGUI {
         mnuEmpleados.add(mniEmpleadosOperaciones);
 
         mnuClientes = new JMenu("Clientes");
+        mnuClientes.setMnemonic('C');
         mnuClientes.setEnabled(false);
         menuBar.add(mnuClientes);
 
@@ -151,6 +154,7 @@ public class GestorLavanderiaGUI {
         mnuDirecciones.add(mniDireccionesOperaciones);
 
         mnuServicios = new JMenu("Servicios");
+        mnuServicios.setMnemonic('S');
         mnuServicios.setEnabled(false);
         menuBar.add(mnuServicios);
 
@@ -163,6 +167,7 @@ public class GestorLavanderiaGUI {
         mnuServicios.add(mniServiciosGestiones);
 
         mnuOtros = new JMenu("Otros");
+        mnuOtros.setMnemonic('O');
         mnuOtros.setEnabled(false);
         menuBar.add(mnuOtros);
 
