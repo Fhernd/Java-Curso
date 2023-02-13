@@ -1,7 +1,6 @@
 package vistas;
 
 import modelos.*;
-import net.sf.jasperreports.engine.JRDataSource;
 import utilidades.Utilidad;
 
 import java.awt.EventQueue;
@@ -23,6 +22,8 @@ public class GestorLavanderiaGUI {
     private JMenu mnuServicios;
     private JMenu mnuOtros;
     private JMenu mnuClientes;
+    private JMenuItem mniIniciarSesion;
+    private JMenuItem mniCerrarSesion;
 
     /**
      * Launch the application.
@@ -68,7 +69,7 @@ public class GestorLavanderiaGUI {
         JMenu mnuArchivo = new JMenu("Archivo");
         menuBar.add(mnuArchivo);
 
-        JMenuItem mniIniciarSesion = new JMenuItem("Iniciar sesión...");
+        mniIniciarSesion = new JMenuItem("Iniciar sesión...");
         mniIniciarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LoginFrame login = new LoginFrame(GestorLavanderiaGUI.this);
@@ -96,15 +97,16 @@ public class GestorLavanderiaGUI {
                 empleadoCrear.setVisible(true);
             }
         });
-        
-        JMenuItem mnuCerrarSesion = new JMenuItem("Cerrar sesión");
-        mnuCerrarSesion.addActionListener(e -> {
+
+        mniCerrarSesion = new JMenuItem("Cerrar sesión");
+        mniCerrarSesion.setEnabled(false);
+        mniCerrarSesion.addActionListener(e -> {
             mostrarMenus(false);
             gestorLavanderia.setEmpleadoActual(null);
 
             JOptionPane.showMessageDialog(frmGestorLavanderiaGUI, "Sesión cerrada correctamente", "Cerrar sesión", JOptionPane.INFORMATION_MESSAGE);
         });
-        mnuArchivo.add(mnuCerrarSesion);
+        mnuArchivo.add(mniCerrarSesion);
         
         JSeparator separator = new JSeparator();
         mnuArchivo.add(separator);
@@ -211,6 +213,8 @@ public class GestorLavanderiaGUI {
         mnuDirecciones.setEnabled(estado);
         mnuServicios.setEnabled(estado);
         mnuOtros.setEnabled(estado);
+        mniIniciarSesion.setEnabled(!mniIniciarSesion.isEnabled());
+        mniCerrarSesion.setEnabled(!mniCerrarSesion.isEnabled());
     }
 
     public List<Rol> getRoles() {
