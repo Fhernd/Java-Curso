@@ -3,10 +3,9 @@ package vistas;
 import modelos.*;
 import utilidades.Utilidad;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -192,6 +191,9 @@ public class GestorLavanderiaGUI {
         });
 
         frmGestorLavanderiaGUI.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        // Cambiar el ícono de la ventana:
+        frmGestorLavanderiaGUI.setIconImage(Toolkit.getDefaultToolkit().getImage(GestorLavanderiaGUI.class.getResource("/imagenes/logo.png")));
     }
 
     private void cierreVentana() {
