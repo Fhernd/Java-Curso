@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -80,14 +82,7 @@ public class GestorLavanderiaGUI {
         mnuArchivo.add(mniIniciarSesion);
 
         JMenuItem mniSalir = new JMenuItem("Salir");
-        mniSalir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int opcion = JOptionPane.showConfirmDialog(frmGestorLavanderiaGUI, "¿Está seguro que desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
-                if (opcion == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                }
-            }
-        });
+        mniSalir.addActionListener(e -> cierreVentana());
 
         JMenuItem mniEmpleadoUsuarioCrear = new JMenuItem("Crear nuevo empleado");
         mniEmpleadoUsuarioCrear.addActionListener(new ActionListener() {
@@ -187,6 +182,23 @@ public class GestorLavanderiaGUI {
             reportesFrame.setVisible(true);
         });
         mnuOtros.add(mniGenerarReportes);
+
+        // Método para detectar la pulsación en el botón cerrar de la ventana actual:
+        frmGestorLavanderiaGUI.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                cierreVentana();
+            }
+        });
+
+        frmGestorLavanderiaGUI.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    }
+
+    private void cierreVentana() {
+        int respuesta = JOptionPane.showConfirmDialog(frmGestorLavanderiaGUI, "¿Está seguro de que desea salir?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
 
     public Usuario iniciarSesion(String email, String password) {
