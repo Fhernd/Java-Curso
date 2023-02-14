@@ -234,6 +234,13 @@ public class GestorLavanderiaGUI {
         mniCerrarSesion.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/cerrar_sesion.png")));
         mniEmpleadoUsuarioCrear.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/crear_empleado.png")));
         mniSalir.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/salir.png")));
+
+        mniEmpleadosOperaciones.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/operaciones.png")));
+        mniClientesOperaciones.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/operaciones.png")));
+        mniDireccionesOperaciones.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/operaciones.png")));
+        mniServiciosGestiones.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/operaciones.png")));
+        mniGenerarReportes.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/reportes.png")));
+        mniTipoAtencion.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/tipos.png")));
     }
 
     private void cierreVentana() {
