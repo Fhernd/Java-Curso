@@ -13,6 +13,8 @@ import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class GestorLavanderiaGUI {
 
@@ -72,6 +74,7 @@ public class GestorLavanderiaGUI {
         menuBar.add(mnuArchivo);
 
         mniIniciarSesion = new JMenuItem("Iniciar sesión...");
+        mniIniciarSesion.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_DOWN_MASK));
         mniIniciarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LoginFrame login = new LoginFrame(GestorLavanderiaGUI.this);
@@ -82,9 +85,11 @@ public class GestorLavanderiaGUI {
         mnuArchivo.add(mniIniciarSesion);
 
         JMenuItem mniSalir = new JMenuItem("Salir");
+        mniSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
         mniSalir.addActionListener(e -> cierreVentana());
 
         JMenuItem mniEmpleadoUsuarioCrear = new JMenuItem("Crear nuevo empleado");
+        mniEmpleadoUsuarioCrear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         mniEmpleadoUsuarioCrear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EmpleadoCrearFrame empleadoCrear = new EmpleadoCrearFrame(GestorLavanderiaGUI.this);
@@ -206,6 +211,18 @@ public class GestorLavanderiaGUI {
         mnuDirecciones.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/direcciones.png")));
         mnuServicios.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/servicios.png")));
         mnuOtros.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/otros.png")));
+
+        mniSalir.setMnemonic('S');
+        mniIniciarSesion.setMnemonic('I');
+        mniCerrarSesion.setMnemonic('C');
+        mniEmpleadoUsuarioCrear.setMnemonic('U');
+
+        mniEmpleadosOperaciones.setMnemonic('O');
+        mniClientesOperaciones.setMnemonic('O');
+        mniDireccionesOperaciones.setMnemonic('O');
+        mniServiciosGestiones.setMnemonic('G');
+        mniTipoAtencion.setMnemonic('T');
+        mniGenerarReportes.setMnemonic('R');
     }
 
     private void cierreVentana() {
