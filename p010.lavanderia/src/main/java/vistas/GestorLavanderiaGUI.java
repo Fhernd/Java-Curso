@@ -119,6 +119,7 @@ public class GestorLavanderiaGUI {
         menuBar.add(mnuEmpleados);
 
         JMenuItem mniEmpleadosOperaciones = new JMenuItem("Operaciones");
+        mniEmpleadosOperaciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK));
         mniEmpleadosOperaciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EmpleadoUsuarioFrame empleadoUsuario = new EmpleadoUsuarioFrame(GestorLavanderiaGUI.this);
@@ -134,6 +135,7 @@ public class GestorLavanderiaGUI {
         menuBar.add(mnuClientes);
 
         JMenuItem mniClientesOperaciones = new JMenuItem("Operaciones");
+        mniClientesOperaciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         mniClientesOperaciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ClientesFrame clientesFrame = new ClientesFrame(GestorLavanderiaGUI.this);
@@ -149,6 +151,7 @@ public class GestorLavanderiaGUI {
         menuBar.add(mnuDirecciones);
 
         JMenuItem mniDireccionesOperaciones = new JMenuItem("Operaciones");
+        mniDireccionesOperaciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         mniDireccionesOperaciones.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 DireccionesFrame direccionesFrame = new DireccionesFrame(GestorLavanderiaGUI.this);
@@ -164,6 +167,7 @@ public class GestorLavanderiaGUI {
         menuBar.add(mnuServicios);
 
         JMenuItem mniServiciosGestiones = new JMenuItem("Gestiones");
+        mniServiciosGestiones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         mniServiciosGestiones.addActionListener(e -> {
             ServicioFrame serviciosFrame = new ServicioFrame(this);
             dtpPrincipal.add(serviciosFrame);
@@ -177,6 +181,7 @@ public class GestorLavanderiaGUI {
         menuBar.add(mnuOtros);
 
         JMenuItem mniTipoAtencion = new JMenuItem("Gestionar tipos atención");
+        mniTipoAtencion.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         mniTipoAtencion.addActionListener(e -> {
             TipoAtencionFrame tipoAtencionFrame = new TipoAtencionFrame(this);
             dtpPrincipal.add(tipoAtencionFrame);
@@ -185,6 +190,7 @@ public class GestorLavanderiaGUI {
         mnuOtros.add(mniTipoAtencion);
 
         JMenuItem mniGenerarReportes = new JMenuItem("Generar reportes...");
+        mniGenerarReportes.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
         mniGenerarReportes.addActionListener(e -> {
             GeneracionReportesFrame reportesFrame = new GeneracionReportesFrame(this);
             dtpPrincipal.add(reportesFrame);
