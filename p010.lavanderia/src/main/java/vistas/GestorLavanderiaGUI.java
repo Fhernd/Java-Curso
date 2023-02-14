@@ -197,8 +197,15 @@ public class GestorLavanderiaGUI {
 
         frmGestorLavanderiaGUI.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        // Cambiar el ícono de la ventana:
         frmGestorLavanderiaGUI.setIconImage(Toolkit.getDefaultToolkit().getImage(GestorLavanderiaGUI.class.getResource("/imagenes/logo.png")));
+
+        // Establecer un ícono para el menú archivo:
+        mnuArchivo.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/archivo.png")));
+        mnuEmpleados.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/empleados.png")));
+        mnuClientes.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/clientes.png")));
+        mnuDirecciones.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/direcciones.png")));
+        mnuServicios.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/servicios.png")));
+        mnuOtros.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/otros.png")));
     }
 
     private void cierreVentana() {
@@ -208,7 +215,7 @@ public class GestorLavanderiaGUI {
         }
     }
 
-    public Usuario iniciarSesion(String email, String password) {
+public Usuario iniciarSesion(String email, String password) {
         Usuario usuario = gestorLavanderia.obtenerUsuarioPorCorreo(email);
         boolean resultadoValidacion = Utilidad.comprobarPassword(usuario.getClave(), password);
 
