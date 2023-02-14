@@ -223,6 +223,11 @@ public class GestorLavanderiaGUI {
         mniServiciosGestiones.setMnemonic('G');
         mniTipoAtencion.setMnemonic('T');
         mniGenerarReportes.setMnemonic('R');
+
+        mniIniciarSesion.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/iniciar_sesion.png")));
+        mniCerrarSesion.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/cerrar_sesion.png")));
+        mniEmpleadoUsuarioCrear.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/crear_empleado.png")));
+        mniSalir.setIcon(new ImageIcon(GestorLavanderiaGUI.class.getResource("/imagenes/salir.png")));
     }
 
     private void cierreVentana() {
