@@ -5,11 +5,14 @@ import utilidades.Utilidad;
 
 import java.awt.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,6 +30,7 @@ public class GestorLavanderiaGUI {
     private JMenu mnuClientes;
     private JMenuItem mniIniciarSesion;
     private JMenuItem mniCerrarSesion;
+    private BufferedImage imagenFondo;
 
     /**
      * Launch the application.
@@ -63,7 +67,19 @@ public class GestorLavanderiaGUI {
         frmGestorLavanderiaGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmGestorLavanderiaGUI.getContentPane().setLayout(new BorderLayout(0, 0));
 
-        JDesktopPane dtpPrincipal = new JDesktopPane();
+        try {
+            imagenFondo = ImageIO.read(getClass().getResource("/imagenes/imagen.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        JDesktopPane dtpPrincipal = new JDesktopPane() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagenFondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         frmGestorLavanderiaGUI.getContentPane().add(dtpPrincipal, BorderLayout.CENTER);
 
         JMenuBar menuBar = new JMenuBar();
