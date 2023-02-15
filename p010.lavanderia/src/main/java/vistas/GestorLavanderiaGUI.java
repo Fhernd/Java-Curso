@@ -68,7 +68,7 @@ public class GestorLavanderiaGUI {
         frmGestorLavanderiaGUI.getContentPane().setLayout(new BorderLayout(0, 0));
 
         try {
-            imagenFondo = ImageIO.read(getClass().getResource("/imagenes/imagen.jpg"));
+            imagenFondo = ImageIO.read(getClass().getResource("/imagenes/fondo.jpg"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
