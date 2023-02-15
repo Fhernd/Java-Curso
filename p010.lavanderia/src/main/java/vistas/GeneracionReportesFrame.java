@@ -41,6 +41,7 @@ public class GeneracionReportesFrame extends JInternalFrame {
      * Create the frame.
      */
     public GeneracionReportesFrame(GestorLavanderiaGUI gestorLavanderiaGUI) {
+    	setClosable(true);
         this.gestorLavanderiaGUI = gestorLavanderiaGUI;
 
         setTitle("Generación de Reportes");
