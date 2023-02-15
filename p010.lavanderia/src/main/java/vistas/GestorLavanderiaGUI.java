@@ -3,12 +3,11 @@ package vistas;
 import modelos.*;
 import utilidades.Utilidad;
 
-import java.awt.*;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -16,8 +15,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.awt.event.KeyEvent;
-import java.awt.event.InputEvent;
 
 public class GestorLavanderiaGUI {
 
@@ -91,12 +88,10 @@ public class GestorLavanderiaGUI {
 
         mniIniciarSesion = new JMenuItem("Iniciar sesión...");
         mniIniciarSesion.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_DOWN_MASK));
-        mniIniciarSesion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                LoginFrame login = new LoginFrame(GestorLavanderiaGUI.this);
-                dtpPrincipal.add(login);
-                login.setVisible(true);
-            }
+        mniIniciarSesion.addActionListener(e -> {
+            LoginFrame login = new LoginFrame(GestorLavanderiaGUI.this);
+            dtpPrincipal.add(login);
+            login.setVisible(true);
         });
         mnuArchivo.add(mniIniciarSesion);
 
@@ -106,12 +101,10 @@ public class GestorLavanderiaGUI {
 
         JMenuItem mniEmpleadoUsuarioCrear = new JMenuItem("Crear nuevo empleado");
         mniEmpleadoUsuarioCrear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
-        mniEmpleadoUsuarioCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                EmpleadoCrearFrame empleadoCrear = new EmpleadoCrearFrame(GestorLavanderiaGUI.this);
-                dtpPrincipal.add(empleadoCrear);
-                empleadoCrear.setVisible(true);
-            }
+        mniEmpleadoUsuarioCrear.addActionListener(e -> {
+            EmpleadoCrearFrame empleadoCrear = new EmpleadoCrearFrame(GestorLavanderiaGUI.this);
+            dtpPrincipal.add(empleadoCrear);
+            empleadoCrear.setVisible(true);
         });
 
         mniCerrarSesion = new JMenuItem("Cerrar sesión");
@@ -136,12 +129,10 @@ public class GestorLavanderiaGUI {
 
         JMenuItem mniEmpleadosOperaciones = new JMenuItem("Operaciones");
         mniEmpleadosOperaciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK));
-        mniEmpleadosOperaciones.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                EmpleadoUsuarioFrame empleadoUsuario = new EmpleadoUsuarioFrame(GestorLavanderiaGUI.this);
-                dtpPrincipal.add(empleadoUsuario);
-                empleadoUsuario.setVisible(true);
-            }
+        mniEmpleadosOperaciones.addActionListener(e -> {
+            EmpleadoUsuarioFrame empleadoUsuario = new EmpleadoUsuarioFrame(GestorLavanderiaGUI.this);
+            dtpPrincipal.add(empleadoUsuario);
+            empleadoUsuario.setVisible(true);
         });
         mnuEmpleados.add(mniEmpleadosOperaciones);
 
@@ -152,12 +143,10 @@ public class GestorLavanderiaGUI {
 
         JMenuItem mniClientesOperaciones = new JMenuItem("Operaciones");
         mniClientesOperaciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
-        mniClientesOperaciones.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ClientesFrame clientesFrame = new ClientesFrame(GestorLavanderiaGUI.this);
-                dtpPrincipal.add(clientesFrame);
-                clientesFrame.setVisible(true);
-            }
+        mniClientesOperaciones.addActionListener(e -> {
+            ClientesFrame clientesFrame = new ClientesFrame(GestorLavanderiaGUI.this);
+            dtpPrincipal.add(clientesFrame);
+            clientesFrame.setVisible(true);
         });
         mnuClientes.add(mniClientesOperaciones);
 
@@ -168,12 +157,10 @@ public class GestorLavanderiaGUI {
 
         JMenuItem mniDireccionesOperaciones = new JMenuItem("Operaciones");
         mniDireccionesOperaciones.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
-        mniDireccionesOperaciones.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DireccionesFrame direccionesFrame = new DireccionesFrame(GestorLavanderiaGUI.this);
-                dtpPrincipal.add(direccionesFrame);
-                direccionesFrame.setVisible(true);
-            }
+        mniDireccionesOperaciones.addActionListener(e -> {
+            DireccionesFrame direccionesFrame = new DireccionesFrame(GestorLavanderiaGUI.this);
+            dtpPrincipal.add(direccionesFrame);
+            direccionesFrame.setVisible(true);
         });
         mnuDirecciones.add(mniDireccionesOperaciones);
 
@@ -214,7 +201,6 @@ public class GestorLavanderiaGUI {
         });
         mnuOtros.add(mniGenerarReportes);
 
-        // Método para detectar la pulsación en el botón cerrar de la ventana actual:
         frmGestorLavanderiaGUI.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
