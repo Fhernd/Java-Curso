@@ -1,0 +1,245 @@
+
+
+Version:	3.50
+CmdLine:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = C:\Program Files\Amazon Corretto\jdk11.0.17_8
+Substitute:	PATH = F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+JRE paths:	C:\Program Files\Amazon Corretto\jdk11.0.17_8;F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+Check launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe (OK)
+Version string: 1.011.000_017 / 64-Bit (OK)
+Main class:	vistas.GestorLavanderiaGUI
+Add classpath:	jackson-dataformat-xml-2.13.1.jar
+Add classpath:	TimingFramework-0.55.jar
+Add classpath:	jasperreports-6.19.0.jar
+Add classpath:	jackson-core-2.13.1.jar
+Add classpath:	commons-digester-2.1.jar
+Add classpath:	stax2-api-4.2.1.jar
+Add classpath:	mysql-connector-java-8.0.28.jar
+Add classpath:	bcprov-jdk15on-1.68.jar
+Add classpath:	password4j-1.6.0.jar
+Add classpath:	commons-collections4-4.2.jar
+Add classpath:	jgoodies-forms-1.8.0.jar
+Add classpath:	woodstox-core-6.2.7.jar
+Add classpath:	commons-logging-1.2.jar
+Add classpath:	slf4j-api-1.7.36.jar
+Add classpath:	jackson-databind-2.13.1.jar
+Add classpath:	jcalendar-1.4.jar
+Add classpath:	protobuf-java-3.11.4.jar
+Add classpath:	jgoodies-common-1.8.0.jar
+Add classpath:	jcommon-1.0.23.jar
+Add classpath:	jfreechart-1.0.19.jar
+Add classpath:	jackson-annotations-2.13.1.jar
+Add classpath:	commons-validator-1.7.jar
+Add classpath:	itext-2.1.7.js9.jar
+Add classpath:	commons-beanutils-1.9.4.jar
+Add classpath:	commons-collections-3.2.2.jar
+Add classpath:	swing-time-picker.jar
+Add classpath:	ecj-3.21.0.jar
+Add classpath:	commons-lang3-3.12.0.jar
+Launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe
+Launcher args:	-classpath "E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe;jackson-dataformat-xml-2.13.1.jar;TimingFramework-0.55.jar;jasperreports-6.19.0.jar;jackson-core-2.13.1.jar;commons-digester-2.1.jar;stax2-api-4.2.1.jar;mysql-connector-java-8.0.28.jar;bcprov-jdk15on-1.68.jar;password4j-1.6.0.jar;commons-collections4-4.2.jar;jgoodies-forms-1.8.0.jar;woodstox-core-6.2.7.jar;commons-logging-1.2.jar;slf4j-api-1.7.36.jar;jackson-databind-2.13.1.jar;jcalendar-1.4.jar;protobuf-java-3.11.4.jar;jgoodies-common-1.8.0.jar;jcommon-1.0.23.jar;jfreechart-1.0.19.jar;jackson-annotations-2.13.1.jar;commons-validator-1.7.jar;itext-2.1.7.js9.jar;commons-beanutils-1.9.4.jar;commons-collections-3.2.2.jar;swing-time-picker.jar;ecj-3.21.0.jar;commons-lang3-3.12.0.jar" vistas.GestorLavanderiaGUI
+Args length:	802/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = C:\Program Files\Amazon Corretto\jdk11.0.17_8
+Substitute:	PATH = F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+JRE paths:	C:\Program Files\Amazon Corretto\jdk11.0.17_8;F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+Check launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe (OK)
+Version string: 1.011.000_017 / 64-Bit (OK)
+Main class:	vistas.GestorLavanderiaGUI
+Add classpath:	jackson-dataformat-xml-2.13.1.jar
+Add classpath:	TimingFramework-0.55.jar
+Add classpath:	jasperreports-6.19.0.jar
+Add classpath:	jackson-core-2.13.1.jar
+Add classpath:	commons-digester-2.1.jar
+Add classpath:	stax2-api-4.2.1.jar
+Add classpath:	mysql-connector-java-8.0.28.jar
+Add classpath:	bcprov-jdk15on-1.68.jar
+Add classpath:	password4j-1.6.0.jar
+Add classpath:	commons-collections4-4.2.jar
+Add classpath:	jgoodies-forms-1.8.0.jar
+Add classpath:	woodstox-core-6.2.7.jar
+Add classpath:	commons-logging-1.2.jar
+Add classpath:	slf4j-api-1.7.36.jar
+Add classpath:	jackson-databind-2.13.1.jar
+Add classpath:	jcalendar-1.4.jar
+Add classpath:	protobuf-java-3.11.4.jar
+Add classpath:	jgoodies-common-1.8.0.jar
+Add classpath:	jcommon-1.0.23.jar
+Add classpath:	jfreechart-1.0.19.jar
+Add classpath:	jackson-annotations-2.13.1.jar
+Add classpath:	commons-validator-1.7.jar
+Add classpath:	itext-2.1.7.js9.jar
+Add classpath:	commons-beanutils-1.9.4.jar
+Add classpath:	commons-collections-3.2.2.jar
+Add classpath:	swing-time-picker.jar
+Add classpath:	ecj-3.21.0.jar
+Add classpath:	commons-lang3-3.12.0.jar
+Launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe
+Launcher args:	-classpath "E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe;jackson-dataformat-xml-2.13.1.jar;TimingFramework-0.55.jar;jasperreports-6.19.0.jar;jackson-core-2.13.1.jar;commons-digester-2.1.jar;stax2-api-4.2.1.jar;mysql-connector-java-8.0.28.jar;bcprov-jdk15on-1.68.jar;password4j-1.6.0.jar;commons-collections4-4.2.jar;jgoodies-forms-1.8.0.jar;woodstox-core-6.2.7.jar;commons-logging-1.2.jar;slf4j-api-1.7.36.jar;jackson-databind-2.13.1.jar;jcalendar-1.4.jar;protobuf-java-3.11.4.jar;jgoodies-common-1.8.0.jar;jcommon-1.0.23.jar;jfreechart-1.0.19.jar;jackson-annotations-2.13.1.jar;commons-validator-1.7.jar;itext-2.1.7.js9.jar;commons-beanutils-1.9.4.jar;commons-collections-3.2.2.jar;swing-time-picker.jar;ecj-3.21.0.jar;commons-lang3-3.12.0.jar" vistas.GestorLavanderiaGUI
+Args length:	802/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = C:\Program Files\Amazon Corretto\jdk11.0.17_8
+Substitute:	PATH = F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+JRE paths:	C:\Program Files\Amazon Corretto\jdk11.0.17_8;F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+Check launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe (OK)
+Version string: 1.011.000_017 / 64-Bit (OK)
+Main class:	vistas.GestorLavanderiaGUI
+Add classpath:	jackson-dataformat-xml-2.13.1.jar
+Add classpath:	TimingFramework-0.55.jar
+Add classpath:	jasperreports-6.19.0.jar
+Add classpath:	jackson-core-2.13.1.jar
+Add classpath:	commons-digester-2.1.jar
+Add classpath:	stax2-api-4.2.1.jar
+Add classpath:	mysql-connector-java-8.0.28.jar
+Add classpath:	bcprov-jdk15on-1.68.jar
+Add classpath:	password4j-1.6.0.jar
+Add classpath:	commons-collections4-4.2.jar
+Add classpath:	jgoodies-forms-1.8.0.jar
+Add classpath:	woodstox-core-6.2.7.jar
+Add classpath:	commons-logging-1.2.jar
+Add classpath:	slf4j-api-1.7.36.jar
+Add classpath:	jackson-databind-2.13.1.jar
+Add classpath:	jcalendar-1.4.jar
+Add classpath:	protobuf-java-3.11.4.jar
+Add classpath:	jgoodies-common-1.8.0.jar
+Add classpath:	jcommon-1.0.23.jar
+Add classpath:	jfreechart-1.0.19.jar
+Add classpath:	jackson-annotations-2.13.1.jar
+Add classpath:	commons-validator-1.7.jar
+Add classpath:	itext-2.1.7.js9.jar
+Add classpath:	commons-beanutils-1.9.4.jar
+Add classpath:	commons-collections-3.2.2.jar
+Add classpath:	swing-time-picker.jar
+Add classpath:	ecj-3.21.0.jar
+Add classpath:	commons-lang3-3.12.0.jar
+Launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe
+Launcher args:	-classpath "E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe;jackson-dataformat-xml-2.13.1.jar;TimingFramework-0.55.jar;jasperreports-6.19.0.jar;jackson-core-2.13.1.jar;commons-digester-2.1.jar;stax2-api-4.2.1.jar;mysql-connector-java-8.0.28.jar;bcprov-jdk15on-1.68.jar;password4j-1.6.0.jar;commons-collections4-4.2.jar;jgoodies-forms-1.8.0.jar;woodstox-core-6.2.7.jar;commons-logging-1.2.jar;slf4j-api-1.7.36.jar;jackson-databind-2.13.1.jar;jcalendar-1.4.jar;protobuf-java-3.11.4.jar;jgoodies-common-1.8.0.jar;jcommon-1.0.23.jar;jfreechart-1.0.19.jar;jackson-annotations-2.13.1.jar;commons-validator-1.7.jar;itext-2.1.7.js9.jar;commons-beanutils-1.9.4.jar;commons-collections-3.2.2.jar;swing-time-picker.jar;ecj-3.21.0.jar;commons-lang3-3.12.0.jar" vistas.GestorLavanderiaGUI
+Args length:	802/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = C:\Program Files\Amazon Corretto\jdk11.0.17_8
+Substitute:	PATH = F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+JRE paths:	C:\Program Files\Amazon Corretto\jdk11.0.17_8;F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+Check launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe (OK)
+Version string: 1.011.000_017 / 64-Bit (OK)
+Main class:	vistas.GestorLavanderiaGUI
+Add classpath:	jackson-dataformat-xml-2.13.1.jar
+Add classpath:	TimingFramework-0.55.jar
+Add classpath:	jasperreports-6.19.0.jar
+Add classpath:	jackson-core-2.13.1.jar
+Add classpath:	commons-digester-2.1.jar
+Add classpath:	stax2-api-4.2.1.jar
+Add classpath:	mysql-connector-java-8.0.28.jar
+Add classpath:	bcprov-jdk15on-1.68.jar
+Add classpath:	password4j-1.6.0.jar
+Add classpath:	commons-collections4-4.2.jar
+Add classpath:	jgoodies-forms-1.8.0.jar
+Add classpath:	woodstox-core-6.2.7.jar
+Add classpath:	commons-logging-1.2.jar
+Add classpath:	slf4j-api-1.7.36.jar
+Add classpath:	jackson-databind-2.13.1.jar
+Add classpath:	jcalendar-1.4.jar
+Add classpath:	protobuf-java-3.11.4.jar
+Add classpath:	jgoodies-common-1.8.0.jar
+Add classpath:	jcommon-1.0.23.jar
+Add classpath:	jfreechart-1.0.19.jar
+Add classpath:	jackson-annotations-2.13.1.jar
+Add classpath:	commons-validator-1.7.jar
+Add classpath:	itext-2.1.7.js9.jar
+Add classpath:	commons-beanutils-1.9.4.jar
+Add classpath:	commons-collections-3.2.2.jar
+Add classpath:	swing-time-picker.jar
+Add classpath:	ecj-3.21.0.jar
+Add classpath:	commons-lang3-3.12.0.jar
+Launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe
+Launcher args:	-classpath "E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe;jackson-dataformat-xml-2.13.1.jar;TimingFramework-0.55.jar;jasperreports-6.19.0.jar;jackson-core-2.13.1.jar;commons-digester-2.1.jar;stax2-api-4.2.1.jar;mysql-connector-java-8.0.28.jar;bcprov-jdk15on-1.68.jar;password4j-1.6.0.jar;commons-collections4-4.2.jar;jgoodies-forms-1.8.0.jar;woodstox-core-6.2.7.jar;commons-logging-1.2.jar;slf4j-api-1.7.36.jar;jackson-databind-2.13.1.jar;jcalendar-1.4.jar;protobuf-java-3.11.4.jar;jgoodies-common-1.8.0.jar;jcommon-1.0.23.jar;jfreechart-1.0.19.jar;jackson-annotations-2.13.1.jar;commons-validator-1.7.jar;itext-2.1.7.js9.jar;commons-beanutils-1.9.4.jar;commons-collections-3.2.2.jar;swing-time-picker.jar;ecj-3.21.0.jar;commons-lang3-3.12.0.jar" vistas.GestorLavanderiaGUI
+Args length:	802/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	
+Java max ver:	
+Substitute:	JAVA_HOME = C:\Program Files\Amazon Corretto\jdk11.0.17_8
+Substitute:	PATH = F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+JRE paths:	C:\Program Files\Amazon Corretto\jdk11.0.17_8;F:\Python\Python27\;F:\Python\Python27\Scripts;C:\Program Files\Eclipse Adoptium\jdk-11.0.17.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-17.0.5.8-hotspot\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin;C:\Program Files\Amazon Corretto\jdk17.0.5_8\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-8.0.352.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-17.0.5.8-hotspot\bin;C:\Program Files\Eclipse Adoptium\jre-11.0.17.8-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;F:\Program Files\Git\cmd;F:\Program Files\nodejs\;F:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\johno\scoop\shims;C:\Users\johno\AppData\Local\Microsoft\WindowsApps;C:\Users\johno\AppData\Local\GitHubDesktop\bin;C:\Users\johno\AppData\Roaming\npm;C:\Users\johno\.dotnet\tools;C:\Users\johno\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin
+Check launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe (OK)
+Version string: 1.011.000_017 / 64-Bit (OK)
+Main class:	vistas.GestorLavanderiaGUI
+Add classpath:	jackson-dataformat-xml-2.13.1.jar
+Add classpath:	TimingFramework-0.55.jar
+Add classpath:	jasperreports-6.19.0.jar
+Add classpath:	jackson-core-2.13.1.jar
+Add classpath:	commons-digester-2.1.jar
+Add classpath:	stax2-api-4.2.1.jar
+Add classpath:	mysql-connector-java-8.0.28.jar
+Add classpath:	bcprov-jdk15on-1.68.jar
+Add classpath:	password4j-1.6.0.jar
+Add classpath:	commons-collections4-4.2.jar
+Add classpath:	jgoodies-forms-1.8.0.jar
+Add classpath:	woodstox-core-6.2.7.jar
+Add classpath:	commons-logging-1.2.jar
+Add classpath:	slf4j-api-1.7.36.jar
+Add classpath:	jackson-databind-2.13.1.jar
+Add classpath:	jcalendar-1.4.jar
+Add classpath:	protobuf-java-3.11.4.jar
+Add classpath:	jgoodies-common-1.8.0.jar
+Add classpath:	jcommon-1.0.23.jar
+Add classpath:	jfreechart-1.0.19.jar
+Add classpath:	jackson-annotations-2.13.1.jar
+Add classpath:	commons-validator-1.7.jar
+Add classpath:	itext-2.1.7.js9.jar
+Add classpath:	commons-beanutils-1.9.4.jar
+Add classpath:	commons-collections-3.2.2.jar
+Add classpath:	swing-time-picker.jar
+Add classpath:	ecj-3.21.0.jar
+Add classpath:	commons-lang3-3.12.0.jar
+Launcher:	C:\Program Files\Amazon Corretto\jdk11.0.17_8\bin\javaw.exe
+Launcher args:	-classpath "E:\Dropbox\Pro\Cursos\Java-Curso\p010.lavanderia\dist\GestorLavanderia.exe;jackson-dataformat-xml-2.13.1.jar;TimingFramework-0.55.jar;jasperreports-6.19.0.jar;jackson-core-2.13.1.jar;commons-digester-2.1.jar;stax2-api-4.2.1.jar;mysql-connector-java-8.0.28.jar;bcprov-jdk15on-1.68.jar;password4j-1.6.0.jar;commons-collections4-4.2.jar;jgoodies-forms-1.8.0.jar;woodstox-core-6.2.7.jar;commons-logging-1.2.jar;slf4j-api-1.7.36.jar;jackson-databind-2.13.1.jar;jcalendar-1.4.jar;protobuf-java-3.11.4.jar;jgoodies-common-1.8.0.jar;jcommon-1.0.23.jar;jfreechart-1.0.19.jar;jackson-annotations-2.13.1.jar;commons-validator-1.7.jar;itext-2.1.7.js9.jar;commons-beanutils-1.9.4.jar;commons-collections-3.2.2.jar;swing-time-picker.jar;ecj-3.21.0.jar;commons-lang3-3.12.0.jar" vistas.GestorLavanderiaGUI
+Args length:	802/32768 chars
+Exit code:	0
