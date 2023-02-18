@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 Main-Class: vistas.GestorLavanderiaGUI
-Class-Path: jackson-dataformat-xml-2.13.1.jar TimingFramework-0.55.jar j
- asperreports-6.19.0.jar jackson-core-2.13.1.jar commons-digester-2.1.ja
- r stax2-api-4.2.1.jar mysql-connector-java-8.0.28.jar bcprov-jdk15on-1.
- 68.jar password4j-1.6.0.jar commons-collections4-4.2.jar jgoodies-forms
- -1.8.0.jar woodstox-core-6.2.7.jar commons-logging-1.2.jar slf4j-api-1.
- 7.36.jar jackson-databind-2.13.1.jar jcalendar-1.4.jar protobuf-java-3.
- 11.4.jar jgoodies-common-1.8.0.jar jcommon-1.0.23.jar jfreechart-1.0.19
- .jar jackson-annotations-2.13.1.jar commons-validator-1.7.jar itext-2.1
- .7.js9.jar commons-beanutils-1.9.4.jar commons-collections-3.2.2.jar sw
- ing-time-picker.jar ecj-3.21.0.jar commons-lang3-3.12.0.jar
+Class-Path: jgoodies-common-1.8.0.jar commons-digester-2.1.jar mysql-con
+ nector-java-8.0.28.jar jgoodies-forms-1.8.0.jar jcommon-1.0.23.jar comm
+ ons-collections4-4.2.jar TimingFramework-0.55.jar itext-2.1.7.js9.jar c
+ ommons-lang3-3.12.0.jar jackson-annotations-2.13.1.jar commons-beanutil
+ s-1.9.4.jar slf4j-api-1.7.36.jar jasperreports-6.19.0.jar jfreechart-1.
+ 0.19.jar jackson-core-2.13.1.jar commons-logging-1.2.jar ecj-3.21.0.jar
+  password4j-1.6.0.jar woodstox-core-6.2.7.jar commons-validator-1.7.jar
+  commons-collections-3.2.2.jar bcprov-jdk15on-1.68.jar protobuf-java-3.
+ 11.4.jar jcalendar-1.4.jar jackson-databind-2.13.1.jar swing-time-picke
+ r.jar stax2-api-4.2.1.jar jackson-dataformat-xml-2.13.1.jar
 
